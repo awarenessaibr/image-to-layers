@@ -1,0 +1,4 @@
+torch
+torchvision
+huggingface-hub
+git+https://github.com/facebookresearch/sam2.git

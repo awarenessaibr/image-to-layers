@@ -1,0 +1,2406 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image → Layers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ── brand tokens (fallbacks if _.css isn't loaded) ──────────────── */
+        :root {
+            --ls-bg: #131217;
+            --ls-surface: #1a1920;
+            --ls-raised: #24232c;
+            --ls-stage: #0a0a0d;
+            --ls-line: #2b2a34;
+            --ls-line-hi: #3a3946;
+            --ls-text: #f2f0ea;
+            --ls-muted: #9c99a8;
+            --ls-accent: #e8803a;
+            --ls-danger: #e5484d;
+            --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+        }
+
+        html, body { margin: 0; height: 100%; background: var(--ls-bg); }
+        body {
+            display: grid;
+            grid-template-rows: 56px 1fr;
+            color: var(--ls-text);
+            font: 13px/1.45 var(--sans);
+            min-height: 0;
+        }
+        * { box-sizing: border-box; }
+        button, input, select, textarea { font: inherit; color: inherit; }
+        button { cursor: pointer; }
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible { outline: 2px solid var(--ls-accent); outline-offset: 2px; }
+
+        /* ── header ─────────────────────────────────────────────────────── */
+        .itl-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 18px;
+            padding: 0 18px;
+            border-bottom: 1px solid var(--ls-line);
+            background: var(--ls-surface);
+        }
+        .itl-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 650;
+            letter-spacing: 0.01em;
+        }
+        .itl-brand .dot {
+            display: grid;
+            width: 26px;
+            height: 26px;
+            place-items: center;
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--ls-accent) 18%, var(--ls-raised));
+            color: var(--ls-accent);
+        }
+        .itl-brand small {
+            color: var(--ls-muted);
+            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 0.02em;
+        }
+        .itl-brand a {
+            color: var(--ls-muted);
+            font-size: 11px;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            margin-left: 8px;
+        }
+        .itl-brand a:hover { color: var(--ls-accent); }
+
+        .itl-modes { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 999px; background: var(--ls-bg); border: 1px solid var(--ls-line); }
+        .itl-modes button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 30px;
+            padding: 5px 12px;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--ls-muted);
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .itl-modes button[aria-pressed="true"] {
+            background: var(--ls-raised);
+            color: var(--ls-text);
+            box-shadow: inset 0 0 0 1px var(--ls-line-hi);
+        }
+        .itl-modes button i { font-size: 11px; opacity: 0.75; }
+
+        .itl-header-right { display: inline-flex; align-items: center; gap: 10px; }
+        .itl-status {
+            color: var(--ls-muted);
+            font-size: 11px;
+            max-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        @media (max-width: 1250px) {
+            .itl-header { gap: 10px; padding: 0 12px; }
+            .itl-modes button { gap: 4px; padding: 4px 8px; font-size: 10px; }
+            .itl-status { max-width: 180px; }
+            .itl-brand small, .itl-brand a { display: none; }
+        }
+        .itl-status[data-kind="error"] { color: #ff9090; }
+        .itl-status[data-kind="ok"] { color: #73d49a; }
+        .itl-status[data-kind="busy"] { color: var(--ls-accent); }
+
+        /* ── app grid ───────────────────────────────────────────────────── */
+        .itl-app {
+            display: grid;
+            grid-template-columns: 300px 1fr 340px;
+            min-height: 0;
+        }
+        @media (max-width: 1100px) { .itl-app { grid-template-columns: 260px 1fr 300px; } }
+        @media (max-width: 850px) {
+            .itl-app { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+        }
+
+        .itl-side, .itl-inspector {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+            background: var(--ls-surface);
+        }
+        .itl-side { border-right: 1px solid var(--ls-line); overflow-y: auto; }
+        .itl-inspector { border-left: 1px solid var(--ls-line); overflow-y: auto; }
+
+        .itl-section {
+            display: grid;
+            gap: 8px;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--ls-line);
+        }
+        .itl-section[hidden] { display: none; }
+        .itl-section h3 {
+            margin: 0;
+            font-size: 11px;
+            font-weight: 650;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ls-muted);
+        }
+        .itl-section h3 .badge {
+            display: inline-flex;
+            min-width: 20px;
+            height: 18px;
+            padding: 0 6px;
+            align-items: center;
+            justify-content: center;
+            margin-left: 6px;
+            border-radius: 999px;
+            background: var(--ls-raised);
+            color: var(--ls-text);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        /* ── reference drop ─────────────────────────────────────────────── */
+        .itl-drop {
+            display: grid;
+            place-items: center;
+            gap: 4px;
+            min-height: 88px;
+            padding: 12px;
+            border: 1.5px dashed var(--ls-line-hi);
+            border-radius: 10px;
+            background: var(--ls-bg);
+            color: var(--ls-muted);
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: border-color .15s, background .15s;
+        }
+        .itl-drop:hover,
+        .itl-drop[data-dragover="true"] {
+            border-color: var(--ls-accent);
+            background: color-mix(in srgb, var(--ls-accent) 6%, var(--ls-bg));
+        }
+        .itl-drop i { font-size: 16px; color: var(--ls-accent); }
+        .itl-drop strong { color: var(--ls-text); font-weight: 600; }
+
+        .itl-thumb {
+            display: grid;
+            grid-template-columns: 60px 1fr auto auto;
+            gap: 8px;
+            align-items: center;
+            padding: 6px;
+            border: 1px solid var(--ls-line);
+            border-radius: 8px;
+            background: var(--ls-bg);
+        }
+        .itl-thumb img {
+            width: 60px;
+            height: 46px;
+            border-radius: 5px;
+            background: #fff;
+            object-fit: contain;
+        }
+        .itl-thumb .meta { display: grid; min-width: 0; gap: 2px; }
+        .itl-thumb .meta strong { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .itl-thumb .meta small { color: var(--ls-muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+        .itl-thumb button {
+            min-height: 28px;
+            padding: 4px 8px;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 6px;
+            background: var(--ls-raised);
+            font-size: 10px;
+        }
+        .itl-thumb button:hover { border-color: var(--ls-accent); }
+        .itl-thumb button[data-danger="true"]:hover { border-color: var(--ls-danger); color: #ffaaaa; }
+
+        /* ── layer list ─────────────────────────────────────────────────── */
+        .itl-layers {
+            display: grid;
+            gap: 4px;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        .itl-layers[hidden] { display: none; }
+        .itl-layer {
+            display: grid;
+            grid-template-columns: 18px 1fr auto auto;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            background: transparent;
+            text-align: left;
+            cursor: pointer;
+        }
+        .itl-layer:hover { background: var(--ls-raised); }
+        .itl-layer[aria-selected="true"] {
+            background: var(--ls-raised);
+            border-color: var(--ls-line-hi);
+        }
+        .itl-layer .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
+        }
+        .itl-layer .info { display: grid; gap: 1px; min-width: 0; }
+        .itl-layer .info input {
+            min-width: 0;
+            padding: 1px 3px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--ls-text);
+            font-size: 12px;
+        }
+        .itl-layer .info input:focus { border-color: var(--ls-line-hi); background: var(--ls-bg); }
+        .itl-layer .info strong {
+            font-size: 12px;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .itl-layer .count {
+            color: var(--ls-muted);
+            font-size: 10px;
+            font-variant-numeric: tabular-nums;
+        }
+        .itl-layer button {
+            min-width: 26px;
+            min-height: 26px;
+            padding: 2px 5px;
+            border: 0;
+            border-radius: 5px;
+            background: transparent;
+            color: var(--ls-muted);
+            font-size: 11px;
+            opacity: 0;
+        }
+        .itl-layer:hover button,
+        .itl-layer:focus-within button,
+        .itl-layer[aria-selected="true"] button { opacity: 1; }
+        .itl-layer button:hover { color: var(--ls-text); background: #3a3946; }
+        .itl-layer button[data-danger="true"]:hover { color: #ffaaaa; background: rgba(229, 72, 77, 0.15); }
+
+        .itl-add {
+            display: inline-flex;
+            min-height: 32px;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border: 1px dashed var(--ls-line-hi);
+            border-radius: 7px;
+            background: transparent;
+            color: var(--ls-muted);
+            font-size: 11px;
+        }
+        .itl-add:hover { border-color: var(--ls-accent); color: var(--ls-text); }
+
+        .itl-help {
+            margin: 0;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: var(--ls-bg);
+            color: var(--ls-muted);
+            font-size: 11px;
+            line-height: 1.55;
+        }
+        .itl-help kbd {
+            padding: 1px 5px;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 4px;
+            background: var(--ls-raised);
+            color: var(--ls-text);
+            font-family: inherit;
+            font-size: 10px;
+        }
+        .itl-help code {
+            font-size: 10px;
+            color: var(--ls-text);
+        }
+        .itl-hint {
+            margin: 0;
+            color: var(--ls-muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+        .itl-recover-status {
+            min-height: 15px;
+            color: var(--ls-muted);
+            font-size: 10px;
+            line-height: 1.45;
+        }
+        .itl-recover-status[data-kind="ok"] { color: #73d49a; }
+        .itl-recover-status[data-kind="error"] { color: #ff9090; }
+
+        /* ── canvas ─────────────────────────────────────────────────────── */
+        .itl-canvas-area {
+            position: relative;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            overflow: auto;
+            background-color: var(--ls-stage);
+            background-image: radial-gradient(#25242c 1px, transparent 1px);
+            background-size: 18px 18px;
+            min-height: 0;
+        }
+        .itl-canvas-wrap {
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+            width: fit-content;
+            height: fit-content;
+            border-radius: 10px;
+            box-shadow: 0 18px 50px rgb(0 0 0 / 45%);
+            overflow: hidden;
+            background: #fff;
+        }
+        .itl-canvas {
+            display: block;
+            max-width: min(100%, 1200px);
+            max-height: calc(100vh - 120px);
+            width: auto;
+            height: auto;
+            touch-action: none;
+            cursor: crosshair;
+            user-select: none;
+        }
+        .itl-canvas[data-mode="masks"],
+        .itl-canvas[data-mode="sam-auto"] { cursor: default; }
+        .itl-canvas[data-mode="recover"] { cursor: default; }
+
+        .itl-hole-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .itl-hole-canvas[hidden] { display: none; }
+
+        .itl-placeholder {
+            display: grid;
+            place-items: center;
+            gap: 12px;
+            padding: 60px;
+            color: var(--ls-muted);
+            text-align: center;
+            max-width: 420px;
+        }
+        .itl-placeholder[hidden] { display: none; }
+        .itl-placeholder i { font-size: 32px; color: var(--ls-line-hi); }
+        .itl-placeholder h2 { margin: 0; font-size: 15px; color: var(--ls-text); }
+
+        /* ── inspector ──────────────────────────────────────────────────── */
+        .itl-field { display: grid; gap: 5px; }
+        .itl-field label { color: var(--ls-muted); font-size: 11px; letter-spacing: 0.02em; }
+        .itl-field input[type="text"],
+        .itl-field input[type="number"],
+        .itl-field select {
+            min-height: 32px;
+            padding: 5px 8px;
+            border: 1px solid var(--ls-line);
+            border-radius: 6px;
+            background: var(--ls-bg);
+            font-size: 12px;
+        }
+        .itl-field select { padding-right: 4px; }
+        .itl-field input[type="range"] { accent-color: var(--ls-accent); }
+        .itl-field output {
+            color: var(--ls-muted);
+            font-size: 10px;
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+        }
+        .itl-field-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+
+        .itl-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            color: var(--ls-muted);
+            font-size: 11px;
+        }
+        .itl-toggle[hidden] { display: none; }
+        .itl-toggle input { accent-color: var(--ls-accent); }
+
+        .itl-cta {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 6px;
+            padding: 12px 14px 0;
+        }
+        .itl-btn {
+            min-height: 36px;
+            padding: 6px 14px;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 7px;
+            background: var(--ls-raised);
+            color: var(--ls-text);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .itl-btn:hover:not(:disabled) { border-color: var(--ls-accent); }
+        .itl-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .itl-btn-primary {
+            border-color: var(--ls-accent);
+            background: var(--ls-accent);
+            color: #17130f;
+        }
+        .itl-btn-primary:hover:not(:disabled) { filter: brightness(1.08); }
+
+        .itl-progress { display: grid; gap: 6px; padding: 0 14px 12px; }
+        .itl-progress[hidden] { display: none; }
+        .itl-progress-bar {
+            position: relative;
+            height: 6px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: var(--ls-line);
+        }
+        .itl-progress-bar::after {
+            content: "";
+            position: absolute;
+            inset: 0 100% 0 0;
+            background: var(--ls-accent);
+            transition: inset-inline-end .25s ease-out;
+        }
+        .itl-progress[data-value] .itl-progress-bar::after { inset-inline-end: var(--p, 0%); }
+        .itl-progress-label { color: var(--ls-muted); font-size: 11px; }
+        .itl-progress-label code { color: var(--ls-text); }
+
+        .itl-preview { display: grid; gap: 8px; padding: 0 14px 14px; }
+        .itl-preview[hidden] { display: none; }
+        .itl-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px;
+        }
+        .itl-tile {
+            position: relative;
+            display: grid;
+            gap: 4px;
+            padding: 6px;
+            border: 1px solid var(--ls-line);
+            border-radius: 7px;
+            background: var(--ls-bg);
+        }
+        .itl-tile img {
+            width: 100%;
+            height: 90px;
+            border-radius: 4px;
+            background: #0e0d12;
+            object-fit: contain;
+        }
+        .itl-tile .missing {
+            display: grid;
+            place-items: center;
+            height: 90px;
+            color: var(--ls-muted);
+            font-size: 10px;
+        }
+        .itl-tile small {
+            color: var(--ls-muted);
+            font-size: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .itl-tile .group {
+            color: var(--ls-accent);
+            font-size: 9px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .itl-tile .z {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            padding: 1px 6px;
+            border-radius: 999px;
+            background: rgb(20 18 24 / 82%);
+            color: var(--ls-muted);
+            font-size: 9px;
+            font-variant-numeric: tabular-nums;
+        }
+        .itl-tile img.on-white { background: #fff; }
+
+        .itl-point-area { pointer-events: none; }
+        .itl-point-label {
+            pointer-events: none;
+            paint-order: stroke;
+            font-weight: 700;
+            font-family: var(--sans);
+        }
+
+        .itl-dialog {
+            width: min(440px, calc(100vw - 32px));
+            padding: 0;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 12px;
+            background: var(--ls-surface);
+            color: var(--ls-text);
+            box-shadow: 0 24px 80px rgb(0 0 0 / 55%);
+        }
+        .itl-dialog.wide { width: min(560px, calc(100vw - 32px)); }
+        .itl-dialog::backdrop { background: rgb(5 5 8 / 62%); }
+        .itl-dialog form { display: grid; gap: 12px; padding: 18px; }
+        .itl-dialog h2 { margin: 0; font-size: 15px; }
+        .itl-dialog p { margin: 0; color: var(--ls-muted); font-size: 11px; line-height: 1.55; }
+        .itl-dialog label {
+            display: grid;
+            gap: 5px;
+            color: var(--ls-muted);
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .itl-dialog input[type="text"] {
+            width: 100%;
+            padding: 9px 10px;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 7px;
+            background: var(--ls-bg);
+            color: var(--ls-text);
+            font-size: 13px;
+        }
+        .itl-dialog input[type="text"]:focus {
+            outline: none;
+            border-color: var(--ls-accent);
+        }
+        .itl-dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        .itl-dialog .itl-btn { min-height: 34px; }
+        .itl-dialog-hint { color: var(--ls-muted); font-size: 10px; }
+        .itl-confirm-list { display: grid; gap: 6px; max-height: 280px; overflow: auto; }
+        .itl-confirm-row {
+            display: grid;
+            grid-template-columns: 12px 1fr auto;
+            gap: 8px;
+            align-items: center;
+            padding: 8px 10px;
+            border: 1px solid var(--ls-line);
+            border-radius: 7px;
+            background: var(--ls-bg);
+        }
+        .itl-confirm-row .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .itl-confirm-row strong {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .itl-confirm-row small { color: var(--ls-muted); font-size: 10px; }
+        .itl-confirm-row.empty {
+            border-color: color-mix(in srgb, var(--ls-danger) 45%, var(--ls-line));
+        }
+        .itl-confirm-row.empty small { color: var(--ls-danger); }
+
+        .itl-recover-preview { display: grid; gap: 8px; padding: 0 14px 14px; }
+        .itl-recover-preview[hidden] { display: none; }
+        .itl-recover-preview h3 { margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ls-muted); }
+        .itl-recover-preview img {
+            width: 100%;
+            max-height: 300px;
+            border-radius: 7px;
+            border: 1px solid var(--ls-line);
+            background: #fff;
+            object-fit: contain;
+        }
+        .itl-recover-preview .meta { color: var(--ls-muted); font-size: 10px; line-height: 1.5; }
+
+        .itl-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            padding: 0 14px 14px;
+        }
+        .itl-actions[hidden], .itl-link[hidden] { display: none; }
+        .itl-actions .itl-btn { font-size: 11px; }
+
+        .itl-link {
+            padding: 0 14px 18px;
+            color: var(--ls-muted);
+            font-size: 11px;
+        }
+        .itl-link a { color: var(--ls-accent); text-decoration: underline; text-underline-offset: 2px; }
+    </style>
+</head>
+
+<body>
+    <header class="itl-header">
+        <div class="itl-brand">
+            <span class="dot"><i class="fas fa-layer-group"></i></span>
+            <span>Image&nbsp;→&nbsp;Layers</span>
+            <small>segmenter</small>
+            <a href="studio-v2.html">Studio v2 →</a>
+        </div>
+
+        <div class="itl-modes" role="tablist" aria-label="Segmentation mode">
+            <button type="button" data-mode="sam-points" aria-pressed="true">
+                <i class="fas fa-crosshairs"></i> Point prompts (basic)
+            </button>
+            <button type="button" data-mode="masks" aria-pressed="false">
+                <i class="fas fa-images"></i> Upload masks
+            </button>
+            <button type="button" data-mode="sam-auto" aria-pressed="false">
+                <i class="fas fa-wand-magic-sparkles"></i> Automatic SAM
+            </button>
+            <button type="button" data-mode="recover" aria-pressed="false">
+                <i class="fas fa-object-group"></i> Recover missing
+            </button>
+        </div>
+
+        <div class="itl-header-right">
+            <span id="itlStatus" class="itl-status" role="status">Ready.</span>
+        </div>
+    </header>
+
+    <div class="itl-app">
+        <!-- ── sidebar ───────────────────────────────────────────────── -->
+        <aside class="itl-side">
+            <section class="itl-section">
+                <h3 id="itlRefTitle">Reference</h3>
+                <div id="itlRefDrop" class="itl-drop" tabindex="0" role="button"
+                     aria-label="Choose or drop the reference image">
+                    <i class="fas fa-image"></i>
+                    <strong>Drop or click</strong>
+                    <span>PNG · JPG · WebP</span>
+                </div>
+                <div id="itlRefThumb" class="itl-thumb" hidden></div>
+                <input type="file" id="itlRefInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+                <p class="itl-hint" id="itlRefHint" hidden>The complete final image, exactly as it appears
+                    on the studio canvas.</p>
+            </section>
+
+            <section class="itl-section" id="itlExportSection" hidden>
+                <h3>Aligned export <span class="badge">holes</span></h3>
+                <div id="itlExportDrop" class="itl-drop" tabindex="0" role="button"
+                     aria-label="Choose or drop the aligned studio export">
+                    <i class="fas fa-eraser"></i>
+                    <strong>Drop the studio export</strong>
+                    <span>PNG with transparent holes</span>
+                </div>
+                <div id="itlExportThumb" class="itl-thumb" hidden></div>
+                <input type="file" id="itlExportInput" accept="image/png,image/webp,image/jpeg" hidden>
+                <p class="itl-hint">The export must be aligned to the final image. Transparent
+                    (or near-white) areas are treated as missing parts.</p>
+            </section>
+
+            <section class="itl-section" id="itlRecoverSection" hidden>
+                <h3>Missing parts</h3>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlRecoverMin">Min area</label>
+                        <output id="itlRecoverMinOut" for="itlRecoverMin">0.10%</output>
+                    </div>
+                    <input type="range" id="itlRecoverMin" min="0.01" max="2" step="0.01" value="0.1">
+                </div>
+                <div class="itl-field">
+                    <label for="itlRecoverHoles">Hole source</label>
+                    <select id="itlRecoverHoles">
+                        <option value="auto">Auto (alpha, then near-white)</option>
+                        <option value="alpha">Transparency alpha</option>
+                        <option value="white">Near-white pixels</option>
+                    </select>
+                </div>
+                <label class="itl-toggle"><input type="checkbox" id="itlRecoverBorder" checked>
+                    Ignore edge-touching regions</label>
+                <div class="itl-recover-status" id="itlRecoverStatus">Upload an export to preview
+                    the missing parts.</div>
+            </section>
+
+            <section class="itl-section" id="itlLayersSection">
+                <h3>
+                    <span id="itlLayersTitle">Layer groups</span>
+                    <span id="itlLayersCount" class="badge">0</span>
+                </h3>
+                <div id="itlLayers" class="itl-layers" role="list"></div>
+                <button type="button" class="itl-add" id="itlAddLayer">
+                    <i class="fas fa-plus"></i> Add layer group
+                </button>
+                <button type="button" class="itl-add" id="itlAddMasks" hidden>
+                    <i class="fas fa-upload"></i> Upload masks
+                </button>
+                <input type="file" id="itlMasksInput" accept="image/png,image/webp" multiple hidden>
+            </section>
+
+            <section class="itl-section" style="flex: 1; border-bottom: 0;">
+                <h3>How it works</h3>
+                <div id="itlHelp" class="itl-help">
+                    <p style="margin: 0 0 8px;"><strong>Point prompts (basic masks).</strong> Add a layer group, give it
+                        a name, then click the image to select its area. The translucent overlay shows the group area;
+                        <kbd>Alt</kbd>+click adds a negative point to cut into it. Click a point to select its layer;
+                        <kbd>Alt</kbd>+click a point to delete it. Press <strong>Review &amp; run</strong> to
+                        confirm every named group before the cutouts are written.</p>
+                    <p style="margin: 0 0 8px;">For object-aware masks, choose <strong>Automatic SAM</strong>. It names
+                        and groups each mask (Background, Books, Foreground, Subject, Props, …) so Studio opens with a
+                        readable segment tree instead of <code>mask-001</code>.</p>
+                    <p style="margin: 0;">Name the layers like studio parts (<code>eye-white-left</code>,
+                        <code>beard</code>, <code>shirt</code>) and the auto-rig will wire them up.</p>
+                </div>
+                <div id="itlRecoverHelp" class="itl-help" hidden>
+                    <p style="margin: 0 0 8px;"><strong>Recover missing parts.</strong> Add the complete final image as the
+                        reference, then add the studio export that was aligned to it. The export's transparent (or near-white)
+                        areas are detected as holes.</p>
+                    <p style="margin: 0 0 8px;">Each hole becomes a new layer cut from the final image. The aligned export is
+                        kept as the visible base, so opening the recovered composition shows the whole scene again.</p>
+                    <p style="margin: 0;">The magenta preview on the canvas is live and approximate; the run preview is the
+                        exact result after filtering.</p>
+                </div>
+            </section>
+        </aside>
+
+        <!-- ── canvas ────────────────────────────────────────────────── -->
+        <main class="itl-canvas-area" id="itlCanvasArea">
+            <div id="itlPlaceholder" class="itl-placeholder">
+                <i class="fas fa-vector-square"></i>
+                <h2>Add a reference image</h2>
+                <p>Choose basic point masks, upload masks, or use Automatic SAM for object-aware segmentation.</p>
+            </div>
+            <div id="itlCanvasWrap" class="itl-canvas-wrap" hidden>
+                <svg id="itlCanvas" class="itl-canvas" data-mode="sam-points" preserveAspectRatio="xMidYMid meet"
+                     xmlns="http://www.w3.org/2000/svg"></svg>
+                <canvas id="itlHoleCanvas" class="itl-hole-canvas" hidden aria-hidden="true"></canvas>
+            </div>
+        </main>
+
+        <!-- ── inspector ────────────────────────────────────────────── -->
+        <aside class="itl-inspector">
+            <section class="itl-section">
+                <h3>Composition</h3>
+                <div class="itl-field">
+                    <label for="itlName">Name</label>
+                    <input type="text" id="itlName" value="My Scene" maxlength="120">
+                </div>
+                <div class="itl-field">
+                    <label for="itlOutput">Output</label>
+                    <select id="itlOutput">
+                        <option value="project">Project · data/projects/</option>
+                        <option value="zip">ZIP · for Import&nbsp;+&nbsp;image</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="itl-section" id="itlModelsSection">
+                <h3>Models</h3>
+                <div class="itl-field">
+                    <label for="itlSam">SAM</label>
+                    <select id="itlSam">
+                        <option value="sam2-large">SAM 2.1 Large (best)</option>
+                        <option value="sam2-base">SAM 2.1 Base+</option>
+                        <option value="sam2-small">SAM 2.1 Small (fast)</option>
+                        <option value="sam2-tiny">SAM 2.1 Tiny</option>
+                    </select>
+                </div>
+                <p class="itl-hint">Depth ordering uses vertical position — no depth model is
+                    downloaded.</p>
+            </section>
+
+            <section class="itl-section">
+                <h3>Quality</h3>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlFeather">Feather</label>
+                        <output id="itlFeatherOut" for="itlFeather">1.0 px</output>
+                    </div>
+                    <input type="range" id="itlFeather" min="0" max="4" step="0.1" value="1">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlDilate">Dilate</label>
+                        <output id="itlDilateOut" for="itlDilate">0 px</output>
+                    </div>
+                    <input type="range" id="itlDilate" min="0" max="4" step="1" value="0">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlRadius">Point radius</label>
+                        <output id="itlRadiusOut" for="itlRadius">3.0%</output>
+                    </div>
+                    <input type="range" id="itlRadius" min="0.01" max="0.1" step="0.005" value="0.03">
+                </div>
+                <label class="itl-toggle" id="itlOrderToggle"><input type="checkbox" id="itlOrder" checked>
+                    Refine Z by vertical position</label>
+                <label class="itl-toggle" id="itlDepthRoleToggle"><input type="checkbox" id="itlDepthRole">
+                    Re-derive role from Y-position</label>
+            </section>
+
+            <div class="itl-cta">
+                <button type="button" class="itl-btn itl-btn-primary" id="itlRun">
+                    <i class="fas fa-play"></i> <span id="itlRunLabel">Run segmenter</span>
+                </button>
+                <button type="button" class="itl-btn" id="itlCancel" disabled title="Cancel current run">
+                    <i class="fas fa-stop"></i>
+                </button>
+            </div>
+
+            <section class="itl-progress" id="itlProgress" hidden>
+                <div class="itl-progress-bar"></div>
+                <div class="itl-progress-label" id="itlProgressLabel">Starting…</div>
+            </section>
+
+            <section class="itl-recover-preview" id="itlRecoverPreview" hidden>
+                <h3>Missing parts</h3>
+                <img id="itlRecoverPreviewImg" alt="Missing regions highlighted on the final image">
+                <div class="meta" id="itlRecoverPreviewMeta"></div>
+            </section>
+
+            <section class="itl-preview" id="itlPreview" hidden>
+                <h3 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ls-muted);">
+                    Result
+                </h3>
+                <div class="itl-preview-grid" id="itlPreviewGrid"></div>
+            </section>
+
+            <div class="itl-actions" id="itlActions" hidden>
+                <button type="button" class="itl-btn" id="itlExportProject">
+                    <i class="fas fa-folder-plus"></i> Open in studio
+                </button>
+                <button type="button" class="itl-btn" id="itlDownload">
+                    <i class="fas fa-download"></i> Download
+                </button>
+            </div>
+
+            <div class="itl-link" id="itlStudioLink" hidden></div>
+        </aside>
+    </div>
+
+    <dialog id="itlNameDialog" class="itl-dialog" aria-labelledby="itlNameTitle">
+        <form id="itlNameForm" method="dialog">
+            <h2 id="itlNameTitle">Add a layer group</h2>
+            <p>Name the group first, then click the image to select its area. The name becomes the
+                cutout and the Studio group.</p>
+            <label for="itlNameInput">Group name
+                <input type="text" id="itlNameInput" maxlength="60" autocomplete="off" required>
+            </label>
+            <div class="itl-dialog-actions">
+                <button type="button" class="itl-btn" id="itlNameCancel">Cancel</button>
+                <button type="submit" class="itl-btn itl-btn-primary" id="itlNameConfirm">Add group</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="itlConfirmDialog" class="itl-dialog wide" aria-labelledby="itlConfirmTitle">
+        <form id="itlConfirmForm" method="dialog">
+            <h2 id="itlConfirmTitle">Confirm groups before segmentation</h2>
+            <p id="itlConfirmSummary"></p>
+            <div id="itlConfirmList" class="itl-confirm-list"></div>
+            <p class="itl-dialog-hint">Each group becomes one named cutout. Its name becomes the
+                Studio group.</p>
+            <div class="itl-dialog-actions">
+                <button type="button" class="itl-btn" id="itlConfirmBack">Back to edit</button>
+                <button type="submit" class="itl-btn itl-btn-primary" id="itlConfirmRun">Confirm &amp; segment</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+    'use strict';
+    (() => {
+        const $ = (id) => document.getElementById(id);
+        const SVG_NS = 'http://www.w3.org/2000/svg';
+        const PALETTE = [
+            '#e8803a', '#6ea8f0', '#8fcf5c', '#e05ba0', '#c69af0',
+            '#e0c34f', '#5cd4c7', '#e06262', '#f0a73a', '#9ab87a',
+        ];
+        const API = '/api';
+        let pendingPoint = null;
+        let pendingPayload = null;
+
+        const state = {
+            reference: null,     // { dataUrl, width, height, name }
+            exportImage: null,   // { dataUrl, width, height, name } — aligned export with holes
+            mode: 'sam-points',
+            layers: [],          // [{ id, name, color, points: [{ x, y, positive }] }]
+            activeLayerId: null,
+            masks: [],           // [{ name, dataUrl }]
+            recover: {
+                minArea: 0.1,
+                ignoreBorder: true,
+                holeSource: 'auto',
+            },
+            settings: {
+                samModel: 'sam2-large',
+                feather: 1,
+                dilate: 0,
+                pointRadius: 0.03,
+                depth: true,
+                depthRole: false,
+                name: 'My Scene',
+                output: 'project',
+            },
+            running: false,
+            controller: null,
+            result: null,
+        };
+
+        // ── helpers ─────────────────────────────────────────────────────
+        const uid = () => `L-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+        const nextColor = () => PALETTE[state.layers.length % PALETTE.length];
+        const slug = (value) => String(value).toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'scene';
+
+        function setStatus(text, kind = '') {
+            const node = $('itlStatus');
+            node.textContent = text;
+            node.dataset.kind = kind;
+        }
+
+        function syncActiveState() {
+            const recovering = state.mode === 'recover';
+            document.querySelectorAll('.itl-modes button').forEach(b => {
+                b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode));
+            });
+            $('itlAddLayer').hidden = state.mode !== 'sam-points';
+            $('itlAddMasks').hidden = state.mode !== 'masks';
+            $('itlLayers').hidden = state.mode === 'sam-auto';
+            $('itlLayersSection').hidden = recovering || state.mode === 'sam-auto';
+            $('itlExportSection').hidden = !recovering;
+            $('itlRecoverSection').hidden = !recovering;
+            $('itlModelsSection').hidden = recovering;
+            $('itlOrderToggle').hidden = recovering;
+            $('itlDepthRoleToggle').hidden = recovering;
+            $('itlRunLabel').textContent = recovering
+                ? 'Recover missing layers'
+                : state.mode === 'sam-points' ? 'Review & run' : 'Run segmenter';
+            $('itlRefTitle').textContent = recovering ? 'Final image' : 'Reference';
+            $('itlRefHint').hidden = !recovering;
+            $('itlHelp').hidden = recovering;
+            $('itlRecoverHelp').hidden = !recovering;
+            $('itlLayersTitle').textContent =
+                state.mode === 'masks' ? 'Masks'
+                : state.mode === 'sam-points' ? 'Layer groups'
+                : 'Automatic';
+            $('itlCanvas')?.setAttribute('data-mode', state.mode);
+            $('itlRun').disabled = state.running || !state.reference
+                || (recovering && !state.exportImage);
+            $('itlCancel').disabled = !state.running;
+            if (!recovering) {
+                $('itlRecoverPreview').hidden = true;
+                clearHolePreview();
+            }
+        }
+
+        // ── reference upload ────────────────────────────────────────────
+        function setReference(file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const url = String(reader.result);
+                const img = new Image();
+                img.onload = () => {
+                    imageLoads.clear();
+                    state.reference = {
+                        dataUrl: url,
+                        width: img.naturalWidth,
+                        height: img.naturalHeight,
+                        name: file.name || 'reference',
+                    };
+                    renderReference();
+                    renderCanvas();
+                    setStatus(`Reference ${img.naturalWidth}×${img.naturalHeight} · ${file.name || 'image'}`, 'ok');
+                };
+                img.onerror = () => setStatus('The reference image could not be decoded.', 'error');
+                img.src = url;
+            };
+            reader.onerror = () => setStatus('Could not read the reference file.', 'error');
+            reader.readAsDataURL(file);
+        }
+
+        function clearReference() {
+            imageLoads.clear();
+            state.reference = null;
+            renderReference();
+            renderCanvas();
+            setStatus('Reference cleared.', '');
+        }
+
+        function renderReference() {
+            const thumb = $('itlRefThumb');
+            if (!state.reference) {
+                thumb.hidden = true;
+                thumb.replaceChildren();
+                return;
+            }
+            thumb.hidden = false;
+            thumb.replaceChildren();
+            const img = document.createElement('img');
+            img.src = state.reference.dataUrl;
+            img.alt = '';
+            const meta = document.createElement('div');
+            meta.className = 'meta';
+            const strong = document.createElement('strong');
+            strong.textContent = state.reference.name;
+            const small = document.createElement('small');
+            small.textContent = `${state.reference.width} × ${state.reference.height} px`;
+            meta.append(strong, small);
+            const replace = document.createElement('button');
+            replace.type = 'button';
+            replace.textContent = 'Replace';
+            replace.addEventListener('click', () => $('itlRefInput').click());
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.dataset.danger = 'true';
+            remove.title = 'Remove reference';
+            remove.innerHTML = '<i class="fas fa-times"></i>';
+            remove.addEventListener('click', clearReference);
+            thumb.append(img, meta, replace, remove);
+        }
+
+        // ── aligned export (recover mode) ───────────────────────────────
+        function setExport(file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const url = String(reader.result);
+                const img = new Image();
+                img.onload = () => {
+                    imageLoads.clear();
+                    state.exportImage = {
+                        dataUrl: url,
+                        width: img.naturalWidth,
+                        height: img.naturalHeight,
+                        name: file.name || 'export',
+                    };
+                    renderExport();
+                    renderCanvas();
+                    scheduleHolePreview();
+                    setStatus(`Export ${img.naturalWidth}×${img.naturalHeight} · ${file.name || 'image'}`, 'ok');
+                };
+                img.onerror = () => setStatus('The export image could not be decoded.', 'error');
+                img.src = url;
+            };
+            reader.onerror = () => setStatus('Could not read the export file.', 'error');
+            reader.readAsDataURL(file);
+        }
+
+        function clearExport() {
+            imageLoads.clear();
+            state.exportImage = null;
+            renderExport();
+            renderCanvas();
+            clearHolePreview();
+            setStatus('Export cleared.', '');
+        }
+
+        function renderExport() {
+            const thumb = $('itlExportThumb');
+            if (!state.exportImage) {
+                thumb.hidden = true;
+                thumb.replaceChildren();
+                return;
+            }
+            thumb.hidden = false;
+            thumb.replaceChildren();
+            const img = document.createElement('img');
+            img.src = state.exportImage.dataUrl;
+            img.alt = '';
+            const meta = document.createElement('div');
+            meta.className = 'meta';
+            const strong = document.createElement('strong');
+            strong.textContent = state.exportImage.name;
+            const small = document.createElement('small');
+            small.textContent = `${state.exportImage.width} × ${state.exportImage.height} px`;
+            meta.append(strong, small);
+            const replace = document.createElement('button');
+            replace.type = 'button';
+            replace.textContent = 'Replace';
+            replace.addEventListener('click', () => $('itlExportInput').click());
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.dataset.danger = 'true';
+            remove.title = 'Remove export';
+            remove.innerHTML = '<i class="fas fa-times"></i>';
+            remove.addEventListener('click', clearExport);
+            thumb.append(img, meta, replace, remove);
+        }
+
+        // ── layer list ──────────────────────────────────────────────────
+        function uniqueLayerName(base) {
+            const clean = String(base || '').trim().slice(0, 60) || 'layer';
+            const used = new Set(state.layers.map((layer) => layer.name.trim().toLowerCase()));
+            if (!used.has(clean.toLowerCase())) return clean;
+            let index = 2;
+            let candidate = `${clean} ${index}`;
+            while (used.has(candidate.toLowerCase())) {
+                index += 1;
+                candidate = `${clean} ${index}`;
+            }
+            return candidate;
+        }
+
+        function createLayer(name) {
+            const layer = {
+                id: uid(),
+                name: uniqueLayerName(name),
+                color: nextColor(),
+                points: [],
+            };
+            state.layers.push(layer);
+            state.activeLayerId = layer.id;
+            return layer;
+        }
+
+        function openNameDialog(point = null) {
+            if (document.querySelector('dialog[open]')) return;
+            pendingPoint = point;
+            const input = $('itlNameInput');
+            input.value = uniqueLayerName(`layer-${state.layers.length + 1}`);
+            $('itlNameDialog').showModal();
+            requestAnimationFrame(() => {
+                input.focus();
+                input.select();
+            });
+        }
+
+        function addLayer() {
+            openNameDialog();
+        }
+
+        function removeLayer(id) {
+            state.layers = state.layers.filter(l => l.id !== id);
+            if (state.activeLayerId === id) state.activeLayerId = state.layers[0]?.id ?? null;
+            renderLayers();
+            renderCanvas();
+        }
+
+        function renderPointLayers(list) {
+            state.layers.forEach((layer) => {
+                const row = document.createElement('div');
+                row.className = 'itl-layer';
+                row.setAttribute('role', 'listitem');
+                row.setAttribute('aria-selected', String(layer.id === state.activeLayerId));
+                row.dataset.id = layer.id;
+                row.addEventListener('click', (event) => {
+                    if (event.target.closest('input, button')) return;
+                    state.activeLayerId = layer.id;
+                    renderLayers();
+                    renderCanvas();
+                });
+
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.style.background = layer.color;
+
+                const info = document.createElement('div');
+                info.className = 'info';
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = layer.name;
+                input.maxLength = 60;
+                input.dataset.role = 'name';
+                input.addEventListener('input', () => {
+                    layer.name = input.value || layer.name;
+                    renderCanvas();
+                });
+                info.append(input);
+
+                const count = document.createElement('span');
+                count.className = 'count';
+                const pos = layer.points.filter(p => p.positive).length;
+                const neg = layer.points.length - pos;
+                count.textContent = `${pos} positive${neg ? ` · ${neg} negative` : ''}`;
+
+                const del = document.createElement('button');
+                del.type = 'button';
+                del.dataset.danger = 'true';
+                del.title = 'Delete layer';
+                del.innerHTML = '<i class="fas fa-trash"></i>';
+                del.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    removeLayer(layer.id);
+                });
+
+                row.append(dot, info, count, del);
+                list.append(row);
+            });
+            $('itlLayersCount').textContent = String(state.layers.length);
+        }
+
+        function renderMaskLayers(list) {
+            state.masks.forEach((mask, index) => {
+                const row = document.createElement('div');
+                row.className = 'itl-layer';
+                row.setAttribute('role', 'listitem');
+                row.setAttribute('aria-selected', 'false');
+
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.style.background = PALETTE[index % PALETTE.length];
+
+                const info = document.createElement('div');
+                info.className = 'info';
+                const name = document.createElement('strong');
+                name.textContent = mask.name;
+                info.append(name);
+
+                const count = document.createElement('span');
+                count.className = 'count';
+                count.textContent = '';
+
+                const del = document.createElement('button');
+                del.type = 'button';
+                del.dataset.danger = 'true';
+                del.title = 'Remove mask';
+                del.innerHTML = '<i class="fas fa-trash"></i>';
+                del.addEventListener('click', () => {
+                    state.masks.splice(index, 1);
+                    renderLayers();
+                    renderCanvas();
+                });
+
+                row.append(dot, info, count, del);
+                list.append(row);
+            });
+            $('itlLayersCount').textContent = String(state.masks.length);
+        }
+
+        function renderLayers() {
+            const list = $('itlLayers');
+            list.replaceChildren();
+            if (state.mode === 'masks') {
+                renderMaskLayers(list);
+            } else {
+                renderPointLayers(list);
+            }
+            syncActiveState();
+        }
+
+        // ── canvas + point placement ────────────────────────────────────
+        function renderCanvas() {
+            const svg = $('itlCanvas');
+            const wrap = $('itlCanvasWrap');
+            const placeholder = $('itlPlaceholder');
+            if (!state.reference) {
+                wrap.hidden = true;
+                placeholder.hidden = false;
+                clearHolePreview();
+                return;
+            }
+            wrap.hidden = false;
+            placeholder.hidden = true;
+
+            svg.setAttribute('viewBox', `0 0 ${state.reference.width} ${state.reference.height}`);
+            svg.setAttribute('width', String(state.reference.width));
+            svg.setAttribute('height', String(state.reference.height));
+            svg.style.aspectRatio = `${state.reference.width} / ${state.reference.height}`;
+            svg.replaceChildren();
+
+            const image = document.createElementNS(SVG_NS, 'image');
+            image.setAttribute('href', state.reference.dataUrl);
+            image.setAttribute('x', '0');
+            image.setAttribute('y', '0');
+            image.setAttribute('width', String(state.reference.width));
+            image.setAttribute('height', String(state.reference.height));
+            svg.appendChild(image);
+
+            if (state.mode === 'recover') {
+                scheduleHolePreview();
+                syncActiveState();
+                return;
+            }
+
+            if (state.mode === 'masks') {
+                renderMaskPreview(svg);
+                syncActiveState();
+                return;
+            }
+            if (state.mode === 'sam-auto') {
+                syncActiveState();
+                return;
+            }
+
+            const activeId = state.activeLayerId;
+            const radius = Math.max(4, Math.round(
+                Math.min(state.reference.width, state.reference.height) * state.settings.pointRadius
+            ));
+            const defs = document.createElementNS(SVG_NS, 'defs');
+            svg.appendChild(defs);
+
+            // Confirm each group's selected area before the run: a translucent
+            // union of positive circles minus the negative points.
+            state.layers.forEach((layer) => {
+                if (!layer.points.length) return;
+                const maskId = `itl-area-mask-${layer.id}`;
+                const mask = document.createElementNS(SVG_NS, 'mask');
+                mask.setAttribute('id', maskId);
+                mask.setAttribute('maskUnits', 'userSpaceOnUse');
+                mask.setAttribute('maskContentUnits', 'userSpaceOnUse');
+                mask.setAttribute('x', '0');
+                mask.setAttribute('y', '0');
+                mask.setAttribute('width', String(state.reference.width));
+                mask.setAttribute('height', String(state.reference.height));
+
+                const positives = layer.points.filter((point) => point.positive);
+                const negatives = layer.points.filter((point) => !point.positive);
+                positives.forEach((point) => {
+                    const circle = document.createElementNS(SVG_NS, 'circle');
+                    circle.setAttribute('cx', String(point.x * state.reference.width));
+                    circle.setAttribute('cy', String(point.y * state.reference.height));
+                    circle.setAttribute('r', String(radius));
+                    circle.setAttribute('fill', '#ffffff');
+                    mask.appendChild(circle);
+                });
+                negatives.forEach((point) => {
+                    const circle = document.createElementNS(SVG_NS, 'circle');
+                    circle.setAttribute('cx', String(point.x * state.reference.width));
+                    circle.setAttribute('cy', String(point.y * state.reference.height));
+                    circle.setAttribute('r', String(radius * 2));
+                    circle.setAttribute('fill', '#000000');
+                    mask.appendChild(circle);
+                });
+                defs.appendChild(mask);
+
+                const area = document.createElementNS(SVG_NS, 'rect');
+                area.setAttribute('x', '0');
+                area.setAttribute('y', '0');
+                area.setAttribute('width', String(state.reference.width));
+                area.setAttribute('height', String(state.reference.height));
+                area.setAttribute('fill', layer.color);
+                area.setAttribute('opacity', layer.id === activeId ? '0.32' : '0.18');
+                area.setAttribute('mask', `url(#${maskId})`);
+                area.classList.add('itl-point-area');
+                svg.appendChild(area);
+
+                if (positives.length) {
+                    const anchorX = positives.reduce((sum, point) => sum + point.x, 0) / positives.length;
+                    const topY = Math.min(...positives.map((point) => point.y));
+                    const label = document.createElementNS(SVG_NS, 'text');
+                    const fontSize = Math.max(12, Math.round(
+                        Math.min(state.reference.width, state.reference.height) * 0.018
+                    ));
+                    label.setAttribute('x', String(anchorX * state.reference.width));
+                    label.setAttribute('y', String(Math.max(
+                        fontSize * 1.4,
+                        topY * state.reference.height - radius * 1.2,
+                    )));
+                    label.setAttribute('text-anchor', 'middle');
+                    label.setAttribute('font-size', String(fontSize));
+                    label.setAttribute('fill', layer.id === activeId ? '#ffffff' : layer.color);
+                    label.setAttribute('stroke', 'rgba(10, 10, 13, 0.88)');
+                    label.setAttribute('stroke-width', String(Math.max(2, fontSize * 0.2)));
+                    label.classList.add('itl-point-label');
+                    label.textContent = layer.name;
+                    svg.appendChild(label);
+                }
+            });
+
+            state.layers.forEach((layer) => {
+                const g = document.createElementNS(SVG_NS, 'g');
+                g.dataset.layerId = layer.id;
+                layer.points.forEach((point, index) => {
+                    const cx = point.x * state.reference.width;
+                    const cy = point.y * state.reference.height;
+                    if (point.positive) {
+                        const ring = document.createElementNS(SVG_NS, 'circle');
+                        ring.setAttribute('cx', String(cx));
+                        ring.setAttribute('cy', String(cy));
+                        ring.setAttribute('r', String(radius));
+                        ring.setAttribute('fill', 'none');
+                        ring.setAttribute('stroke', layer.id === activeId ? '#ffffff' : layer.color);
+                        ring.setAttribute('stroke-width', String(Math.max(2, radius * 0.12)));
+                        ring.classList.add('itl-point');
+                        g.appendChild(ring);
+
+                        const core = document.createElementNS(SVG_NS, 'circle');
+                        core.setAttribute('cx', String(cx));
+                        core.setAttribute('cy', String(cy));
+                        core.setAttribute('r', String(Math.max(2.5, radius * 0.16)));
+                        core.setAttribute('fill', layer.color);
+                        core.setAttribute('stroke', 'rgba(10, 10, 13, 0.7)');
+                        core.setAttribute('stroke-width', '1');
+                        core.classList.add('itl-point');
+                        g.appendChild(core);
+                    } else {
+                        const size = radius;
+                        [[-1, -1, 1, 1], [-1, 1, 1, -1]].forEach(([x1, y1, x2, y2]) => {
+                            const line = document.createElementNS(SVG_NS, 'line');
+                            line.setAttribute('x1', String(cx + x1 * size));
+                            line.setAttribute('y1', String(cy + y1 * size));
+                            line.setAttribute('x2', String(cx + x2 * size));
+                            line.setAttribute('y2', String(cy + y2 * size));
+                            line.setAttribute('stroke', layer.color);
+                            line.setAttribute('stroke-width', String(radius * 0.45));
+                            line.setAttribute('stroke-linecap', 'round');
+                            line.classList.add('itl-point');
+                            g.appendChild(line);
+                        });
+                    }
+                    // invisible fat hit area
+                    const hit = document.createElementNS(SVG_NS, 'circle');
+                    hit.setAttribute('cx', String(cx));
+                    hit.setAttribute('cy', String(cy));
+                    hit.setAttribute('r', String(radius * 1.8));
+                    hit.setAttribute('fill', 'transparent');
+                    hit.dataset.layerIndex = String(state.layers.indexOf(layer));
+                    hit.dataset.pointIndex = String(index);
+                    hit.classList.add('itl-point-hit');
+                    g.appendChild(hit);
+                });
+                svg.appendChild(g);
+            });
+            syncActiveState();
+        }
+
+        function renderMaskPreview(svg) {
+            state.masks.forEach((mask, index) => {
+                const image = document.createElementNS(SVG_NS, 'image');
+                image.setAttribute('href', mask.dataUrl);
+                image.setAttribute('x', '0');
+                image.setAttribute('y', '0');
+                image.setAttribute('width', String(state.reference.width));
+                image.setAttribute('height', String(state.reference.height));
+                image.setAttribute('opacity', index === 0 ? '0.5' : String(Math.max(0.15, 0.45 - index * 0.05)));
+                image.setAttribute('style', 'mix-blend-mode: screen;');
+                svg.appendChild(image);
+            });
+        }
+
+        // ── live hole preview (recover mode) ────────────────────────────
+        const imageLoads = new Map();
+        let holePreviewTimer = 0;
+        let holePreviewRun = 0;
+
+        function loadImageElement(url) {
+            if (!imageLoads.has(url)) {
+                imageLoads.set(url, new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error('could not decode image'));
+                    img.src = url;
+                }));
+            }
+            return imageLoads.get(url);
+        }
+
+        function scheduleHolePreview() {
+            clearTimeout(holePreviewTimer);
+            holePreviewTimer = setTimeout(drawHolePreview, 120);
+        }
+
+        function clearHolePreview() {
+            holePreviewRun += 1;
+            clearTimeout(holePreviewTimer);
+            const canvas = $('itlHoleCanvas');
+            canvas.hidden = true;
+            const ctx = canvas.getContext('2d');
+            if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const status = $('itlRecoverStatus');
+            status.dataset.kind = '';
+            status.textContent = state.exportImage
+                ? 'Hole preview is shown in Recover missing mode.'
+                : 'Upload an export to preview the missing parts.';
+        }
+
+        function computeHoleMask(refData, exportData, refHasAlpha, alphaMode, total) {
+            const holes = new Uint8Array(total);
+            for (let pixel = 0, index = 0; pixel < total; pixel += 1, index += 4) {
+                if (refHasAlpha && refData[index + 3] < 16) continue;
+                const alpha = exportData[index + 3];
+                if (alphaMode) {
+                    if (alpha < 32) holes[pixel] = 1;
+                    continue;
+                }
+                const flatRed = (exportData[index] * alpha + 255 * (255 - alpha)) / 255;
+                const flatGreen = (exportData[index + 1] * alpha + 255 * (255 - alpha)) / 255;
+                const flatBlue = (exportData[index + 2] * alpha + 255 * (255 - alpha)) / 255;
+                const darkest = Math.min(flatRed, flatGreen, flatBlue);
+                const brightest = Math.max(flatRed, flatGreen, flatBlue);
+                if (darkest < 244 || brightest - darkest > 8) continue;
+                const difference = Math.max(
+                    Math.abs(refData[index] - flatRed),
+                    Math.abs(refData[index + 1] - flatGreen),
+                    Math.abs(refData[index + 2] - flatBlue),
+                );
+                if (difference < 16) continue;
+                holes[pixel] = 1;
+            }
+            return holes;
+        }
+
+        function floodFillRegions(holes, width, height, total) {
+            const compIds = new Int32Array(total);
+            compIds.fill(-1);
+            const stack = new Int32Array(total);
+            const regions = [];
+            for (let start = 0; start < total; start += 1) {
+                if (!holes[start] || compIds[start] >= 0) continue;
+                const id = regions.length;
+                let top = 0;
+                stack[top++] = start;
+                compIds[start] = id;
+                let area = 0;
+                let minX = width, minY = height, maxX = -1, maxY = -1;
+                let touchesBorder = false;
+                while (top > 0) {
+                    const pixel = stack[--top];
+                    area += 1;
+                    const y = Math.floor(pixel / width);
+                    const x = pixel - y * width;
+                    if (x < minX) minX = x;
+                    if (x > maxX) maxX = x;
+                    if (y < minY) minY = y;
+                    if (y > maxY) maxY = y;
+                    if (x === 0 || y === 0 || x === width - 1 || y === height - 1) touchesBorder = true;
+                    let neighbour;
+                    if (x > 0) {
+                        neighbour = pixel - 1;
+                        if (holes[neighbour] && compIds[neighbour] < 0) {
+                            compIds[neighbour] = id; stack[top++] = neighbour;
+                        }
+                    }
+                    if (x + 1 < width) {
+                        neighbour = pixel + 1;
+                        if (holes[neighbour] && compIds[neighbour] < 0) {
+                            compIds[neighbour] = id; stack[top++] = neighbour;
+                        }
+                    }
+                    if (y > 0) {
+                        neighbour = pixel - width;
+                        if (holes[neighbour] && compIds[neighbour] < 0) {
+                            compIds[neighbour] = id; stack[top++] = neighbour;
+                        }
+                    }
+                    if (y + 1 < height) {
+                        neighbour = pixel + width;
+                        if (holes[neighbour] && compIds[neighbour] < 0) {
+                            compIds[neighbour] = id; stack[top++] = neighbour;
+                        }
+                    }
+                }
+                regions.push({ id, area, touchesBorder, bbox: [minX, minY, maxX + 1, maxY + 1] });
+            }
+            return { compIds, regions };
+        }
+
+        function filterRegions(regions, total, minAreaPct, ignoreBorder) {
+            const minArea = Math.max(1, Math.round(total * minAreaPct / 100));
+            return regions.filter((region) => (
+                region.area >= minArea
+                && !(ignoreBorder && region.touchesBorder)
+            ));
+        }
+
+        async function drawHolePreview() {
+            const run = ++holePreviewRun;
+            const canvas = $('itlHoleCanvas');
+            const status = $('itlRecoverStatus');
+            if (state.mode !== 'recover' || !state.reference || !state.exportImage) {
+                canvas.hidden = true;
+                return;
+            }
+
+            const width = state.reference.width;
+            const height = state.reference.height;
+            const total = width * height;
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            try {
+                const [refImg, exportImg] = await Promise.all([
+                    loadImageElement(state.reference.dataUrl),
+                    loadImageElement(state.exportImage.dataUrl),
+                ]);
+                if (run !== holePreviewRun) return;
+
+                const refCanvas = document.createElement('canvas');
+                refCanvas.width = width;
+                refCanvas.height = height;
+                const refCtx = refCanvas.getContext('2d', { willReadFrequently: true });
+                refCtx.drawImage(refImg, 0, 0, width, height);
+                const refData = refCtx.getImageData(0, 0, width, height).data;
+
+                const exportCanvas = document.createElement('canvas');
+                exportCanvas.width = width;
+                exportCanvas.height = height;
+                const exportCtx = exportCanvas.getContext('2d', { willReadFrequently: true });
+                exportCtx.clearRect(0, 0, width, height);
+                exportCtx.drawImage(exportImg, 0, 0, width, height);
+                const exportData = exportCtx.getImageData(0, 0, width, height).data;
+
+                let refHasAlpha = false;
+                for (let index = 3; index < refData.length; index += 4) {
+                    if (refData[index] < 250) { refHasAlpha = true; break; }
+                }
+                let hasTransparency = false;
+                for (let index = 3; index < exportData.length; index += 4) {
+                    if (exportData[index] < 32) { hasTransparency = true; break; }
+                }
+
+                const source = state.recover.holeSource;
+                let alphaMode = source === 'alpha' || (source === 'auto' && hasTransparency);
+
+                let holes = computeHoleMask(refData, exportData, refHasAlpha, alphaMode, total);
+                let { compIds, regions } = floodFillRegions(holes, width, height, total);
+                let kept = filterRegions(regions, total, state.recover.minArea, state.recover.ignoreBorder);
+
+                // Mirror the backend's alpha → near-white fallback.
+                let didFallback = false;
+                if (!kept.length && alphaMode && source === 'auto') {
+                    alphaMode = false;
+                    didFallback = true;
+                    holes = computeHoleMask(refData, exportData, refHasAlpha, false, total);
+                    ({ compIds, regions } = floodFillRegions(holes, width, height, total));
+                    kept = filterRegions(regions, total, state.recover.minArea, state.recover.ignoreBorder);
+                }
+
+                if (run !== holePreviewRun) return;
+
+                const keptIds = new Uint8Array(regions.length);
+                kept.forEach((region) => { keptIds[region.id] = 1; });
+
+                const image = ctx.createImageData(width, height);
+                const out = image.data;
+                let holePixels = 0;
+                for (let pixel = 0, index = 0; pixel < total; pixel += 1, index += 4) {
+                    const id = compIds[pixel];
+                    if (id >= 0 && keptIds[id]) {
+                        out[index] = 255;
+                        out[index + 1] = 45;
+                        out[index + 2] = 149;
+                        out[index + 3] = 118;
+                        holePixels += 1;
+                    }
+                }
+                ctx.clearRect(0, 0, width, height);
+                ctx.putImageData(image, 0, 0);
+
+                const scale = Math.max(width, height);
+                const lineWidth = Math.max(2, Math.round(scale * 0.0025));
+                const fontPx = Math.max(14, Math.round(scale * 0.018));
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = '#ff2d95';
+                ctx.font = `600 ${fontPx}px system-ui, sans-serif`;
+                ctx.textBaseline = 'top';
+                kept.forEach((region, index) => {
+                    const [x0, y0, x1, y1] = region.bbox;
+                    ctx.strokeRect(
+                        x0 + lineWidth / 2,
+                        y0 + lineWidth / 2,
+                        Math.max(1, x1 - x0 - lineWidth),
+                        Math.max(1, y1 - y0 - lineWidth),
+                    );
+                    const label = String(index + 1);
+                    const pad = Math.round(fontPx * 0.25);
+                    const labelWidth = ctx.measureText(label).width;
+                    ctx.fillStyle = 'rgba(20, 18, 24, 0.82)';
+                    ctx.fillRect(x0 + 3, y0 + 3, labelWidth + pad * 2, fontPx + pad * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText(label, x0 + 3 + pad, y0 + 3 + pad);
+                });
+
+                canvas.hidden = false;
+                const percent = (holePixels / total) * 100;
+                if (kept.length) {
+                    const sourceLabel = alphaMode ? 'alpha' : 'near-white';
+                    const scaled = state.exportImage.width !== width || state.exportImage.height !== height;
+                    const aspectOff = scaled && Math.abs(
+                        (state.exportImage.width / state.exportImage.height) - (width / height)
+                    ) > 0.02;
+                    status.dataset.kind = 'ok';
+                    status.textContent = `${kept.length} missing region${kept.length === 1 ? '' : 's'}`
+                        + ` · ${percent.toFixed(1)}% of canvas · ${sourceLabel} holes`
+                        + (didFallback ? ' (auto fallback)' : '')
+                        + (scaled
+                            ? ` · export scaled${aspectOff ? ' (aspect differs)' : ' to final size'}`
+                            : '');
+                } else {
+                    status.dataset.kind = 'error';
+                    status.textContent = hasTransparency || source === 'white'
+                        ? 'No missing regions matched. Lower the minimum area, keep edge regions, or change the hole source.'
+                        : 'No transparent holes found. Switch the hole source to near-white for an opaque export.';
+                }
+            } catch (error) {
+                canvas.hidden = true;
+                status.dataset.kind = 'error';
+                status.textContent = `Preview unavailable: ${error.message || error}`;
+            }
+        }
+
+        function screenToSvg(svg, clientX, clientY) {
+            const point = svg.createSVGPoint();
+            point.x = clientX;
+            point.y = clientY;
+            return point.matrixTransform(svg.getScreenCTM().inverse());
+        }
+
+        function findPointTarget(svg, event) {
+            const hit = event.target.closest('.itl-point-hit');
+            if (!hit) return null;
+            const layerIndex = Number(hit.dataset.layerIndex);
+            const pointIndex = Number(hit.dataset.pointIndex);
+            const layer = state.layers[layerIndex];
+            if (!layer) return null;
+            return { layer, layerIndex, pointIndex, point: layer.points[pointIndex] };
+        }
+
+        $('itlCanvas').addEventListener('pointerdown', (event) => {
+            if (event.button !== 0) return;
+            if (state.mode !== 'sam-points' || !state.reference) return;
+            const svg = $('itlCanvas');
+            const hit = findPointTarget(svg, event);
+            if (hit) {
+                if (event.altKey) {
+                    hit.layer.points.splice(hit.pointIndex, 1);
+                    const positive = hit.layer.points.filter((point) => point.positive).length;
+                    setStatus(
+                        `${hit.layer.name}: ${positive} selected point${positive === 1 ? '' : 's'}.`,
+                        'ok',
+                    );
+                } else {
+                    state.activeLayerId = hit.layer.id;
+                }
+                renderLayers();
+                renderCanvas();
+                return;
+            }
+            const pt = screenToSvg(svg, event.clientX, event.clientY);
+            const x = pt.x / state.reference.width;
+            const y = pt.y / state.reference.height;
+            if (x < 0 || x > 1 || y < 0 || y > 1) return;
+            const layer = state.layers.find(l => l.id === state.activeLayerId);
+            if (!layer) {
+                openNameDialog({ x, y, positive: !event.altKey });
+                event.preventDefault();
+                return;
+            }
+            layer.points.push({ x, y, positive: !event.altKey });
+            const positive = layer.points.filter((point) => point.positive).length;
+            setStatus(`${layer.name}: ${positive} selected point${positive === 1 ? '' : 's'}.`, 'ok');
+            renderLayers();
+            renderCanvas();
+            event.preventDefault();
+        });
+
+        // ── masks upload ────────────────────────────────────────────────
+        function setMasks(files) {
+            const imageFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+            if (!imageFiles.length) {
+                setStatus('No images selected.', 'error');
+                return;
+            }
+            Promise.all(imageFiles.map((file) => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve({
+                    name: file.name.replace(/\.[^.]+$/, ''),
+                    dataUrl: String(reader.result),
+                });
+                reader.onerror = () => reject(reader.error);
+                reader.readAsDataURL(file);
+            }))).then((loaded) => {
+                state.masks = loaded;
+                renderLayers();
+                renderCanvas();
+                setStatus(`Loaded ${loaded.length} mask${loaded.length === 1 ? '' : 's'}.`, 'ok');
+            }).catch((err) => setStatus(String(err.message || err), 'error'));
+        }
+
+        // ── run ─────────────────────────────────────────────────────────
+        function buildPayload() {
+            const payload = {
+                reference: state.reference.dataUrl,
+                referenceName: state.reference.name,
+                mode: state.mode,
+                samModel: state.settings.samModel,
+                feather: state.settings.feather,
+                dilate: state.settings.dilate,
+                pointRadius: state.settings.pointRadius,
+                depth: state.settings.depth,
+                depthRole: state.settings.depthRole,
+                outputMode: state.settings.output,
+                name: state.settings.name || 'My Scene',
+            };
+            if (state.mode === 'sam-points') {
+                const valid = state.layers.filter(l => l.points.some(p => p.positive));
+                if (!valid.length) throw new Error('Add at least one positive point to a group.');
+                // Coordinates are 0–1 fractions; the CLI multiplies them by the image size.
+                payload.samPoints = valid.map((layer) => {
+                    const points = layer.points.map((p) => {
+                        return `${p.positive ? '' : '!'}${p.x.toFixed(6)},${p.y.toFixed(6)}`;
+                    }).join('|');
+                    const safeName = layer.name.replace(/[;:|]/g, '_') || 'layer';
+                    return `${safeName}:${points}`;
+                }).join(';');
+            } else if (state.mode === 'masks') {
+                if (!state.masks.length) throw new Error('Upload at least one mask.');
+                payload.masks = state.masks;
+            } else if (state.mode === 'recover') {
+                if (!state.exportImage) throw new Error('Add the aligned studio export.');
+                payload.export = state.exportImage.dataUrl;
+                payload.exportName = state.exportImage.name;
+                payload.recoverMinArea = state.recover.minArea;
+                payload.recoverIgnoreBorder = state.recover.ignoreBorder;
+                payload.recoverHoleSource = state.recover.holeSource;
+            }
+            return payload;
+        }
+
+        async function cancelRun() {
+            if (state.controller) {
+                try { await fetch(`${API}/cancel`, { method: 'POST' }); } catch {}
+                state.controller.abort();
+            }
+        }
+
+        function estimateLayerArea(layer) {
+            if (!state.reference) return 0;
+            const width = state.reference.width;
+            const height = state.reference.height;
+            const minSide = Math.min(width, height);
+            const radius = Math.max(0.5, minSide * state.settings.pointRadius);
+            const rx = radius / width;
+            const ry = radius / height;
+            const positives = layer.points.filter((point) => point.positive);
+            const negatives = layer.points.filter((point) => !point.positive);
+            if (!positives.length) return 0;
+            const grid = 96;
+            let hits = 0;
+            for (let gy = 0; gy < grid; gy += 1) {
+                const y = (gy + 0.5) / grid;
+                for (let gx = 0; gx < grid; gx += 1) {
+                    const x = (gx + 0.5) / grid;
+                    let inside = false;
+                    for (const point of positives) {
+                        const dx = (x - point.x) / rx;
+                        const dy = (y - point.y) / ry;
+                        if (dx * dx + dy * dy <= 1) {
+                            inside = true;
+                            break;
+                        }
+                    }
+                    if (inside) {
+                        for (const point of negatives) {
+                            const dx = (x - point.x) / (rx * 2);
+                            const dy = (y - point.y) / (ry * 2);
+                            if (dx * dx + dy * dy <= 1) {
+                                inside = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (inside) hits += 1;
+                }
+            }
+            return (hits / (grid * grid)) * 100;
+        }
+
+        function openConfirmDialog(payload) {
+            const list = $('itlConfirmList');
+            list.replaceChildren();
+            const valid = state.layers.filter((layer) => layer.points.some((point) => point.positive));
+            const empty = state.layers.filter((layer) => !layer.points.some((point) => point.positive));
+            const nameCounts = new Map();
+            state.layers.forEach((layer) => {
+                const key = layer.name.trim().toLowerCase();
+                nameCounts.set(key, (nameCounts.get(key) || 0) + 1);
+            });
+
+            valid.forEach((layer) => {
+                const positive = layer.points.filter((point) => point.positive).length;
+                const negative = layer.points.length - positive;
+                const area = estimateLayerArea(layer);
+                const row = document.createElement('div');
+                row.className = 'itl-confirm-row';
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.style.background = layer.color;
+                const info = document.createElement('div');
+                const name = document.createElement('strong');
+                name.textContent = layer.name;
+                const meta = document.createElement('small');
+                meta.textContent = `${positive} positive${negative ? ` · ${negative} negative` : ''} · ~${area.toFixed(1)}% of image`;
+                if ((nameCounts.get(layer.name.trim().toLowerCase()) || 0) > 1) {
+                    meta.textContent += ' · duplicate name';
+                }
+                info.append(name, meta);
+                const tag = document.createElement('small');
+                tag.textContent = 'group';
+                row.append(dot, info, tag);
+                list.append(row);
+            });
+
+            empty.forEach((layer) => {
+                const row = document.createElement('div');
+                row.className = 'itl-confirm-row empty';
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.style.background = layer.color;
+                const info = document.createElement('div');
+                const name = document.createElement('strong');
+                name.textContent = layer.name;
+                const meta = document.createElement('small');
+                meta.textContent = 'No positive point — this group will be skipped.';
+                info.append(name, meta);
+                const tag = document.createElement('small');
+                tag.textContent = 'empty';
+                row.append(dot, info, tag);
+                list.append(row);
+            });
+
+            const totalPoints = valid.reduce((sum, layer) => (
+                sum + layer.points.filter((point) => point.positive).length
+            ), 0);
+            $('itlConfirmSummary').textContent = valid.length
+                ? `${valid.length} group${valid.length === 1 ? '' : 's'} ready · ${totalPoints} positive point${totalPoints === 1 ? '' : 's'}. Review the names and selected areas before segmentation.`
+                : 'No group has a positive point yet. Go back and select an area first.';
+            $('itlConfirmRun').disabled = valid.length === 0;
+            pendingPayload = payload;
+            $('itlConfirmDialog').showModal();
+        }
+
+        async function run() {
+            if (state.running) return;
+            let payload;
+            try {
+                payload = buildPayload();
+            } catch (error) {
+                setStatus(error.message, 'error');
+                return;
+            }
+            if (state.mode === 'sam-points') {
+                openConfirmDialog(payload);
+                return;
+            }
+            await startRun(payload);
+        }
+
+        async function startRun(payload) {
+            state.running = true;
+            state.result = null;
+            syncActiveState();
+            $('itlProgress').hidden = false;
+            $('itlPreview').hidden = true;
+            $('itlActions').hidden = true;
+            $('itlStudioLink').hidden = true;
+            setProgress(0, 'Starting…');
+            setStatus('Running segmenter…', 'busy');
+            state.controller = new AbortController();
+            try {
+                const response = await fetch(`${API}/run`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    signal: state.controller.signal,
+                });
+                if (!response.ok) {
+                    const detail = await response.text().catch(() => '');
+                    let parsed = null;
+                    try { parsed = JSON.parse(detail); } catch {}
+                    throw new Error(parsed?.error || detail || `Server returned ${response.status}`);
+                }
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let percent = 0;
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        buffer += decoder.decode();
+                        break;
+                    }
+                    buffer += decoder.decode(value, { stream: true });
+                    let newline;
+                    while ((newline = buffer.indexOf('\n')) >= 0) {
+                        const line = buffer.slice(0, newline).trim();
+                        buffer = buffer.slice(newline + 1);
+                        if (!line) continue;
+                        let event;
+                        try { event = JSON.parse(line); }
+                        catch { continue; }
+                        handleEvent(event, (next) => { percent = next; setProgress(next, event.message || '…'); });
+                    }
+                    setProgress(percent);
+                }
+                if (buffer.trim()) {
+                    try {
+                        const event = JSON.parse(buffer.trim());
+                        handleEvent(event, (next) => { percent = next; });
+                    } catch {}
+                }
+                if (state.result) {
+                    const layers = resultLayers(state.result);
+                    if (state.result.zipUrl && !layers.length) {
+                        setStatus('Done — ZIP ready with named, grouped cutouts.', 'ok');
+                    } else {
+                        const layerCount = state.mode === 'recover'
+                            ? (state.result.recoverRegions ?? layers.length)
+                            : layers.length;
+                        const verb = state.mode === 'recover' ? 'missing layer' : 'layer';
+                        const groupCount = new Set(
+                            layers.map((layer) => layer.segmentGroup).filter(Boolean)
+                        ).size;
+                        const groupText = groupCount
+                            ? ` · ${groupCount} group${groupCount === 1 ? '' : 's'}`
+                            : '';
+                        setStatus(`Done — ${layerCount} ${verb}${layerCount === 1 ? '' : 's'}${groupText}.`, 'ok');
+                    }
+                } else {
+                    setStatus('Finished with warnings. Check the log.', 'error');
+                }
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    setStatus('Run cancelled.', 'error');
+                } else {
+                    setStatus(error.message || 'Segmenter failed.', 'error');
+                }
+            } finally {
+                state.running = false;
+                state.controller = null;
+                syncActiveState();
+            }
+        }
+
+        function handleEvent(event, setPct) {
+            if (event.type === 'log') {
+                const line = String(event.message || '').trim();
+                if (!line) return;
+                // Honest heuristics based on what the CLI actually prints.
+                if (/Running SAM/.test(line)) setPct(10);
+                else if (/automatic masks:/.test(line)) setPct(70);
+                else if (/recovered \d+ missing/.test(line)) setPct(60);
+                else if (/^wrote /.test(line)) setPct(95);
+                $('itlProgressLabel').textContent = line;
+            } else if (event.type === 'error') {
+                setStatus(event.message || 'Segmenter failed.', 'error');
+                $('itlProgressLabel').textContent = event.message || 'Failed';
+            } else if (event.type === 'done') {
+                setProgress(100, `Done in ${event.elapsedMs ? Math.round(event.elapsedMs / 1000) + 's' : ''}`);
+                state.result = event;
+                renderPreview(event);
+            }
+        }
+
+        function setProgress(value, label) {
+            const node = $('itlProgress');
+            node.hidden = false;
+            node.style.setProperty('--p', `${Math.min(100, Math.max(0, value))}%`);
+            if (label) $('itlProgressLabel').textContent = label;
+        }
+
+        function resultLayers(result) {
+            const composition = result?.composition;
+            if (!composition) return [];
+            const baseId = composition.meta?.recover?.baseLayerId;
+            return (composition.layers || []).filter(layer => (
+                layer.id !== composition.referenceLayerId && layer.id !== baseId
+            ));
+        }
+
+        function renderPreview(result) {
+            const grid = $('itlPreviewGrid');
+            grid.replaceChildren();
+            const layers = resultLayers(result).sort((a, b) => b.z - a.z);
+            layers.forEach((layer) => {
+                const tile = document.createElement('div');
+                tile.className = 'itl-tile';
+                const img = document.createElement('img');
+                img.src = layer.url;
+                img.alt = layer.name;
+                img.loading = 'lazy';
+                img.onerror = () => {
+                    const missing = document.createElement('div');
+                    missing.className = 'missing';
+                    missing.textContent = 'Image missing';
+                    img.replaceWith(missing);
+                };
+                const label = document.createElement('small');
+                label.textContent = layer.name || layer.id;
+                const group = layer.segmentGroup
+                    ? document.createElement('small')
+                    : null;
+                if (group) {
+                    group.className = 'group';
+                    group.textContent = layer.segmentGroup;
+                }
+                const z = document.createElement('span');
+                z.className = 'z';
+                z.textContent = `z ${layer.z}`;
+                tile.append(img, label, ...(group ? [group] : []), z);
+                grid.append(tile);
+            });
+            $('itlPreview').hidden = layers.length === 0;
+            $('itlActions').hidden = layers.length === 0
+                && !result.zipUrl && !result.outputPath;
+
+            const recoverPreview = $('itlRecoverPreview');
+            const recoverImg = $('itlRecoverPreviewImg');
+            const recoverMeta = $('itlRecoverPreviewMeta');
+            if (result.previewUrl) {
+                const regions = result.recoverRegions
+                    ?? result.composition?.meta?.recover?.regions;
+                recoverImg.src = `${result.previewUrl}?t=${Date.now()}`;
+                recoverMeta.textContent = regions
+                    ? `${regions} missing region${regions === 1 ? '' : 's'} highlighted on the final image.`
+                    : 'Missing regions highlighted on the final image.';
+                recoverPreview.hidden = false;
+            } else {
+                recoverPreview.hidden = true;
+                recoverImg.removeAttribute('src');
+            }
+
+            const link = $('itlStudioLink');
+            link.replaceChildren();
+            if (result.projectDir && result.outputMode === 'project') {
+                const a = document.createElement('a');
+                a.href = 'studio-v2.html';
+                a.textContent = `Open studio-v2.html and pick “${result.composition.name}”`;
+                link.append('Composition saved to ', document.createTextNode(result.projectDir), '. ', a, '.');
+                link.hidden = false;
+            } else if (result.zipUrl) {
+                const a = document.createElement('a');
+                a.href = result.zipUrl;
+                a.download = '';
+                a.textContent = 'Download the ZIP';
+                link.append('Cutouts packaged. ', a, ' to import into Studio → “Import ZIP + image”.');
+                link.hidden = false;
+            } else {
+                link.hidden = true;
+            }
+
+            const downloadBtn = $('itlDownload');
+            downloadBtn.innerHTML = result.zipUrl
+                ? '<i class="fas fa-download"></i> Download ZIP'
+                : '<i class="fas fa-download"></i> Download JSON';
+            downloadBtn.onclick = () => {
+                const target = result.zipUrl || result.outputPath;
+                if (!target) return;
+                const a = document.createElement('a');
+                a.href = target;
+                a.download = '';
+                a.click();
+            };
+            $('itlExportProject').onclick = () => {
+                window.open('studio-v2.html', '_blank', 'noopener');
+            };
+        }
+
+        // ── wiring ─────────────────────────────────────────────────────
+        $('itlRefDrop').addEventListener('click', () => $('itlRefInput').click());
+        $('itlRefDrop').addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                $('itlRefInput').click();
+            }
+        });
+        ['dragenter', 'dragover'].forEach(evt =>
+            $('itlRefDrop').addEventListener(evt, (event) => {
+                event.preventDefault();
+                $('itlRefDrop').dataset.dragover = 'true';
+            }));
+        ['dragleave', 'drop'].forEach(evt =>
+            $('itlRefDrop').addEventListener(evt, (event) => {
+                event.preventDefault();
+                $('itlRefDrop').dataset.dragover = 'false';
+            }));
+        $('itlRefDrop').addEventListener('drop', (event) => {
+            const file = event.dataTransfer?.files?.[0];
+            if (file && file.type.startsWith('image/')) setReference(file);
+        });
+        $('itlRefInput').addEventListener('change', (event) => {
+            const file = event.target.files?.[0];
+            if (file) setReference(file);
+            event.target.value = '';
+        });
+
+        $('itlExportDrop').addEventListener('click', () => $('itlExportInput').click());
+        $('itlExportDrop').addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                $('itlExportInput').click();
+            }
+        });
+        ['dragenter', 'dragover'].forEach(evt =>
+            $('itlExportDrop').addEventListener(evt, (event) => {
+                event.preventDefault();
+                $('itlExportDrop').dataset.dragover = 'true';
+            }));
+        ['dragleave', 'drop'].forEach(evt =>
+            $('itlExportDrop').addEventListener(evt, (event) => {
+                event.preventDefault();
+                $('itlExportDrop').dataset.dragover = 'false';
+            }));
+        $('itlExportDrop').addEventListener('drop', (event) => {
+            const file = event.dataTransfer?.files?.[0];
+            if (file && file.type.startsWith('image/')) setExport(file);
+        });
+        $('itlExportInput').addEventListener('change', (event) => {
+            const file = event.target.files?.[0];
+            if (file) setExport(file);
+            event.target.value = '';
+        });
+
+        $('itlRecoverMin').addEventListener('input', (event) => {
+            state.recover.minArea = Number(event.target.value);
+            $('itlRecoverMinOut').textContent = `${state.recover.minArea.toFixed(2)}%`;
+            scheduleHolePreview();
+        });
+        $('itlRecoverHoles').addEventListener('change', (event) => {
+            state.recover.holeSource = event.target.value;
+            scheduleHolePreview();
+        });
+        $('itlRecoverBorder').addEventListener('change', (event) => {
+            state.recover.ignoreBorder = event.target.checked;
+            scheduleHolePreview();
+        });
+
+        document.querySelectorAll('.itl-modes button').forEach((button) => {
+            button.addEventListener('click', () => {
+                state.mode = button.dataset.mode;
+                renderLayers();
+                renderCanvas();
+                syncActiveState();
+            });
+        });
+
+        $('itlAddLayer').addEventListener('click', addLayer);
+        $('itlNameCancel').addEventListener('click', () => $('itlNameDialog').close());
+        $('itlNameForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const input = $('itlNameInput');
+            const value = input.value.trim();
+            if (!value) {
+                setStatus('Name the group before selecting its area.', 'error');
+                input.focus();
+                return;
+            }
+            const layer = createLayer(value);
+            if (pendingPoint) {
+                layer.points.push(pendingPoint);
+                pendingPoint = null;
+            }
+            $('itlNameDialog').close();
+            renderLayers();
+            renderCanvas();
+            setStatus(
+                `Group “${layer.name}” added. Click the image to select its area.`,
+                'ok',
+            );
+        });
+        $('itlNameDialog').addEventListener('close', () => {
+            pendingPoint = null;
+        });
+
+        $('itlConfirmBack').addEventListener('click', () => {
+            pendingPayload = null;
+            $('itlConfirmDialog').close();
+        });
+        $('itlConfirmForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const payload = pendingPayload;
+            $('itlConfirmDialog').close();
+            if (payload) startRun(payload);
+        });
+        $('itlConfirmDialog').addEventListener('close', () => {
+            pendingPayload = null;
+        });
+
+        $('itlAddMasks').addEventListener('click', () => $('itlMasksInput').click());
+        $('itlMasksInput').addEventListener('change', (event) => {
+            setMasks(event.target.files || []);
+            event.target.value = '';
+        });
+
+        $('itlName').addEventListener('input', (event) => {
+            state.settings.name = event.target.value || 'My Scene';
+        });
+        $('itlOutput').addEventListener('change', (event) => {
+            state.settings.output = event.target.value;
+        });
+        $('itlSam').addEventListener('change', (event) => {
+            state.settings.samModel = event.target.value;
+        });
+        $('itlFeather').addEventListener('input', (event) => {
+            state.settings.feather = Number(event.target.value);
+            $('itlFeatherOut').textContent = `${state.settings.feather.toFixed(1)} px`;
+        });
+        $('itlDilate').addEventListener('input', (event) => {
+            state.settings.dilate = Number(event.target.value);
+            $('itlDilateOut').textContent = `${state.settings.dilate} px`;
+        });
+        $('itlRadius').addEventListener('input', (event) => {
+            state.settings.pointRadius = Number(event.target.value);
+            $('itlRadiusOut').textContent = `${(state.settings.pointRadius * 100).toFixed(1)}%`;
+            if (state.mode === 'sam-points') renderCanvas();
+        });
+        $('itlOrder').addEventListener('change', (event) => {
+            state.settings.depth = event.target.checked;
+        });
+        $('itlDepthRole').addEventListener('change', (event) => {
+            state.settings.depthRole = event.target.checked;
+        });
+
+        $('itlRun').addEventListener('click', run);
+        $('itlCancel').addEventListener('click', cancelRun);
+
+        // keyboard: N adds a layer when focus is on the app
+        window.addEventListener('keydown', (event) => {
+            if (event.target.matches('input, textarea, select')) return;
+            if (document.querySelector('dialog[open]')) return;
+            if (event.key === 'n' && state.mode === 'sam-points') {
+                event.preventDefault();
+                addLayer();
+            }
+        });
+
+        // ── boot ───────────────────────────────────────────────────────
+        renderLayers();
+        renderReference();
+        renderExport();
+        renderCanvas();
+        syncActiveState();
+        fetch(`${API}/sample`).then(async (response) => {
+            if (!response.ok) return;
+            const data = await response.json();
+            if (!data?.url || state.reference) return;
+            const img = new Image();
+            img.onload = () => {
+                imageLoads.clear();
+                state.reference = {
+                    dataUrl: data.url,
+                    width: img.naturalWidth,
+                    height: img.naturalHeight,
+                    name: data.name || 'sample',
+                };
+                renderReference();
+                renderCanvas();
+                setStatus('Sample reference loaded — try a few points.', 'ok');
+            };
+            img.src = data.url;
+        }).catch(() => {});
+    })();
+    </script>
+</body>
+
+</html>
