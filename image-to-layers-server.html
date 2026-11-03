@@ -396,6 +396,10 @@
             height: 100%;
             pointer-events: none;
         }
+        .itl-hole-canvas[data-interactive="true"] {
+            pointer-events: auto;
+            cursor: pointer;
+        }
         .itl-hole-canvas[hidden] { display: none; }
 
         .itl-placeholder {
@@ -444,6 +448,61 @@
         }
         .itl-toggle[hidden] { display: none; }
         .itl-toggle input { accent-color: var(--ls-accent); }
+
+        .itl-label-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .itl-info {
+            display: inline-grid;
+            place-items: center;
+            width: 15px;
+            height: 15px;
+            padding: 0;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 999px;
+            background: var(--ls-raised);
+            color: var(--ls-muted);
+            font-size: 9px;
+            line-height: 1;
+        }
+        .itl-info:hover { border-color: var(--ls-accent); color: var(--ls-text); }
+        .itl-result-summary {
+            display: grid;
+            gap: 6px;
+        }
+        .itl-result-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+            align-items: center;
+            padding: 7px 8px;
+            border: 1px solid var(--ls-line);
+            border-radius: 7px;
+            background: var(--ls-bg);
+            font-size: 11px;
+        }
+        .itl-result-row strong {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 11px;
+            color: var(--ls-text);
+        }
+        .itl-result-row small {
+            color: var(--ls-muted);
+            font-size: 10px;
+            font-variant-numeric: tabular-nums;
+        }
+        .itl-result-row .pill {
+            padding: 2px 6px;
+            border-radius: 999px;
+            background: rgba(232, 128, 58, 0.12);
+            color: var(--ls-accent);
+            font-size: 9px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
 
         .itl-cta {
             display: grid;
@@ -545,6 +604,27 @@
             font-variant-numeric: tabular-nums;
         }
         .itl-tile img.on-white { background: #fff; }
+        .itl-tile .dl {
+            position: absolute;
+            top: 4px;
+            left: 6px;
+            display: grid;
+            place-items: center;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 6px;
+            background: rgb(20 18 24 / 82%);
+            color: var(--ls-text);
+            font-size: 9px;
+            cursor: pointer;
+        }
+        .itl-tile .dl:hover:not(:disabled) {
+            border-color: var(--ls-accent);
+            color: var(--ls-accent);
+        }
+        .itl-tile .dl:disabled { opacity: 0.45; cursor: default; }
 
         .itl-point-area { pointer-events: none; }
         .itl-point-label {
@@ -677,6 +757,9 @@
             <button type="button" data-mode="sam-auto" aria-pressed="false">
                 <i class="fas fa-wand-magic-sparkles"></i> Automatic SAM
             </button>
+            <button type="button" data-mode="knockout" aria-pressed="false">
+                <i class="fas fa-scissors"></i> Knockout background
+            </button>
             <button type="button" data-mode="recover" aria-pressed="false">
                 <i class="fas fa-object-group"></i> Recover missing
             </button>
@@ -718,11 +801,25 @@
                     (or near-white) areas are treated as missing parts.</p>
             </section>
 
+            <section class="itl-section" id="itlCutoutSection" hidden>
+                <h3>Cut-out</h3>
+                <div id="itlCutoutDrop" class="itl-drop" tabindex="0" role="button"
+                     aria-label="Choose or drop the cut-out image for knockout mode">
+                    <i class="fas fa-scissors"></i>
+                    <strong>Drop the cut-out image</strong>
+                    <span>PNG · JPG · WebP</span>
+                </div>
+                <div id="itlCutoutThumb" class="itl-thumb" hidden></div>
+                <input type="file" id="itlCutoutInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+                <p class="itl-hint">Use the full final image as the reference and the cut-out’s silhouette
+                    as the hole source. Pixels stay from the reference outside the silhouette.</p>
+            </section>
+
             <section class="itl-section" id="itlRecoverSection" hidden>
                 <h3>Missing parts</h3>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlRecoverMin">Min area</label>
+                        <label for="itlRecoverMin" data-tooltip="Only holes larger than this area are kept. Lower it to catch small gaps, raise it to ignore noise.">Min area</label>
                         <output id="itlRecoverMinOut" for="itlRecoverMin">0.10%</output>
                     </div>
                     <input type="range" id="itlRecoverMin" min="0.01" max="2" step="0.01" value="0.1">
@@ -779,6 +876,14 @@
                     <p style="margin: 0;">The magenta preview on the canvas is live and approximate; the run preview is the
                         exact result after filtering.</p>
                 </div>
+                <div id="itlKnockoutHelp" class="itl-help" hidden>
+                    <p style="margin: 0 0 8px;"><strong>Knockout background.</strong> Use the final image as the reference and
+                        drop the cut-out image whose silhouette defines the hole.</p>
+                    <p style="margin: 0 0 8px;">The background keeps pixels from the reference outside that silhouette, so the
+                        final background matches the original artwork exactly while removing the cut-out area.</p>
+                    <p style="margin: 0;">Use a small underlap to shrink the hole slightly and hide seams; optionally keep the
+                        matching cut-out layer so the pair recomposites back to the final image.</p>
+                </div>
             </section>
         </aside>
 
@@ -828,25 +933,51 @@
                     downloaded.</p>
             </section>
 
+            <section class="itl-section" id="itlKnockoutSettings" hidden>
+                <h3>Knockout</h3>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlKnockoutUnderlap" data-tooltip="Shrinks the removal hole by a few pixels so the background tucks under the cut-out edge and seams disappear.">Underlap</label>
+                        <output id="itlKnockoutUnderlapOut" for="itlKnockoutUnderlap">1 px</output>
+                    </div>
+                    <input type="range" id="itlKnockoutUnderlap" min="0" max="4" step="1" value="1">
+                </div>
+                <label class="itl-toggle"><input type="checkbox" id="itlKnockoutKeepCutout" checked>
+                    Keep matching cut-out layer</label>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlKnockoutKeepOut">Objects kept</label>
+                        <output id="itlKnockoutKeepOut" for="itlKnockoutKeepOut">0</output>
+                    </div>
+                    <p class="itl-hint" style="margin: 0;">Click a highlighted object on the canvas to keep
+                        it in the background; click it again to knock it out.</p>
+                    <button type="button" class="itl-btn" id="itlKnockoutReset" disabled>
+                        <i class="fas fa-rotate-left"></i> Reset object selection
+                    </button>
+                    <div class="itl-recover-status" id="itlKnockoutStatus">Upload a cut-out to select
+                        objects.</div>
+                </div>
+            </section>
+
             <section class="itl-section">
                 <h3>Quality</h3>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlFeather">Feather</label>
+                        <label for="itlFeather" data-tooltip="Feather softens the cut-out edge so seams stay hidden. 1 px is a clean default for most work.">Feather</label>
                         <output id="itlFeatherOut" for="itlFeather">1.0 px</output>
                     </div>
                     <input type="range" id="itlFeather" min="0" max="4" step="0.1" value="1">
                 </div>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlDilate">Dilate</label>
+                        <label for="itlDilate" data-tooltip="Dilate expands the mask slightly before export; useful if tiny gaps are leaving a halo.">Dilate</label>
                         <output id="itlDilateOut" for="itlDilate">0 px</output>
                     </div>
                     <input type="range" id="itlDilate" min="0" max="4" step="1" value="0">
                 </div>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlRadius">Point radius</label>
+                        <label for="itlRadius" data-tooltip="This is the positive point influence radius. Smaller values are more precise; larger values are safer for fuzzy edges.">Point radius</label>
                         <output id="itlRadiusOut" for="itlRadius">3.0%</output>
                     </div>
                     <input type="range" id="itlRadius" min="0.01" max="0.1" step="0.005" value="0.03">
@@ -875,6 +1006,20 @@
                 <h3>Missing parts</h3>
                 <img id="itlRecoverPreviewImg" alt="Missing regions highlighted on the final image">
                 <div class="meta" id="itlRecoverPreviewMeta"></div>
+            </section>
+
+            <section class="itl-preview" id="itlKnockoutPreview" hidden>
+                <h3 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ls-muted);">
+                    Outcome preview
+                </h3>
+                <div id="itlKnockoutSummary" class="itl-result-summary"></div>
+            </section>
+
+            <section class="itl-preview" id="itlAutoPreview" hidden>
+                <h3 style="margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ls-muted);">
+                    Outcome preview
+                </h3>
+                <div id="itlAutoSummary" class="itl-result-summary"></div>
             </section>
 
             <section class="itl-preview" id="itlPreview" hidden>
@@ -942,6 +1087,7 @@
         const state = {
             reference: null,     // { dataUrl, width, height, name }
             exportImage: null,   // { dataUrl, width, height, name } — aligned export with holes
+            cutoutImage: null,   // { dataUrl, width, height, name } — silhouette source for knockout mode
             mode: 'sam-points',
             layers: [],          // [{ id, name, color, points: [{ x, y, positive }] }]
             activeLayerId: null,
@@ -950,6 +1096,11 @@
                 minArea: 0.1,
                 ignoreBorder: true,
                 holeSource: 'auto',
+            },
+            knockout: {
+                underlap: 1,
+                keepCutout: true,
+                exclude: [],  // [{ x, y }] normalized seeds of objects to keep
             },
             settings: {
                 samModel: 'sam2-large',
@@ -980,36 +1131,57 @@
 
         function syncActiveState() {
             const recovering = state.mode === 'recover';
+            const knockout = state.mode === 'knockout';
+            const autoSam = state.mode === 'sam-auto';
             document.querySelectorAll('.itl-modes button').forEach(b => {
                 b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode));
             });
             $('itlAddLayer').hidden = state.mode !== 'sam-points';
             $('itlAddMasks').hidden = state.mode !== 'masks';
-            $('itlLayers').hidden = state.mode === 'sam-auto';
-            $('itlLayersSection').hidden = recovering || state.mode === 'sam-auto';
+            $('itlLayers').hidden = autoSam || knockout;
+            $('itlLayersSection').hidden = recovering || autoSam || knockout;
             $('itlExportSection').hidden = !recovering;
+            $('itlCutoutSection').hidden = !knockout;
             $('itlRecoverSection').hidden = !recovering;
-            $('itlModelsSection').hidden = recovering;
-            $('itlOrderToggle').hidden = recovering;
-            $('itlDepthRoleToggle').hidden = recovering;
+            $('itlModelsSection').hidden = recovering || knockout;
+            $('itlKnockoutSettings').hidden = !knockout;
+            $('itlOrderToggle').hidden = recovering || knockout;
+            $('itlDepthRoleToggle').hidden = recovering || knockout;
             $('itlRunLabel').textContent = recovering
                 ? 'Recover missing layers'
-                : state.mode === 'sam-points' ? 'Review & run' : 'Run segmenter';
+                : knockout
+                    ? 'Build knockout background'
+                    : state.mode === 'sam-points' ? 'Review & run' : 'Run segmenter';
             $('itlRefTitle').textContent = recovering ? 'Final image' : 'Reference';
-            $('itlRefHint').hidden = !recovering;
-            $('itlHelp').hidden = recovering;
+            $('itlRefHint').hidden = !recovering && !knockout;
+            $('itlHelp').hidden = recovering || knockout;
             $('itlRecoverHelp').hidden = !recovering;
+            $('itlKnockoutHelp').hidden = !knockout;
             $('itlLayersTitle').textContent =
                 state.mode === 'masks' ? 'Masks'
                 : state.mode === 'sam-points' ? 'Layer groups'
                 : 'Automatic';
             $('itlCanvas')?.setAttribute('data-mode', state.mode);
             $('itlRun').disabled = state.running || !state.reference
-                || (recovering && !state.exportImage);
+                || (recovering && !state.exportImage)
+                || (knockout && !state.cutoutImage);
             $('itlCancel').disabled = !state.running;
+            $('itlKnockoutPreview').hidden = !(knockout && state.reference && state.cutoutImage);
+            $('itlAutoPreview').hidden = !(autoSam && state.reference);
             if (!recovering) {
                 $('itlRecoverPreview').hidden = true;
                 clearHolePreview();
+            }
+            if (knockout) {
+                updateKnockoutSelection();
+                drawKnockoutPreview();
+            } else {
+                $('itlKnockoutSummary').innerHTML = '';
+            }
+            if (autoSam) {
+                updateSamAutoPreview();
+            } else {
+                $('itlAutoSummary').innerHTML = '';
             }
         }
 
@@ -1027,6 +1199,7 @@
                         height: img.naturalHeight,
                         name: file.name || 'reference',
                     };
+                    state.knockout.exclude = [];
                     renderReference();
                     renderCanvas();
                     setStatus(`Reference ${img.naturalWidth}×${img.naturalHeight} · ${file.name || 'image'}`, 'ok');
@@ -1142,6 +1315,75 @@
             remove.title = 'Remove export';
             remove.innerHTML = '<i class="fas fa-times"></i>';
             remove.addEventListener('click', clearExport);
+            thumb.append(img, meta, replace, remove);
+        }
+
+        // ── cut-out upload (knockout mode) ──────────────────────────────
+        function setCutout(file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const url = String(reader.result);
+                const img = new Image();
+                img.onload = () => {
+                    imageLoads.clear();
+                    state.cutoutImage = {
+                        dataUrl: url,
+                        width: img.naturalWidth,
+                        height: img.naturalHeight,
+                        name: file.name || 'cutout',
+                    };
+                    state.knockout.exclude = [];
+                    updateKnockoutSelection(0);
+                    renderCutout();
+                    renderCanvas();
+                    setStatus(`Cut-out ${img.naturalWidth}×${img.naturalHeight} · ${file.name || 'image'}`, 'ok');
+                };
+                img.onerror = () => setStatus('The cut-out image could not be decoded.', 'error');
+                img.src = url;
+            };
+            reader.onerror = () => setStatus('Could not read the cut-out file.', 'error');
+            reader.readAsDataURL(file);
+        }
+
+        function clearCutout() {
+            imageLoads.clear();
+            state.cutoutImage = null;
+            state.knockout.exclude = [];
+            updateKnockoutSelection(0);
+            renderCutout();
+            renderCanvas();
+            setStatus('Cut-out cleared.', '');
+        }
+
+        function renderCutout() {
+            const thumb = $('itlCutoutThumb');
+            if (!state.cutoutImage) {
+                thumb.hidden = true;
+                thumb.replaceChildren();
+                return;
+            }
+            thumb.hidden = false;
+            thumb.replaceChildren();
+            const img = document.createElement('img');
+            img.src = state.cutoutImage.dataUrl;
+            img.alt = '';
+            const meta = document.createElement('div');
+            meta.className = 'meta';
+            const strong = document.createElement('strong');
+            strong.textContent = state.cutoutImage.name;
+            const small = document.createElement('small');
+            small.textContent = `${state.cutoutImage.width} × ${state.cutoutImage.height} px`;
+            meta.append(strong, small);
+            const replace = document.createElement('button');
+            replace.type = 'button';
+            replace.textContent = 'Replace';
+            replace.addEventListener('click', () => $('itlCutoutInput').click());
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.dataset.danger = 'true';
+            remove.title = 'Remove cut-out';
+            remove.innerHTML = '<i class="fas fa-times"></i>';
+            remove.addEventListener('click', clearCutout);
             thumb.append(img, meta, replace, remove);
         }
 
@@ -1329,6 +1571,11 @@
                 syncActiveState();
                 return;
             }
+            if (state.mode === 'knockout') {
+                scheduleKnockoutPreview();
+                syncActiveState();
+                return;
+            }
 
             if (state.mode === 'masks') {
                 renderMaskPreview(svg);
@@ -1490,6 +1737,7 @@
         const imageLoads = new Map();
         let holePreviewTimer = 0;
         let holePreviewRun = 0;
+        let knockoutPreview = null;  // { width, height, labels, keptIds }
 
         function loadImageElement(url) {
             if (!imageLoads.has(url)) {
@@ -1508,13 +1756,28 @@
             holePreviewTimer = setTimeout(drawHolePreview, 120);
         }
 
+        function scheduleKnockoutPreview() {
+            clearTimeout(holePreviewTimer);
+            holePreviewTimer = setTimeout(drawKnockoutPreview, 120);
+        }
+
         function clearHolePreview() {
             holePreviewRun += 1;
             clearTimeout(holePreviewTimer);
             const canvas = $('itlHoleCanvas');
             canvas.hidden = true;
+            canvas.dataset.interactive = 'false';
+            knockoutPreview = null;
             const ctx = canvas.getContext('2d');
             if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (state.mode === 'knockout') {
+                const knockoutStatus = $('itlKnockoutStatus');
+                knockoutStatus.dataset.kind = '';
+                knockoutStatus.textContent = state.cutoutImage
+                    ? 'Computing knockout preview…'
+                    : 'Upload a cut-out to select objects.';
+                return;
+            }
             const status = $('itlRecoverStatus');
             status.dataset.kind = '';
             status.textContent = state.exportImage
@@ -1609,6 +1872,361 @@
                 region.area >= minArea
                 && !(ignoreBorder && region.touchesBorder)
             ));
+        }
+
+        function computeKnockoutMask(cutData, width, height, whiteThreshold = 244, alphaThreshold = 16) {
+            const total = width * height;
+            const mask = new Uint8Array(total);
+            let anyAlpha = false;
+            for (let pixel = 0, index = 0; pixel < total; pixel += 1, index += 4) {
+                const alpha = cutData[index + 3];
+                if (alpha < 255) anyAlpha = true;
+                if (alpha >= alphaThreshold) {
+                    mask[pixel] = 1;
+                }
+            }
+            if (anyAlpha) {
+                return mask;
+            }
+
+            // Mirror the CLI: near-white pixels connected to the canvas border are
+            // background; everything else (including enclosed white areas) is content.
+            const nearWhite = new Uint8Array(total);
+            for (let pixel = 0, index = 0; pixel < total; pixel += 1, index += 4) {
+                const red = cutData[index];
+                const green = cutData[index + 1];
+                const blue = cutData[index + 2];
+                const darkest = Math.min(red, green, blue);
+                const brightest = Math.max(red, green, blue);
+                if (darkest >= whiteThreshold && brightest - darkest <= 8) nearWhite[pixel] = 1;
+            }
+
+            const outside = new Uint8Array(total);
+            const stack = [];
+            const mark = (x, y) => {
+                if (x < 0 || y < 0 || x >= width || y >= height) return;
+                const pixel = y * width + x;
+                if (outside[pixel] || !nearWhite[pixel]) return;
+                outside[pixel] = 1;
+                stack.push(pixel);
+            };
+            for (let x = 0; x < width; x += 1) {
+                mark(x, 0);
+                mark(x, height - 1);
+            }
+            for (let y = 0; y < height; y += 1) {
+                mark(0, y);
+                mark(width - 1, y);
+            }
+            while (stack.length) {
+                const pixel = stack.pop();
+                const y = Math.floor(pixel / width);
+                const x = pixel - y * width;
+                mark(x - 1, y);
+                mark(x + 1, y);
+                mark(x, y - 1);
+                mark(x, y + 1);
+            }
+            for (let pixel = 0; pixel < total; pixel += 1) {
+                mask[pixel] = outside[pixel] ? 0 : 1;
+            }
+            return mask;
+        }
+
+        function erodeMask(mask, width, height, passes) {
+            let working = new Uint8Array(mask.length);
+            working.set(mask);
+            for (let pass = 0; pass < passes; pass += 1) {
+                const next = new Uint8Array(mask.length);
+                for (let y = 0; y < height; y += 1) {
+                    for (let x = 0; x < width; x += 1) {
+                        const pixel = y * width + x;
+                        if (!working[pixel]) continue;
+                        let ok = true;
+                        for (let yy = -1; yy <= 1; yy += 1) {
+                            for (let xx = -1; xx <= 1; xx += 1) {
+                                if (xx === 0 && yy === 0) continue;
+                                const nx = x + xx;
+                                const ny = y + yy;
+                                if (nx < 0 || ny < 0 || nx >= width || ny >= height) {
+                                    ok = false; break;
+                                }
+                                const nidx = ny * width + nx;
+                                if (!working[nidx]) {
+                                    ok = false; break;
+                                }
+                            }
+                            if (!ok) break;
+                        }
+                        if (ok) next[pixel] = 1;
+                    }
+                }
+                working = next;
+            }
+            return working;
+        }
+
+        function updateSamAutoPreview() {
+            const summary = $('itlAutoSummary');
+            if (!state.reference || state.mode !== 'sam-auto') {
+                summary.innerHTML = '';
+                return;
+            }
+
+            const aspect = state.reference.width / Math.max(1, state.reference.height);
+            const tighter = state.settings.pointRadius >= 0.05 || state.settings.feather >= 1.5;
+            let scene = 'landscape';
+            if (aspect < 0.82) scene = 'portrait';
+            else if (tighter && aspect >= 0.9 && aspect <= 1.25) scene = 'subject-heavy';
+            else if (aspect >= 1.5) scene = 'landscape';
+            else if (aspect <= 0.75) scene = 'portrait';
+
+            const presets = {
+                landscape: {
+                    Background: 62,
+                    Subject: 18,
+                    Foreground: 12,
+                    Props: 6,
+                    Details: 2,
+                },
+                portrait: {
+                    Background: 46,
+                    Subject: 30,
+                    Foreground: 14,
+                    Props: 7,
+                    Details: 3,
+                },
+                'subject-heavy': {
+                    Background: 38,
+                    Subject: 38,
+                    Foreground: 12,
+                    Props: 8,
+                    Details: 4,
+                },
+            };
+
+            const weights = presets[scene];
+            const total = Object.values(weights).reduce((sum, value) => sum + value, 0);
+            summary.innerHTML = Object.entries(weights).map(([name, area]) => {
+                const percent = (area / total) * 100;
+                return `
+                    <div class="itl-result-row">
+                        <div>
+                            <strong>${name}</strong>
+                            <small>approx. ${percent.toFixed(0)}% of the canvas</small>
+                        </div>
+                        <span class="pill">${percent.toFixed(0)}%</span>
+                    </div>
+                `;
+            }).join('');
+            summary.insertAdjacentHTML('beforeend', `
+                <small style="color: var(--ls-muted); display: block; padding-top: 2px;">
+                    Scene profile: ${scene.replace('-', ' ')}. This estimate updates live as the settings change; the final SAM result may still shift slightly after the run.
+                </small>
+            `);
+        }
+
+        function tintMask(maskCanvas, color, blurPx) {
+            const tint = document.createElement('canvas');
+            tint.width = maskCanvas.width;
+            tint.height = maskCanvas.height;
+            const ctx = tint.getContext('2d');
+            if (blurPx > 0) ctx.filter = `blur(${blurPx}px)`;
+            ctx.drawImage(maskCanvas, 0, 0);
+            ctx.filter = 'none';
+            ctx.globalCompositeOperation = 'source-in';
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, tint.width, tint.height);
+            return tint;
+        }
+
+        function drawKnockoutOverlay(ctx, knocked, compIds, keptIds, width, height, total,
+                                    regions) {
+            const feather = Math.max(0, state.settings.feather);
+            ctx.clearRect(0, 0, width, height);
+
+            const image = ctx.createImageData(width, height);
+            const out = image.data;
+            let knockedPixels = 0;
+            for (let pixel = 0, index = 0; pixel < total; pixel += 1, index += 4) {
+                if (knocked[pixel]) knockedPixels += 1;
+                const id = compIds[pixel];
+                if (id >= 0 && keptIds.has(id)) {
+                    out[index] = 255;
+                    out[index + 1] = 176;
+                    out[index + 2] = 102;
+                    out[index + 3] = 96;
+                } else if (knocked[pixel] && feather === 0) {
+                    out[index] = 255;
+                    out[index + 1] = 45;
+                    out[index + 2] = 149;
+                    out[index + 3] = 118;
+                }
+            }
+            ctx.putImageData(image, 0, 0);
+
+            // Feather softens the exported hole edge; blur the preview to match.
+            if (feather > 0) {
+                const maskCanvas = document.createElement('canvas');
+                maskCanvas.width = width;
+                maskCanvas.height = height;
+                const maskCtx = maskCanvas.getContext('2d');
+                const maskImage = maskCtx.createImageData(width, height);
+                for (let pixel = 0, index = 0; pixel < total; pixel += 1, index += 4) {
+                    if (!knocked[pixel]) continue;
+                    maskImage.data[index] = 255;
+                    maskImage.data[index + 1] = 255;
+                    maskImage.data[index + 2] = 255;
+                    maskImage.data[index + 3] = 255;
+                }
+                maskCtx.putImageData(maskImage, 0, 0);
+                ctx.save();
+                ctx.globalAlpha = 0.46;
+                ctx.drawImage(tintMask(maskCanvas, '#ff2d95', feather), 0, 0);
+                ctx.restore();
+            }
+
+            // Outline the kept objects so the selection is obvious on any artwork.
+            if (keptIds.size) {
+                ctx.save();
+                ctx.strokeStyle = 'rgba(255, 176, 102, 0.95)';
+                ctx.lineWidth = Math.max(1, Math.round(width / 500));
+                const dash = Math.max(3, Math.round(width / 160));
+                ctx.setLineDash([dash * 2, dash]);
+                regions.forEach((region) => {
+                    if (!keptIds.has(region.id)) return;
+                    const [minX, minY, maxX, maxY] = region.bbox;
+                    const w = Math.max(1, maxX - minX - 1);
+                    const h = Math.max(1, maxY - minY - 1);
+                    ctx.strokeRect(minX + 0.5, minY + 0.5, w, h);
+                });
+                ctx.restore();
+            }
+            return knockedPixels;
+        }
+
+        function updateKnockoutSelection(keptCount) {
+            const count = Number.isFinite(keptCount) ? keptCount : state.knockout.exclude.length;
+            $('itlKnockoutKeepOut').textContent = String(count);
+            $('itlKnockoutReset').disabled = state.knockout.exclude.length === 0;
+        }
+
+        async function drawKnockoutPreview() {
+            const run = ++holePreviewRun;
+            const canvas = $('itlHoleCanvas');
+            const status = $('itlKnockoutStatus');
+            if (state.mode !== 'knockout' || !state.reference || !state.cutoutImage) {
+                canvas.hidden = true;
+                canvas.dataset.interactive = 'false';
+                knockoutPreview = null;
+                return;
+            }
+
+            const width = state.reference.width;
+            const height = state.reference.height;
+            const total = width * height;
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            try {
+                const [cutoutImg] = await Promise.all([
+                    loadImageElement(state.cutoutImage.dataUrl),
+                ]);
+                if (run !== holePreviewRun) return;
+
+                const cutoutCanvas = document.createElement('canvas');
+                cutoutCanvas.width = width;
+                cutoutCanvas.height = height;
+                const cutoutCtx = cutoutCanvas.getContext('2d', { willReadFrequently: true });
+                cutoutCtx.clearRect(0, 0, width, height);
+                cutoutCtx.drawImage(cutoutImg, 0, 0, width, height);
+                const cutoutData = cutoutCtx.getImageData(0, 0, width, height).data;
+
+                const content = computeKnockoutMask(cutoutData, width, height, 244, 16);
+                const { compIds, regions } = floodFillRegions(content, width, height, total);
+
+                const keptIds = new Set();
+                const activeSeeds = [];
+                state.knockout.exclude.forEach((seed) => {
+                    const px = Math.min(width - 1, Math.max(0, Math.round(seed.x * (width - 1))));
+                    const py = Math.min(height - 1, Math.max(0, Math.round(seed.y * (height - 1))));
+                    const id = compIds[py * width + px];
+                    if (id < 0) return;
+                    keptIds.add(id);
+                    activeSeeds.push(seed);
+                });
+                if (activeSeeds.length !== state.knockout.exclude.length) {
+                    state.knockout.exclude = activeSeeds;
+                }
+                updateKnockoutSelection(keptIds.size);
+
+                const hole = new Uint8Array(total);
+                for (let pixel = 0; pixel < total; pixel += 1) {
+                    const id = compIds[pixel];
+                    if (id >= 0 && !keptIds.has(id)) hole[pixel] = 1;
+                }
+                // The CLI shrinks the hole with underlap and, for the background,
+                // expands it with dilate — mirror both in the preview.
+                const shrink = Math.max(0, state.knockout.underlap)
+                    + Math.max(0, state.settings.dilate);
+                const knocked = erodeMask(hole, width, height, shrink);
+
+                const knockedPixels = drawKnockoutOverlay(
+                    ctx, knocked, compIds, keptIds, width, height, total, regions,
+                );
+                knockoutPreview = { width, height, labels: compIds, regions, keptIds };
+                canvas.hidden = false;
+                canvas.dataset.interactive = 'true';
+
+                const percent = (knockedPixels / Math.max(1, total)) * 100;
+                const keptText = `${keptIds.size} object${keptIds.size === 1 ? '' : 's'} kept`;
+                status.dataset.kind = 'ok';
+                status.textContent = `${percent.toFixed(1)}% knocked out`
+                    + ` · ${keptText}`
+                    + ` · underlap ${state.knockout.underlap}px`
+                    + (state.settings.feather ? ` · feather ${state.settings.feather.toFixed(1)}px` : '')
+                    + (state.settings.dilate ? ` · dilate ${state.settings.dilate}px` : '');
+            } catch (error) {
+                canvas.hidden = true;
+                canvas.dataset.interactive = 'false';
+                knockoutPreview = null;
+                status.dataset.kind = 'error';
+                status.textContent = `Preview unavailable: ${error.message || error}`;
+            }
+        }
+
+        function toggleKnockoutObject(event) {
+            if (state.mode !== 'knockout' || !knockoutPreview) return;
+            if (event.button !== 0) return;
+            const canvas = $('itlHoleCanvas');
+            const rect = canvas.getBoundingClientRect();
+            if (rect.width <= 0 || rect.height <= 0) return;
+            const nx = (event.clientX - rect.left) / rect.width;
+            const ny = (event.clientY - rect.top) / rect.height;
+            if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
+
+            const { width, height, labels } = knockoutPreview;
+            const px = Math.min(width - 1, Math.max(0, Math.round(nx * (width - 1))));
+            const py = Math.min(height - 1, Math.max(0, Math.round(ny * (height - 1))));
+            const id = labels[py * width + px];
+            if (id < 0) {
+                const status = $('itlKnockoutStatus');
+                status.dataset.kind = '';
+                status.textContent = 'Click a highlighted object to keep it in the background.';
+                return;
+            }
+
+            const index = state.knockout.exclude.findIndex((seed) => {
+                const sx = Math.min(width - 1, Math.max(0, Math.round(seed.x * (width - 1))));
+                const sy = Math.min(height - 1, Math.max(0, Math.round(seed.y * (height - 1))));
+                return labels[sy * width + sx] === id;
+            });
+            if (index >= 0) state.knockout.exclude.splice(index, 1);
+            else state.knockout.exclude.push({ x: nx, y: ny });
+            drawKnockoutPreview();
+            event.preventDefault();
         }
 
         async function drawHolePreview() {
@@ -1863,6 +2481,16 @@
                 payload.recoverMinArea = state.recover.minArea;
                 payload.recoverIgnoreBorder = state.recover.ignoreBorder;
                 payload.recoverHoleSource = state.recover.holeSource;
+            } else if (state.mode === 'knockout') {
+                if (!state.cutoutImage) throw new Error('Add the cut-out image.');
+                payload.cutout = state.cutoutImage.dataUrl;
+                payload.cutoutName = state.cutoutImage.name;
+                payload.knockoutUnderlap = state.knockout.underlap;
+                payload.knockoutKeepCutout = state.knockout.keepCutout;
+                payload.knockoutExclude = state.knockout.exclude.map((seed) => ({
+                    x: Number(seed.x.toFixed(6)),
+                    y: Number(seed.y.toFixed(6)),
+                }));
             }
             return payload;
         }
@@ -2118,6 +2746,24 @@
             ));
         }
 
+        function downloadLayerImage(layer) {
+            const path = String(layer.url || '').split(/[?#]/)[0];
+            const extension = (path.match(/\.(png|jpe?g|webp|gif)$/i) || [, '.png'])[0];
+            const base = (layer.name || layer.id || 'layer')
+                .trim()
+                .replace(/\.(png|jpe?g|webp|gif)$/i, '')
+                .replace(/[^\w.-]+/g, '-') || 'layer';
+            // Keep the anchor click inside the user gesture: an awaited fetch
+            // would drop the gesture and browsers may block the download.
+            const a = document.createElement('a');
+            a.href = layer.url;
+            a.download = `${base}${extension}`;
+            a.rel = 'noopener';
+            document.body.append(a);
+            a.click();
+            a.remove();
+        }
+
         function renderPreview(result) {
             const grid = $('itlPreviewGrid');
             grid.replaceChildren();
@@ -2147,7 +2793,14 @@
                 const z = document.createElement('span');
                 z.className = 'z';
                 z.textContent = `z ${layer.z}`;
-                tile.append(img, label, ...(group ? [group] : []), z);
+                const dl = document.createElement('button');
+                dl.type = 'button';
+                dl.className = 'dl';
+                dl.title = `Download ${layer.name || layer.id}`;
+                dl.setAttribute('aria-label', `Download ${layer.name || layer.id}`);
+                dl.innerHTML = '<i class="fas fa-download"></i>';
+                dl.addEventListener('click', () => downloadLayerImage(layer));
+                tile.append(img, label, ...(group ? [group] : []), z, dl);
                 grid.append(tile);
             });
             $('itlPreview').hidden = layers.length === 0;
@@ -2261,6 +2914,30 @@
             event.target.value = '';
         });
 
+        ['dragenter', 'dragover'].forEach(evt =>
+            $('itlCutoutDrop').addEventListener(evt, (event) => {
+                event.preventDefault();
+                $('itlCutoutDrop').dataset.dragover = 'true';
+            }));
+        ['dragleave', 'drop'].forEach(evt =>
+            $('itlCutoutDrop').addEventListener(evt, (event) => {
+                event.preventDefault();
+                $('itlCutoutDrop').dataset.dragover = 'false';
+            }));
+        $('itlCutoutDrop').addEventListener('click', (event) => {
+            event.preventDefault();
+            $('itlCutoutInput').click();
+        });
+        $('itlCutoutDrop').addEventListener('drop', (event) => {
+            const file = event.dataTransfer?.files?.[0];
+            if (file && file.type.startsWith('image/')) setCutout(file);
+        });
+        $('itlCutoutInput').addEventListener('change', (event) => {
+            const file = event.target.files?.[0];
+            if (file) setCutout(file);
+            event.target.value = '';
+        });
+
         $('itlRecoverMin').addEventListener('input', (event) => {
             state.recover.minArea = Number(event.target.value);
             $('itlRecoverMinOut').textContent = `${state.recover.minArea.toFixed(2)}%`;
@@ -2344,16 +3021,36 @@
         $('itlFeather').addEventListener('input', (event) => {
             state.settings.feather = Number(event.target.value);
             $('itlFeatherOut').textContent = `${state.settings.feather.toFixed(1)} px`;
+            if (state.mode === 'sam-auto') updateSamAutoPreview();
+            if (state.mode === 'knockout') scheduleKnockoutPreview();
         });
         $('itlDilate').addEventListener('input', (event) => {
             state.settings.dilate = Number(event.target.value);
             $('itlDilateOut').textContent = `${state.settings.dilate} px`;
+            if (state.mode === 'sam-auto') updateSamAutoPreview();
+            if (state.mode === 'knockout') scheduleKnockoutPreview();
         });
         $('itlRadius').addEventListener('input', (event) => {
             state.settings.pointRadius = Number(event.target.value);
             $('itlRadiusOut').textContent = `${(state.settings.pointRadius * 100).toFixed(1)}%`;
             if (state.mode === 'sam-points') renderCanvas();
+            if (state.mode === 'sam-auto') updateSamAutoPreview();
         });
+        $('itlKnockoutUnderlap').addEventListener('input', (event) => {
+            state.knockout.underlap = Number(event.target.value);
+            $('itlKnockoutUnderlapOut').textContent = `${state.knockout.underlap} px`;
+            if (state.mode === 'knockout') scheduleKnockoutPreview();
+        });
+        $('itlKnockoutKeepCutout').addEventListener('change', (event) => {
+            state.knockout.keepCutout = event.target.checked;
+        });
+        $('itlKnockoutReset').addEventListener('click', () => {
+            if (!state.knockout.exclude.length) return;
+            state.knockout.exclude = [];
+            updateKnockoutSelection(0);
+            drawKnockoutPreview();
+        });
+        $('itlHoleCanvas').addEventListener('click', toggleKnockoutObject);
         $('itlOrder').addEventListener('change', (event) => {
             state.settings.depth = event.target.checked;
         });
@@ -2378,7 +3075,9 @@
         renderLayers();
         renderReference();
         renderExport();
+        renderCutout();
         renderCanvas();
+        $('itlKnockoutUnderlapOut').textContent = `${state.knockout.underlap} px`;
         syncActiveState();
         fetch(`${API}/sample`).then(async (response) => {
             if (!response.ok) return;

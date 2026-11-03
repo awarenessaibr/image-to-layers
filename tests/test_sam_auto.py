@@ -240,6 +240,88 @@ class SamAutoTests(unittest.TestCase):
             self.assertEqual(generated_layer["name"], "man")
             self.assertEqual(generated_layer["segmentGroup"], "man")
 
+    def test_knockout_background_matches_reference_outside_cutout(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            reference = Image.new("RGBA", (20, 20), (255, 255, 255, 255))
+            cutout = Image.new("RGBA", (20, 20), (255, 255, 255, 255))
+            cutout.paste((0, 0, 0, 255), (6, 6, 14, 14))
+
+            reference_path = root / "reference.png"
+            cutout_path = root / "cutout.png"
+            reference.save(reference_path)
+            cutout.save(cutout_path)
+
+            result = image_to_layers.main([
+                "--reference", str(reference_path),
+                "--knockout", str(cutout_path),
+                "--knockout-underlap", "1",
+                "--name", "Knockout Test",
+                "--out", str(root / "projects"),
+                "--feather", "0",
+            ])
+
+            self.assertEqual(result, 0)
+            background_path = root / "projects" / "Knockout-Test-background" / "images" / "Background.png"
+            self.assertTrue(background_path.is_file())
+            background = Image.open(background_path).convert("RGBA")
+            self.assertEqual(background.convert("RGB").tobytes(), reference.convert("RGB").tobytes())
+            self.assertIsNotNone(background.getchannel("A").getbbox())
+
+    def test_knockout_exclude_keeps_selected_objects(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            reference = Image.new("RGBA", (20, 20), (255, 0, 0, 255))
+            cutout = Image.new("RGBA", (20, 20), (255, 255, 255, 255))
+            cutout.paste((0, 0, 0, 255), (2, 2, 6, 6))
+            cutout.paste((0, 0, 0, 255), (12, 12, 16, 16))
+
+            reference_path = root / "reference.png"
+            cutout_path = root / "cutout.png"
+            reference.save(reference_path)
+            cutout.save(cutout_path)
+
+            result = image_to_layers.main([
+                "--reference", str(reference_path),
+                "--knockout", str(cutout_path),
+                "--knockout-underlap", "0",
+                "--knockout-exclude", "0.2,0.2",
+                "--name", "Keep Objects",
+                "--out", str(root / "projects"),
+                "--feather", "0",
+            ])
+
+            self.assertEqual(result, 0)
+            background_path = (
+                root / "projects" / "Keep-Objects-background" / "images" / "Background.png"
+            )
+            self.assertTrue(background_path.is_file())
+            background = Image.open(background_path).convert("RGBA")
+            # The clicked object stays opaque; the other one is knocked out.
+            self.assertEqual(background.getpixel((4, 4))[3], 255)
+            self.assertEqual(background.getpixel((14, 14))[3], 0)
+
+    def test_knockout_exclude_reports_when_everything_is_kept(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            reference = Image.new("RGBA", (20, 20), (255, 0, 0, 255))
+            cutout = Image.new("RGBA", (20, 20), (255, 255, 255, 255))
+            cutout.paste((0, 0, 0, 255), (6, 6, 14, 14))
+
+            reference_path = root / "reference.png"
+            cutout_path = root / "cutout.png"
+            reference.save(reference_path)
+            cutout.save(cutout_path)
+
+            with self.assertRaisesRegex(SystemExit, "nothing left to remove"):
+                image_to_layers.main([
+                    "--reference", str(reference_path),
+                    "--knockout", str(cutout_path),
+                    "--knockout-exclude", "0.5,0.5",
+                    "--name", "Keep Everything",
+                    "--out", str(root / "projects"),
+                ])
+
     def test_missing_sam_dependencies_are_actionable(self):
         with patch.dict(sys.modules, {"numpy": None, "sam2": None}):
             with self.assertRaisesRegex(RuntimeError, "Optional SAM 2 setup"):

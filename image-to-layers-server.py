@@ -204,6 +204,29 @@ def build_command(payload: dict, tmpdir: Path) -> tuple[list[str], Path]:
         ]
         if payload.get("recoverIgnoreBorder") is False:
             argv.append("--recover-keep-border")
+    elif mode == "knockout":
+        cutout_value = payload.get("cutout")
+        if not cutout_value:
+            raise ValueError("Knockout mode requires the cut-out image")
+        cutout_name = payload.get("cutoutName") or "cutout.png"
+        cutout_path = tmpdir / f"cutout{guess_extension(cutout_name)}"
+        cutout_path.write_bytes(decode_data_url(cutout_value, "cutout"))
+        argv += [
+            "--knockout", str(cutout_path),
+            "--knockout-underlap", str(max(0, int(payload.get("knockoutUnderlap", 1)))),
+        ]
+        if payload.get("knockoutKeepCutout"):
+            argv.append("--knockout-keep-cutout")
+        seeds = []
+        for item in payload.get("knockoutExclude") or []:
+            try:
+                x, y = float(item.get("x")), float(item.get("y"))
+            except (AttributeError, TypeError, ValueError):
+                continue
+            if 0.0 <= x <= 1.0 and 0.0 <= y <= 1.0:
+                seeds.append(f"{x:.6f},{y:.6f}")
+        if seeds:
+            argv += ["--knockout-exclude", ";".join(seeds)]
     elif mode == "sam-auto":
         argv.append("--sam-auto")
     else:
@@ -226,7 +249,31 @@ def parse_composition_output(stdout_lines: list[str]) -> dict | None:
                 try:
                     return json.loads(path.read_text(encoding="utf-8"))
                 except json.JSONDecodeError:
-                    return None
+                    pass
+    # FIX: filesystem fallback — find the most recently modified composition
+    # under PROJECTS_DIR. The CLI prints the path, but a small format change
+    # would otherwise break the server silently.
+    try:
+        candidates = sorted(
+            PROJECTS_DIR.glob("*/compositions/*.composition.json"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+        if candidates:
+            # Only accept if it was written after the run started — we don't
+            # have that time here, so be conservative and accept only if the
+            # stdout explicitly mentions the project slug.
+            for line in stdout_lines:
+                if "wrote " in line and "composition.json" in line:
+                    slug = Path(line.split("wrote ", 1)[1].strip()).stem.split(".")[0]
+                    for candidate in candidates:
+                        if candidate.stem.startswith(slug):
+                            try:
+                                return json.loads(candidate.read_text(encoding="utf-8"))
+                            except json.JSONDecodeError:
+                                pass
+    except Exception:
+        pass
     return None
 
 

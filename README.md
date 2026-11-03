@@ -28,6 +28,34 @@ python3 tools/image-to-layers.py \
   --mode zip
 ```
 
+## Knockout background mode
+
+Use knockout mode when the full final image is already available as `--reference` and a cut-out of the thing to remove is available as `--knockout`.
+
+```bash
+python3 tools/image-to-layers.py \
+  --reference path/to/final.png \
+  --knockout path/to/cutout.png \
+  --name "My Scene" \
+  --out data/projects \
+  --knockout-underlap 1
+```
+
+This keeps the pixels from the final image and removes the silhouette of the cut-out. If the cut-out is flattened on white, the script treats border-connected white as empty and preserves enclosed white areas such as paper inside a frame. `--knockout-underlap` shrinks the hole by a few pixels so the background tucks under the cut-out edge. `--knockout-keep-cutout` additionally emits the cut-out as a separate layer for pairing and matching.
+
+Some objects inside the cut-out silhouette may need to stay in the background (for example a chair the subject is holding). Pass seed points with `--knockout-exclude` and every object touching a seed is kept instead of removed:
+
+```bash
+python3 tools/image-to-layers.py \
+  --reference path/to/final.png \
+  --knockout path/to/cutout.png \
+  --knockout-exclude "0.42,0.61;0.55,0.28" \
+  --name "My Scene" \
+  --out data/projects
+```
+
+Seeds are normalized `x,y` pairs; the whole connected object under a seed is preserved. In the web UI these seeds come from clicking objects on the pink knockout preview, which also redraws as you move Underlap, Feather, and Dilate. Each tile in the Result grid has its own download button in addition to the ZIP/JSON download.
+
 ## Recover missing layers from an aligned export
 
 When layers are removed from a composition, the base image can be left with holes. If you have the complete final image and the studio's aligned export, the recovery mode can turn those holes back into layers:
