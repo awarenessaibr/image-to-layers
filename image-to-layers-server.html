@@ -147,7 +147,7 @@
             padding: 12px 14px;
             border-bottom: 1px solid var(--ls-line);
         }
-        .itl-section[hidden] { display: none; }
+        .itl-section[hidden], .itl-field[hidden] { display: none; }
         .itl-section h3 {
             margin: 0;
             font-size: 11px;
@@ -735,6 +735,103 @@
             font-size: 11px;
         }
         .itl-link a { color: var(--ls-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+        /* ── tooltips (every [data-tooltip] element) ───────────────────── */
+        .itl-tooltip {
+            position: fixed;
+            z-index: 1000;
+            max-width: 280px;
+            padding: 8px 10px;
+            border: 1px solid var(--ls-line-hi);
+            border-radius: 8px;
+            background: var(--ls-raised);
+            box-shadow: 0 10px 30px rgb(0 0 0 / 50%);
+            color: var(--ls-text);
+            font-size: 11px;
+            line-height: 1.5;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(2px);
+            transition: opacity .12s, transform .12s;
+        }
+        .itl-tooltip[data-show="true"] { opacity: 1; transform: none; }
+        .itl-tooltip b { color: var(--ls-accent); font-weight: 600; }
+        .itl-tipicon {
+            display: inline-grid;
+            place-items: center;
+            width: 14px;
+            height: 14px;
+            margin-left: 5px;
+            vertical-align: -2px;
+            border: 1px solid currentColor;
+            border-radius: 999px;
+            color: var(--ls-muted);
+            font: italic 700 9px/1 Georgia, serif;
+            cursor: help;
+            opacity: 0.7;
+        }
+        .itl-tipicon:hover, .itl-tipicon:focus-visible { color: var(--ls-accent); opacity: 1; }
+        .itl-field label[data-tooltip], .itl-toggle[data-tooltip] { cursor: help; }
+
+        /* ── scene description ─────────────────────────────────────────── */
+        .itl-field textarea {
+            min-height: 78px;
+            padding: 7px 8px;
+            border: 1px solid var(--ls-line);
+            border-radius: 6px;
+            background: var(--ls-bg);
+            font-size: 12px;
+            line-height: 1.45;
+            resize: vertical;
+        }
+        .itl-inline-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .itl-inline-btns.single { grid-template-columns: 1fr; }
+        .itl-btn.small { min-height: 30px; padding: 4px 10px; font-size: 11px; }
+        .itl-scene-list { display: grid; gap: 4px; max-height: 260px; overflow-y: auto; }
+        .itl-scene-obj {
+            display: grid;
+            grid-template-columns: 12px 1fr auto auto;
+            gap: 6px;
+            align-items: center;
+            padding: 5px 6px;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            background: var(--ls-bg);
+        }
+        .itl-scene-obj[aria-selected="true"] { border-color: var(--ls-line-hi); background: var(--ls-raised); }
+        .itl-scene-obj .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .itl-scene-obj input {
+            min-width: 0;
+            padding: 2px 4px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background: transparent;
+            font-size: 11px;
+        }
+        .itl-scene-obj input:focus { border-color: var(--ls-line-hi); background: var(--ls-surface); }
+        .itl-scene-obj .grp {
+            max-width: 84px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--ls-accent);
+            font-size: 9px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .itl-scene-obj button {
+            min-width: 22px;
+            min-height: 22px;
+            padding: 0 4px;
+            border: 0;
+            border-radius: 5px;
+            background: transparent;
+            color: var(--ls-muted);
+            font-size: 10px;
+        }
+        .itl-scene-obj button:hover { color: #ffaaaa; background: rgba(229, 72, 77, 0.15); }
+        .itl-scene-box { fill: none; stroke-dasharray: 8 5; }
+        .itl-scene-tag { pointer-events: none; paint-order: stroke; font-weight: 700; font-family: var(--sans); }
     </style>
 </head>
 
@@ -748,19 +845,28 @@
         </div>
 
         <div class="itl-modes" role="tablist" aria-label="Segmentation mode">
-            <button type="button" data-mode="sam-points" aria-pressed="true">
+            <button type="button" data-mode="sam-points" aria-pressed="true"
+                    data-tooltip="You name each layer and click on it. Most control, most manual work. SAM 2 turns your clicks into exact outlines.">
                 <i class="fas fa-crosshairs"></i> Point prompts (basic)
             </button>
-            <button type="button" data-mode="masks" aria-pressed="false">
+            <button type="button" data-mode="masks" aria-pressed="false"
+                    data-tooltip="You already have mask images (white = layer). Each mask file becomes one layer named after the file.">
                 <i class="fas fa-images"></i> Upload masks
             </button>
-            <button type="button" data-mode="sam-auto" aria-pressed="false">
+            <button type="button" data-mode="sam-auto" aria-pressed="false"
+                    data-tooltip="SAM 2 finds every region by itself. Names come from the Scene description if you made one, otherwise from simple size/position rules (background-01, props-03…).">
                 <i class="fas fa-wand-magic-sparkles"></i> Automatic SAM
             </button>
-            <button type="button" data-mode="knockout" aria-pressed="false">
+            <button type="button" data-mode="sam-scene" aria-pressed="false"
+                    data-tooltip="Best naming. A vision model looks at the whole image first and lists its objects with boxes; SAM 2 then cuts exactly those objects, using the model's names and groups.">
+                <i class="fas fa-eye"></i> Scene-guided SAM
+            </button>
+            <button type="button" data-mode="knockout" aria-pressed="false"
+                    data-tooltip="Makes a background layer = the full image with a cut-out's silhouette removed, so the two recomposite exactly.">
                 <i class="fas fa-scissors"></i> Knockout background
             </button>
-            <button type="button" data-mode="recover" aria-pressed="false">
+            <button type="button" data-mode="recover" aria-pressed="false"
+                    data-tooltip="Finds parts missing from a studio export (transparent holes) and cuts them from the final image as new layers.">
                 <i class="fas fa-object-group"></i> Recover missing
             </button>
         </div>
@@ -825,14 +931,15 @@
                     <input type="range" id="itlRecoverMin" min="0.01" max="2" step="0.01" value="0.1">
                 </div>
                 <div class="itl-field">
-                    <label for="itlRecoverHoles">Hole source</label>
+                    <label for="itlRecoverHoles" data-tooltip="How a missing part is recognised in the export. Transparency: pixels with alpha near 0. Near-white: pure-white pixels that differ from the final image (for flattened exports). Auto tries transparency first, then near-white if it finds nothing.">Hole source</label>
                     <select id="itlRecoverHoles">
                         <option value="auto">Auto (alpha, then near-white)</option>
                         <option value="alpha">Transparency alpha</option>
                         <option value="white">Near-white pixels</option>
                     </select>
                 </div>
-                <label class="itl-toggle"><input type="checkbox" id="itlRecoverBorder" checked>
+                <label class="itl-toggle" data-tooltip="Skips holes that touch the image border. Those are normally the empty canvas around the artwork, not a missing part. Turn it off if a genuinely missing piece runs off the edge.">
+                    <input type="checkbox" id="itlRecoverBorder" checked>
                     Ignore edge-touching regions</label>
                 <div class="itl-recover-status" id="itlRecoverStatus">Upload an export to preview
                     the missing parts.</div>
@@ -876,6 +983,15 @@
                     <p style="margin: 0;">The magenta preview on the canvas is live and approximate; the run preview is the
                         exact result after filtering.</p>
                 </div>
+                <div id="itlSceneHelp" class="itl-help" hidden>
+                    <p style="margin: 0 0 8px;"><strong>Scene-guided SAM.</strong> 1) Press <strong>Describe image</strong>:
+                        a vision model looks at the whole picture and lists every object with a name, group, box and
+                        point. 2) Rename, regroup or delete objects in the list (the dashed boxes on the canvas follow).
+                        3) Run: SAM 2 cuts each object from its box and point.</p>
+                    <p style="margin: 0 0 8px;">Layers keep the model's names and groups, and groups with two or more layers get
+                        their own folder under <code>images/</code>. <code>layers.json</code> lists every file.</p>
+                    <p style="margin: 0;">Too coarse or too fine? Change <strong>Detail level</strong> and describe again.</p>
+                </div>
                 <div id="itlKnockoutHelp" class="itl-help" hidden>
                     <p style="margin: 0 0 8px;"><strong>Knockout background.</strong> Use the final image as the reference and
                         drop the cut-out image whose silhouette defines the hole.</p>
@@ -906,22 +1022,70 @@
             <section class="itl-section">
                 <h3>Composition</h3>
                 <div class="itl-field">
-                    <label for="itlName">Name</label>
+                    <label for="itlName" data-tooltip="Becomes the project folder name (data/projects/&lt;name&gt;/) and the composition title in Studio. Run again with the same name and the project is overwritten.">Name</label>
                     <input type="text" id="itlName" value="My Scene" maxlength="120">
                 </div>
                 <div class="itl-field">
-                    <label for="itlOutput">Output</label>
+                    <label for="itlOutput" data-tooltip="Project: writes images + composition straight into data/projects/ so Studio's project picker sees it. ZIP: one flat bundle of PNGs to drop into Studio → Import ZIP + image.">Output</label>
                     <select id="itlOutput">
                         <option value="project">Project · data/projects/</option>
                         <option value="zip">ZIP · for Import&nbsp;+&nbsp;image</option>
                     </select>
+                </div>
+                <div class="itl-field">
+                    <label for="itlFolders" data-tooltip="Grouped: layers that share a group (Books, Background…) go into their own images/&lt;group&gt;/ folder. A group with only one layer stays in images/ so you don't get folders holding a single file. Flat: everything in images/. Only affects Project output; a layers.json manifest listing every file is always written.">Folders</label>
+                    <select id="itlFolders">
+                        <option value="group">Grouped · images/&lt;group&gt;/</option>
+                        <option value="flat">Flat · images/</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="itl-section" id="itlSceneSection">
+                <h3>Scene description <span class="badge" id="itlSceneCount">0</span></h3>
+                <p class="itl-hint">A vision model looks at the whole image first. Its description and
+                    named objects are used to name layers and to prompt SAM 2 (SAM 2 cannot read text, so
+                    the model supplies boxes and points instead).</p>
+                <div class="itl-field">
+                    <label for="itlVisionModel" data-tooltip="DeepSeek currently exposes image input on deepseek-flash only, so that is the model used to look at the reference. Requires DEEPSEEK_API_KEY in .env (or the environment) on the machine running the server.">Vision model</label>
+                    <select id="itlVisionModel">
+                        <option value="deepseek-flash">DeepSeek Flash (vision)</option>
+                    </select>
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlSceneDetail" data-tooltip="How finely the model splits the image. 1: only the few largest regions. 3: one layer per object or character. 5: every separable part (facial features, small props, decorations). Higher = more layers and more SAM prompts to run.">Detail level</label>
+                        <output id="itlSceneDetailOut" for="itlSceneDetail">3 · objects</output>
+                    </div>
+                    <input type="range" id="itlSceneDetail" min="1" max="5" step="1" value="3">
+                </div>
+                <div class="itl-field">
+                    <label for="itlSceneHint" data-tooltip="Optional context only you know, e.g. “children's storybook, keep each character separate from props” or “product photo: ignore the shadow”. It is added to the model's instructions.">Hint for the model</label>
+                    <input type="text" id="itlSceneHint" maxlength="600" placeholder="e.g. storybook page, separate characters from props" autocomplete="off">
+                </div>
+                <div class="itl-inline-btns single">
+                    <button type="button" class="itl-btn small" id="itlDescribe"
+                            data-tooltip="Sends the reference image to the vision model and fills in the description and object list below. Takes roughly 10–40 seconds. Re-running replaces the list, including edits you made.">
+                        <i class="fas fa-eye"></i> Describe image
+                    </button>
+                </div>
+                <div class="itl-field">
+                    <label for="itlSceneText" data-tooltip="The model's overall description of the image. Editable. It is saved with the project (scene.json and composition meta) so the layers keep their context. It does not change the masks by itself; the objects below do.">Description</label>
+                    <textarea id="itlSceneText" placeholder="Run “Describe image”, or write your own description." spellcheck="false"></textarea>
+                </div>
+                <div id="itlSceneList" class="itl-scene-list" role="list"></div>
+                <div class="itl-inline-btns single">
+                    <button type="button" class="itl-btn small" id="itlSceneImport" hidden
+                            data-tooltip="Creates one layer group per scene object, pre-filled with its point and box, so you can fine-tune each one by hand in Point prompts mode.">
+                        <i class="fas fa-file-import"></i> Import objects as layer groups
+                    </button>
                 </div>
             </section>
 
             <section class="itl-section" id="itlModelsSection">
                 <h3>Models</h3>
                 <div class="itl-field">
-                    <label for="itlSam">SAM</label>
+                    <label for="itlSam" data-tooltip="Which SAM 2.1 checkpoint cuts the masks. Large has the cleanest edges but is slowest and needs the most memory; Tiny is fastest and fine for rough layouts. Weights download on first use.">SAM</label>
                     <select id="itlSam">
                         <option value="sam2-large">SAM 2.1 Large (best)</option>
                         <option value="sam2-base">SAM 2.1 Base+</option>
@@ -933,6 +1097,81 @@
                     downloaded.</p>
             </section>
 
+            <section class="itl-section" id="itlAutoSettings" hidden>
+                <h3>Granularity · automatic SAM</h3>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoPoints" data-tooltip="SAM probes the image on an N×N grid of points and grows a mask from each. More points find smaller objects but the run gets slower (time grows with N²). 16 suits most scenes; try 32 for lots of small items.">Sampling grid</label>
+                        <output id="itlAutoPointsOut" for="itlAutoPoints">16 × 16</output>
+                    </div>
+                    <input type="range" id="itlAutoPoints" min="4" max="64" step="2" value="16">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoMinArea" data-tooltip="Masks smaller than this share of the whole canvas are thrown away. Lower it to keep tiny details (eyes, buttons); raise it to ignore specks.">Smallest region</label>
+                        <output id="itlAutoMinAreaOut" for="itlAutoMinArea">0.10%</output>
+                    </div>
+                    <input type="range" id="itlAutoMinArea" min="0.01" max="3" step="0.01" value="0.1">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoPredIou" data-tooltip="SAM scores how good it thinks each mask is. Masks scoring below this are dropped. Raise it for fewer, cleaner layers; lower it to keep more rough or uncertain ones.">Mask quality</label>
+                        <output id="itlAutoPredIouOut" for="itlAutoPredIou">0.80</output>
+                    </div>
+                    <input type="range" id="itlAutoPredIou" min="0.5" max="0.98" step="0.01" value="0.8">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoStability" data-tooltip="How steady a mask stays when SAM's threshold wiggles. Unstable masks usually have ragged or flickering edges. Raise it for smoother layers; lower it to keep more.">Edge stability</label>
+                        <output id="itlAutoStabilityOut" for="itlAutoStability">0.85</output>
+                    </div>
+                    <input type="range" id="itlAutoStability" min="0.5" max="0.98" step="0.01" value="0.85">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoNms" data-tooltip="When two masks overlap by more than this (intersection over union) the smaller duplicate is dropped. Lower = more aggressive de-duplication and fewer layers; higher = keeps near-copies.">Duplicate overlap</label>
+                        <output id="itlAutoNmsOut" for="itlAutoNms">0.55</output>
+                    </div>
+                    <input type="range" id="itlAutoNms" min="0.2" max="0.95" step="0.01" value="0.55">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoContain" data-tooltip="A mask that lies mostly inside a bigger one is treated as part of it and dropped. 1.00 keeps every nested part (an eye inside a face); lower values merge parts into their parent and give fewer layers.">Nested parts</label>
+                        <output id="itlAutoContainOut" for="itlAutoContain">0.85</output>
+                    </div>
+                    <input type="range" id="itlAutoContain" min="0.5" max="1" step="0.01" value="0.85">
+                </div>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlAutoMax" data-tooltip="Hard cap on the number of layers: only the largest N masks are kept. 0 means no cap.">Max layers</label>
+                        <output id="itlAutoMaxOut" for="itlAutoMax">no cap</output>
+                    </div>
+                    <input type="range" id="itlAutoMax" min="0" max="200" step="1" value="0">
+                </div>
+                <div class="itl-field" id="itlSceneMatchField">
+                    <div class="itl-field-row">
+                        <label for="itlSceneMatch" data-tooltip="Only used when a scene description exists. An automatic mask gets a scene object's name when its overlap score with that object reaches this value. Lower = more masks get real names (riskier); higher = only confident matches are renamed and the rest keep names like props-03.">Name match strictness</label>
+                        <output id="itlSceneMatchOut" for="itlSceneMatch">0.35</output>
+                    </div>
+                    <input type="range" id="itlSceneMatch" min="0.1" max="0.9" step="0.01" value="0.35">
+                </div>
+            </section>
+
+            <section class="itl-section" id="itlSceneSettings" hidden>
+                <h3>Granularity · scene-guided</h3>
+                <div class="itl-field">
+                    <div class="itl-field-row">
+                        <label for="itlScenePad" data-tooltip="Grows each object's box by this much before giving it to SAM. The vision model's boxes are approximate, so a little padding stops edges being clipped. Too much lets neighbouring objects leak into the mask.">Box padding</label>
+                        <output id="itlScenePadOut" for="itlScenePad">2.0%</output>
+                    </div>
+                    <input type="range" id="itlScenePad" min="0" max="0.1" step="0.005" value="0.02">
+                </div>
+                <label class="itl-toggle" data-tooltip="Besides the box, also gives SAM the object's centre point (and any negative points). More precise for objects crowded by neighbours; turn it off if the model's point sometimes lands on the wrong thing and you trust the box more.">
+                    <input type="checkbox" id="itlScenePoints" checked> Prompt with centre point too</label>
+                <label class="itl-toggle" data-tooltip="Adds an extra “unassigned” layer containing every pixel that no scene object claimed, so nothing in the image is lost. Turn it off if you only want the named objects.">
+                    <input type="checkbox" id="itlSceneRemainder" checked> Keep unassigned remainder layer</label>
+            </section>
+
             <section class="itl-section" id="itlKnockoutSettings" hidden>
                 <h3>Knockout</h3>
                 <div class="itl-field">
@@ -942,11 +1181,12 @@
                     </div>
                     <input type="range" id="itlKnockoutUnderlap" min="0" max="4" step="1" value="1">
                 </div>
-                <label class="itl-toggle"><input type="checkbox" id="itlKnockoutKeepCutout" checked>
+                <label class="itl-toggle" data-tooltip="Also writes the cut-out itself as a layer, re-cut from the final image, so background + cut-out recomposite back to the original artwork.">
+                    <input type="checkbox" id="itlKnockoutKeepCutout" checked>
                     Keep matching cut-out layer</label>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlKnockoutKeepOut">Objects kept</label>
+                        <label for="itlKnockoutKeepOut" data-tooltip="Objects you clicked on the canvas to leave in the background instead of cutting out. Click an object again to knock it out once more.">Objects kept</label>
                         <output id="itlKnockoutKeepOut" for="itlKnockoutKeepOut">0</output>
                     </div>
                     <p class="itl-hint" style="margin: 0;">Click a highlighted object on the canvas to keep
@@ -963,28 +1203,30 @@
                 <h3>Quality</h3>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlFeather" data-tooltip="Feather softens the cut-out edge so seams stay hidden. 1 px is a clean default for most work.">Feather</label>
+                        <label for="itlFeather" data-tooltip="Blurs each layer's edge by this many pixels so cut-outs blend into each other instead of looking jagged. 0 = hard pixel edges; 1 px is a clean default; above 3 px layers start to look soft.">Feather</label>
                         <output id="itlFeatherOut" for="itlFeather">1.0 px</output>
                     </div>
                     <input type="range" id="itlFeather" min="0" max="4" step="0.1" value="1">
                 </div>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlDilate" data-tooltip="Dilate expands the mask slightly before export; useful if tiny gaps are leaving a halo.">Dilate</label>
+                        <label for="itlDilate" data-tooltip="Grows every mask outward by this many pixels before export. Use 1–2 px if thin gaps or a light halo show between layers; keep 0 when layers must not overlap their neighbours.">Dilate</label>
                         <output id="itlDilateOut" for="itlDilate">0 px</output>
                     </div>
                     <input type="range" id="itlDilate" min="0" max="4" step="1" value="0">
                 </div>
                 <div class="itl-field">
                     <div class="itl-field-row">
-                        <label for="itlRadius" data-tooltip="This is the positive point influence radius. Smaller values are more precise; larger values are safer for fuzzy edges.">Point radius</label>
+                        <label for="itlRadius" data-tooltip="Size of the circle drawn around each click on the canvas, and of the rough circle used if SAM 2 isn't installed (fallback only). It does not change real SAM results. Smaller = more precise fallback; larger = safer for fuzzy edges.">Point radius</label>
                         <output id="itlRadiusOut" for="itlRadius">3.0%</output>
                     </div>
                     <input type="range" id="itlRadius" min="0.01" max="0.1" step="0.005" value="0.03">
                 </div>
-                <label class="itl-toggle" id="itlOrderToggle"><input type="checkbox" id="itlOrder" checked>
+                <label class="itl-toggle" id="itlOrderToggle" data-tooltip="Stacks layers by how low they sit in the picture: things lower down are assumed closer to the viewer and go in front. Good for scenes seen from the front or above; turn it off to stack by role only (background → props → characters → foreground).">
+                    <input type="checkbox" id="itlOrder" checked>
                     Refine Z by vertical position</label>
-                <label class="itl-toggle" id="itlDepthRoleToggle"><input type="checkbox" id="itlDepthRole">
+                <label class="itl-toggle" id="itlDepthRoleToggle" data-tooltip="Overrides each layer's role (background / midground / ground / foreground) from its vertical position instead of its name or the vision model's label. Only useful when names carry no information; it can mislabel tall objects, so leave it off when you have a scene description.">
+                    <input type="checkbox" id="itlDepthRole">
                     Re-derive role from Y-position</label>
             </section>
 
@@ -1102,6 +1344,21 @@
                 keepCutout: true,
                 exclude: [],  // [{ x, y }] normalized seeds of objects to keep
             },
+            scene: null,         // { description, style, objects: [{ name, label, group, role, bbox, point, ... }] }
+            sceneSelected: null, // index of the highlighted scene object
+            describing: false,
+            vision: { model: 'deepseek-flash', detail: 3, hint: '' },
+            auto: {
+                pointsPerSide: 16,
+                minArea: 0.1,
+                predIou: 0.8,
+                minStability: 0.85,
+                nmsIou: 0.55,
+                containment: 0.85,
+                maxLayers: 0,
+                sceneMatch: 0.35,
+            },
+            sceneOpts: { boxPad: 0.02, usePoints: true, remainder: true },
             settings: {
                 samModel: 'sam2-large',
                 feather: 1,
@@ -1111,6 +1368,7 @@
                 depthRole: false,
                 name: 'My Scene',
                 output: 'project',
+                folders: 'group',
             },
             running: false,
             controller: null,
@@ -1133,17 +1391,24 @@
             const recovering = state.mode === 'recover';
             const knockout = state.mode === 'knockout';
             const autoSam = state.mode === 'sam-auto';
+            const sceneMode = state.mode === 'sam-scene';
+            const hasScene = Boolean(state.scene?.objects?.length);
             document.querySelectorAll('.itl-modes button').forEach(b => {
                 b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode));
             });
             $('itlAddLayer').hidden = state.mode !== 'sam-points';
             $('itlAddMasks').hidden = state.mode !== 'masks';
-            $('itlLayers').hidden = autoSam || knockout;
-            $('itlLayersSection').hidden = recovering || autoSam || knockout;
+            $('itlLayers').hidden = autoSam || sceneMode || knockout;
+            $('itlLayersSection').hidden = recovering || autoSam || sceneMode || knockout;
             $('itlExportSection').hidden = !recovering;
             $('itlCutoutSection').hidden = !knockout;
             $('itlRecoverSection').hidden = !recovering;
-            $('itlModelsSection').hidden = recovering || knockout;
+            $('itlModelsSection').hidden = recovering || knockout || state.mode === 'masks';
+            $('itlSceneSection').hidden = recovering || knockout || state.mode === 'masks';
+            $('itlSceneImport').hidden = !(state.mode === 'sam-points' && hasScene);
+            $('itlAutoSettings').hidden = !autoSam;
+            $('itlSceneMatchField').hidden = !hasScene;
+            $('itlSceneSettings').hidden = !sceneMode;
             $('itlKnockoutSettings').hidden = !knockout;
             $('itlOrderToggle').hidden = recovering || knockout;
             $('itlDepthRoleToggle').hidden = recovering || knockout;
@@ -1151,10 +1416,13 @@
                 ? 'Recover missing layers'
                 : knockout
                     ? 'Build knockout background'
+                    : sceneMode ? 'Run scene-guided SAM'
                     : state.mode === 'sam-points' ? 'Review & run' : 'Run segmenter';
             $('itlRefTitle').textContent = recovering ? 'Final image' : 'Reference';
             $('itlRefHint').hidden = !recovering && !knockout;
-            $('itlHelp').hidden = recovering || knockout;
+            $('itlHelp').hidden = recovering || knockout || sceneMode;
+            $('itlSceneHelp').hidden = !sceneMode;
+            $('itlRun').title = sceneMode && !hasScene ? 'Click “Describe image” first.' : '';
             $('itlRecoverHelp').hidden = !recovering;
             $('itlKnockoutHelp').hidden = !knockout;
             $('itlLayersTitle').textContent =
@@ -1162,9 +1430,11 @@
                 : state.mode === 'sam-points' ? 'Layer groups'
                 : 'Automatic';
             $('itlCanvas')?.setAttribute('data-mode', state.mode);
+            $('itlDescribe').disabled = state.describing || state.running || !state.reference;
             $('itlRun').disabled = state.running || !state.reference
                 || (recovering && !state.exportImage)
-                || (knockout && !state.cutoutImage);
+                || (knockout && !state.cutoutImage)
+                || (sceneMode && !hasScene);
             $('itlCancel').disabled = !state.running;
             $('itlKnockoutPreview').hidden = !(knockout && state.reference && state.cutoutImage);
             $('itlAutoPreview').hidden = !(autoSam && state.reference);
@@ -1200,7 +1470,10 @@
                         name: file.name || 'reference',
                     };
                     state.knockout.exclude = [];
+                    state.scene = null;   // a description belongs to one image
+                    state.sceneSelected = null;
                     renderReference();
+                    renderScene();
                     renderCanvas();
                     setStatus(`Reference ${img.naturalWidth}×${img.naturalHeight} · ${file.name || 'image'}`, 'ok');
                 };
@@ -1214,7 +1487,10 @@
         function clearReference() {
             imageLoads.clear();
             state.reference = null;
+            state.scene = null;
+            state.sceneSelected = null;
             renderReference();
+            renderScene();
             renderCanvas();
             setStatus('Reference cleared.', '');
         }
@@ -1582,7 +1858,8 @@
                 syncActiveState();
                 return;
             }
-            if (state.mode === 'sam-auto') {
+            if (state.mode === 'sam-auto' || state.mode === 'sam-scene') {
+                renderSceneOverlay(svg);
                 syncActiveState();
                 return;
             }
@@ -1665,6 +1942,17 @@
             state.layers.forEach((layer) => {
                 const g = document.createElementNS(SVG_NS, 'g');
                 g.dataset.layerId = layer.id;
+                if (layer.box) {   // imported from the scene description
+                    const rect = document.createElementNS(SVG_NS, 'rect');
+                    rect.setAttribute('x', String(layer.box[0] * state.reference.width));
+                    rect.setAttribute('y', String(layer.box[1] * state.reference.height));
+                    rect.setAttribute('width', String((layer.box[2] - layer.box[0]) * state.reference.width));
+                    rect.setAttribute('height', String((layer.box[3] - layer.box[1]) * state.reference.height));
+                    rect.setAttribute('stroke', layer.color);
+                    rect.setAttribute('stroke-width', String(layer.id === activeId ? 3 : 1.5));
+                    rect.classList.add('itl-scene-box', 'itl-point-area');
+                    g.appendChild(rect);
+                }
                 layer.points.forEach((point, index) => {
                     const cx = point.x * state.reference.width;
                     const cy = point.y * state.reference.height;
@@ -1717,6 +2005,70 @@
                 svg.appendChild(g);
             });
             syncActiveState();
+        }
+
+        // Dashed boxes, names and centre points of the vision model's objects.
+        function renderSceneOverlay(svg) {
+            const objects = state.scene?.objects || [];
+            if (!objects.length) return;
+            const W = state.reference.width;
+            const H = state.reference.height;
+            const unit = Math.min(W, H);
+            const fontSize = Math.max(11, Math.round(unit * 0.016));
+            objects.forEach((obj, index) => {
+                const color = PALETTE[index % PALETTE.length];
+                const selected = state.sceneSelected === index;
+                const g = document.createElementNS(SVG_NS, 'g');
+                g.setAttribute('opacity', selected || state.sceneSelected === null ? '1' : '0.45');
+                if (obj.bbox) {
+                    const rect = document.createElementNS(SVG_NS, 'rect');
+                    rect.setAttribute('x', String(obj.bbox[0] * W));
+                    rect.setAttribute('y', String(obj.bbox[1] * H));
+                    rect.setAttribute('width', String((obj.bbox[2] - obj.bbox[0]) * W));
+                    rect.setAttribute('height', String((obj.bbox[3] - obj.bbox[1]) * H));
+                    rect.setAttribute('stroke', color);
+                    rect.setAttribute('stroke-width', String(selected ? Math.max(3, unit * 0.005) : Math.max(1.5, unit * 0.0025)));
+                    rect.setAttribute('fill', color);
+                    rect.setAttribute('fill-opacity', selected ? '0.14' : '0.04');
+                    rect.classList.add('itl-scene-box');
+                    g.appendChild(rect);
+
+                    const tag = document.createElementNS(SVG_NS, 'text');
+                    tag.setAttribute('x', String(obj.bbox[0] * W + 4));
+                    tag.setAttribute('y', String(Math.max(fontSize + 2, obj.bbox[1] * H + fontSize + 2)));
+                    tag.setAttribute('font-size', String(fontSize));
+                    tag.setAttribute('fill', '#ffffff');
+                    tag.setAttribute('stroke', 'rgba(10, 10, 13, 0.88)');
+                    tag.setAttribute('stroke-width', String(Math.max(2, fontSize * 0.22)));
+                    tag.classList.add('itl-scene-tag');
+                    tag.textContent = obj.name;
+                    g.appendChild(tag);
+                }
+                if (obj.point) {
+                    const dot = document.createElementNS(SVG_NS, 'circle');
+                    dot.setAttribute('cx', String(obj.point[0] * W));
+                    dot.setAttribute('cy', String(obj.point[1] * H));
+                    dot.setAttribute('r', String(Math.max(3, unit * 0.007)));
+                    dot.setAttribute('fill', color);
+                    dot.setAttribute('stroke', '#ffffff');
+                    dot.setAttribute('stroke-width', '1.5');
+                    g.appendChild(dot);
+                }
+                (obj.negative_points || []).forEach((p) => {
+                    const r = Math.max(3, unit * 0.006);
+                    [[-1, -1, 1, 1], [-1, 1, 1, -1]].forEach(([x1, y1, x2, y2]) => {
+                        const line = document.createElementNS(SVG_NS, 'line');
+                        line.setAttribute('x1', String(p[0] * W + x1 * r));
+                        line.setAttribute('y1', String(p[1] * H + y1 * r));
+                        line.setAttribute('x2', String(p[0] * W + x2 * r));
+                        line.setAttribute('y2', String(p[1] * H + y2 * r));
+                        line.setAttribute('stroke', color);
+                        line.setAttribute('stroke-width', '2');
+                        g.appendChild(line);
+                    });
+                });
+                svg.appendChild(g);
+            });
         }
 
         function renderMaskPreview(svg) {
@@ -1973,6 +2325,34 @@
                 return;
             }
 
+            if (state.scene?.objects?.length) {
+                // Real information beats a guess: show the groups the model found.
+                const counts = new Map();
+                state.scene.objects.forEach((obj) => counts.set(obj.group, (counts.get(obj.group) || 0) + 1));
+                summary.innerHTML = '';
+                counts.forEach((count, group) => {
+                    const row = document.createElement('div');
+                    row.className = 'itl-result-row';
+                    const left = document.createElement('div');
+                    const strong = document.createElement('strong');
+                    strong.textContent = group;
+                    const small = document.createElement('small');
+                    small.textContent = `${count} named object${count === 1 ? '' : 's'} from the scene description`;
+                    left.append(strong, small);
+                    const pill = document.createElement('span');
+                    pill.className = 'pill';
+                    pill.textContent = String(count);
+                    row.append(left, pill);
+                    summary.append(row);
+                });
+                const note = document.createElement('small');
+                note.style.cssText = 'color: var(--ls-muted); display: block; padding-top: 2px;';
+                note.textContent = 'Automatic masks are renamed after these objects when they overlap them; '
+                    + 'masks that match nothing keep rule-based names like props-03.';
+                summary.append(note);
+                return;
+            }
+
             const aspect = state.reference.width / Math.max(1, state.reference.height);
             const tighter = state.settings.pointRadius >= 0.05 || state.settings.feather >= 1.5;
             let scene = 'landscape';
@@ -2021,7 +2401,7 @@
             }).join('');
             summary.insertAdjacentHTML('beforeend', `
                 <small style="color: var(--ls-muted); display: block; padding-top: 2px;">
-                    Scene profile: ${scene.replace('-', ' ')}. This estimate updates live as the settings change; the final SAM result may still shift slightly after the run.
+                    Rough guess from the image shape only (${scene.replace('-', ' ')}). Press “Describe image” for real names, or run to see the actual masks.
                 </small>
             `);
         }
@@ -2458,19 +2838,46 @@
                 depth: state.settings.depth,
                 depthRole: state.settings.depthRole,
                 outputMode: state.settings.output,
+                folders: state.settings.folders,
                 name: state.settings.name || 'My Scene',
             };
+            // The scene description rides along in every SAM mode: it names/prompts
+            // layers and is stored with the project.
+            if (state.scene?.objects?.length && ['sam-points', 'sam-auto', 'sam-scene'].includes(state.mode)) {
+                payload.scene = {
+                    description: state.scene.description || '',
+                    style: state.scene.style || '',
+                    model: state.scene.model || state.vision.model,
+                    detail: state.scene.detail || state.vision.detail,
+                    objects: state.scene.objects,
+                };
+            }
             if (state.mode === 'sam-points') {
                 const valid = state.layers.filter(l => l.points.some(p => p.positive));
                 if (!valid.length) throw new Error('Add at least one positive point to a group.');
                 // Coordinates are 0–1 fractions; the CLI multiplies them by the image size.
                 payload.samPoints = valid.map((layer) => {
-                    const points = layer.points.map((p) => {
+                    const tokens = layer.points.map((p) => {
                         return `${p.positive ? '' : '!'}${p.x.toFixed(6)},${p.y.toFixed(6)}`;
-                    }).join('|');
+                    });
+                    if (layer.box) tokens.push(`box:${layer.box.map((v) => v.toFixed(6)).join(',')}`);
                     const safeName = layer.name.replace(/[;:|]/g, '_') || 'layer';
-                    return `${safeName}:${points}`;
+                    return `${safeName}:${tokens.join('|')}`;
                 }).join(';');
+            } else if (state.mode === 'sam-auto') {
+                payload.autoPointsPerSide = state.auto.pointsPerSide;
+                payload.autoMinArea = state.auto.minArea;
+                payload.autoPredIou = state.auto.predIou;
+                payload.autoMinStability = state.auto.minStability;
+                payload.autoNmsIou = state.auto.nmsIou;
+                payload.autoContainment = state.auto.containment;
+                payload.autoMaxLayers = state.auto.maxLayers;
+                payload.sceneMatch = state.auto.sceneMatch;
+            } else if (state.mode === 'sam-scene') {
+                if (!payload.scene) throw new Error('Click “Describe image” first so SAM has objects to cut.');
+                payload.sceneBoxPad = state.sceneOpts.boxPad;
+                payload.sceneUsePoints = state.sceneOpts.usePoints;
+                payload.sceneRemainder = state.sceneOpts.remainder;
             } else if (state.mode === 'masks') {
                 if (!state.masks.length) throw new Error('Upload at least one mask.');
                 payload.masks = state.masks;
@@ -2859,6 +3266,195 @@
             };
         }
 
+        // ── scene description (vision LLM) ──────────────────────────────
+        const DETAIL_LABELS = ['', 'regions', 'major', 'objects', 'parts', 'everything'];
+        const ROLE_CHOICES = ['background', 'midground', 'ground', 'prop', 'character',
+            'character-part', 'foreground', 'effect'];
+
+        async function describeScene() {
+            if (!state.reference || state.describing) return;
+            state.describing = true;
+            syncActiveState();
+            setStatus(`Describing the whole image with ${state.vision.model}…`, 'busy');
+            try {
+                const response = await fetch(`${API}/describe`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        reference: state.reference.dataUrl,
+                        referenceName: state.reference.name,
+                        visionModel: state.vision.model,
+                        detail: state.vision.detail,
+                        hint: state.vision.hint,
+                    }),
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok || !data.scene) {
+                    throw new Error(data.error || `Server returned ${response.status}`);
+                }
+                state.scene = data.scene;
+                state.sceneSelected = null;
+                renderScene();
+                renderCanvas();
+                const n = state.scene.objects.length;
+                setStatus(`Scene described · ${n} object${n === 1 ? '' : 's'} found.`, 'ok');
+            } catch (error) {
+                setStatus(error.message || 'Could not describe the image.', 'error');
+            } finally {
+                state.describing = false;
+                syncActiveState();
+            }
+        }
+
+        function renderScene() {
+            const objects = state.scene?.objects || [];
+            $('itlSceneCount').textContent = String(objects.length);
+            const text = $('itlSceneText');
+            if (document.activeElement !== text) text.value = state.scene?.description || '';
+            const list = $('itlSceneList');
+            list.replaceChildren();
+            objects.forEach((obj, index) => {
+                const row = document.createElement('div');
+                row.className = 'itl-scene-obj';
+                row.setAttribute('role', 'listitem');
+                row.setAttribute('aria-selected', String(state.sceneSelected === index));
+                row.addEventListener('click', (event) => {
+                    if (event.target.closest('button')) return;
+                    state.sceneSelected = state.sceneSelected === index ? null : index;
+                    renderScene();
+                    renderCanvas();
+                });
+
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.style.background = PALETTE[index % PALETTE.length];
+
+                const name = document.createElement('input');
+                name.type = 'text';
+                name.value = obj.name;
+                name.maxLength = 60;
+                name.setAttribute('aria-label', 'Layer name');
+                name.dataset.tooltip = [obj.label, obj.description, `Role: ${obj.role}`]
+                    .filter(Boolean).join(' · ');
+                name.addEventListener('input', () => {
+                    obj.name = name.value.trim() || obj.name;
+                    renderCanvas();
+                });
+
+                const group = document.createElement('input');
+                group.type = 'text';
+                group.value = obj.group;
+                group.className = 'grp';
+                group.maxLength = 40;
+                group.size = 9;
+                group.setAttribute('aria-label', 'Group (becomes the folder)');
+                group.dataset.tooltip = 'Group. Layers that share a group are stored together in one folder and share a Studio group.';
+                group.addEventListener('input', () => {
+                    obj.group = group.value.trim() || obj.group;
+                });
+
+                const del = document.createElement('button');
+                del.type = 'button';
+                del.innerHTML = '<i class="fas fa-trash"></i>';
+                del.setAttribute('aria-label', `Remove ${obj.name}`);
+                del.dataset.tooltip = 'Remove this object from the scene (no layer will be made for it).';
+                del.addEventListener('click', () => {
+                    state.scene.objects.splice(index, 1);
+                    state.sceneSelected = null;
+                    renderScene();
+                    renderCanvas();
+                });
+
+                row.append(dot, name, group, del);
+                list.append(row);
+            });
+            syncActiveState();
+        }
+
+        function importSceneAsGroups() {
+            const objects = state.scene?.objects || [];
+            if (!objects.length) return;
+            let added = 0;
+            objects.forEach((obj) => {
+                const points = [];
+                if (obj.point) points.push({ x: obj.point[0], y: obj.point[1], positive: true });
+                (obj.negative_points || []).forEach((p) => points.push({ x: p[0], y: p[1], positive: false }));
+                if (!points.some((p) => p.positive)) return;
+                const layer = createLayer(obj.name);
+                layer.points = points;
+                layer.box = obj.bbox ? obj.bbox.slice() : null;
+                added += 1;
+            });
+            renderLayers();
+            renderCanvas();
+            setStatus(`Imported ${added} layer group${added === 1 ? '' : 's'} from the scene.`, 'ok');
+        }
+
+        // ── tooltips ────────────────────────────────────────────────────
+        // Any element with data-tooltip gets one. Labels and toggles also get a
+        // small (i) icon so the hint is discoverable without hovering blindly.
+        function initTooltips() {
+            const tip = document.createElement('div');
+            tip.className = 'itl-tooltip';
+            tip.id = 'itlTooltip';
+            tip.setAttribute('role', 'tooltip');
+            document.body.append(tip);
+            let current = null;
+
+            function place(target) {
+                const rect = target.getBoundingClientRect();
+                const tipRect = tip.getBoundingClientRect();
+                let left = rect.left + rect.width / 2 - tipRect.width / 2;
+                left = Math.max(8, Math.min(window.innerWidth - tipRect.width - 8, left));
+                let top = rect.bottom + 8;
+                if (top + tipRect.height > window.innerHeight - 8) top = rect.top - tipRect.height - 8;
+                tip.style.left = `${left}px`;
+                tip.style.top = `${Math.max(8, top)}px`;
+            }
+            function show(target) {
+                const text = target.dataset.tooltip;
+                if (!text) return;
+                current = target;
+                tip.textContent = text;
+                tip.dataset.show = 'true';
+                place(target);
+                target.setAttribute('aria-describedby', 'itlTooltip');
+            }
+            function hide() {
+                if (current) current.removeAttribute('aria-describedby');
+                current = null;
+                tip.dataset.show = 'false';
+            }
+
+            document.addEventListener('mouseover', (event) => {
+                const target = event.target.closest?.('[data-tooltip]');
+                if (target && target !== current) show(target);
+                else if (!target) hide();
+            });
+            document.addEventListener('focusin', (event) => {
+                const target = event.target.closest?.('[data-tooltip]');
+                if (target) show(target);
+            });
+            document.addEventListener('focusout', hide);
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') hide(); });
+            document.addEventListener('scroll', hide, true);
+            window.addEventListener('blur', hide);
+
+            document.querySelectorAll('label[data-tooltip], .itl-toggle[data-tooltip]').forEach((el) => {
+                if (el.querySelector('.itl-tipicon')) return;
+                const icon = document.createElement('span');
+                icon.className = 'itl-tipicon';
+                icon.tabIndex = 0;
+                icon.setAttribute('role', 'img');
+                icon.setAttribute('aria-label', 'More info');
+                icon.dataset.tooltip = el.dataset.tooltip;
+                icon.textContent = 'i';   // plain text: no icon-font dependency
+                // Inside a checkbox label a click would flip the checkbox.
+                icon.addEventListener('click', (event) => event.preventDefault());
+                el.append(icon);
+            });
+        }
+
         // ── wiring ─────────────────────────────────────────────────────
         $('itlRefDrop').addEventListener('click', () => $('itlRefInput').click());
         $('itlRefDrop').addEventListener('keydown', (event) => {
@@ -3058,6 +3654,44 @@
             state.settings.depthRole = event.target.checked;
         });
 
+        // scene description controls
+        $('itlVisionModel').addEventListener('change', (event) => { state.vision.model = event.target.value; });
+        $('itlSceneDetail').addEventListener('input', (event) => {
+            state.vision.detail = Number(event.target.value);
+            $('itlSceneDetailOut').textContent = `${state.vision.detail} · ${DETAIL_LABELS[state.vision.detail]}`;
+        });
+        $('itlSceneHint').addEventListener('input', (event) => { state.vision.hint = event.target.value; });
+        $('itlDescribe').addEventListener('click', describeScene);
+        $('itlSceneText').addEventListener('input', (event) => {
+            if (!state.scene) state.scene = { description: '', objects: [] };
+            state.scene.description = event.target.value;
+        });
+        $('itlSceneImport').addEventListener('click', importSceneAsGroups);
+        $('itlFolders').addEventListener('change', (event) => { state.settings.folders = event.target.value; });
+
+        // granularity levers: [input id, output id, state object, key, formatter]
+        [
+            ['itlAutoPoints', 'itlAutoPointsOut', state.auto, 'pointsPerSide', (v) => `${v} × ${v}`, Number],
+            ['itlAutoMinArea', 'itlAutoMinAreaOut', state.auto, 'minArea', (v) => `${v.toFixed(2)}%`, Number],
+            ['itlAutoPredIou', 'itlAutoPredIouOut', state.auto, 'predIou', (v) => v.toFixed(2), Number],
+            ['itlAutoStability', 'itlAutoStabilityOut', state.auto, 'minStability', (v) => v.toFixed(2), Number],
+            ['itlAutoNms', 'itlAutoNmsOut', state.auto, 'nmsIou', (v) => v.toFixed(2), Number],
+            ['itlAutoContain', 'itlAutoContainOut', state.auto, 'containment', (v) => v.toFixed(2), Number],
+            ['itlAutoMax', 'itlAutoMaxOut', state.auto, 'maxLayers', (v) => (v ? String(v) : 'no cap'), Number],
+            ['itlSceneMatch', 'itlSceneMatchOut', state.auto, 'sceneMatch', (v) => v.toFixed(2), Number],
+            ['itlScenePad', 'itlScenePadOut', state.sceneOpts, 'boxPad', (v) => `${(v * 100).toFixed(1)}%`, Number],
+        ].forEach(([inputId, outputId, target, key, format, cast]) => {
+            const input = $(inputId);
+            const sync = () => {
+                target[key] = cast(input.value);
+                $(outputId).textContent = format(target[key]);
+            };
+            input.addEventListener('input', sync);
+            sync();
+        });
+        $('itlScenePoints').addEventListener('change', (event) => { state.sceneOpts.usePoints = event.target.checked; });
+        $('itlSceneRemainder').addEventListener('change', (event) => { state.sceneOpts.remainder = event.target.checked; });
+
         $('itlRun').addEventListener('click', run);
         $('itlCancel').addEventListener('click', cancelRun);
 
@@ -3076,8 +3710,11 @@
         renderReference();
         renderExport();
         renderCutout();
+        renderScene();
         renderCanvas();
         $('itlKnockoutUnderlapOut').textContent = `${state.knockout.underlap} px`;
+        $('itlSceneDetailOut').textContent = `${state.vision.detail} · ${DETAIL_LABELS[state.vision.detail]}`;
+        initTooltips();
         syncActiveState();
         fetch(`${API}/sample`).then(async (response) => {
             if (!response.ok) return;

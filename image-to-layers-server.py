@@ -24,7 +24,21 @@ Usage:
   python3 image-to-layers-server.py
   PORT=8008 HOST=127.0.0.1 python3 image-to-layers-server.py
 
+Scene description (vision LLM):
+  POST /api/describe   { reference, referenceName, visionModel, detail, hint }
+                       → { scene: { description, objects: [...] } }
+  The CLI calls the DeepSeek Chat Completions API, so DEEPSEEK_API_KEY must be in
+  .env (loaded at startup) or this process's environment (it is never sent to or
+  read from the browser). ITL_VISION_MODEL overrides the default model;
+  DEEPSEEK_BASE_URL points at another compatible base URL.
+
 Changed since the original:
+
+  * /api/describe + `sam-scene` mode + `scene` in the run payload.
+  * Granularity levers (`auto*`, `scene*`, `folders`) are validated and clamped
+    here before they reach the CLI.
+  * The HTML file is found under either name (image-to-layers.html or
+    image-to-layers-server.html) instead of a hard-coded one.
 
   * Pre-stream validation errors now return proper 400/500 JSON instead of
     writing raw NDJSON bytes without headers.
@@ -50,6 +64,7 @@ import sys
 import tempfile
 import threading
 import time
+import urllib.parse
 from io import BytesIO
 from pathlib import Path
 
@@ -66,6 +81,32 @@ MAX_BODY = 200 * 1024 * 1024  # 200 MB — generous for 4K references + masks
 
 RUN_LOCK = threading.Lock()
 RUNNING_PROC: subprocess.Popen | None = None
+
+
+def load_dotenv(folder: Path) -> None:
+    """Load KEY=VALUE pairs from the nearest .env; real env vars win."""
+    for base in [folder, *folder.parents]:
+        env_file = base / ".env"
+        if not env_file.is_file():
+            continue
+        try:
+            lines = env_file.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            return
+        for line in lines:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            name, _, value = line.partition("=")
+            name = name.strip()
+            if name.startswith("export "):
+                name = name[len("export "):].strip()
+            if name and name not in os.environ:
+                os.environ[name] = value.strip().strip('"').strip("'")
+        return
+
+
+load_dotenv(ROOT)
 
 
 # ── decoding helpers ─────────────────────────────────────────────────────
@@ -96,6 +137,24 @@ def guess_extension(name: str, default: str = ".png") -> str:
     if suffix in {".png", ".jpg", ".jpeg", ".webp", ".gif"}:
         return suffix
     return default
+
+
+def clamp_number(payload: dict, key: str, default, low, high, cast=float):
+    """Read a numeric lever from the payload, falling back to ``default`` and clamping."""
+    try:
+        value = cast(payload.get(key, default))
+    except (TypeError, ValueError):
+        value = default
+    if value != value:   # NaN
+        value = default
+    return max(low, min(high, value))
+
+
+def ui_page() -> str:
+    for name in ("image-to-layers-server.html", "image-to-layers.html"):
+        if (ROOT / name).is_file():
+            return "/" + name
+    return "/image-to-layers.html"
 
 
 def find_sample_reference() -> dict | None:
@@ -162,11 +221,27 @@ def build_command(payload: dict, tmpdir: Path) -> tuple[list[str], Path]:
     if payload.get("pointRadius"):
         argv += ["--point-radius", str(float(payload["pointRadius"]))]
     if payload.get("depth"):
-        argv.append("--depth")
+        # The UI promises "vertical position, no depth model is downloaded"; without
+        # this flag the CLI defaulted to loading Depth Anything.
+        argv += ["--depth", "--depth-model", "none"]
     if payload.get("depthRole"):
         argv.append("--depth-role")
 
+    folders = str(payload.get("folders") or "group").lower()
+    argv += ["--folders", folders if folders in {"group", "flat"} else "group"]
+
     mode = payload.get("mode") or "sam-points"
+
+    # Scene description from the vision LLM (optional except for sam-scene).
+    scene = payload.get("scene")
+    scene_objects = scene.get("objects") if isinstance(scene, dict) else None
+    if isinstance(scene_objects, list) and scene_objects:
+        scene_path = tmpdir / "scene.json"
+        scene_path.write_text(json.dumps(scene), encoding="utf-8")
+        argv += ["--scene-json", str(scene_path)]
+    elif mode == "sam-scene":
+        raise ValueError("Scene-guided SAM needs a scene description. Click “Describe image” first.")
+
     if mode == "sam-points":
         sam_points = str(payload.get("samPoints") or "").strip()
         if not sam_points:
@@ -228,7 +303,26 @@ def build_command(payload: dict, tmpdir: Path) -> tuple[list[str], Path]:
         if seeds:
             argv += ["--knockout-exclude", ";".join(seeds)]
     elif mode == "sam-auto":
-        argv.append("--sam-auto")
+        argv += [
+            "--sam-auto",
+            "--auto-points-per-side", str(clamp_number(payload, "autoPointsPerSide", 16, 4, 64, int)),
+            "--auto-min-area", str(clamp_number(payload, "autoMinArea", 0.1, 0.001, 5.0)),
+            "--auto-min-stability", str(clamp_number(payload, "autoMinStability", 0.85, 0.0, 0.99)),
+            "--auto-pred-iou", str(clamp_number(payload, "autoPredIou", 0.8, 0.0, 0.99)),
+            "--auto-nms-iou", str(clamp_number(payload, "autoNmsIou", 0.55, 0.1, 0.95)),
+            "--auto-containment", str(clamp_number(payload, "autoContainment", 0.85, 0.3, 1.0)),
+            "--auto-max-layers", str(clamp_number(payload, "autoMaxLayers", 0, 0, 500, int)),
+            "--scene-match", str(clamp_number(payload, "sceneMatch", 0.35, 0.05, 0.95)),
+        ]
+    elif mode == "sam-scene":
+        argv += [
+            "--sam-scene",
+            "--scene-box-pad", str(clamp_number(payload, "sceneBoxPad", 0.02, 0.0, 0.2)),
+        ]
+        if payload.get("sceneUsePoints") is False:
+            argv.append("--scene-no-points")
+        if payload.get("sceneRemainder", True):
+            argv.append("--scene-remainder")
     else:
         raise ValueError(f"Unknown mode {mode!r}")
 
@@ -328,10 +422,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             super().log_message(fmt, *args)
 
     def do_GET(self):
-        if self.path in ("", "/"):
-            self.path = "/image-to-layers.html"
-        elif self.path in ("/image-to-layers.html", "/image-to-layers-server.html"):
-            self.path = "/image-to-layers.html"
+        request_path = urllib.parse.urlsplit(self.path).path
+        if any(part.startswith(".") for part in request_path.split("/") if part not in ("", ".", "..")):
+            self.send_error(404)  # never serve .env, .git, .venv, ...
+            return
+        if self.path in ("", "/", "/image-to-layers.html", "/image-to-layers-server.html"):
+            self.path = ui_page()
         elif self.path.startswith("/api/sample"):
             self.send_json(200, find_sample_reference() or {})
             return
@@ -340,6 +436,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         if self.path == "/api/run":
             self.handle_run()
+        elif self.path == "/api/describe":
+            self.handle_describe()
         elif self.path == "/api/cancel":
             self.handle_cancel()
         else:
@@ -370,6 +468,55 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.wfile.flush()
         except (BrokenPipeError, ConnectionResetError):
             self._broken = True
+
+    # ── describe (vision LLM) ──────────────────────────────────────────
+
+    def handle_describe(self):
+        """Look at the whole image once and return a scene description + objects."""
+        tmpdir = Path(tempfile.mkdtemp(prefix="itl-describe-"))
+        try:
+            if not TOOL.is_file():
+                raise RuntimeError(f"Missing CLI: {TOOL}")
+            payload = read_json_body(self)
+            if "reference" not in payload:
+                raise ValueError("Missing `reference` data URL")
+            reference_name = payload.get("referenceName") or "reference.png"
+            reference_path = tmpdir / f"reference{guess_extension(reference_name)}"
+            reference_path.write_bytes(decode_data_url(payload["reference"], "reference"))
+            scene_path = tmpdir / "scene.json"
+
+            model = str(payload.get("visionModel") or "").strip()
+            if model and not re.fullmatch(r"[A-Za-z0-9._:/-]{1,80}", model):
+                raise ValueError("Invalid vision model id")
+            argv = [
+                sys.executable, str(TOOL),
+                "--reference", str(reference_path),
+                "--describe-only", "--scene-out", str(scene_path),
+                "--scene-detail", str(clamp_number(payload, "detail", 3, 1, 5, int)),
+                "--scene-hint", str(payload.get("hint") or "")[:600],
+            ]
+            if model:
+                argv += ["--vision-model", model]
+
+            done = subprocess.run(
+                argv, cwd=str(ROOT), capture_output=True, text=True, timeout=240,
+                env={**os.environ, "PYTHONUNBUFFERED": "1"},
+            )
+            if done.returncode != 0 or not scene_path.is_file():
+                lines = [l for l in (done.stderr or done.stdout).strip().splitlines() if l.strip()]
+                message = lines[-1] if lines else f"CLI exited with status {done.returncode}"
+                self.send_json(502, {"error": message})
+                return
+            scene = json.loads(scene_path.read_text(encoding="utf-8"))
+            self.send_json(200, {"scene": scene})
+        except subprocess.TimeoutExpired:
+            self.send_json(504, {"error": "The vision model took too long (over 4 minutes)."})
+        except (ValueError, KeyError) as exc:
+            self.send_json(400, {"error": str(exc)})
+        except Exception as exc:
+            self.send_json(500, {"error": str(exc)})
+        finally:
+            shutil.rmtree(tmpdir, ignore_errors=True)
 
     # ── cancel ─────────────────────────────────────────────────────────
 
@@ -522,8 +669,10 @@ def main():
     PROJECTS_DIR.mkdir(parents=True, exist_ok=True)
     os.chdir(ROOT)  # SimpleHTTPRequestHandler serves from CWD
     server = ThreadingServer((HOST, PORT), Handler)
-    print(f"[itl] http://{HOST}:{PORT}/image-to-layers-server.html")
+    print(f"[itl] http://{HOST}:{PORT}{ui_page()}")
     print(f"[itl] project output → {PROJECTS_DIR}")
+    if not os.environ.get("DEEPSEEK_API_KEY"):
+        print("[itl] note: DEEPSEEK_API_KEY is not set — “Describe image” will be unavailable")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

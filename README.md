@@ -134,3 +134,13 @@ PORT=8009 HOST=127.0.0.1 .venv/bin/python image-to-layers-server.py
 On first use, SAM 2 downloads the selected checkpoint from Hugging Face. The default is SAM 2.1 Large; choose Tiny or Small in the UI for a smaller download and faster inference. Automatic device selection prefers CUDA, then Apple MPS, then CPU. CPU inference works but can be slow.
 
 If SAM 2 is not installed, Automatic SAM reports the missing setup instead of returning placeholder masks.
+
+## Optional scene description (DeepSeek)
+
+**Describe image** asks a DeepSeek vision model to name the objects in the reference; those names, boxes and points then prompt SAM 2. Put the key in a `.env` file next to `image-to-layers-server.py`:
+
+```dotenv
+DEEPSEEK_API_KEY=sk-...
+```
+
+The server loads `.env` at startup (real environment variables win) and never sends the key to the browser. `ITL_VISION_MODEL` overrides the model — DeepSeek currently accepts images on `deepseek-flash` only — and `DEEPSEEK_BASE_URL` points at another compatible endpoint. Without a key the rest of the tool still works; only **Describe image** is unavailable.

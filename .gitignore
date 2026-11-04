@@ -6,6 +6,10 @@ __pycache__/
 venv/
 .DS_Store
 
+# Environment / secrets
+.env
+.env.*
+
 # Generated project output
 /data/projects/
 *.zip

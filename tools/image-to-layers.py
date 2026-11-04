@@ -31,21 +31,82 @@ Quality flags:
   --knockout-exclude "x,y;x,y"  keep the objects under these 0–1 canvas points
                           in the background instead of knocking them out
   --sam-points-fallback  skip SAM, always use circle approximation
+
+Scene description (vision LLM → names, groups, SAM prompts):
+  --describe-only        ask a vision LLM to look at the WHOLE image first and write
+                         a scene description plus a list of named objects (name,
+                         group, role, bbox, point). Writes --scene-out and exits.
+                         Needs DEEPSEEK_API_KEY in .env or the environment.
+  --scene-json PATH      use a scene description (from --describe-only or hand-edited)
+  --sam-scene            layer source: prompt SAM 2 with every object in --scene-json
+                         (box + centre point per object) → named, grouped masks
+  --vision-model ID      vision model used by --describe-only
+  --scene-detail 1-5     how fine the vision model should split the image
+  --scene-hint TEXT      extra context for the vision model
+  --scene-box-pad F      grow every scene box by F (0-1 fraction) before prompting SAM
+  --scene-no-points      prompt SAM with the box only (no centre point)
+  --scene-remainder      add an "unassigned" layer with the pixels no object claimed
+  --scene-match F        with --sam-auto + --scene-json: minimum match score (0-1)
+                         for giving an automatic mask the name of a scene object
+
+Automatic SAM granularity (--sam-auto):
+  --auto-points-per-side N  sampling grid; more points find smaller things (default 16)
+  --auto-min-area PCT       drop masks smaller than PCT % of the canvas (default 0.1)
+  --auto-min-stability F    drop unstable masks (default 0.85)
+  --auto-pred-iou F         drop masks SAM itself is unsure about (default 0.8)
+  --auto-nms-iou F          duplicate suppression overlap (default 0.55)
+  --auto-containment F      drop masks mostly inside a bigger one (default 0.85)
+  --auto-max-layers N       keep only the N largest masks (0 = no cap)
+
+Output organisation:
+  --folders group|flat   group = images/<group>/<layer>.png when a group holds
+                         2+ layers (default); flat = everything in images/
+                         A layers.json manifest and scene.json are always written.
 """
 
 from __future__ import annotations
 
 import argparse
+import base64
 import io
 import json
+import os
 import re
 import sys
+import urllib.error
+import urllib.request
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageStat
+
+
+def load_dotenv(folder: Path) -> None:
+    """Load KEY=VALUE pairs from the nearest .env; real env vars win."""
+    for base in [folder, *folder.parents]:
+        env_file = base / ".env"
+        if not env_file.is_file():
+            continue
+        try:
+            lines = env_file.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            return
+        for line in lines:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            name, _, value = line.partition("=")
+            name = name.strip()
+            if name.startswith("export "):
+                name = name[len("export "):].strip()
+            if name and name not in os.environ:
+                os.environ[name] = value.strip().strip('"').strip("'")
+        return
+
+
+load_dotenv(Path(__file__).resolve().parent)
 
 # ── role / part classification ───────────────────────────────────────────
 
@@ -78,11 +139,15 @@ class LayerMask(tuple):
     """A ``(name, alpha)`` pair with optional grouping metadata."""
 
     def __new__(cls, name, alpha, group: str = "", role: str | None = None,
-                group_slug: str = ""):
+                group_slug: str = "", source: str = "", label: str = "",
+                description: str = ""):
         instance = super().__new__(cls, (name, alpha))
         instance.group = group
         instance.role = role
         instance.group_slug = group_slug
+        instance.source = source          # "scene" when the name came from the vision LLM
+        instance.label = label
+        instance.description = description
         return instance
 
     @property
@@ -92,6 +157,14 @@ class LayerMask(tuple):
     @property
     def alpha(self) -> Image.Image:
         return self[1]
+
+    def with_alpha(self, alpha: Image.Image) -> "LayerMask":
+        """Same metadata, new alpha (used after feather / dilate)."""
+        return LayerMask(
+            self[0], alpha, group=self.group, role=self.role,
+            group_slug=self.group_slug, source=self.source,
+            label=self.label, description=self.description,
+        )
 
 
 PART_MATCHERS: list[tuple[str, list[str]]] = [
@@ -188,6 +261,307 @@ def classify_part(name: str) -> tuple[str, str, str] | None:
                 return ("head", "head", variant)
             return (part, group, variant)
     return None
+
+
+# ── scene description (vision LLM) ───────────────────────────────────────
+#
+# SAM 2 cannot read text, so the vision model does the "reading": it looks at
+# the whole image once, writes a description, and returns every separable
+# element as {name, group, role, bbox, point}. Those boxes/points become SAM
+# prompts (--sam-scene) or are used to name automatic masks (--sam-auto).
+
+DEFAULT_VISION_MODEL = "deepseek-flash"
+DEFAULT_VISION_BASE_URL = "https://api.deepseek.com"
+SCENE_ROLES = [role for role, _ in ROLE_ORDER]
+ROLE_TO_GROUP = {
+    "background": "Background",
+    "midground": "Midground",
+    "ground": "Ground",
+    "prop": "Props",
+    "character": "Subject",
+    "character-part": "Subject",
+    "foreground": "Foreground",
+    "effect": "Effects",
+}
+DETAIL_GUIDE = {
+    1: "Very coarse: only the 3-6 largest regions (e.g. background, ground, main subject).",
+    2: "Coarse: the major elements only; merge small props into their surroundings.",
+    3: "Balanced: every distinct object and character as ONE layer each; do not split objects into parts.",
+    4: "Fine: also split significant sub-parts (clothing, hair, large decorations, each book on a shelf).",
+    5: "Very fine: every separable part, including facial features, small props and decorative details.",
+}
+
+
+def _clean_point(value) -> tuple[float, float] | None:
+    try:
+        x, y = float(value[0]), float(value[1])
+    except (TypeError, ValueError, IndexError, KeyError):
+        return None
+    if not (x == x and y == y):
+        return None
+    return (min(1.0, max(0.0, x)), min(1.0, max(0.0, y)))
+
+
+def _clean_box(value) -> list[float] | None:
+    try:
+        x1, y1, x2, y2 = (float(v) for v in value[:4])
+    except (TypeError, ValueError):
+        return None
+    x1, x2 = sorted((min(1.0, max(0.0, x1)), min(1.0, max(0.0, x2))))
+    y1, y2 = sorted((min(1.0, max(0.0, y1)), min(1.0, max(0.0, y2))))
+    if x2 - x1 < 0.004 or y2 - y1 < 0.004:
+        return None
+    return [x1, y1, x2, y2]
+
+
+def normalize_scene(raw, model: str = "", detail: int = 3) -> dict:
+    """Validate / repair a scene JSON object (LLM output or hand-edited file)."""
+    if not isinstance(raw, dict):
+        raise ValueError("scene description must be a JSON object")
+    objects: list[dict] = []
+    used: dict[str, int] = {}
+    for item in raw.get("objects") or []:
+        if not isinstance(item, dict):
+            continue
+        base = slugify(item.get("name") or item.get("label") or "object", 40).lower()
+        box = _clean_box(item.get("bbox"))
+        point = _clean_point(item.get("point"))
+        if box is None and point is None:
+            continue
+        if point is None and box is not None:
+            point = ((box[0] + box[2]) / 2, (box[1] + box[3]) / 2)
+        negatives = []
+        for candidate in item.get("negative_points") or []:
+            cleaned = _clean_point(candidate)
+            if cleaned:
+                negatives.append(cleaned)
+        role = item.get("role")
+        if role not in SCENE_ROLES:
+            role = classify_role(base)
+        group = re.sub(r"\s+", " ", str(item.get("group") or "")).strip()[:40]
+        if not group:
+            group = ROLE_TO_GROUP.get(role, "Props")
+        count = used.get(base, 0) + 1
+        used[base] = count
+        objects.append({
+            "name": base if count == 1 else f"{base}-{count}",
+            "label": str(item.get("label") or base.replace("-", " ")).strip()[:80],
+            "description": str(item.get("description") or "").strip()[:300],
+            "group": group,
+            "role": role,
+            "bbox": box,
+            "point": list(point),
+            "negative_points": [list(p) for p in negatives],
+        })
+    return {
+        "description": str(raw.get("description") or "").strip(),
+        "style": str(raw.get("style") or "").strip()[:120],
+        "model": str(raw.get("model") or model),
+        "detail": int(raw.get("detail") or detail),
+        "objects": objects,
+    }
+
+
+def load_scene(path: Path) -> dict:
+    try:
+        raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        sys.exit(f"scene: cannot read {path} ({exc})")
+    if isinstance(raw, dict) and isinstance(raw.get("scene"), dict):
+        raw = raw["scene"]
+    try:
+        return normalize_scene(raw)
+    except ValueError as exc:
+        sys.exit(f"scene: {exc}")
+
+
+def build_scene_prompt(detail: int, hint: str) -> str:
+    detail = min(5, max(1, int(detail)))
+    lines = [
+        "You are preparing an image for layer segmentation with SAM 2. First look at the "
+        "WHOLE image, describe it, then list every separable element as a named layer.",
+        "",
+        "Return ONLY one JSON object (no markdown fences, no commentary) shaped like:",
+        '{"description": "2-4 sentences: subject, setting, composition, art style",',
+        ' "style": "short style tag, e.g. flat vector illustration",',
+        ' "objects": [{"name": "...", "label": "...", "description": "...", "group": "...",',
+        '              "role": "...", "bbox": [x1, y1, x2, y2], "point": [x, y],',
+        '              "negative_points": [[x, y]]}]}',
+        "",
+        "Rules:",
+        "- All coordinates are fractions 0..1 of the full image width/height, origin top-left.",
+        "- bbox is tight around the object's visible pixels.",
+        "- point must sit on solid pixels of THAT object (not on a hole, a gap, or something "
+        "in front of it). negative_points are optional: spots inside the bbox that belong "
+        "to other objects.",
+        "- name: lowercase kebab-case, specific and unique (bookshelf-left, red-armchair, "
+        "hero-hair). Never generic names such as object-1, item or shape.",
+        "- label: the same thing in plain words for a human. description: one short sentence.",
+        "- group: a short noun that gathers related layers (Background, Subject, Props, "
+        "Foreground, Effects, Books, Furniture, ...). Reuse the same string for related layers.",
+        "- role: one of " + ", ".join(SCENE_ROLES) + ".",
+        "- List objects back to front.",
+        "- Granularity (level %d of 5): %s" % (detail, DETAIL_GUIDE[detail]),
+    ]
+    hint = (hint or "").strip()
+    if hint:
+        lines += ["", "Extra context from the user: " + hint[:600]]
+    return "\n".join(lines)
+
+
+def _extract_json_object(text: str) -> dict:
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.IGNORECASE)
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end <= start:
+        raise RuntimeError("the vision model did not return a JSON object")
+    try:
+        return json.loads(text[start:end + 1])
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"the vision model returned invalid JSON ({exc})") from exc
+
+
+def describe_scene(reference: Image.Image, model: str = DEFAULT_VISION_MODEL,
+                   detail: int = 3, hint: str = "", timeout: int = 180) -> dict:
+    """Send the whole image to DeepSeek's vision model and return a normalized scene dict."""
+    key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError(
+            "DEEPSEEK_API_KEY is not set. Add it to .env next to this repo, or export it "
+            "before starting the server (the key stays on the server; it is never sent to the browser)."
+        )
+    image = reference.convert("RGB")
+    image.thumbnail((1568, 1568), Image.Resampling.LANCZOS)  # coordinates are fractions, so scaling is safe
+    buffer = io.BytesIO()
+    image.save(buffer, format="JPEG", quality=90)
+    data_url = "data:image/jpeg;base64," + base64.b64encode(buffer.getvalue()).decode("ascii")
+    body = {
+        "model": model,
+        "max_tokens": 8192,
+        "messages": [{
+            "role": "user",
+            "content": [
+                {"type": "image_url", "image_url": {"url": data_url}},
+                {"type": "text", "text": build_scene_prompt(detail, hint)},
+            ],
+        }],
+    }
+    base_url = os.environ.get("DEEPSEEK_BASE_URL", DEFAULT_VISION_BASE_URL).rstrip("/")
+    request = urllib.request.Request(
+        f"{base_url}/chat/completions",
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "content-type": "application/json",
+            "authorization": f"Bearer {key}",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail_text = exc.read().decode("utf-8", "replace")[:400]
+        raise RuntimeError(f"vision API returned {exc.code}: {detail_text}") from exc
+    except (urllib.error.URLError, TimeoutError) as exc:
+        raise RuntimeError(f"vision API unreachable ({exc})") from exc
+    try:
+        text = payload["choices"][0]["message"]["content"] or ""
+    except (KeyError, IndexError, TypeError) as exc:
+        raise RuntimeError("the vision model returned no message content") from exc
+    if isinstance(text, list):
+        text = "".join(
+            part.get("text", "") for part in text
+            if isinstance(part, dict) and part.get("type") == "text"
+        )
+    scene = normalize_scene(_extract_json_object(text), model=model, detail=detail)
+    if not scene["objects"]:
+        raise RuntimeError(
+            "the vision model returned no usable objects; use a vision-capable model "
+            f"(deepseek-flash) or a higher detail level "
+            f"[model={model}]"
+        )
+    return scene
+
+
+def scene_to_prompts(scene: dict, pad: float = 0.02, use_points: bool = True) -> list[dict]:
+    """Turn scene objects into SAM prompt dicts (box + centre point)."""
+    prompts: list[dict] = []
+    for obj in scene["objects"]:
+        box = obj.get("bbox")
+        if box:
+            box = (
+                max(0.0, box[0] - pad), max(0.0, box[1] - pad),
+                min(1.0, box[2] + pad), min(1.0, box[3] + pad),
+            )
+        positives = [tuple(obj["point"])] if (use_points and obj.get("point")) else []
+        if not positives and not box:
+            continue
+        prompts.append({
+            "name": obj["name"],
+            "positive": positives,
+            "negative": [tuple(p) for p in obj.get("negative_points", [])],
+            "box": box,
+            "group": obj["group"],
+            "role": obj["role"],
+            "label": obj.get("label", ""),
+            "description": obj.get("description", ""),
+            "source": "scene",
+        })
+    return prompts
+
+
+def _bbox_iou(a, b) -> tuple[float, float]:
+    """Return (iou, fraction of ``a`` that lies inside ``b``)."""
+    ix = max(0.0, min(a[2], b[2]) - max(a[0], b[0]))
+    iy = max(0.0, min(a[3], b[3]) - max(a[1], b[1]))
+    inter = ix * iy
+    area_a = max(1e-9, (a[2] - a[0]) * (a[3] - a[1]))
+    area_b = max(1e-9, (b[2] - b[0]) * (b[3] - b[1]))
+    return inter / (area_a + area_b - inter), inter / area_a
+
+
+def match_scene_objects(records: list[dict], scene: dict, threshold: float = 0.35) -> int:
+    """Give each automatic mask the scene object it overlaps best (in place).
+
+    score = 0.40·bbox IoU + 0.30·(object's point lies inside the mask)
+          + 0.15·(mask centre lies inside object box) + 0.15·(mask box inside object box)
+    """
+    matched = 0
+    objects = scene.get("objects", [])
+    for record in records:
+        alpha: Image.Image = record["alpha"]
+        width, height = alpha.size
+        x0, y0, x1, y1 = record["stats"]["bbox"]
+        mask_box = (x0 / width, y0 / height, x1 / width, y1 / height)
+        cx, cy = record["stats"]["cx"], record["stats"]["cy"]
+        best_index, best_score = None, 0.0
+        for index, obj in enumerate(objects):
+            box = obj.get("bbox")
+            iou, inside = _bbox_iou(mask_box, box) if box else (0.0, 0.0)
+            px = min(width - 1, max(0, round(obj["point"][0] * (width - 1))))
+            py = min(height - 1, max(0, round(obj["point"][1] * (height - 1))))
+            point_hit = 1.0 if alpha.getpixel((px, py)) >= 128 else 0.0
+            centre = 1.0 if box and box[0] <= cx <= box[2] and box[1] <= cy <= box[3] else 0.0
+            score = 0.40 * iou + 0.30 * point_hit + 0.15 * centre + 0.15 * inside
+            if score > best_score:
+                best_index, best_score = index, score
+        record["scene_index"] = best_index if best_score >= threshold else None
+        record["scene_score"] = best_score
+        if record["scene_index"] is not None:
+            matched += 1
+    return matched
+
+
+def remainder_mask(items: list["LayerMask"], size: tuple[int, int],
+                   min_coverage: float = 0.005) -> Image.Image | None:
+    """Pixels no layer claimed, or None when almost everything is covered."""
+    covered = Image.new("L", size, 0)
+    for item in items:
+        solid = item[1].point(lambda value: 255 if value >= 128 else 0)
+        covered = ImageChops.lighter(covered, solid)
+    rest = ImageChops.invert(covered)
+    if sum(rest.histogram()[128:]) / float(size[0] * size[1]) < min_coverage:
+        return None
+    return rest
 
 
 # ── mask loading / cutout ────────────────────────────────────────────────
@@ -681,11 +1055,14 @@ def create_prompt_mask(
     positives: list[tuple[float, float]],
     negatives: list[tuple[float, float]],
     radius_fraction: float = 0.03,
+    box: Optional[tuple[float, float, float, float]] = None,
 ) -> Image.Image:
     """Approximate mask from points; used only as a SAM-unavailable fallback."""
     mask = Image.new("L", (width, height), 0)
     draw = ImageDraw.Draw(mask)
     radius = max(6, int(min(width, height) * radius_fraction))
+    if box and not positives:   # scene prompt without a point: fill the box ellipse
+        draw.ellipse((box[0] * width, box[1] * height, box[2] * width, box[3] * height), fill=255)
     for x, y in positives:
         cx, cy = x * width, y * height
         draw.ellipse((cx - radius, cy - radius, cx + radius, cy + radius), fill=255)
@@ -741,6 +1118,18 @@ def generate_sam_from_points(
     min_pixels = max(4, int(width * height * 0.0002))
     results: list[LayerMask] = []
 
+    def make_layer(prompt: dict, alpha: Image.Image) -> LayerMask:
+        # Scene prompts carry their own group / role / label; manual prompts use the name.
+        return LayerMask(
+            prompt["name"], alpha,
+            group=prompt.get("group", prompt["name"]),
+            role=prompt.get("role"),
+            group_slug=slugify(prompt["group"], 20).lower() if prompt.get("group") else "",
+            source=prompt.get("source", ""),
+            label=prompt.get("label", ""),
+            description=prompt.get("description", ""),
+        )
+
     for prompt in prompts:
         point_coords = []
         point_labels = []
@@ -768,8 +1157,9 @@ def generate_sam_from_points(
             print(f"  warn: SAM failed for {prompt['name']!r} ({exc}); falling back to circles")
             alpha = create_prompt_mask(
                 width, height, prompt["positive"], prompt["negative"], radius_fraction,
+                box=prompt.get("box"),
             )
-            results.append(LayerMask(prompt["name"], alpha, group=prompt["name"]))
+            results.append(make_layer(prompt, alpha))
             continue
 
         best = int(np.argmax(scores))
@@ -779,7 +1169,7 @@ def generate_sam_from_points(
             print(f"  warn: {prompt['name']!r} produced a tiny mask ({pixels} px)")
         print(f"  {prompt['name']:<24} score={float(scores[best]):.3f}  pixels={pixels}")
         alpha = Image.fromarray((bool_mask.astype(np.uint8) * 255))
-        results.append(LayerMask(prompt["name"], alpha, group=prompt["name"]))
+        results.append(make_layer(prompt, alpha))
 
     return results
 
@@ -829,7 +1219,9 @@ def nms_masks(records: list[dict],
     return kept
 
 
-def build_sam2_auto_generator(model: str, device: str, points_per_side: int = 16):
+def build_sam2_auto_generator(model: str, device: str, points_per_side: int = 16,
+                              pred_iou_thresh: float = 0.8,
+                              stability_score_thresh: float = 0.85):
     try:
         import numpy as np
         import torch
@@ -850,9 +1242,13 @@ def build_sam2_auto_generator(model: str, device: str, points_per_side: int = 16
             "Optional SAM 2 setup: install the SAM 2 stack with 'pip install -r requirements-sam.txt' "
             f"(model load error: {exc})"
         ) from exc
+    # The generator filters on these itself. Previously only points_per_side was
+    # passed, so SAM's built-in 0.95 stability cut-off silently overrode --min-stability.
     generator = SAM2AutomaticMaskGenerator(
         sam_model,
         points_per_side=points_per_side,
+        pred_iou_thresh=pred_iou_thresh,
+        stability_score_thresh=stability_score_thresh,
         output_mode="binary_mask",
     )
     return generator, np
@@ -966,8 +1362,16 @@ def generate_sam_auto(
     min_area_pct: float = 0.1,
     min_stability: float = 0.85,
     points_per_side: int = 16,
+    pred_iou: float = 0.8,
+    nms_iou: float = 0.55,
+    containment: float = 0.85,
+    max_layers: int = 0,
+    scene: dict | None = None,
+    scene_match: float = 0.35,
 ) -> list[LayerMask]:
-    generator, np = build_sam2_auto_generator(model, device, points_per_side)
+    generator, np = build_sam2_auto_generator(
+        model, device, points_per_side, pred_iou, min_stability,
+    )
     rgb = np.asarray(reference.convert("RGB")).copy()
     raw_masks = generator.generate(rgb)
     min_area = max(1, int(reference.width * reference.height * min_area_pct / 100))
@@ -1013,7 +1417,11 @@ def generate_sam_auto(
             "area": area,
         })
 
-    deduped = nms_masks(raw_records, iou_threshold=0.55, containment_threshold=0.85)
+    deduped = nms_masks(
+        raw_records, iou_threshold=nms_iou, containment_threshold=containment,
+    )
+    if max_layers and len(deduped) > max_layers:
+        deduped = sorted(deduped, key=lambda r: r["area"], reverse=True)[:max_layers]
 
     records: list[dict] = []
     for rec in deduped:
@@ -1022,19 +1430,52 @@ def generate_sam_auto(
             continue
         records.append({**rec, "stats": stats})
 
-    book_like = {index for index, record in enumerate(records)
+    # 1) Names from the vision LLM's scene description, when one was supplied.
+    scene_objects = (scene or {}).get("objects") or []
+    scene_matched = 0
+    if scene_objects:
+        scene_matched = match_scene_objects(records, scene, scene_match)
+    for record in records:
+        record.setdefault("scene_index", None)
+
+    # 2) Heuristic classes for everything the scene did not claim.
+    unmatched = [r for r in records if r["scene_index"] is None]
+    book_like = {id(record) for record in unmatched
                  if _looks_like_shelf_book(record["stats"])}
     use_books = len(book_like) >= 3
-
-    for index, record in enumerate(records):
+    for record in unmatched:
         record["kind"] = _classify_sam_mask(
-            record["stats"], books=use_books and index in book_like
+            record["stats"], books=use_books and id(record) in book_like
         )
 
-    records.sort(key=_sam_sort_key)
-    counts: dict[str, int] = {}
+    unmatched.sort(key=_sam_sort_key)
+    matched = sorted(
+        (r for r in records if r["scene_index"] is not None),
+        key=lambda r: (r["scene_index"], -r["stats"]["coverage"],
+                       r["stats"]["bbox"][1], r["stats"]["bbox"][0]),
+    )
+
     results: list[LayerMask] = []
-    for record in records:
+    per_object: dict[int, int] = {}
+    for record in matched:
+        per_object[record["scene_index"]] = per_object.get(record["scene_index"], 0) + 1
+    seen_object: dict[int, int] = {}
+    for record in matched:
+        obj = scene_objects[record["scene_index"]]
+        seen_object[record["scene_index"]] = seen_object.get(record["scene_index"], 0) + 1
+        name = obj["name"]
+        if per_object[record["scene_index"]] > 1:
+            name = f"{name}-{seen_object[record['scene_index']]:02d}"
+        results.append(LayerMask(
+            name, record["alpha"],
+            group=obj["group"], role=obj["role"],
+            group_slug=slugify(obj["group"], 20).lower(),
+            source="scene", label=obj.get("label", ""),
+            description=obj.get("description", ""),
+        ))
+
+    counts: dict[str, int] = {}
+    for record in unmatched:
         kind = record["kind"]
         label, prefix, role = SAM_GROUPS[kind]
         counts[kind] = counts.get(kind, 0) + 1
@@ -1051,6 +1492,11 @@ def generate_sam_auto(
         f"  SAM 2 automatic masks: {len(results)} kept from {len(raw_masks)} raw "
         f"(after NMS; minimum area {min_area}px, stability {min_stability:.2f})"
     )
+    if scene_objects:
+        print(
+            f"  scene naming: {scene_matched} of {len(records)} masks matched one of "
+            f"{len(scene_objects)} scene objects (threshold {scene_match:.2f})"
+        )
     if counts:
         summary = ", ".join(
             f"{SAM_GROUPS[kind][0]} {counts[kind]}"
@@ -1193,12 +1639,17 @@ def build_composition(
         }
         if entry.get("segment_group"):
             layer["segmentGroup"] = entry["segment_group"]
-        part = classify_part(entry["name"])
-        if part:
+        if entry.get("label"):
+            layer["label"] = entry["label"]
+        if entry.get("description"):
+            layer["description"] = entry["description"]
+        # Part info is decided once in main(); scene-named layers keep the role the
+        # vision model gave them instead of being re-guessed from the file name.
+        if entry.get("part"):
             layer["role"] = "character-part"
-            layer["part"] = part[0]
-            layer["group"] = part[1]
-            layer["variant"] = part[2]
+            layer["part"] = entry["part"]
+            layer["group"] = entry["group"]
+            layer["variant"] = entry.get("variant", "")
         layers.append(layer)
         z += 1
 
@@ -1280,6 +1731,33 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--knockout-exclude", type=str, default="",
                         help="Objects to keep in the background, as normalized 'x,y;x,y' points")
     parser.add_argument("--sam-model", default="sam2-large")
+
+    # scene description (vision LLM)
+    parser.add_argument("--describe-only", action="store_true",
+                        help="Ask a vision LLM for a scene description + named objects, write --scene-out, exit")
+    parser.add_argument("--scene-out", type=Path, help="Where --describe-only writes the scene JSON")
+    parser.add_argument("--scene-json", type=Path,
+                        help="Scene description to use (from --describe-only or hand-edited)")
+    parser.add_argument("--sam-scene", action="store_true",
+                        help="Layer source: prompt SAM 2 with every object of --scene-json")
+    parser.add_argument("--vision-model", default=os.environ.get("ITL_VISION_MODEL", DEFAULT_VISION_MODEL))
+    parser.add_argument("--scene-detail", type=int, default=3, choices=[1, 2, 3, 4, 5])
+    parser.add_argument("--scene-hint", default="")
+    parser.add_argument("--scene-box-pad", type=float, default=0.02)
+    parser.add_argument("--scene-no-points", action="store_true")
+    parser.add_argument("--scene-remainder", action="store_true")
+    parser.add_argument("--scene-match", type=float, default=0.35)
+
+    # automatic SAM granularity
+    parser.add_argument("--auto-points-per-side", type=int, default=16)
+    parser.add_argument("--auto-min-area", type=float, default=0.1)
+    parser.add_argument("--auto-min-stability", type=float, default=0.85)
+    parser.add_argument("--auto-pred-iou", type=float, default=0.8)
+    parser.add_argument("--auto-nms-iou", type=float, default=0.55)
+    parser.add_argument("--auto-containment", type=float, default=0.85)
+    parser.add_argument("--auto-max-layers", type=int, default=0)
+
+    parser.add_argument("--folders", choices=["group", "flat"], default="group")
     parser.add_argument("--depth", action="store_true",
                         help="Refine z-order by monocular depth (or vertical heuristic)")
     parser.add_argument("--depth-role", action="store_true",
@@ -1315,15 +1793,38 @@ def main(argv: list[str] | None = None) -> int:
     if not args.reference:
         parser.error("--reference is required")
 
-    sources = (args.masks, args.sam_points, args.sam_auto, args.export_path, args.knockout)
-    if sum(1 for value in sources if value) != 1:
-        parser.error(
-            "choose exactly one of --masks / --sam-points / --sam-auto / --export / --knockout"
-        )
-
     reference_path = Path(args.reference)
     if not reference_path.exists():
         sys.exit(f"reference not found: {reference_path}")
+
+    if args.describe_only:
+        if not args.scene_out:
+            parser.error("--describe-only needs --scene-out")
+        described_from = Image.open(reference_path).convert("RGBA")
+        print(f"  Describing the whole image with {args.vision_model} (detail {args.scene_detail})…", flush=True)
+        try:
+            described = describe_scene(
+                described_from, args.vision_model, args.scene_detail, args.scene_hint,
+            )
+        except RuntimeError as exc:
+            sys.exit(f"describe: {exc}")
+        args.scene_out.parent.mkdir(parents=True, exist_ok=True)
+        args.scene_out.write_text(json.dumps(described, indent=2), encoding="utf-8")
+        print(f"  scene: {len(described['objects'])} object(s)")
+        print(f"scene written {args.scene_out}")
+        return 0
+
+    sources = (args.masks, args.sam_points, args.sam_auto, args.export_path,
+               args.knockout, args.sam_scene)
+    if sum(1 for value in sources if value) != 1:
+        parser.error(
+            "choose exactly one of --masks / --sam-points / --sam-auto / --sam-scene / "
+            "--export / --knockout"
+        )
+
+    scene: dict | None = load_scene(args.scene_json) if args.scene_json else None
+    if args.sam_scene and not (scene and scene["objects"]):
+        parser.error("--sam-scene needs --scene-json with at least one object")
 
     reference = Image.open(reference_path).convert("RGBA")
     width, height = reference.size
@@ -1366,16 +1867,53 @@ def main(argv: list[str] | None = None) -> int:
                     args.point_radius,
                 )
                 items.append(LayerMask(prompt["name"], mask, group=prompt["name"]))
+    elif args.sam_scene:
+        prompts = scene_to_prompts(scene, args.scene_box_pad, not args.scene_no_points)
+        if not prompts:
+            sys.exit("no usable objects in --scene-json")
+        print(f"  Running SAM 2 on {len(prompts)} scene object(s) "
+              f"({args.sam_model}, device={args.device})", flush=True)
+        try:
+            items = generate_sam_from_points(
+                reference, prompts, args.sam_model, args.device, args.point_radius,
+            )
+        except RuntimeError as exc:
+            print(f"  warn: SAM unavailable; using box/circle fallback ({exc})")
+            for prompt in prompts:
+                mask = create_prompt_mask(
+                    width, height, prompt["positive"], prompt["negative"],
+                    args.point_radius, box=prompt.get("box"),
+                )
+                items.append(LayerMask(
+                    prompt["name"], mask, group=prompt["group"], role=prompt["role"],
+                    group_slug=slugify(prompt["group"], 20).lower(), source="scene",
+                    label=prompt.get("label", ""), description=prompt.get("description", ""),
+                ))
+        if args.scene_remainder:
+            rest = remainder_mask(items, reference.size)
+            if rest is not None:
+                items.append(LayerMask(
+                    "unassigned", rest, group="Background", role="background",
+                    group_slug="background", source="scene",
+                    label="Unassigned pixels",
+                    description="Everything no scene object claimed, so nothing is lost.",
+                ))
+                print("  added 'unassigned' remainder layer")
     elif args.sam_auto:
         print(f"  Running SAM 2 automatic segmentation ({args.sam_model}, device={args.device})", flush=True)
-        for mask in generate_sam_auto(reference, args.sam_model, args.device):
-            name, alpha = mask
-            items.append(LayerMask(
-                name, alpha,
-                group=getattr(mask, "group", ""),
-                role=getattr(mask, "role", None),
-                group_slug=getattr(mask, "group_slug", ""),
-            ))
+        for mask in generate_sam_auto(
+            reference, args.sam_model, args.device,
+            min_area_pct=args.auto_min_area,
+            min_stability=args.auto_min_stability,
+            points_per_side=args.auto_points_per_side,
+            pred_iou=args.auto_pred_iou,
+            nms_iou=args.auto_nms_iou,
+            containment=args.auto_containment,
+            max_layers=args.auto_max_layers,
+            scene=scene,
+            scene_match=args.scene_match,
+        ):
+            items.append(mask)
     elif args.knockout:
         knockout_path = Path(args.knockout)
         if not knockout_path.exists():
@@ -1528,13 +2066,7 @@ def main(argv: list[str] | None = None) -> int:
                 alpha, args.feather, args.dilate,
                 decontaminate=False,  # ZIP cuts straight from the reference anyway
             )
-            new = LayerMask(
-                name, refined_alpha,
-                group=getattr(item, "group", ""),
-                role=getattr(item, "role", None),
-                group_slug=getattr(item, "group_slug", ""),
-            )
-            refined.append(new)
+            refined.append(item.with_alpha(refined_alpha))
         emit_zip(reference, refined, slug)
         return 0
 
@@ -1587,6 +2119,21 @@ def main(argv: list[str] | None = None) -> int:
     entries: list[dict] = []
     used_stems: dict[str, int] = {}
     alpha_by_entry: dict[str, Image.Image] = {}
+
+    # A group only gets its own folder when it holds 2+ layers, so a manual
+    # one-layer-per-group run does not scatter single files into many folders.
+    group_sizes: dict[str, int] = {}
+    for item in items:
+        group_name = getattr(item, "group", "")
+        if group_name:
+            group_sizes[group_name] = group_sizes.get(group_name, 0) + 1
+
+    def folder_for(item) -> str:
+        group_name = getattr(item, "group", "")
+        if args.folders == "group" and group_name and group_sizes.get(group_name, 0) >= 2:
+            return slugify(group_name, 40).lower()
+        return ""
+
     for item in items:
         name, raw_alpha = item
         alpha = refine_alpha(raw_alpha, args.feather, args.dilate)
@@ -1600,21 +2147,32 @@ def main(argv: list[str] | None = None) -> int:
             continue
         if args.strict and bbox == (0, 0, width, height) and len(items) > 1:
             print(f"  warn (strict): {name!r} covers the whole canvas")
-        stem = _unique_stem(slugify(name, 40), used_stems)
-        out_file = images_dir / f"{stem}.png"
+        folder = folder_for(item)
+        stem = _unique_stem(f"{folder}/{slugify(name, 40)}", used_stems).split("/", 1)[1]
+        target_dir = images_dir / folder if folder else images_dir
+        target_dir.mkdir(parents=True, exist_ok=True)
+        out_file = target_dir / f"{stem}.png"
         cropped.save(out_file, optimize=True)
+        relative_file = out_file.relative_to(images_dir).as_posix()
         entry = {
             "name": name,
-            "id": f"layer-{stem}",
+            "id": f"layer-{folder + '-' if folder else ''}{stem}",
             "role": getattr(item, "role", None) or classify_role(name),
             "crop": bbox,
-            "url": f"/data/projects/{project_dir.name}/images/{out_file.name}",
+            "url": f"/data/projects/{project_dir.name}/images/{relative_file}",
+            "file": f"images/{relative_file}",
         }
         segment_group = getattr(item, "group", "")
         if segment_group:
             entry["segment_group"] = segment_group
+        if getattr(item, "label", ""):
+            entry["label"] = item.label
+        if getattr(item, "description", ""):
+            entry["description"] = item.description
+        # Scene-named layers keep the vision model's role; guessing "character-part"
+        # from the file name would undo that. Everything else behaves as before.
         part = classify_part(name)
-        if part:
+        if part and (getattr(item, "source", "") != "scene" or entry["role"] == "character-part"):
             entry["role"] = "character-part"
             entry["part"] = part[0]
             entry["group"] = part[1]
@@ -1644,6 +2202,14 @@ def main(argv: list[str] | None = None) -> int:
             elif score > 0.82:
                 entry["role"] = "foreground"
 
+    composition_meta_extra = dict(recover_meta or {})
+    if scene:
+        composition_meta_extra["scene"] = {
+            "description": scene.get("description", ""),
+            "style": scene.get("style", ""),
+            "model": scene.get("model", ""),
+            "objects": len(scene.get("objects", [])),
+        }
     composition = build_composition(
         entries,
         output_name,
@@ -1651,12 +2217,41 @@ def main(argv: list[str] | None = None) -> int:
         height,
         reference_url,
         base=base_meta,
-        meta=recover_meta,
+        meta=composition_meta_extra or None,
         sort_by_depth=use_depth,
     )
+
+    # Manifest: what file lives in which folder, and why it has that name.
+    manifest = {
+        "name": output_name,
+        "width": width,
+        "height": height,
+        "description": (scene or {}).get("description", ""),
+        "layers": [
+            {
+                "name": entry["name"],
+                "file": entry["file"],
+                "folder": str(Path(entry["file"]).parent.relative_to("images").as_posix())
+                if Path(entry["file"]).parent != Path("images") else "",
+                "group": entry.get("segment_group", ""),
+                "role": entry["role"],
+                "label": entry.get("label", ""),
+                "description": entry.get("description", ""),
+                "bbox": list(entry["crop"]),
+            }
+            for entry in sorted(entries, key=lambda e: (e["file"]))
+        ],
+    }
+    (project_dir / "layers.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    if scene:
+        (project_dir / "scene.json").write_text(json.dumps(scene, indent=2), encoding="utf-8")
+
     out_json = compositions_dir / f"{slug}.composition.json"
     out_json.write_text(json.dumps(composition, indent=2), encoding="utf-8")
     print(f"wrote {out_json}")
+    folders_used = sorted({m["folder"] for m in manifest["layers"] if m["folder"]})
+    if folders_used:
+        print(f"      folders: {', '.join(folders_used)}")
     if recovering:
         print(f"      {len(entries)} missing layers + 1 aligned base, {width}x{height}")
     else:
