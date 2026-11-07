@@ -36,7 +36,7 @@ Scene description (vision LLM → names, groups, SAM prompts):
   --describe-only        ask a vision LLM to look at the WHOLE image first and write
                          a scene description plus a list of named objects (name,
                          group, role, bbox, point). Writes --scene-out and exits.
-                         Needs DEEPSEEK_API_KEY in .env or the environment.
+                         DeepSeek needs DEEPSEEK_API_KEY; Ollama runs locally.
   --scene-json PATH      use a scene description (from --describe-only or hand-edited)
   --sam-scene            layer source: prompt SAM 2 with every object in --scene-json
                          (box + centre point per object) → named, grouped masks
@@ -421,33 +421,64 @@ def _extract_json_object(text: str) -> dict:
 
 
 def describe_scene(reference: Image.Image, model: str = DEFAULT_VISION_MODEL,
-                   detail: int = 3, hint: str = "", timeout: int = 180) -> dict:
-    """Send the whole image to DeepSeek's vision model and return a normalized scene dict."""
-    key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
-    if not key:
-        raise RuntimeError(
-            "DEEPSEEK_API_KEY is not set. Add it to .env next to this repo, or export it "
-            "before starting the server (the key stays on the server; it is never sent to the browser)."
-        )
+                   detail: int = 3, hint: str = "", timeout: int = 600) -> dict:
+    """Send the reference to DeepSeek or a local Ollama model."""
+    is_ollama = model.startswith("ollama:")
+    if is_ollama:
+        api_model = model[len("ollama:"):]
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,79}", api_model):
+            raise RuntimeError(f"invalid Ollama vision model id: {api_model!r}")
+        base_url = os.environ.get(
+            "ITL_OLLAMA_BASE_URL", "http://127.0.0.1:11434"
+        ).strip().rstrip("/")
+        if base_url.endswith("/v1"):
+            base_url = base_url[:-3]
+        endpoint = f"{base_url}/api/chat"
+        api_key = os.environ.get("ITL_OLLAMA_API_KEY", "").strip()
+    else:
+        api_model = model
+        base_url = os.environ.get("DEEPSEEK_BASE_URL", DEFAULT_VISION_BASE_URL).rstrip("/")
+        endpoint = f"{base_url}/chat/completions"
+        api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+        if not api_key:
+            raise RuntimeError(
+                "DEEPSEEK_API_KEY is not set. Add it to .env next to this repo, or export it "
+                "before starting the server (the key stays on the server; it is never sent to the browser)."
+            )
+    key = api_key
     image = reference.convert("RGB")
     image.thumbnail((1568, 1568), Image.Resampling.LANCZOS)  # coordinates are fractions, so scaling is safe
     buffer = io.BytesIO()
     image.save(buffer, format="JPEG", quality=90)
-    data_url = "data:image/jpeg;base64," + base64.b64encode(buffer.getvalue()).decode("ascii")
-    body = {
-        "model": model,
-        "max_tokens": 8192,
-        "messages": [{
-            "role": "user",
-            "content": [
-                {"type": "image_url", "image_url": {"url": data_url}},
-                {"type": "text", "text": build_scene_prompt(detail, hint)},
-            ],
-        }],
-    }
-    base_url = os.environ.get("DEEPSEEK_BASE_URL", DEFAULT_VISION_BASE_URL).rstrip("/")
+    image_base64 = base64.b64encode(buffer.getvalue()).decode("ascii")
+    if is_ollama:
+        body = {
+            "model": api_model,
+            "format": "json",
+            "stream": False,
+            "think": False,
+            "messages": [{
+                "role": "user",
+                "content": build_scene_prompt(detail, hint),
+                "images": [image_base64],
+            }],
+            "options": {"num_predict": 8192},
+        }
+    else:
+        data_url = "data:image/jpeg;base64," + image_base64
+        body = {
+            "model": api_model,
+            "max_tokens": 8192,
+            "messages": [{
+                "role": "user",
+                "content": [
+                    {"type": "image_url", "image_url": {"url": data_url}},
+                    {"type": "text", "text": build_scene_prompt(detail, hint)},
+                ],
+            }],
+        }
     request = urllib.request.Request(
-        f"{base_url}/chat/completions",
+        endpoint,
         data=json.dumps(body).encode("utf-8"),
         headers={
             "content-type": "application/json",
@@ -455,6 +486,10 @@ def describe_scene(reference: Image.Image, model: str = DEFAULT_VISION_MODEL,
         },
         method="POST",
     )
+    request.remove_header("authorization")
+    request.remove_header("Authorization")
+    if api_key:
+        request.add_header("Authorization", f"Bearer {api_key}")
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             payload = json.loads(response.read().decode("utf-8"))
@@ -463,10 +498,13 @@ def describe_scene(reference: Image.Image, model: str = DEFAULT_VISION_MODEL,
         raise RuntimeError(f"vision API returned {exc.code}: {detail_text}") from exc
     except (urllib.error.URLError, TimeoutError) as exc:
         raise RuntimeError(f"vision API unreachable ({exc})") from exc
-    try:
-        text = payload["choices"][0]["message"]["content"] or ""
-    except (KeyError, IndexError, TypeError) as exc:
-        raise RuntimeError("the vision model returned no message content") from exc
+    if is_ollama:
+        text = (payload.get("message") or {}).get("content") or ""
+    else:
+        try:
+            text = payload["choices"][0]["message"]["content"] or ""
+        except (KeyError, IndexError, TypeError) as exc:
+            raise RuntimeError("the vision model returned no message content") from exc
     if isinstance(text, list):
         text = "".join(
             part.get("text", "") for part in text
@@ -737,6 +775,32 @@ def build_knockout_items(reference: Image.Image, cut: Image.Image, underlap: int
 def load_rgba(path: Path) -> Image.Image:
     with Image.open(path) as img:
         return img.convert("RGBA")
+
+
+def match_recovery_scene_object(region: dict, scene: dict | None,
+                                width: int, height: int) -> dict | None:
+    """Match a recovered hole to the scene object covering most of its bounds."""
+    if not scene:
+        return None
+    x0, y0, x1, y1 = region["bbox"]
+    region_box = (x0 / width, y0 / height, x1 / width, y1 / height)
+    region_area = max(1e-9, (region_box[2] - region_box[0]) * (region_box[3] - region_box[1]))
+    best_object = None
+    best_score = 0.0
+    best_area = float("inf")
+    for obj in scene.get("objects") or []:
+        box = obj.get("bbox")
+        if not box:
+            continue
+        intersection = max(0.0, min(region_box[2], box[2]) - max(region_box[0], box[0]))
+        intersection *= max(0.0, min(region_box[3], box[3]) - max(region_box[1], box[1]))
+        coverage = intersection / region_area
+        object_area = max(0.0, (box[2] - box[0]) * (box[3] - box[1]))
+        if coverage > best_score or (coverage == best_score and object_area < best_area):
+            best_object = obj
+            best_score = coverage
+            best_area = object_area
+    return best_object if best_score >= 0.2 else None
 
 
 def _flatten_on_white(image: Image.Image) -> Image.Image:
@@ -1677,6 +1741,7 @@ def build_composition(
 def emit_zip(reference: Image.Image, items: list[LayerMask], slug: str) -> Path:
     target = Path(f"{slug}.zip")
     used: dict[str, int] = {}
+    manifest_layers: list[dict] = []
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as zf:
         for item in items:
             name, alpha = item
@@ -1695,7 +1760,28 @@ def emit_zip(reference: Image.Image, items: list[LayerMask], slug: str) -> Path:
             stem = base_stem if count == 1 else f"{base_stem}-{count}"
             buf = io.BytesIO()
             cropped.save(buf, format="PNG", optimize=True)
-            zf.writestr(f"{stem}.png", buf.getvalue())
+            filename = f"{stem}.png"
+            zf.writestr(filename, buf.getvalue())
+            manifest_layer = {
+                "file": filename,
+                "name": name,
+                "role": getattr(item, "role", None) or classify_role(name),
+            }
+            group = getattr(item, "group", "")
+            if group:
+                manifest_layer["group"] = group
+            if getattr(item, "label", ""):
+                manifest_layer["label"] = item.label
+            if getattr(item, "description", ""):
+                manifest_layer["description"] = item.description
+            manifest_layers.append(manifest_layer)
+        zf.writestr(
+            "image-to-layers.json",
+            json.dumps({
+                "schema": "image-to-layers/segments-v1",
+                "layers": manifest_layers,
+            }, indent=2),
+        )
     print(f"wrote {target}")
     print("drop it into Studio → Import ZIP + image")
     return target
@@ -1782,6 +1868,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--recover-white", type=int, default=244)
     parser.add_argument("--recover-diff", type=int, default=16)
     parser.add_argument("--recover-keep-border", action="store_true")
+    parser.add_argument("--recover-into", help="merge recovered layers into an existing project folder")
     parser.add_argument("--keep-base-alpha", action="store_true")
     parser.add_argument("--list-models", action="store_true")
     args = parser.parse_args(argv)
@@ -1828,9 +1915,49 @@ def main(argv: list[str] | None = None) -> int:
 
     reference = Image.open(reference_path).convert("RGBA")
     width, height = reference.size
+    merge_project_dir: Path | None = None
+    merge_composition: dict | None = None
+    merge_manifest: dict | None = None
+    if args.recover_into:
+        if not args.export_path:
+            parser.error("--recover-into is only available with --export")
+        if args.mode != "project":
+            parser.error("--recover-into cannot be used with ZIP output")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.recover_into):
+            parser.error("--recover-into must be an existing project folder name")
+        merge_project_dir = Path(args.out).resolve() / args.recover_into
+        composition_path = (
+            merge_project_dir / "compositions" / f"{args.recover_into}.composition.json"
+        )
+        manifest_path = merge_project_dir / "layers.json"
+        try:
+            merge_composition = json.loads(composition_path.read_text(encoding="utf-8"))
+            merge_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            sys.exit(f"recover into {args.recover_into!r}: could not read project files ({exc})")
+        if not isinstance(merge_composition, dict) or not isinstance(merge_manifest, dict):
+            sys.exit(f"recover into {args.recover_into!r}: project files must contain JSON objects")
+        if (merge_composition.get("width") != width
+                or merge_composition.get("height") != height):
+            sys.exit(
+                f"recover into {args.recover_into!r}: final image is {width}x{height}, "
+                f"but the project is {merge_composition.get('width')}x{merge_composition.get('height')}"
+            )
+        if not isinstance(merge_composition.get("layers"), list):
+            sys.exit(f"recover into {args.recover_into!r}: composition has no layers list")
+        if not isinstance(merge_manifest.get("layers"), list):
+            sys.exit(f"recover into {args.recover_into!r}: layers manifest has no layers list")
+        if scene is None:
+            scene_path = merge_project_dir / "scene.json"
+            if scene_path.is_file():
+                scene = load_scene(scene_path)
+
     items: list[LayerMask] = []
 
-    output_name = args.name
+    output_name = (
+        merge_composition.get("name", args.name)
+        if merge_composition else args.name
+    )
     base_image: Image.Image | None = None
     base_meta: dict | None = None
     recover_meta: dict | None = None
@@ -1987,6 +2114,12 @@ def main(argv: list[str] | None = None) -> int:
             f"  ignored {stats['small']} small and {stats['border']} border-touching "
             f"region(s); minimum area {stats['min_area']}px"
         )
+        used_names = {
+            str(layer.get("name", "")).casefold()
+            for layer in (merge_composition or {}).get("layers", [])
+            if isinstance(layer, dict)
+        }
+        scene_name_counts: dict[str, int] = {}
         for index, region in enumerate(regions, 1):
             x0, y0, x1, y1 = region["bbox"]
             print(
@@ -1994,7 +2127,38 @@ def main(argv: list[str] | None = None) -> int:
                 f"{region['area']}px"
             )
             alpha = region["mask"]
-            items.append(LayerMask(f"missing-{index:02d}", alpha))
+            obj = match_recovery_scene_object(region, scene, width, height)
+            if obj:
+                base_name = obj["name"]
+                group = obj["group"]
+                role = obj["role"]
+                label = obj.get("label", "")
+                description = obj.get("description", "")
+                count = scene_name_counts.get(base_name, 0) + 1
+                scene_name_counts[base_name] = count
+                name = base_name if count == 1 else f"{base_name}-recovered-{count:02d}"
+            else:
+                name = f"recovered-region-{index:02d}" if merge_composition else f"missing-{index:02d}"
+                group = "Recovered" if merge_composition else ""
+                role = "prop"
+                label = ""
+                description = ""
+            original_name = name
+            suffix = 2
+            while name.casefold() in used_names:
+                name = f"{original_name}-recovered-{suffix:02d}"
+                suffix += 1
+            used_names.add(name.casefold())
+            items.append(LayerMask(
+                name,
+                alpha,
+                group=group,
+                role=role,
+                group_slug=slugify(group, 20).lower() if group else "",
+                source="scene" if obj else "",
+                label=label,
+                description=description,
+            ))
 
         base_image = export
         if not args.keep_base_alpha:
@@ -2006,7 +2170,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
 
         recover_regions = regions
-        if not re.search(r"recovered$", output_name, re.IGNORECASE):
+        if not merge_composition and not re.search(r"recovered$", output_name, re.IGNORECASE):
             output_name = f"{output_name} recovered"
     else:
         masks_dir = args.masks
@@ -2051,7 +2215,7 @@ def main(argv: list[str] | None = None) -> int:
         depth_map = compute_depth(reference, args.depth_model, device)
 
     # Prepare entries.
-    slug = slugify(output_name, 60) or "image-to-layers"
+    slug = args.recover_into or slugify(output_name, 60) or "image-to-layers"
 
     if args.mode == "zip":
         if recovering:
@@ -2070,7 +2234,7 @@ def main(argv: list[str] | None = None) -> int:
         emit_zip(reference, refined, slug)
         return 0
 
-    project_dir = Path(args.out) / slug
+    project_dir = merge_project_dir or Path(args.out) / slug
     images_dir = project_dir / "images"
     compositions_dir = project_dir / "compositions"
     images_dir.mkdir(parents=True, exist_ok=True)
@@ -2078,30 +2242,35 @@ def main(argv: list[str] | None = None) -> int:
 
     ref_name = f"reference{reference_path.suffix.lower()}"
     ref_out = images_dir / ref_name
-    if not ref_out.exists():
+    if not merge_composition and not ref_out.exists():
         saved_reference = reference.convert("RGB") if ref_out.suffix.lower() in {".jpg", ".jpeg"} else reference
         saved_reference.save(ref_out, optimize=True)
     reference_url = f"/data/projects/{project_dir.name}/images/{ref_name}"
 
     preview_url = None
     if recovering:
-        base_path = images_dir / "export.png"
-        assert base_image is not None
-        base_image.save(base_path, optimize=True)
-        base_url = f"/data/projects/{project_dir.name}/images/export.png"
-        base_meta = {
-            "id": "aligned-export",
-            "name": "Aligned export",
-            "url": base_url,
-        }
+        if not merge_composition:
+            base_path = images_dir / "export.png"
+            assert base_image is not None
+            base_image.save(base_path, optimize=True)
+            base_url = f"/data/projects/{project_dir.name}/images/export.png"
+            base_meta = {
+                "id": "aligned-export",
+                "name": "Aligned export",
+                "url": base_url,
+            }
 
-        preview_path = images_dir / "missing-preview.png"
+        preview_name = "recovery-preview.png" if merge_composition else "missing-preview.png"
+        preview_path = images_dir / preview_name
         write_recover_preview(reference, recover_regions, preview_path)
         print(f"preview {preview_path.resolve()}")
-        preview_url = f"/data/projects/{project_dir.name}/images/missing-preview.png"
+        preview_url = f"/data/projects/{project_dir.name}/images/{preview_name}"
         recover_meta = {
             "source": "image-to-layers-recover",
             "note": (
+                "Missing regions were detected from an aligned studio export and cut "
+                "from the final image."
+                if merge_composition else
                 "Missing regions were detected from an aligned studio export and cut "
                 "from the final image. The aligned export is the visible base layer."
             ),
@@ -2112,7 +2281,9 @@ def main(argv: list[str] | None = None) -> int:
                 "minAreaPct": args.recover_min_area,
                 "ignoredBorder": not args.recover_keep_border,
                 "previewUrl": preview_url,
-                "baseLayerId": "aligned-export",
+                **({"mergedInto": project_dir.name} if merge_composition else {
+                    "baseLayerId": "aligned-export",
+                }),
             },
         }
 
@@ -2123,14 +2294,28 @@ def main(argv: list[str] | None = None) -> int:
     # A group only gets its own folder when it holds 2+ layers, so a manual
     # one-layer-per-group run does not scatter single files into many folders.
     group_sizes: dict[str, int] = {}
+    if merge_manifest:
+        for manifest_layer in merge_manifest["layers"]:
+            group_name = manifest_layer.get("group", "")
+            if group_name:
+                group_sizes[group_name] = group_sizes.get(group_name, 0) + 1
     for item in items:
         group_name = getattr(item, "group", "")
         if group_name:
             group_sizes[group_name] = group_sizes.get(group_name, 0) + 1
 
+    used_stems: dict[str, int] = {}
+    if merge_composition:
+        for existing_file in images_dir.rglob("*"):
+            if existing_file.is_file():
+                stem = existing_file.relative_to(images_dir).with_suffix("").as_posix()
+                used_stems[stem] = 1
+
     def folder_for(item) -> str:
         group_name = getattr(item, "group", "")
-        if args.folders == "group" and group_name and group_sizes.get(group_name, 0) >= 2:
+        if args.folders == "group" and group_name and (
+            group_sizes.get(group_name, 0) >= 2 or merge_composition
+        ):
             return slugify(group_name, 40).lower()
         return ""
 
@@ -2148,7 +2333,9 @@ def main(argv: list[str] | None = None) -> int:
         if args.strict and bbox == (0, 0, width, height) and len(items) > 1:
             print(f"  warn (strict): {name!r} covers the whole canvas")
         folder = folder_for(item)
-        stem = _unique_stem(f"{folder}/{slugify(name, 40)}", used_stems).split("/", 1)[1]
+        stem_base = f"{folder}/{slugify(name, 40)}" if folder else slugify(name, 40)
+        unique_name = _unique_stem(stem_base, used_stems)
+        stem = unique_name.split("/", 1)[1] if folder else unique_name
         target_dir = images_dir / folder if folder else images_dir
         target_dir.mkdir(parents=True, exist_ok=True)
         out_file = target_dir / f"{stem}.png"
@@ -2210,49 +2397,97 @@ def main(argv: list[str] | None = None) -> int:
             "model": scene.get("model", ""),
             "objects": len(scene.get("objects", [])),
         }
-    composition = build_composition(
-        entries,
-        output_name,
-        width,
-        height,
-        reference_url,
-        base=base_meta,
-        meta=composition_meta_extra or None,
-        sort_by_depth=use_depth,
-    )
+    if merge_composition:
+        added_layers = build_composition(
+            entries,
+            output_name,
+            width,
+            height,
+            reference_url,
+            meta=None,
+            sort_by_depth=use_depth,
+        )["layers"][1:]
+        existing_ids = {
+            layer.get("id")
+            for layer in merge_composition["layers"]
+            if isinstance(layer, dict)
+        }
+        next_z = max(
+            (float(layer.get("z", 0)) for layer in merge_composition["layers"]
+             if isinstance(layer, dict)),
+            default=0,
+        )
+        for layer in added_layers:
+            base_id = layer["id"]
+            layer_id = base_id
+            suffix = 2
+            while layer_id in existing_ids:
+                layer_id = f"{base_id}-{suffix}"
+                suffix += 1
+            layer["id"] = layer_id
+            existing_ids.add(layer_id)
+            next_z += 1
+            layer["z"] = next_z
+        merge_composition["layers"].extend(added_layers)
+        meta = merge_composition.get("meta")
+        if not isinstance(meta, dict):
+            meta = {}
+            merge_composition["meta"] = meta
+        meta["recover"] = {
+            **recover_meta["recover"],
+            "addedLayerIds": [layer["id"] for layer in added_layers],
+        }
+        composition = merge_composition
+    else:
+        composition = build_composition(
+            entries,
+            output_name,
+            width,
+            height,
+            reference_url,
+            base=base_meta,
+            meta=composition_meta_extra or None,
+            sort_by_depth=use_depth,
+        )
 
     # Manifest: what file lives in which folder, and why it has that name.
+    added_manifest_layers = [
+        {
+            "name": entry["name"],
+            "file": entry["file"],
+            "folder": str(Path(entry["file"]).parent.relative_to("images").as_posix())
+            if Path(entry["file"]).parent != Path("images") else "",
+            "group": entry.get("segment_group", ""),
+            "role": entry["role"],
+            "label": entry.get("label", ""),
+            "description": entry.get("description", ""),
+            "bbox": list(entry["crop"]),
+        }
+        for entry in sorted(entries, key=lambda e: (e["file"]))
+    ]
     manifest = {
         "name": output_name,
         "width": width,
         "height": height,
         "description": (scene or {}).get("description", ""),
         "layers": [
-            {
-                "name": entry["name"],
-                "file": entry["file"],
-                "folder": str(Path(entry["file"]).parent.relative_to("images").as_posix())
-                if Path(entry["file"]).parent != Path("images") else "",
-                "group": entry.get("segment_group", ""),
-                "role": entry["role"],
-                "label": entry.get("label", ""),
-                "description": entry.get("description", ""),
-                "bbox": list(entry["crop"]),
-            }
-            for entry in sorted(entries, key=lambda e: (e["file"]))
+            *(merge_manifest["layers"] if merge_manifest else []),
+            *added_manifest_layers,
         ],
     }
     (project_dir / "layers.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-    if scene:
+    if scene and not merge_composition:
         (project_dir / "scene.json").write_text(json.dumps(scene, indent=2), encoding="utf-8")
 
     out_json = compositions_dir / f"{slug}.composition.json"
     out_json.write_text(json.dumps(composition, indent=2), encoding="utf-8")
     print(f"wrote {out_json}")
-    folders_used = sorted({m["folder"] for m in manifest["layers"] if m["folder"]})
+    folders_used = sorted({m.get("folder", "") for m in manifest["layers"] if m.get("folder")})
     if folders_used:
         print(f"      folders: {', '.join(folders_used)}")
-    if recovering:
+    if recovering and merge_composition:
+        print(f"      {len(entries)} missing layers merged into {project_dir.name}, {width}x{height}")
+    elif recovering:
         print(f"      {len(entries)} missing layers + 1 aligned base, {width}x{height}")
     else:
         print(f"      {len(entries)} layers, {width}x{height}")

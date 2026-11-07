@@ -841,7 +841,7 @@
             <span class="dot"><i class="fas fa-layer-group"></i></span>
             <span>Image&nbsp;→&nbsp;Layers</span>
             <small>segmenter</small>
-            <a href="studio-v2.html">Studio v2 →</a>
+            <a id="itlStudioNav" href="http://127.0.0.1:8008/studio-v2.html">Studio v2 →</a>
         </div>
 
         <div class="itl-modes" role="tablist" aria-label="Segmentation mode">
@@ -924,6 +924,13 @@
             <section class="itl-section" id="itlRecoverSection" hidden>
                 <h3>Missing parts</h3>
                 <div class="itl-field">
+                    <label for="itlRecoverProject" data-tooltip="Merge the recovered cutouts into an existing project instead of creating a separate recovered project. Existing scene names and groups are used where they match.">Add to project</label>
+                    <select id="itlRecoverProject">
+                        <option value="">Create a separate recovered project</option>
+                    </select>
+                    <p class="itl-hint" style="margin: 6px 0 0;">Only the recovered cutouts are added; the aligned export is not placed over your existing layers.</p>
+                </div>
+                <div class="itl-field">
                     <div class="itl-field-row">
                         <label for="itlRecoverMin" data-tooltip="Only holes larger than this area are kept. Lower it to catch small gaps, raise it to ignore noise.">Min area</label>
                         <output id="itlRecoverMinOut" for="itlRecoverMin">0.10%</output>
@@ -979,7 +986,8 @@
                         reference, then add the studio export that was aligned to it. The export's transparent (or near-white)
                         areas are detected as holes.</p>
                     <p style="margin: 0 0 8px;">Each hole becomes a new layer cut from the final image. The aligned export is
-                        kept as the visible base, so opening the recovered composition shows the whole scene again.</p>
+                        kept as the visible base for a separate recovered project. Choose an existing project above to add
+                        only the recovered cutouts to it; matching scene objects keep their project names and groups.</p>
                     <p style="margin: 0;">The magenta preview on the canvas is live and approximate; the run preview is the
                         exact result after filtering.</p>
                 </div>
@@ -1022,13 +1030,13 @@
             <section class="itl-section">
                 <h3>Composition</h3>
                 <div class="itl-field">
-                    <label for="itlName" data-tooltip="Becomes the project folder name (data/projects/&lt;name&gt;/) and the composition title in Studio. Run again with the same name and the project is overwritten.">Name</label>
+                    <label for="itlName" data-tooltip="Becomes the project folder name (studio/data/projects/&lt;name&gt;/) and the composition title in Studio. Run again with the same name and the project is overwritten.">Name</label>
                     <input type="text" id="itlName" value="My Scene" maxlength="120">
                 </div>
                 <div class="itl-field">
-                    <label for="itlOutput" data-tooltip="Project: writes images + composition straight into data/projects/ so Studio's project picker sees it. ZIP: one flat bundle of PNGs to drop into Studio → Import ZIP + image.">Output</label>
+                    <label for="itlOutput" data-tooltip="Project: writes images + composition straight into studio/data/projects/ so Studio's project picker sees it. ZIP: one flat bundle of PNGs to drop into Studio → Import ZIP + image.">Output</label>
                     <select id="itlOutput">
-                        <option value="project">Project · data/projects/</option>
+                        <option value="project">Project · studio/data/projects/</option>
                         <option value="zip">ZIP · for Import&nbsp;+&nbsp;image</option>
                     </select>
                 </div>
@@ -1047,11 +1055,12 @@
                     named objects are used to name layers and to prompt SAM 2 (SAM 2 cannot read text, so
                     the model supplies boxes and points instead).</p>
                 <div class="itl-field">
-                    <label for="itlVisionModel" data-tooltip="DeepSeek currently exposes image input on deepseek-flash only, so that is the model used to look at the reference. Requires DEEPSEEK_API_KEY in .env (or the environment) on the machine running the server.">Vision model</label>
-                    <select id="itlVisionModel">
-                        <option value="deepseek-flash">DeepSeek Flash (vision)</option>
+                    <label for="itlVisionModel" data-tooltip="DeepSeek Flash uses DEEPSEEK_API_KEY. Ollama models use the local Ollama server at http://127.0.0.1:11434 by default; change ITL_OLLAMA_BASE_URL if yours is elsewhere.">Vision model</label>
+                    <select id="itlVisionModel" disabled>
+                        <option value="">Loading installed vision models…</option>
                     </select>
                 </div>
+                <p class="itl-hint" id="itlVisionModelStatus" role="status">Checking configured AI providers…</p>
                 <div class="itl-field">
                     <div class="itl-field-row">
                         <label for="itlSceneDetail" data-tooltip="How finely the model splits the image. 1: only the few largest regions. 3: one layer per object or character. 5: every separable part (facial features, small props, decorations). Higher = more layers and more SAM prompts to run.">Detail level</label>
@@ -1065,7 +1074,7 @@
                 </div>
                 <div class="itl-inline-btns single">
                     <button type="button" class="itl-btn small" id="itlDescribe"
-                            data-tooltip="Sends the reference image to the vision model and fills in the description and object list below. Takes roughly 10–40 seconds. Re-running replaces the list, including edits you made.">
+                            data-tooltip="Sends the reference image to the vision model and fills in the description and object list below. Local models may take several minutes, especially on CPU. Re-running replaces the list, including edits you made.">
                         <i class="fas fa-eye"></i> Describe image
                     </button>
                 </div>
@@ -1318,6 +1327,15 @@
     (() => {
         const $ = (id) => document.getElementById(id);
         const SVG_NS = 'http://www.w3.org/2000/svg';
+        const studioPageUrl = () => {
+            const url = new URL(window.location.href);
+            url.port = '8008';
+            url.pathname = '/studio-v2.html';
+            url.search = '';
+            url.hash = '';
+            return url.href;
+        };
+        $('itlStudioNav').href = studioPageUrl();
         const PALETTE = [
             '#e8803a', '#6ea8f0', '#8fcf5c', '#e05ba0', '#c69af0',
             '#e0c34f', '#5cd4c7', '#e06262', '#f0a73a', '#9ab87a',
@@ -1338,6 +1356,8 @@
                 minArea: 0.1,
                 ignoreBorder: true,
                 holeSource: 'auto',
+                projectId: '',
+                projects: [],
             },
             knockout: {
                 underlap: 1,
@@ -1347,7 +1367,7 @@
             scene: null,         // { description, style, objects: [{ name, label, group, role, bbox, point, ... }] }
             sceneSelected: null, // index of the highlighted scene object
             describing: false,
-            vision: { model: 'deepseek-flash', detail: 3, hint: '' },
+            vision: { model: '', detail: 3, hint: '' },
             auto: {
                 pointsPerSide: 16,
                 minArea: 0.1,
@@ -1403,6 +1423,12 @@
             $('itlExportSection').hidden = !recovering;
             $('itlCutoutSection').hidden = !knockout;
             $('itlRecoverSection').hidden = !recovering;
+            const recoverProjectOption = $('itlOutput').querySelector('option[value="zip"]');
+            recoverProjectOption.disabled = recovering && Boolean(state.recover.projectId);
+            if (recoverProjectOption.disabled && state.settings.output === 'zip') {
+                state.settings.output = 'project';
+                $('itlOutput').value = 'project';
+            }
             $('itlModelsSection').hidden = recovering || knockout || state.mode === 'masks';
             $('itlSceneSection').hidden = recovering || knockout || state.mode === 'masks';
             $('itlSceneImport').hidden = !(state.mode === 'sam-points' && hasScene);
@@ -1430,7 +1456,7 @@
                 : state.mode === 'sam-points' ? 'Layer groups'
                 : 'Automatic';
             $('itlCanvas')?.setAttribute('data-mode', state.mode);
-            $('itlDescribe').disabled = state.describing || state.running || !state.reference;
+            $('itlDescribe').disabled = state.describing || state.running || !state.reference || !state.vision.model;
             $('itlRun').disabled = state.running || !state.reference
                 || (recovering && !state.exportImage)
                 || (knockout && !state.cutoutImage)
@@ -2888,6 +2914,10 @@
                 payload.recoverMinArea = state.recover.minArea;
                 payload.recoverIgnoreBorder = state.recover.ignoreBorder;
                 payload.recoverHoleSource = state.recover.holeSource;
+                if (state.recover.projectId) {
+                    payload.recoverProjectId = state.recover.projectId;
+                    payload.outputMode = 'project';
+                }
             } else if (state.mode === 'knockout') {
                 if (!state.cutoutImage) throw new Error('Add the cut-out image.');
                 payload.cutout = state.cutoutImage.dataUrl;
@@ -3086,7 +3116,12 @@
                 }
                 if (state.result) {
                     const layers = resultLayers(state.result);
-                    if (state.result.zipUrl && !layers.length) {
+                    const mergedInto = state.result.composition?.meta?.recover?.mergedInto;
+                    if (mergedInto) {
+                        const name = state.recover.projects.find((project) => project.id === mergedInto)?.name
+                            || state.result.composition.name;
+                        setStatus(`Done — ${state.result.recoverRegions ?? layers.length} missing layer${(state.result.recoverRegions ?? layers.length) === 1 ? '' : 's'} added to “${name}”.`, 'ok');
+                    } else if (state.result.zipUrl && !layers.length) {
                         setStatus('Done — ZIP ready with named, grouped cutouts.', 'ok');
                     } else {
                         const layerCount = state.mode === 'recover'
@@ -3148,7 +3183,10 @@
             const composition = result?.composition;
             if (!composition) return [];
             const baseId = composition.meta?.recover?.baseLayerId;
+            const addedIds = composition.meta?.recover?.addedLayerIds;
             return (composition.layers || []).filter(layer => (
+                !Array.isArray(addedIds) || addedIds.includes(layer.id)
+            ) && (
                 layer.id !== composition.referenceLayerId && layer.id !== baseId
             ));
         }
@@ -3234,8 +3272,8 @@
             link.replaceChildren();
             if (result.projectDir && result.outputMode === 'project') {
                 const a = document.createElement('a');
-                a.href = 'studio-v2.html';
-                a.textContent = `Open studio-v2.html and pick “${result.composition.name}”`;
+                a.href = studioPageUrl();
+                a.textContent = `Open Studio and pick “${result.composition.name}”`;
                 link.append('Composition saved to ', document.createTextNode(result.projectDir), '. ', a, '.');
                 link.hidden = false;
             } else if (result.zipUrl) {
@@ -3262,7 +3300,7 @@
                 a.click();
             };
             $('itlExportProject').onclick = () => {
-                window.open('studio-v2.html', '_blank', 'noopener');
+                window.open(studioPageUrl(), '_blank', 'noopener');
             };
         }
 
@@ -3270,6 +3308,58 @@
         const DETAIL_LABELS = ['', 'regions', 'major', 'objects', 'parts', 'everything'];
         const ROLE_CHOICES = ['background', 'midground', 'ground', 'prop', 'character',
             'character-part', 'foreground', 'effect'];
+
+        async function loadVisionModels() {
+            const select = $('itlVisionModel');
+            const status = $('itlVisionModelStatus');
+            try {
+                const response = await fetch(`${API}/vision-models`, { cache: 'no-store' });
+                const catalog = await response.json();
+                if (!response.ok) throw new Error(catalog.error || `Server returned ${response.status}`);
+                const groups = [];
+                const deepseekGroup = document.createElement('optgroup');
+                deepseekGroup.label = 'DeepSeek';
+                const deepseekOption = new Option(
+                    catalog.deepseek?.available ? 'DeepSeek Flash · API' : 'DeepSeek Flash · not configured',
+                    'deepseek-flash',
+                );
+                deepseekOption.disabled = !catalog.deepseek?.available;
+                deepseekGroup.append(deepseekOption);
+                groups.push(deepseekGroup);
+
+                const ollamaGroup = document.createElement('optgroup');
+                ollamaGroup.label = 'Local Ollama · installed vision models';
+                const models = Array.isArray(catalog.ollama?.models) ? catalog.ollama.models : [];
+                if (models.length) {
+                    models.forEach((model) => {
+                        const label = `${model.id}${model.parameterSize ? ` · ${model.parameterSize}` : ''}`;
+                        ollamaGroup.append(new Option(label, `ollama:${model.id}`));
+                    });
+                } else {
+                    const empty = new Option(catalog.ollama?.error || 'No vision models found', '');
+                    empty.disabled = true;
+                    ollamaGroup.append(empty);
+                }
+                groups.push(ollamaGroup);
+                select.replaceChildren(...groups);
+
+                const available = [...select.options].filter((option) => option.value && !option.disabled);
+                const preferred = [state.vision.model, catalog.defaultModel]
+                    .find((model) => model && available.some((option) => option.value === model));
+                state.vision.model = preferred || available[0]?.value || '';
+                select.value = state.vision.model;
+                select.disabled = !available.length;
+                status.textContent = models.length
+                    ? `${models.length} installed Ollama vision model${models.length === 1 ? '' : 's'} detected.`
+                    : (catalog.ollama?.error || 'No installed Ollama vision models detected.');
+            } catch (error) {
+                select.replaceChildren(new Option('Could not load vision models', ''));
+                select.disabled = true;
+                state.vision.model = '';
+                status.textContent = error.message || 'Could not load installed vision models.';
+            }
+            syncActiveState();
+        }
 
         async function describeScene() {
             if (!state.reference || state.describing) return;
@@ -3547,6 +3637,15 @@
             state.recover.ignoreBorder = event.target.checked;
             scheduleHolePreview();
         });
+        $('itlRecoverProject').addEventListener('change', (event) => {
+            state.recover.projectId = event.target.value;
+            const project = state.recover.projects?.find((entry) => entry.id === state.recover.projectId);
+            if (project) {
+                state.settings.name = project.name;
+                $('itlName').value = project.name;
+            }
+            syncActiveState();
+        });
 
         document.querySelectorAll('.itl-modes button').forEach((button) => {
             button.addEventListener('click', () => {
@@ -3607,6 +3706,17 @@
 
         $('itlName').addEventListener('input', (event) => {
             state.settings.name = event.target.value || 'My Scene';
+            if (!state.recover.projectId) {
+                const comparable = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                const matching = state.recover.projects.find((project) => (
+                    comparable(project.name) === comparable(state.settings.name)
+                ));
+                if (matching) {
+                    state.recover.projectId = matching.id;
+                    $('itlRecoverProject').value = matching.id;
+                }
+            }
+            syncActiveState();
         });
         $('itlOutput').addEventListener('change', (event) => {
             state.settings.output = event.target.value;
@@ -3716,6 +3826,32 @@
         $('itlSceneDetailOut').textContent = `${state.vision.detail} · ${DETAIL_LABELS[state.vision.detail]}`;
         initTooltips();
         syncActiveState();
+        loadVisionModels();
+        fetch(`${API}/projects`).then(async (response) => {
+            if (!response.ok) throw new Error(`Could not load projects (${response.status}).`);
+            const data = await response.json();
+            state.recover.projects = Array.isArray(data.projects) ? data.projects : [];
+            const select = $('itlRecoverProject');
+            state.recover.projects.forEach((project) => {
+                const option = document.createElement('option');
+                option.value = project.id;
+                option.textContent = `${project.name} · ${project.width}×${project.height}`;
+                select.append(option);
+            });
+            const comparable = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            const matching = state.recover.projects.find((project) => (
+                comparable(project.name) === comparable(state.settings.name)
+            ));
+            if (matching) {
+                select.value = matching.id;
+                state.recover.projectId = matching.id;
+                state.settings.name = matching.name;
+                $('itlName').value = matching.name;
+                syncActiveState();
+            }
+        }).catch((error) => {
+            setStatus(error.message || 'Could not load existing projects.', 'error');
+        });
         fetch(`${API}/sample`).then(async (response) => {
             if (!response.ok) return;
             const data = await response.json();

@@ -1,8 +1,11 @@
 import importlib.util
+import json
+import os
 import sys
 import tempfile
 import types
 import unittest
+import zipfile
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -26,6 +29,41 @@ def fake_numpy():
 
 
 class SamAutoTests(unittest.TestCase):
+    def test_zip_export_keeps_named_layer_metadata(self):
+        reference = Image.new("RGB", (20, 20), "white")
+        mask = Image.new("L", reference.size, 0)
+        mask.paste(255, (4, 5, 15, 16))
+        layer = image_to_layers.LayerMask(
+            "scones-blueberry-coconut",
+            mask,
+            group="Scones",
+            role="prop",
+            group_slug="scones",
+            source="scene",
+            label="Blueberry coconut scone",
+            description="A scone topped with blueberries and coconut.",
+        )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            previous_cwd = os.getcwd()
+            try:
+                os.chdir(temp_dir)
+                archive_path = image_to_layers.emit_zip(reference, [layer], "bakery").resolve()
+            finally:
+                os.chdir(previous_cwd)
+
+            with zipfile.ZipFile(archive_path) as archive:
+                manifest = json.loads(archive.read("image-to-layers.json"))
+
+        self.assertEqual(manifest["schema"], "image-to-layers/segments-v1")
+        self.assertEqual(len(manifest["layers"]), 1)
+        exported = manifest["layers"][0]
+        self.assertEqual(exported["file"], "scones_scones-blueberry-coconut.png")
+        self.assertEqual(exported["name"], "scones-blueberry-coconut")
+        self.assertEqual(exported["group"], "Scones")
+        self.assertEqual(exported["role"], "prop")
+        self.assertEqual(exported["label"], "Blueberry coconut scone")
+
     def test_device_selection_prefers_cuda_then_mps_then_cpu(self):
         torch = types.SimpleNamespace(
             cuda=types.SimpleNamespace(is_available=lambda: False),

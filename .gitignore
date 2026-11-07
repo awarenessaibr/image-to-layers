@@ -4,6 +4,7 @@ __pycache__/
 *.pyd
 .venv/
 venv/
+.run/
 .DS_Store
 
 # Environment / secrets

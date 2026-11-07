@@ -6,8 +6,9 @@ tools/image-to-layers.py.
 Serves:
   GET  /image-to-layers.html                 the UI
   GET  /_.css                                brand styles (if in root)
-  GET  /data/...                             shared with the studio backend
+  GET  /data/projects/...                    project assets shared with Studio
   GET  /api/sample                           a sample reference if one exists
+  GET  /api/vision-models                    configured providers + installed Ollama vision models
   POST /api/run                              run the CLI, stream NDJSON progress
   POST /api/cancel                           terminate the active run
 
@@ -16,21 +17,21 @@ full reference, and an aligned studio `export` whose holes mark the missing
 regions. The CLI cuts those regions from the reference and writes a composition
 with the export as its visible base layer.
 
-The Python CLI writes directly into <root>/data/projects/, so once it
-completes, both this tool and the running studio's project picker show
-the new composition — no copying required.
+The Python CLI writes directly into <studio-root>/data/projects/, so once it
+completes, the running studio's project picker shows the new composition — no
+copying required. Set STUDIO_ROOT if the Studio checkout is not a sibling.
 
 Usage:
   python3 image-to-layers-server.py
-  PORT=8008 HOST=127.0.0.1 python3 image-to-layers-server.py
+  PORT=8009 HOST=0.0.0.0 python3 image-to-layers-server.py
 
 Scene description (vision LLM):
   POST /api/describe   { reference, referenceName, visionModel, detail, hint }
                        → { scene: { description, objects: [...] } }
-  The CLI calls the DeepSeek Chat Completions API, so DEEPSEEK_API_KEY must be in
-  .env (loaded at startup) or this process's environment (it is never sent to or
-  read from the browser). ITL_VISION_MODEL overrides the default model;
-  DEEPSEEK_BASE_URL points at another compatible base URL.
+  DeepSeek uses DEEPSEEK_API_KEY; Ollama uses its local chat API at
+  http://127.0.0.1:11434 by default. ITL_OLLAMA_BASE_URL and
+  ITL_OLLAMA_API_KEY configure another Ollama-compatible endpoint.
+  ITL_VISION_MODEL overrides the CLI default. Secrets remain server-side.
 
 Changed since the original:
 
@@ -65,19 +66,23 @@ import tempfile
 import threading
 import time
 import urllib.parse
+import urllib.error
+import urllib.request
 from io import BytesIO
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+STUDIO_ROOT = Path(os.environ.get("STUDIO_ROOT", ROOT.parent / "studio")).resolve()
 TOOL = ROOT / "tools" / "image-to-layers.py"
 DATA_DIR = ROOT / "data"
-PROJECTS_DIR = DATA_DIR / "projects"
+PROJECTS_DIR = STUDIO_ROOT / "data" / "projects"
 DOWNLOADS_DIR = DATA_DIR / "downloads"
 SAMPLES_DIR = DATA_DIR / "imports"
 
 PORT = int(os.environ.get("PORT", "8009"))
-HOST = os.environ.get("HOST", "127.0.0.1")
+HOST = os.environ.get("HOST", "0.0.0.0")
 MAX_BODY = 200 * 1024 * 1024  # 200 MB — generous for 4K references + masks
+VISION_SUBPROCESS_TIMEOUT = 660
 
 RUN_LOCK = threading.Lock()
 RUNNING_PROC: subprocess.Popen | None = None
@@ -107,6 +112,96 @@ def load_dotenv(folder: Path) -> None:
 
 
 load_dotenv(ROOT)
+
+
+def _is_ollama_vision_model(model: dict) -> bool:
+    capabilities = model.get("capabilities")
+    if isinstance(capabilities, list) and capabilities:
+        return "vision" in {str(value).lower() for value in capabilities}
+    details = model.get("details") or {}
+    families = details.get("families") or []
+    if isinstance(families, list) and "clip" in {str(value).lower() for value in families}:
+        return True
+    name = str(model.get("name") or "").lower()
+    return bool(re.search(r"(vision|llava|moondream|minicpm-v|qwen[^ ]*vl|gemma[34])", name))
+
+
+def get_vision_model_catalog() -> dict:
+    """Return configured DeepSeek status and installed Ollama vision models."""
+    deepseek_available = bool(os.environ.get("DEEPSEEK_API_KEY", "").strip())
+    base_url = os.environ.get(
+        "ITL_OLLAMA_BASE_URL", "http://127.0.0.1:11434"
+    ).strip()
+    if "://" not in base_url:
+        base_url = "http://" + base_url
+    parsed = urllib.parse.urlsplit(base_url)
+    if (
+        parsed.scheme not in ("http", "https")
+        or not parsed.netloc
+        or parsed.username
+        or parsed.password
+    ):
+        ollama = {
+            "available": False,
+            "models": [],
+            "error": "ITL_OLLAMA_BASE_URL must be a valid HTTP(S) URL.",
+        }
+    else:
+        path = parsed.path.rstrip("/")
+        if path.endswith("/v1"):
+            path = path[:-3]
+        endpoint = urllib.parse.urlunsplit(
+            (parsed.scheme, parsed.netloc, path + "/api/tags", "", "")
+        )
+        request = urllib.request.Request(endpoint, headers={"Accept": "application/json"})
+        api_key = os.environ.get("ITL_OLLAMA_API_KEY", "").strip()
+        if api_key:
+            request.add_header("Authorization", f"Bearer {api_key}")
+        try:
+            with urllib.request.urlopen(request, timeout=5) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            installed = payload.get("models") if isinstance(payload, dict) else None
+            if not isinstance(installed, list):
+                raise ValueError("Ollama returned an invalid model list.")
+            models = []
+            for model in installed:
+                if not isinstance(model, dict) or not _is_ollama_vision_model(model):
+                    continue
+                name = str(model.get("name") or "").strip()
+                if not name:
+                    continue
+                models.append({
+                    "id": name,
+                    "parameterSize": str((model.get("details") or {}).get("parameter_size") or ""),
+                })
+            ollama = {
+                "available": bool(models),
+                "models": models,
+                "error": None if models else "No installed Ollama vision models were detected.",
+            }
+        except (OSError, urllib.error.URLError, TimeoutError, ValueError, json.JSONDecodeError):
+            ollama = {
+                "available": False,
+                "models": [],
+                "error": "Could not load installed vision models from the configured Ollama server.",
+            }
+
+    choices = (["deepseek-flash"] if deepseek_available else []) + [
+        f"ollama:{model['id']}" for model in ollama["models"]
+    ]
+    configured = os.environ.get("ITL_VISION_MODEL", "").strip()
+    default_model = configured if configured in choices else (
+        "deepseek-flash" if deepseek_available
+        else (f"ollama:{ollama['models'][0]['id']}" if ollama["models"] else "")
+    )
+    return {
+        "deepseek": {
+            "available": deepseek_available,
+            "error": None if deepseek_available else "Set DEEPSEEK_API_KEY to enable DeepSeek Flash.",
+        },
+        "ollama": ollama,
+        "defaultModel": default_model,
+    }
 
 
 # ── decoding helpers ─────────────────────────────────────────────────────
@@ -179,6 +274,35 @@ def find_sample_reference() -> dict | None:
         "url": f"/{rel}",
         "name": f"{best.parent.name}",
     }
+
+
+def list_projects() -> list[dict]:
+    projects = []
+    if not PROJECTS_DIR.is_dir():
+        return projects
+    for folder in sorted(PROJECTS_DIR.iterdir(), key=lambda entry: entry.name.casefold()):
+        if not folder.is_dir() or not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", folder.name):
+            continue
+        composition_path = folder / "compositions" / f"{folder.name}.composition.json"
+        manifest_path = folder / "layers.json"
+        if not composition_path.is_file() or not manifest_path.is_file():
+            continue
+        try:
+            composition = json.loads(composition_path.read_text(encoding="utf-8"))
+            if not isinstance(composition, dict) or not isinstance(composition.get("layers"), list):
+                continue
+            width, height = composition.get("width"), composition.get("height")
+            if not isinstance(width, int) or not isinstance(height, int):
+                continue
+            projects.append({
+                "id": folder.name,
+                "name": str(composition.get("name") or folder.name),
+                "width": width,
+                "height": height,
+            })
+        except (OSError, json.JSONDecodeError):
+            continue
+    return projects
 
 
 # ── request body ────────────────────────────────────────────────────────
@@ -279,6 +403,22 @@ def build_command(payload: dict, tmpdir: Path) -> tuple[list[str], Path]:
         ]
         if payload.get("recoverIgnoreBorder") is False:
             argv.append("--recover-keep-border")
+        recover_project_id = payload.get("recoverProjectId")
+        if recover_project_id:
+            if not isinstance(recover_project_id, str) or not re.fullmatch(
+                r"[A-Za-z0-9_-]{1,80}", recover_project_id
+            ):
+                raise ValueError("Choose a valid existing project for recovery.")
+            if str(payload.get("outputMode") or "project").lower() == "zip":
+                raise ValueError("Merging recovered layers requires Project output.")
+            project_dir = PROJECTS_DIR / recover_project_id
+            composition_path = (
+                project_dir / "compositions" / f"{recover_project_id}.composition.json"
+            )
+            manifest_path = project_dir / "layers.json"
+            if not composition_path.is_file() or not manifest_path.is_file():
+                raise ValueError("The selected project is no longer available for recovery.")
+            argv += ["--recover-into", recover_project_id]
     elif mode == "knockout":
         cutout_value = payload.get("cutout")
         if not cutout_value:
@@ -431,7 +571,25 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         elif self.path.startswith("/api/sample"):
             self.send_json(200, find_sample_reference() or {})
             return
+        elif request_path == "/api/projects":
+            self.send_json(200, {"projects": list_projects()})
+            return
+        elif request_path == "/api/vision-models":
+            self.send_json(200, get_vision_model_catalog())
+            return
         super().do_GET()
+
+    def translate_path(self, path: str) -> str:
+        request_path = urllib.parse.unquote(urllib.parse.urlsplit(path).path)
+        prefix = "/data/projects/"
+        if request_path.startswith(prefix):
+            target = (PROJECTS_DIR / request_path[len(prefix):]).resolve()
+            try:
+                target.relative_to(PROJECTS_DIR.resolve())
+            except ValueError:
+                return str(PROJECTS_DIR / "__invalid_path__")
+            return str(target)
+        return super().translate_path(path)
 
     def do_POST(self):
         if self.path == "/api/run":
@@ -499,7 +657,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 argv += ["--vision-model", model]
 
             done = subprocess.run(
-                argv, cwd=str(ROOT), capture_output=True, text=True, timeout=240,
+                argv, cwd=str(ROOT), capture_output=True, text=True,
+                timeout=VISION_SUBPROCESS_TIMEOUT,
                 env={**os.environ, "PYTHONUNBUFFERED": "1"},
             )
             if done.returncode != 0 or not scene_path.is_file():
@@ -510,7 +669,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             scene = json.loads(scene_path.read_text(encoding="utf-8"))
             self.send_json(200, {"scene": scene})
         except subprocess.TimeoutExpired:
-            self.send_json(504, {"error": "The vision model took too long (over 4 minutes)."})
+            self.send_json(504, {"error": "The vision model took too long (over 11 minutes)."})
         except (ValueError, KeyError) as exc:
             self.send_json(400, {"error": str(exc)})
         except Exception as exc:
@@ -620,10 +779,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 slug = str(composition["id"])
                 project_dir = PROJECTS_DIR / slug
                 if project_dir.is_dir():
-                    result["projectDir"] = project_dir.relative_to(ROOT).as_posix()
+                    result["projectDir"] = str(project_dir)
                 candidate = project_dir / "compositions" / f"{slug}.composition.json"
                 if candidate.is_file():
-                    result["outputPath"] = "/" + candidate.relative_to(ROOT).as_posix()
+                    result["outputPath"] = f"/data/projects/{slug}/compositions/{candidate.name}"
 
             preview_path = find_preview_output(stdout_lines)
             if preview_path:
@@ -672,7 +831,7 @@ def main():
     print(f"[itl] http://{HOST}:{PORT}{ui_page()}")
     print(f"[itl] project output → {PROJECTS_DIR}")
     if not os.environ.get("DEEPSEEK_API_KEY"):
-        print("[itl] note: DEEPSEEK_API_KEY is not set — “Describe image” will be unavailable")
+        print("[itl] note: DEEPSEEK_API_KEY is not set — DeepSeek is unavailable; local Ollama remains an option")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

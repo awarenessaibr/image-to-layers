@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from PIL import Image, ImageDraw
 
@@ -43,6 +44,100 @@ def build_fixture(root: Path) -> tuple[Path, Path]:
 
 
 class RecoverMissingTests(unittest.TestCase):
+    def test_merges_recovered_layers_into_existing_project_with_scene_names(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            reference_path, export_path = build_fixture(root)
+            project = root / "projects" / "Existing-Scene"
+            images = project / "images"
+            compositions = project / "compositions"
+            images.mkdir(parents=True)
+            compositions.mkdir()
+            reference_url = "/data/projects/Existing-Scene/images/reference.png"
+            original_layer = {
+                "id": "layer-existing",
+                "name": "existing-layer",
+                "role": "background",
+                "url": "/data/projects/Existing-Scene/images/existing-layer.png",
+                "frames": ["/data/projects/Existing-Scene/images/existing-layer.png"],
+                "x": 0, "y": 0, "w": 100, "h": 100,
+                "opacity": 1, "z": 2, "visible": True, "keyframes": [],
+            }
+            composition = {
+                "id": "Existing-Scene",
+                "name": "Existing Scene",
+                "width": 120,
+                "height": 80,
+                "referenceLayerId": "reference",
+                "layers": [
+                    {"id": "reference", "name": "Final image", "url": reference_url,
+                     "frames": [reference_url], "x": 0, "y": 0, "w": 100, "h": 100,
+                     "opacity": 1, "z": 0, "visible": False, "keyframes": []},
+                    original_layer,
+                ],
+                "meta": {"source": "image-to-layers"},
+            }
+            (compositions / "Existing-Scene.composition.json").write_text(
+                image_to_layers.json.dumps(composition), encoding="utf-8"
+            )
+            (project / "layers.json").write_text(image_to_layers.json.dumps({
+                "name": "Existing Scene",
+                "width": 120,
+                "height": 80,
+                "layers": [{
+                    "name": "existing-layer",
+                    "file": "images/existing-layer.png",
+                    "group": "Foreground",
+                    "role": "background",
+                    "bbox": [0, 0, 120, 80],
+                }],
+            }), encoding="utf-8")
+            (project / "scene.json").write_text(image_to_layers.json.dumps({
+                "description": "A test scene.",
+                "objects": [{
+                    "name": "red-object",
+                    "label": "Red object",
+                    "description": "The object in the top left.",
+                    "group": "Subject",
+                    "role": "character",
+                    "bbox": [10 / 120, 10 / 80, 31 / 120, 31 / 80],
+                }],
+            }), encoding="utf-8")
+
+            result = image_to_layers.main([
+                "--reference", str(reference_path),
+                "--export", str(export_path),
+                "--name", "Ignored New Name",
+                "--out", str(root / "projects"),
+                "--recover-into", "Existing-Scene",
+                "--feather", "0",
+            ])
+
+            self.assertEqual(result, 0)
+            saved = image_to_layers.json.loads(
+                (compositions / "Existing-Scene.composition.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(saved["name"], "Existing Scene")
+            self.assertEqual(saved["meta"]["source"], "image-to-layers")
+            self.assertEqual(saved["meta"]["recover"]["mergedInto"], "Existing-Scene")
+            self.assertEqual(saved["layers"][1]["id"], "layer-existing")
+            self.assertEqual(len(saved["layers"]), 4)
+            recovered = saved["layers"][2:]
+            named = next(layer for layer in recovered if layer["name"] == "red-object")
+            fallback = next(layer for layer in recovered if layer["name"] == "recovered-region-02")
+            self.assertEqual(named["segmentGroup"], "Subject")
+            self.assertEqual(named["role"], "character")
+            self.assertEqual(named["label"], "Red object")
+            self.assertEqual(fallback["segmentGroup"], "Recovered")
+            self.assertTrue(all(layer["z"] > original_layer["z"] for layer in recovered))
+            self.assertTrue((images / "subject" / "red-object.png").is_file())
+            self.assertTrue((images / "recovered" / "recovered-region-02.png").is_file())
+            self.assertFalse(any(layer["name"] == "Aligned export" for layer in saved["layers"]))
+            self.assertEqual(len(image_to_layers.json.loads(
+                (project / "layers.json").read_text(encoding="utf-8")
+            )["layers"]), 3)
+            self.assertFalse((root / "projects" / "Existing-Scene-recovered").exists())
+
     def test_detects_transparent_holes_and_writes_composition(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
@@ -274,6 +369,57 @@ class RecoverMissingTests(unittest.TestCase):
         self.assertIn("0.2", argv)
         self.assertIn("--recover-keep-border", argv)
         self.assertNotIn("--sam-points", argv)
+
+    def test_server_lists_projects_and_targets_recovery_merge(self):
+        def data_url(image: Image.Image, format: str) -> str:
+            buffer = io.BytesIO()
+            image.save(buffer, format=format)
+            return f"data:image/{format.lower()};base64," + base64.b64encode(
+                buffer.getvalue()
+            ).decode()
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            project = root / "Existing-Scene"
+            composition_dir = project / "compositions"
+            composition_dir.mkdir(parents=True)
+            (project / "layers.json").write_text("{}", encoding="utf-8")
+            (composition_dir / "Existing-Scene.composition.json").write_text(
+                image_to_layers_server.json.dumps({
+                    "id": "Existing-Scene",
+                    "name": "Existing Scene",
+                    "width": 10,
+                    "height": 10,
+                    "layers": [],
+                }),
+                encoding="utf-8",
+            )
+            reference = Image.new("RGB", (10, 10), "white")
+            payload = {
+                "reference": data_url(reference, "PNG"),
+                "referenceName": "reference.png",
+                "export": data_url(reference, "PNG"),
+                "exportName": "export.png",
+                "mode": "recover",
+                "name": "Existing Scene",
+                "outputMode": "project",
+                "recoverProjectId": "Existing-Scene",
+            }
+            with patch.object(image_to_layers_server, "PROJECTS_DIR", root):
+                self.assertEqual(image_to_layers_server.list_projects(), [{
+                    "id": "Existing-Scene",
+                    "name": "Existing Scene",
+                    "width": 10,
+                    "height": 10,
+                }])
+                tmpdir = root / "tmp"
+                tmpdir.mkdir()
+                argv, _ = image_to_layers_server.build_command(payload, tmpdir)
+                self.assertIn("--recover-into", argv)
+                self.assertIn("Existing-Scene", argv)
+                payload["outputMode"] = "zip"
+                with self.assertRaisesRegex(ValueError, "Project output"):
+                    image_to_layers_server.build_command(payload, tmpdir)
 
     def test_preview_parser_and_publisher_keep_project_urls(self):
         with tempfile.TemporaryDirectory() as temp_dir:
