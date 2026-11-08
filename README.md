@@ -178,3 +178,5 @@ ITL_OLLAMA_BASE_URL=http://127.0.0.1:11434
 ```
 
 The selector discovers installed vision-capable models from Ollama when the page loads; it does not use a hardcoded model list. Ollama's native chat endpoint is used with thinking disabled to avoid spending the scene-generation budget on hidden reasoning. `ITL_VISION_MODEL` selects the CLI/UI default when that provider is available, `DEEPSEEK_BASE_URL` changes the DeepSeek-compatible endpoint, and `ITL_OLLAMA_BASE_URL` changes the Ollama endpoint. Local Ollama requests need no API key by default; only the DeepSeek option requires `DEEPSEEK_API_KEY`.
+
+If your machine sits behind a MITM proxy or custom cert chain, set `ITL_SSL_VERIFY=false` in the environment or `.env` to disable certificate verification for the model requests. This is only needed when the TLS chain is valid but not trusted by Python's cert store; leave it `true` otherwise.

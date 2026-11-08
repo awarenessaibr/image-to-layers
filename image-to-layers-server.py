@@ -60,6 +60,7 @@ import os
 import re
 import shutil
 import socketserver
+import ssl
 import subprocess
 import sys
 import tempfile
@@ -79,7 +80,7 @@ PROJECTS_DIR = STUDIO_ROOT / "data" / "projects"
 DOWNLOADS_DIR = DATA_DIR / "downloads"
 SAMPLES_DIR = DATA_DIR / "imports"
 
-PORT = int(os.environ.get("PORT", "8009"))
+PORT = int(os.environ.get("PORT", "8008"))
 HOST = os.environ.get("HOST", "0.0.0.0")
 MAX_BODY = 200 * 1024 * 1024  # 200 MB — generous for 4K references + masks
 VISION_SUBPROCESS_TIMEOUT = 660
@@ -126,6 +127,19 @@ def _is_ollama_vision_model(model: dict) -> bool:
     return bool(re.search(r"(vision|llava|moondream|minicpm-v|qwen[^ ]*vl|gemma[34])", name))
 
 
+def _request_context_for_ssl() -> ssl.SSLContext | None:
+    """Allow opt-out of TLS verification for local/self-signed proxies."""
+    mode = os.environ.get("ITL_SSL_VERIFY", "true").strip().lower()
+    if mode in {"", "1", "true", "yes", "on"}:
+        return None
+    if mode in {"0", "false", "no", "off"}:
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        return ctx
+    return None
+
+
 def get_vision_model_catalog() -> dict:
     """Return configured DeepSeek status and installed Ollama vision models."""
     deepseek_available = bool(os.environ.get("DEEPSEEK_API_KEY", "").strip())
@@ -158,7 +172,11 @@ def get_vision_model_catalog() -> dict:
         if api_key:
             request.add_header("Authorization", f"Bearer {api_key}")
         try:
-            with urllib.request.urlopen(request, timeout=5) as response:
+            context = _request_context_for_ssl()
+            kwargs = {"timeout": 5}
+            if context is not None:
+                kwargs["context"] = context
+            with urllib.request.urlopen(request, **kwargs) as response:
                 payload = json.loads(response.read().decode("utf-8"))
             installed = payload.get("models") if isinstance(payload, dict) else None
             if not isinstance(installed, list):
@@ -551,6 +569,16 @@ def publish_preview(path: Path) -> str | None:
     return "/" + target.relative_to(ROOT).as_posix()
 
 
+def parse_preview_json(stdout: str) -> dict:
+    lines = [line.strip() for line in stdout.splitlines() if line.strip()]
+    for line in reversed(lines):
+        if line.startswith("{"):
+            value = json.loads(line)
+            if isinstance(value, dict):
+                return value
+    raise ValueError("HTML preview did not return JSON stage data.")
+
+
 # ── handler ─────────────────────────────────────────────────────────────
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -566,9 +594,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if any(part.startswith(".") for part in request_path.split("/") if part not in ("", ".", "..")):
             self.send_error(404)  # never serve .env, .git, .venv, ...
             return
-        if self.path in ("", "/", "/image-to-layers.html", "/image-to-layers-server.html"):
+        if request_path in ("", "/", "/image-to-layers.html", "/image-to-layers-server.html"):
             self.path = ui_page()
-        elif self.path.startswith("/api/sample"):
+        elif request_path.startswith("/api/sample"):
             self.send_json(200, find_sample_reference() or {})
             return
         elif request_path == "/api/projects":
@@ -592,12 +620,17 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         return super().translate_path(path)
 
     def do_POST(self):
-        if self.path == "/api/run":
+        request_path = urllib.parse.urlsplit(self.path).path
+        if request_path == "/api/run":
             self.handle_run()
-        elif self.path == "/api/describe":
+        elif request_path == "/api/describe":
             self.handle_describe()
-        elif self.path == "/api/cancel":
+        elif request_path == "/api/cancel":
             self.handle_cancel()
+        elif request_path == "/api/html-preview":
+            self.handle_html_preview()
+        elif request_path == "/api/html-projects":
+            self.handle_html_projects()
         else:
             self.send_error(404)
 
@@ -674,6 +707,110 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_json(400, {"error": str(exc)})
         except Exception as exc:
             self.send_json(500, {"error": str(exc)})
+        finally:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+
+    def handle_html_preview(self):
+        tmpdir = Path(tempfile.mkdtemp(prefix="itl-html-preview-"))
+        try:
+            payload = read_json_body(self)
+            html = str(payload.get("html") or "").strip()
+            if not html:
+                raise ValueError("Missing HTML content")
+            page_name = str(payload.get("name") or "html-page").strip() or "html-page"
+            max_stages = clamp_number(payload, "maxStages", 3, 1, 10, int)
+            html_path = tmpdir / "source.html"
+            html_path.write_text(html, encoding="utf-8")
+            argv = [
+                sys.executable,
+                str(ROOT / "tools" / "html-to-projects.py"),
+                "--html", str(html_path),
+                "--name", page_name,
+                "--max-stages", str(max_stages),
+                "--preview-only",
+            ]
+            done = subprocess.run(
+                argv, cwd=str(ROOT), capture_output=True, text=True,
+                timeout=180,
+                env={**os.environ, "PYTHONUNBUFFERED": "1"},
+            )
+            if done.returncode != 0:
+                message = "\n".join(line.strip() for line in (done.stderr or done.stdout).splitlines() if line.strip())
+                if not message:
+                    message = f"HTML preview exited with status {done.returncode}"
+                self.send_json(502, {"error": message})
+                return
+            self.send_json(200, parse_preview_json(done.stdout or ""))
+        except subprocess.TimeoutExpired:
+            self.send_json(504, {"error": "HTML preview timed out."})
+        except (ValueError, KeyError, json.JSONDecodeError) as exc:
+            self.send_json(400, {"error": str(exc)})
+        except Exception as exc:
+            self.send_json(500, {"error": str(exc)})
+        finally:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+
+    def handle_html_projects(self):
+        tmpdir = Path(tempfile.mkdtemp(prefix="itl-html-projects-"))
+        try:
+            payload = read_json_body(self)
+            html = str(payload.get("html") or "").strip()
+            if not html:
+                raise ValueError("Missing HTML content")
+            page_name = str(payload.get("name") or "html-page").strip() or "html-page"
+            max_stages = clamp_number(payload, "maxStages", 3, 1, 10, int)
+            html_path = tmpdir / "source.html"
+            html_path.write_text(html, encoding="utf-8")
+            argv = [
+                sys.executable,
+                str(ROOT / "tools" / "html-to-projects.py"),
+                "--html", str(html_path),
+                "--name", page_name,
+                "--out", str(PROJECTS_DIR),
+                "--max-stages", str(max_stages),
+            ]
+            if payload.get("segmentBackground"):
+                argv.append("--segment-background")
+            if payload.get("samModel"):
+                argv.extend(["--sam-model", str(payload["samModel"])])
+            if payload.get("visionModel"):
+                argv.extend(["--vision-model", str(payload["visionModel"])])
+
+            self.send_ndjson_headers()
+            proc = subprocess.Popen(
+                argv, cwd=str(ROOT), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                text=True, bufsize=1, env={**os.environ, "PYTHONUNBUFFERED": "1"},
+            )
+            projects: list[str] = []
+            stdout_lines: list[str] = []
+            for line in proc.stdout or []:
+                text = line.rstrip("\n")
+                stdout_lines.append(text)
+                if not text.strip():
+                    continue
+                self.emit({"type": "log", "message": text})
+                if text.startswith("project "):
+                    project_path = text.split(" ", 1)[1].strip()
+                    if project_path:
+                        projects.append(project_path)
+            returncode = proc.wait(timeout=180)
+            if returncode != 0:
+                details = "\n".join(text for text in stdout_lines if text.strip())
+                self.emit({"type": "error", "message": details or f"HTML generation exited with status {returncode}"})
+                return
+            self.emit({"type": "done", "projects": projects})
+        except subprocess.TimeoutExpired:
+            self.emit({"type": "error", "message": "HTML generation timed out."})
+        except (ValueError, KeyError) as exc:
+            try:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                pass
+        except Exception as exc:
+            try:
+                self.send_json(500, {"error": str(exc)})
+            except Exception:
+                pass
         finally:
             shutil.rmtree(tmpdir, ignore_errors=True)
 

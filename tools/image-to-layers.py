@@ -72,6 +72,7 @@ import io
 import json
 import os
 import re
+import ssl
 import sys
 import urllib.error
 import urllib.request
@@ -81,6 +82,9 @@ from pathlib import Path
 from typing import Optional
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageStat
+
+ROOT = Path(__file__).resolve().parent.parent
+TOOL_HTML = ROOT / "tools" / "html-to-projects.py"
 
 
 def load_dotenv(folder: Path) -> None:
@@ -133,7 +137,6 @@ SAM_GROUPS: dict[str, tuple[str, str, str]] = {
 SAM_GROUP_ORDER = [
     "background", "books", "foreground", "subject", "props", "effects", "details",
 ]
-
 
 class LayerMask(tuple):
     """A ``(name, alpha)`` pair with optional grouping metadata."""
@@ -420,6 +423,19 @@ def _extract_json_object(text: str) -> dict:
         raise RuntimeError(f"the vision model returned invalid JSON ({exc})") from exc
 
 
+def _request_context_for_ssl() -> ssl.SSLContext | None:
+    """Allow opt-out of TLS verification for local/self-signed proxies."""
+    mode = os.environ.get("ITL_SSL_VERIFY", "true").strip().lower()
+    if mode in {"", "1", "true", "yes", "on"}:
+        return None
+    if mode in {"0", "false", "no", "off"}:
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        return ctx
+    return None
+
+
 def describe_scene(reference: Image.Image, model: str = DEFAULT_VISION_MODEL,
                    detail: int = 3, hint: str = "", timeout: int = 600) -> dict:
     """Send the reference to DeepSeek or a local Ollama model."""
@@ -491,7 +507,11 @@ def describe_scene(reference: Image.Image, model: str = DEFAULT_VISION_MODEL,
     if api_key:
         request.add_header("Authorization", f"Bearer {api_key}")
     try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
+        context = _request_context_for_ssl()
+        kwargs = {"timeout": timeout}
+        if context is not None:
+            kwargs["context"] = context
+        with urllib.request.urlopen(request, **kwargs) as response:
             payload = json.loads(response.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
         detail_text = exc.read().decode("utf-8", "replace")[:400]

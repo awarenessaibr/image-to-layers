@@ -109,6 +109,21 @@ class VisionModelTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "invalid Ollama vision model id"):
                 image_to_layers.describe_scene(self.image, model="ollama:../outside")
 
+    def test_ssl_verification_can_be_disabled_for_proxies(self):
+        def fake_urlopen(request, timeout=None, context=None):
+            self.assertIsNotNone(context)
+            self.assertFalse(context.check_hostname)
+            self.assertEqual(context.verify_mode, image_to_layers.ssl.CERT_NONE)
+            return self.response
+
+        with patch.dict(os.environ, {
+            "DEEPSEEK_API_KEY": "deepseek-secret",
+            "ITL_SSL_VERIFY": "false",
+        }, clear=True), patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            scene = image_to_layers.describe_scene(self.image, model="deepseek-flash")
+
+        self.assertEqual(scene["model"], "deepseek-flash")
+
     def test_vision_catalog_lists_installed_ollama_vision_models(self):
         tags = {
             "models": [

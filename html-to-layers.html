@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML → LayerStudio projects</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #131217; --surface: #1a1920; --raised: #24232c; --line: #2b2a34;
+    --text: #f2f0ea; --muted: #9c99a8; --accent: #e8803a; --ok: #73d49a;
+    --warn: #f0c35a; --danger: #ff9090;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font: 13px/1.45 system-ui, sans-serif; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  header {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+    gap: 18px; padding: 0 20px; height: 56px;
+    border-bottom: 1px solid var(--line); background: var(--surface);
+  }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 650; }
+  .brand .dot { display: grid; width: 26px; height: 26px; place-items: center;
+    border-radius: 8px; background: rgba(232,128,58,.18); color: var(--accent); }
+  .brand small { color: var(--muted); font-size: 11px; font-weight: 500; }
+  .status { color: var(--muted); font-size: 11px; text-align: right; max-width: 420px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .status[data-kind="ok"] { color: var(--ok); }
+  .status[data-kind="error"] { color: var(--danger); }
+  .status[data-kind="busy"] { color: var(--accent); }
+
+  main { display: grid; grid-template-columns: 340px minmax(0, 1fr) 360px;
+    height: calc(100vh - 56px); min-height: 0; }
+  aside, .center { min-height: 0; overflow-y: auto; }
+  aside { display: flex; flex-direction: column; background: var(--surface); }
+  aside.left { border-right: 1px solid var(--line); }
+  aside.right { border-left: 1px solid var(--line); }
+  .center { padding: 14px 16px; display: grid; gap: 12px; align-content: start; }
+
+  section { padding: 14px 16px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+  h3 { margin: 0; font-size: 12px; color: var(--muted); font-weight: 650; }
+  .drop { display: grid; place-items: center; gap: 2px; padding: 14px; min-height: 84px;
+    border: 1.5px dashed var(--line); border-radius: 10px; background: var(--bg);
+    color: var(--muted); text-align: center; cursor: pointer;
+    transition: border-color .15s, background .15s; }
+  .drop:hover, .drop[data-drag="true"] { border-color: var(--accent); background: rgba(232,128,58,.06); }
+  .drop strong { color: var(--text); }
+
+  textarea, input[type="text"], input[type="number"], select {
+    width: 100%; padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--bg); color: var(--text); font-size: 12px; font-family: inherit; }
+  textarea { min-height: 110px; resize: vertical; font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+  select:disabled { opacity: .45; }
+  label { display: grid; gap: 5px; color: var(--muted); font-size: 11px; }
+  label.check { display: flex; align-items: center; gap: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  button { min-height: 34px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--line);
+    background: var(--raised); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button.primary { background: var(--accent); color: #1a0e06; border-color: var(--accent); }
+  button.primary:hover:not(:disabled) { filter: brightness(1.08); }
+  button[hidden] { display: none; }
+
+  .progress { display: none; gap: 6px; padding: 12px 16px 0; }
+  .progress.on { display: grid; }
+  .bar { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s; }
+  .progress .label { color: var(--muted); font-size: 11px; }
+  .log { display: none; margin: 12px 16px 16px; padding: 10px; background: #0a0a0d;
+    border: 1px solid var(--line); border-radius: 8px; color: var(--muted);
+    font: 10px/1.5 ui-monospace, Menlo, monospace; max-height: 200px; overflow-y: auto;
+    white-space: pre-wrap; word-break: break-word; }
+  .log.on { display: block; }
+  .log .w { color: var(--warn); }
+
+  .scrub { display: none; align-items: center; gap: 10px; padding: 8px 12px;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  .scrub.on { display: flex; }
+  .scrub input { flex: 1; accent-color: var(--accent); }
+  .scrub output { min-width: 64px; text-align: right; color: var(--muted);
+    font-variant-numeric: tabular-nums; }
+  .scrub-btn { display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--raised); color: var(--text); font-size: 11px; cursor: pointer; transition: all .12s; }
+  .scrub-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .scrub-btn.playing { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .stages { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+  .stage-card { display: grid; gap: 6px; padding: 10px; text-align: left; min-height: 0;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--bg); cursor: pointer; }
+  .stage-card:focus-visible { outline: 2px solid var(--accent); }
+  .stage-card[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .card-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; }
+  .card-play-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px;
+    border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+    color: var(--text); font-size: 10px; font-weight: 600; cursor: pointer; transition: all .12s; }
+  .card-play-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--raised); }
+  .card-play-btn.playing { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .preview { position: relative; overflow: hidden; border-radius: 8px; background: #0a0a0d;
+    container-type: inline-size; }
+  .preview img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .preview .box { position: absolute; display: flex; align-items: center; overflow: hidden;
+    outline: 1px dashed rgba(232,128,58,.55); transition: opacity .12s; line-height: 1.15;
+    white-space: pre-wrap; pointer-events: none; }
+  .preview .box.shape { outline: none; }
+  .preview .box.img:not(.shape) { outline-color: rgba(115,212,154,.6); }
+  .preview .box img { width: 100%; height: 100%; display: block; }
+  .preview .box.est { outline-color: rgba(240,195,90,.8); }
+  .preview .box.hot { outline: 2px solid #fff; z-index: 9; }
+  .preview .box.off { opacity: 0 !important; }
+  .stage-card h4 { margin: 0; font-size: 12px; }
+  .stage-card small { color: var(--muted); font-size: 10px; }
+
+  .layer { padding: 6px 4px; border-bottom: 1px dashed var(--line); font-size: 11px; cursor: default; }
+  .layer:hover { background: var(--raised); }
+  .layer .meta { color: var(--muted); font-size: 10px; display: block; }
+  .layer .tag { color: var(--warn); }
+  .warns { display: grid; gap: 6px; }
+  .warns div { padding: 6px 8px; border-left: 2px solid var(--warn); background: rgba(240,195,90,.07);
+    border-radius: 0 6px 6px 0; color: var(--text); font-size: 11px; }
+  .results { display: grid; gap: 6px; }
+  .result { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+  .result strong { display: block; font-size: 12px; }
+  .result small { color: var(--muted); word-break: break-all; }
+  .result a { align-self: center; color: var(--accent); text-decoration: none; font-size: 11px;
+    border: 1px solid var(--line); padding: 3px 9px; border-radius: 999px; }
+  .result a:hover { border-color: var(--accent); }
+  .muted { color: var(--muted); font-size: 11px; }
+  code { background: var(--raised); padding: 1px 4px; border-radius: 4px; }
+
+  @media (max-width: 1100px) {
+    main { grid-template-columns: 1fr; height: auto; }
+    aside, .center { overflow: visible; }
+    aside.left, aside.right { border: 0; border-bottom: 1px solid var(--line); }
+    .status { max-width: 50vw; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="dot" aria-hidden="true">H</span>
+    <span>HTML → Projects</span>
+    <small>LayerStudio bridge</small>
+  </div>
+  <div></div>
+  <div class="status" id="status" role="status" aria-live="polite" data-kind="">Ready.</div>
+</header>
+
+<main>
+  <aside class="left">
+    <section>
+      <h3>HTML source</h3>
+      <div class="drop" id="drop" role="button" tabindex="0">
+        <strong>Drop an .html file</strong>
+        <span>or click to browse, or paste below</span>
+      </div>
+      <input type="file" id="file" accept=".html,.htm,text/html" hidden>
+      <textarea id="html" placeholder="<!doctype html>…" aria-label="HTML source"></textarea>
+      <button id="parse" class="primary" disabled>Parse HTML → preview</button>
+    </section>
+
+    <section>
+      <h3>Options</h3>
+      <label>Page name
+        <input type="text" id="name" placeholder="Le Regole della Nonna">
+      </label>
+      <div class="two">
+        <label>Max stages
+          <input type="number" id="maxStages" min="1" max="10" value="3">
+        </label>
+        <label>Duration (s)
+          <input type="number" id="duration" min="1" max="120" step="1" value="10">
+        </label>
+      </div>
+      <label class="check"><input type="checkbox" id="remote" checked> Download remote images into the project</label>
+      <label class="check"><input type="checkbox" id="segment"> Segment background with SAM 2</label>
+      <label>SAM model
+        <select id="samModel" disabled>
+          <option value="sam2-tiny">SAM 2.1 Tiny (fast)</option>
+          <option value="sam2-small">SAM 2.1 Small</option>
+          <option value="sam2-base" selected>SAM 2.1 Base+</option>
+          <option value="sam2-large">SAM 2.1 Large (best)</option>
+        </select>
+      </label>
+      <label>Vision model (optional)
+        <select id="visionModel" disabled>
+          <option value="">(none — rule-based names)</option>
+        </select>
+      </label>
+      <div class="two">
+        <button id="generate" class="primary" disabled>Generate projects</button>
+        <button id="cancel" hidden>Cancel</button>
+      </div>
+    </section>
+
+    <div class="progress" id="progress">
+      <div class="bar"><i id="bar"></i></div>
+      <div class="label" id="progressLabel">Starting…</div>
+    </div>
+    <div class="log" id="log" aria-label="Run log"></div>
+  </aside>
+
+  <div class="center">
+    <h3>Stages</h3>
+    <div class="scrub" id="scrub">
+      <button type="button" id="playBtn" class="scrub-btn" title="Play / Pause (Space)" aria-label="Play">▶</button>
+      <button type="button" id="restartBtn" class="scrub-btn" title="Restart from 0s" aria-label="Restart">⏮</button>
+      <label for="time" style="display:contents">Preview time</label>
+      <input type="range" id="time" min="0" max="10" step="0.05" value="0">
+      <output id="timeOut" for="time">0.0 s</output>
+    </div>
+    <div id="stages" class="stages"><div class="muted">Parse an HTML page to see its stages here.</div></div>
+    <h3>Generated projects</h3>
+    <div class="results" id="results"><div class="muted">Nothing generated yet.</div></div>
+  </div>
+
+  <aside class="right">
+    <section>
+      <h3>Selected stage</h3>
+      <div id="detail" class="muted">Parse the HTML first.</div>
+    </section>
+    <section>
+      <h3>Pipeline</h3>
+      <div class="muted" style="line-height:1.55">
+        Each <code>.stage</code> block becomes one project. Text layers keep their CSS
+        position, colour, font and rotation, and fade in and out from <code>data-s</code> /
+        <code>data-e</code>. Background photos come from <code>--img</code>,
+        <code>background-image</code> or <code>&lt;img&gt;</code>; other images become their own layers.
+        Segmentation splits the background into named cut-outs behind the text.
+        Amber outlines mark layers whose position was estimated rather than read from CSS.
+      </div>
+    </section>
+  </aside>
+</main>
+
+<script>
+'use strict';
+(() => {
+  const $ = (id) => document.getElementById(id);
+  let parsed = null, busy = false, selected = 0, ctrl = null, time = 0;
+
+  const setStatus = (msg, kind = '') => { $('status').textContent = msg; $('status').dataset.kind = kind; };
+  const setProgress = (pct, label) => {
+    $('progress').classList.add('on');
+    $('bar').style.width = Math.max(0, Math.min(100, pct)) + '%';
+    if (label) $('progressLabel').textContent = label;
+  };
+  const log = (line, warn = false) => {
+    const el = $('log'); el.classList.add('on');
+    const row = document.createElement('div');
+    if (warn) row.className = 'w';
+    row.textContent = (warn ? '! ' : '') + line;
+    el.appendChild(row); el.scrollTop = el.scrollHeight;
+  };
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const fmt = (n) => (Math.round(n * 10) / 10).toFixed(1);
+
+  // ── vision models ──────────────────────────────────────────────────────
+  async function loadVisionModels() {
+    try {
+      const data = await (await fetch('/api/vision-models', { cache: 'no-store' })).json();
+      for (const m of data.ollama?.models || []) {
+        const o = el('option', '', m.id); o.value = `ollama:${m.id}`;
+        $('visionModel').appendChild(o);
+      }
+    } catch { /* optional */ }
+  }
+  $('segment').addEventListener('change', () => {
+    const on = $('segment').checked;
+    $('samModel').disabled = !on; $('visionModel').disabled = !on;
+  });
+
+  // ── source handling ────────────────────────────────────────────────────
+  function invalidate() {
+    setPlaying(false);
+    parsed = null; $('generate').disabled = true;
+    $('parse').disabled = !$('html').value.trim();
+  }
+  function injectFonts(html) {
+    if (!html) return;
+    const links = html.match(/<link[^>]+fonts\.googleapis\.com[^>]+>/gi) || [];
+    links.forEach(tag => {
+      const href = tag.match(/href=["']([^"']+)["']/i)?.[1];
+      if (href && !document.querySelector(`link[href="${href}"]`)) {
+        const l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = href;
+        document.head.appendChild(l);
+      }
+    });
+  }
+
+  function setHtml(text, name) {
+    $('html').value = text;
+    if (name) $('name').value = name;
+    injectFonts(text);
+    invalidate();
+    setStatus('HTML loaded — press Parse.');
+  }
+  async function takeFile(f) {
+    if (!f) return;
+    if (!/\.html?$/i.test(f.name)) { setStatus('Please choose an .html file.', 'error'); return; }
+    setHtml(await f.text(), f.name.replace(/\.html?$/i, ''));
+  }
+  $('drop').addEventListener('click', () => $('file').click());
+  $('drop').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('file').click(); }
+  });
+  $('file').addEventListener('change', (e) => { takeFile(e.target.files?.[0]); e.target.value = ''; });
+  ['dragenter', 'dragover'].forEach(t => window.addEventListener(t, (e) => {
+    e.preventDefault(); $('drop').dataset.drag = 'true';
+  }));
+  ['dragleave', 'drop'].forEach(t => window.addEventListener(t, (e) => {
+    e.preventDefault(); $('drop').dataset.drag = 'false';
+  }));
+  window.addEventListener('drop', (e) => takeFile(e.dataTransfer?.files?.[0]));
+  ['html', 'name', 'maxStages', 'duration'].forEach(id => $(id).addEventListener('input', invalidate));
+
+  const options = () => ({
+    html: $('html').value.trim(),
+    name: $('name').value || undefined,
+    maxStages: Math.max(1, Math.min(10, Number($('maxStages').value) || 3)),
+    durationMs: Math.max(1000, Math.min(120000, Math.round((Number($('duration').value) || 10) * 1000))),
+  });
+
+  // ── parse ──────────────────────────────────────────────────────────────
+  $('parse').addEventListener('click', async () => {
+    const opts = options();
+    if (!opts.html) { setStatus('Paste or drop an HTML file first.', 'error'); return; }
+    setStatus('Parsing HTML…', 'busy');
+    $('parse').disabled = true;
+    try {
+      const r = await fetch('/api/html-preview', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(opts),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.stages) throw new Error(data.error || `HTTP ${r.status}`);
+      parsed = data; selected = 0; time = 0;
+      renderStages(); showDetail();
+      $('generate').disabled = false;
+      const warns = data.stages.reduce((n, s) => n + (s.warnings?.length || 0), 0);
+      setStatus(`Parsed ${data.stages.length} stage(s)` + (warns ? ` — ${warns} warning(s), see Selected stage.` : '.'), warns ? '' : 'ok');
+    } catch (err) {
+      setStatus(err.message || 'Parse failed', 'error');
+    } finally {
+      $('parse').disabled = false;
+    }
+  });
+
+  // ── preview rendering ──────────────────────────────────────────────────
+  const visibleAt = (l, t) => {
+    const s = l.meta?.start || 0, e = l.meta?.end;
+    return t >= s && (e == null || t <= e);
+  };
+
+  function buildPreview(s) {
+    const p = el('div', 'preview');
+    p.style.aspectRatio = `${s.width} / ${s.height}`;
+    if (s.background) {
+      const img = el('img', 'bg'); img.src = s.background; img.alt = ''; img.loading = 'lazy';
+      p.appendChild(img);
+    }
+    s.layers.forEach((l, i) => {
+      const isShape = l.meta?.isShape || l.id?.includes('-shape-') || (l.url && (l.url.startsWith('data:image/svg') || l.url.endsWith('.svg')));
+      const b = el('div', 'box' + (l.type === 'image' ? (isShape ? ' shape' : ' img') : '') + (l.meta?.estimatedBox ? ' est' : ''));
+      b.dataset.i = i;
+      Object.assign(b.style, {
+        left: l.x + '%', top: l.y + '%', width: l.w + '%', height: l.h + '%',
+        transform: l.rotation ? `rotate(${l.rotation}deg)` : '', opacity: l.opacity ?? 1,
+      });
+      if (l.type === 'image' && l.url) {
+        const im = el('img'); im.src = l.url; im.alt = '';
+        im.style.objectFit = (l.fit === 'cover' ? 'cover' : (isShape ? 'fill' : 'contain'));
+        b.appendChild(im);
+      } else if (l.type === 'text') {
+        const f = l.font || {};
+        b.textContent = l.text;
+        Object.assign(b.style, {
+          fontSize: `${f.sizePct || 3}cqw`, fontWeight: f.weight || 400, fontStyle: f.style || 'normal',
+          fontFamily: `"${f.family || 'Helvetica Neue'}", system-ui, sans-serif`,
+          lineHeight: f.lineHeight || 1.2, letterSpacing: `${f.letterSpacingEm || 0}em`,
+          textTransform: f.transform === 'uppercase' ? 'uppercase' : 'none',
+          color: l.color || '#fff', textAlign: l.align || 'left',
+          justifyContent: l.align === 'center' ? 'center' : l.align === 'right' ? 'flex-end' : 'flex-start',
+        });
+      }
+      p.appendChild(b);
+    });
+    return p;
+  }
+
+  let isPlaying = false, playAnimId = null, playLastTs = null;
+
+  function updatePlayButtons() {
+    const playBtn = $('playBtn');
+    if (playBtn) {
+      playBtn.textContent = isPlaying ? '⏸' : '▶';
+      playBtn.classList.toggle('playing', isPlaying);
+      playBtn.title = isPlaying ? 'Pause (Space)' : 'Play (Space)';
+    }
+    document.querySelectorAll('.card-play-btn').forEach((btn) => {
+      const idx = Number(btn.dataset.si);
+      const isCardSelected = idx === selected;
+      if (isPlaying && isCardSelected) {
+        btn.textContent = '⏸ Pause';
+        btn.classList.add('playing');
+      } else {
+        btn.textContent = '▶ Play review';
+        btn.classList.remove('playing');
+      }
+    });
+  }
+
+  function setPlaying(play) {
+    if (play === isPlaying) return;
+    isPlaying = play;
+    updatePlayButtons();
+    if (isPlaying) {
+      playLastTs = performance.now();
+      playAnimId = requestAnimationFrame(playStep);
+    } else {
+      if (playAnimId) cancelAnimationFrame(playAnimId);
+      playAnimId = null;
+      playLastTs = null;
+    }
+  }
+
+  function playStep(now) {
+    if (!isPlaying) return;
+    const delta = (now - playLastTs) / 1000;
+    playLastTs = now;
+    const maxDur = Number($('time').max) || 10;
+    time += delta;
+    if (time >= maxDur) {
+      time = 0;
+    }
+    $('time').value = time;
+    applyTime();
+    playAnimId = requestAnimationFrame(playStep);
+  }
+
+  function togglePlay(stageIndex) {
+    if (stageIndex !== undefined && stageIndex !== selected) {
+      selected = stageIndex;
+      showDetail();
+    }
+    const maxDur = Number($('time').max) || 10;
+    if (isPlaying) {
+      setPlaying(false);
+    } else {
+      if (time >= maxDur - 0.1) time = 0;
+      setPlaying(true);
+    }
+  }
+
+  function applyTime() {
+    if (!parsed) return;
+    $('timeOut').textContent = `${fmt(time)} s`;
+    const tMs = Math.round(time * 1000);
+    document.querySelectorAll('.stage-card').forEach((card, si) => {
+      const layers = parsed.stages[si].layers;
+      card.querySelectorAll('.box').forEach(b => {
+        const l = layers[+b.dataset.i];
+        if (!l) return;
+        b.classList.toggle('off', !visibleAt(l, time));
+        if (l.keyframes && l.keyframes.length > 1) {
+          let activeKf = l.keyframes[0];
+          for (const kf of l.keyframes) {
+            if (tMs >= kf.time) activeKf = kf;
+          }
+          if (activeKf.y !== undefined) b.style.top = activeKf.y + '%';
+          if (activeKf.h !== undefined) b.style.height = activeKf.h + '%';
+        }
+      });
+    });
+  }
+
+  function renderStages() {
+    setPlaying(false);
+    const host = $('stages'); host.replaceChildren();
+    const dur = (parsed.stages[0]?.duration || 10000) / 1000;
+    $('time').max = dur; $('time').value = time; $('scrub').classList.add('on');
+    parsed.stages.forEach((s, i) => {
+      const card = el('div', 'stage-card');
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-pressed', String(i === selected));
+
+      const playCardBtn = el('button', 'card-play-btn', '▶ Play review');
+      playCardBtn.type = 'button';
+      playCardBtn.dataset.si = i;
+      playCardBtn.title = `Review ${s.name}`;
+      playCardBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlay(i);
+      });
+
+      const metaRow = el('div', 'card-actions');
+      metaRow.append(
+        el('small', '', `${s.width}×${s.height}, ${s.layers.length} layers` + (s.warnings?.length ? `, ${s.warnings.length} warning(s)` : '')),
+        playCardBtn
+      );
+
+      card.append(buildPreview(s), el('h4', '', s.name), metaRow);
+      card.addEventListener('click', () => { selected = i; showDetail(); });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (e.target === card) { e.preventDefault(); selected = i; showDetail(); }
+        }
+      });
+      host.appendChild(card);
+    });
+    applyTime();
+    updatePlayButtons();
+  }
+
+  $('playBtn').addEventListener('click', () => togglePlay());
+  $('restartBtn').addEventListener('click', () => {
+    time = 0;
+    $('time').value = 0;
+    applyTime();
+  });
+  $('time').addEventListener('input', (e) => {
+    time = Number(e.target.value);
+    if (isPlaying) setPlaying(false);
+    applyTime();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT') {
+      e.preventDefault();
+      togglePlay();
+    }
+  });
+
+  function showDetail() {
+    document.querySelectorAll('.stage-card').forEach((c, i) => c.setAttribute('aria-pressed', String(i === selected)));
+    updatePlayButtons();
+    const host = $('detail'); host.replaceChildren();
+    const s = parsed?.stages[selected];
+    if (!s) { host.textContent = 'Parse the HTML first.'; return; }
+    host.appendChild(el('div', '', s.name)).style.fontWeight = '600';
+    if (s.warnings?.length) {
+      const w = el('div', 'warns'); s.warnings.forEach(t => w.appendChild(el('div', '', t))); host.appendChild(w);
+    }
+    const card = document.querySelectorAll('.stage-card')[selected];
+    s.layers.forEach((l, i) => {
+      const row = el('div', 'layer');
+      const head = el('strong', '', l.name);
+      const m = el('span', 'meta',
+        `${l.type} · x${fmt(l.x)} y${fmt(l.y)} w${fmt(l.w)} h${fmt(l.h)}` +
+        (l.meta?.start || l.meta?.end != null ? ` · ${l.meta.start || 0}s–${l.meta.end ?? 'end'}` : ''));
+      if (l.meta?.estimatedBox) m.appendChild(el('span', 'tag', ' · estimated'));
+      row.append(head, m);
+      if (l.text) row.appendChild(el('span', 'meta', l.text.slice(0, 120)));
+      const hot = (on) => card?.querySelector(`.box[data-i="${i}"]`)?.classList.toggle('hot', on);
+      row.addEventListener('mouseenter', () => hot(true));
+      row.addEventListener('mouseleave', () => hot(false));
+      host.appendChild(row);
+    });
+  }
+
+  // ── generate ───────────────────────────────────────────────────────────
+  function setBusy(on) {
+    busy = on;
+    $('generate').disabled = on || !parsed;
+    $('cancel').hidden = !on;
+    $('parse').disabled = on || !$('html').value.trim();
+  }
+
+  $('generate').addEventListener('click', async () => {
+    if (busy || !parsed) return;
+    setBusy(true);
+    $('results').replaceChildren(); $('log').replaceChildren();
+    setProgress(2, 'Starting…'); setStatus('Generating projects…', 'busy');
+    ctrl = new AbortController();
+    let finished = false, warnCount = 0;
+    try {
+      const r = await fetch('/api/html-projects', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl.signal,
+        body: JSON.stringify({
+          ...options(),
+          segmentBackground: $('segment').checked,
+          samModel: $('samModel').value,
+          visionModel: $('visionModel').value || null,
+          fetchRemote: $('remote').checked,
+        }),
+      });
+      if (!r.ok) {
+        const txt = await r.text(); let err = txt;
+        try { err = JSON.parse(txt).error || txt; } catch { /* plain text */ }
+        throw new Error(err);
+      }
+      const reader = r.body.getReader(), dec = new TextDecoder();
+      let buf = '';
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        let nl;
+        while ((nl = buf.indexOf('\n')) >= 0) {
+          const line = buf.slice(0, nl).trim(); buf = buf.slice(nl + 1);
+          if (!line) continue;
+          let ev; try { ev = JSON.parse(line); } catch { continue; }
+          if (ev.type === 'progress') { setProgress(ev.percent, ev.message); log(ev.message); }
+          else if (ev.type === 'warning') { warnCount++; log(ev.message, true); }
+          else if (ev.type === 'log') { log(ev.message); }
+          else if (ev.type === 'error') { finished = true; setStatus(ev.message.split('\n').pop() || 'Failed', 'error'); log(ev.message, true); }
+          else if (ev.type === 'done') {
+            finished = true; setProgress(100, 'Done.');
+            renderProjects(ev.projects || []);
+            setStatus(`Done — ${(ev.projects || []).length} project(s)` + (warnCount ? `, ${warnCount} warning(s) in the log.` : '.'), 'ok');
+          }
+        }
+      }
+      if (!finished) setStatus('The server closed the stream before finishing.', 'error');
+    } catch (err) {
+      setStatus(err.name === 'AbortError' ? 'Cancelled.' : (err.message || 'Generation failed'),
+        err.name === 'AbortError' ? '' : 'error');
+    } finally {
+      ctrl = null; setBusy(false);
+    }
+  });
+
+  $('cancel').addEventListener('click', async () => {
+    ctrl?.abort();
+    try { await fetch('/api/cancel', { method: 'POST' }); } catch { /* already gone */ }
+  });
+
+  function renderProjects(projects) {
+    const host = $('results'); host.replaceChildren();
+    if (!projects.length) { host.appendChild(el('div', 'muted', 'No projects were written. Check the log.')); return; }
+    projects.forEach((p, idx) => {
+      const id = p.split('/').pop();
+      const row = el('div', 'result'), info = el('div');
+      info.append(el('strong', '', id), el('small', '', p));
+      const actions = el('div', 'actions');
+      actions.style.display = 'flex';
+      actions.style.gap = '6px';
+      actions.style.alignItems = 'center';
+
+      const playLink = el('button', 'card-play-btn', '▶ Review');
+      playLink.type = 'button';
+      playLink.addEventListener('click', () => {
+        if (parsed?.stages?.[idx]) {
+          togglePlay(idx);
+          document.querySelectorAll('.stage-card')?.[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      const link = el('a', '', 'Open in Studio');
+      link.href = `/studio-v2.html?project=${encodeURIComponent(id)}`;
+      link.target = '_blank'; link.rel = 'noopener';
+
+      actions.append(playLink, link);
+      row.append(info, actions); host.appendChild(row);
+    });
+  }
+
+  loadVisionModels();
+})();
+</script>
+</body>
+</html>

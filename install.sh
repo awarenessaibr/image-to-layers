@@ -133,6 +133,7 @@ if [ ! -f "$SCRIPT_DIR/.env" ]; then
 # DEEPSEEK_API_KEY=sk-...
 # ITL_VISION_MODEL=deepseek-flash
 # DEEPSEEK_BASE_URL=https://api.deepseek.com
+# ITL_SSL_VERIFY=true  # set to false only behind a custom/self-signed MITM proxy cert
 # ITL_OLLAMA_BASE_URL=http://127.0.0.1:11434
 # ITL_OLLAMA_API_KEY=
 ENV
