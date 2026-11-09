@@ -55,6 +55,7 @@ from __future__ import annotations
 
 import base64
 import http.server
+import importlib.util
 import json
 import os
 import re
@@ -77,6 +78,7 @@ STUDIO_ROOT = Path(os.environ.get("STUDIO_ROOT", ROOT.parent / "studio")).resolv
 TOOL = ROOT / "tools" / "image-to-layers.py"
 DATA_DIR = ROOT / "data"
 PROJECTS_DIR = STUDIO_ROOT / "data" / "projects"
+LIBRARY_DIR = STUDIO_ROOT / "data" / "library"
 DOWNLOADS_DIR = DATA_DIR / "downloads"
 SAMPLES_DIR = DATA_DIR / "imports"
 
@@ -605,10 +607,21 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         elif request_path == "/api/vision-models":
             self.send_json(200, get_vision_model_catalog())
             return
+        elif request_path == "/api/library":
+            index = LIBRARY_DIR / "index.json"
+            self.send_json(200, json.loads(index.read_text(encoding="utf-8")) if index.is_file() else {"designs": []})
+            return
         super().do_GET()
 
     def translate_path(self, path: str) -> str:
         request_path = urllib.parse.unquote(urllib.parse.urlsplit(path).path)
+        if request_path.startswith("/data/library/"):
+            target = (LIBRARY_DIR / request_path[len("/data/library/"):]).resolve()
+            try:
+                target.relative_to(LIBRARY_DIR.resolve())
+            except ValueError:
+                return str(LIBRARY_DIR / "__invalid_path__")
+            return str(target)
         prefix = "/data/projects/"
         if request_path.startswith(prefix):
             target = (PROJECTS_DIR / request_path[len(prefix):]).resolve()
@@ -631,6 +644,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.handle_html_preview()
         elif request_path == "/api/html-projects":
             self.handle_html_projects()
+        elif request_path in ("/api/library/animations", "/api/library/compose"):
+            self.handle_library_write(request_path.endswith("/compose"))
         else:
             self.send_error(404)
 
@@ -821,6 +836,29 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 pass
         finally:
             shutil.rmtree(tmpdir, ignore_errors=True)
+
+    # ── library: save a validated animation, or compose one from clips ─────
+
+    def handle_library_write(self, compose: bool):
+        try:
+            payload = read_json_body(self)
+            spec = importlib.util.spec_from_file_location("build_library", ROOT / "tools" / "build-library.py")
+            lib = importlib.util.module_from_spec(spec)
+            sys.modules[spec.name] = lib
+            spec.loader.exec_module(lib)
+            design_id = str(payload.get("designId") or "")
+            if compose:
+                result = lib.compose_design(LIBRARY_DIR, PROJECTS_DIR, design_id, payload.get("steps") or [],
+                                            str(payload.get("name") or "Composed animation"), bool(payload.get("save")))
+            else:
+                result = lib.save_animation(LIBRARY_DIR, PROJECTS_DIR, design_id, payload.get("animation") or {})
+            if result.get("file"):
+                lib.build(PROJECTS_DIR, LIBRARY_DIR)  # refresh index so the new animation is listed
+            self.send_json(200, result)
+        except ValueError as exc:
+            self.send_json(400, {"error": str(exc)})
+        except Exception as exc:
+            self.send_json(500, {"error": str(exc)})
 
     # ── cancel ─────────────────────────────────────────────────────────
 

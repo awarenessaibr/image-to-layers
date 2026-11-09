@@ -317,7 +317,7 @@ JS = r"""
   if (document.fonts && document.fonts.status !== 'loaded') {
     Promise.race([
       document.fonts.ready,
-      new Promise(resolve => setTimeout(resolve, 2500)),
+      new Promise(resolve => setTimeout(resolve, 8000)),
     ]).then(boot, boot);
   } else {
     boot();
@@ -386,6 +386,9 @@ SAMPLES_JS = r"""
         bgSize: cs.backgroundSize,
         tf: cs.transform,
         maskImage: (cs.maskImage && cs.maskImage !== "none") ? cs.maskImage.slice(0, 400) : "",
+        clipPath: (cs.clipPath && cs.clipPath !== "none") ? cs.clipPath.slice(0, 400) : "",
+        filter: cs.filter && cs.filter !== "none" ? cs.filter.slice(0, 400) : "",
+        backface: cs.backfaceVisibility || "",
         so: num(parseFloat(cs.strokeDashoffset) || 0),
         sd: cs.strokeDasharray,
       };
@@ -411,10 +414,13 @@ SAMPLES_JS = r"""
         } catch (e) {}
       });
       try {
+        const progress = D > 0 ? Math.min(1, Math.max(0, (t * 1000) / D)) : 0;
+        // Every detected progress variable follows the same time ratio.
+        Object.keys(VARS).forEach(k => stage.style.setProperty("--" + k, String(progress)));
         if (typeof f === "function" && typeof o !== "undefined" && o[stage.id] !== undefined) {
           f(o[stage.id] + t * 1000);
         } else {
-          stage.style.setProperty("--p", String(t / (D / 1000)));
+          stage.style.setProperty("--p", String(progress));
           stage.querySelectorAll("[data-s]").forEach(e => e.classList.toggle(
             "on", t >= +e.dataset.s && t < +(e.dataset.e || 99)));
         }
@@ -596,7 +602,7 @@ def main(argv: list[str] | None = None) -> int:
                          "rounding match the composition")
     ap.add_argument("--width", type=int, default=1400)
     ap.add_argument("--height", type=int, default=1000)
-    ap.add_argument("--budget", type=int, default=5000, help="Chrome virtual time budget (ms)")
+    ap.add_argument("--budget", type=int, default=12000, help="Chrome virtual time budget (ms)")
     ap.add_argument("--samples", type=int, default=0,
                     help="also capture N time samples of the animated state")
     ap.add_argument("--timeout", type=int, default=120)

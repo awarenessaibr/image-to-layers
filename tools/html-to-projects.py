@@ -1840,7 +1840,7 @@ def measure_page(html_path: Path) -> dict | None:
                 "--state", "on", "--stage-width", str(DEFAULT_STAGE_W),
                 "--width", "1200", "--height", "1000", "--samples", "16",
                 "--time", f"{sample_ms / 1000:.3f}",
-                "--budget", "6000", "--out", str(out), *end_vars]
+                "--budget", "12000", "--out", str(out), *end_vars]
         try:
             done = subprocess.run(argv, capture_output=True, text=True, timeout=MEASURE_TIMEOUT_S)
             if done.returncode == 0 and out.is_file():
@@ -3467,6 +3467,57 @@ def build_stage_measured(passes: dict, index: int, name: str, page_ms: int | Non
                                 layer.get("rotation", 0.0), 1.0))
                 kfs2.sort(key=lambda k: k["time"])
                 layer["keyframes"] = kfs2
+
+    # Attach time-varying CSS clip paths and filters to each layer. The
+    # generic visibility/keyframe pass captures boxes and opacity but these
+    # two effects are what make split-screen and filtered reels look wrong.
+    def _clip_rect(value, stage_w, stage_h):
+        if not value or value == "none":
+            return None
+        m = re.match(r"inset\(([^)]*)\)", value)
+        if not m:
+            return None
+        parts = [p.strip() for p in m.group(1).split() if p.strip()]
+        if not parts:
+            return None
+        vals = []
+        for part in (parts * 4)[:4]:
+            num = re.match(r"(-?[\d.]+)\s*(%|px)?", part)
+            if not num:
+                return None
+            n = float(num.group(1))
+            unit = num.group(2) or "px"
+            vals.append(n / 100 if unit == "%" else n / max(1, stage_w if len(vals) % 2 == 0 else stage_h))
+        top, right, bottom, left = (vals + [0, 0, 0, 0])[:4]
+        return {"shape": "rect", "x": round(left * 100, 3), "y": round(top * 100, 3),
+                "w": round(max(0, 1 - left - right) * 100, 3), "h": round(max(0, 1 - top - bottom) * 100, 3)}
+
+    for layer in layers:
+        path = (layer.get("meta") or {}).get("path")
+        rows = rows_by_path.get(path) if path is not None else None
+        if not rows:
+            continue
+        clips = []
+        filters = []
+        for t, sn in rows:
+            cp = sn.get("clipPath")
+            if cp:
+                rect = _clip_rect(cp, W, H)
+                if rect:
+                    clips.append((t, rect))
+            flt = sn.get("filter")
+            if flt and flt != "none":
+                filters.append((t, flt))
+        if len(clips) >= 2 and len({json.dumps(c[1], sort_keys=True) for c in clips}) > 1:
+            for k in layer.get("keyframes") or []:
+                t = float(k.get("time") or 0) / 1000
+                nearest = min(clips, key=lambda c: abs(c[0] - t))
+                k["clip"] = nearest[1]
+        if filters and len({f[1] for f in filters}) > 1:
+            for k in layer.get("keyframes") or []:
+                t = float(k.get("time") or 0) / 1000
+                nearest = min(filters, key=lambda f: abs(f[0] - t))
+                k["filter"] = nearest[1]
 
     text_layers = [l for l in layers if l["type"] == "text"]
     baked_text = any(n.get("text") and any(
