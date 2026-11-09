@@ -2,6 +2,46 @@
 
 This project turns a reference image plus one mask per layer into a Layer Studio composition or a ZIP that can be imported by the studio importer. It can also recover missing layers from an aligned studio export that still contains the final reference image.
 
+## HTML → layers
+
+The same server also exposes an **HTML → Projects** page (`/html-to-layers.html`): drop a
+social-post HTML page (one `.stage` / `.post` per composition), preview the extracted layers
+at any timecode, and write one LayerStudio project per stage.
+
+Extraction is measurement-first: the page is rendered in headless Chrome (three passes, at
+1080 px stage width, webfonts awaited) and text, shapes, photos, clipping and timing are
+taken from the real layout. The CSS walk remains as a labelled fallback when Chrome is not
+installed.
+
+```bash
+# preview a page as JSON
+python3 tools/html-to-projects.py --html page.html --preview-only
+
+# write projects (images are materialised next to the composition)
+python3 tools/html-to-projects.py --html page.html --out data/projects --name "My Page"
+
+# force the CSS-only fallback (no Chrome)
+python3 tools/html-to-projects.py --html page.html --preview-only --layout css
+```
+
+Verification tooling:
+
+```bash
+# record browser ground truth for a page
+python3 tools/measure-html-chrome.py --html page.html --state on --stage-width 1080 \
+  --no-transform --out /tmp/page-boxes.json
+
+# score the extractor against it (--strict is the CI gate)
+python3 tools/check-html-parse.py --fixture /tmp/page-boxes.json --html page.html --strict
+```
+
+Each page in `html-examples/` (including the Heritage Collection pages, whose stages are built
+by the page's own JS) has a report with a browser-vs-extracted image and its stage inventory:
+[docs/examples/](docs/examples/README.md). See
+[docs/html-to-layers-pipeline.md](docs/html-to-layers-pipeline.md) for how layers are built
+and [docs/review-news-bulletin-fidelity.md](docs/review-news-bulletin-fidelity.md) for the
+review that motivated the change.
+
 ## Quick start
 
 Run the web UI in the background with `./start.sh`, then open the URL it

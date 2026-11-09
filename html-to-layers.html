@@ -172,9 +172,9 @@
       </label>
       <div class="two">
         <label>Max stages
-          <input type="number" id="maxStages" min="1" max="10" value="3">
+          <input type="number" id="maxStages" min="1" max="10" value="10">
         </label>
-        <label>Duration (s)
+        <label title="Used only when the page does not declare its own reel length (data-d or a JS duration constant).">Duration (s, fallback)
           <input type="number" id="duration" min="1" max="120" step="1" value="10">
         </label>
       </div>
@@ -381,7 +381,8 @@
       });
       if (l.type === 'image' && l.url) {
         const im = el('img'); im.src = l.url; im.alt = '';
-        im.style.objectFit = (l.fit === 'cover' ? 'cover' : (isShape ? 'fill' : 'contain'));
+        im.style.objectFit = (l.fit === 'cover' ? 'cover' : l.fit === 'fill' ? 'fill'
+          : (isShape ? 'fill' : 'contain'));
         b.appendChild(im);
       } else if (l.type === 'text') {
         const f = l.font || {};
@@ -479,8 +480,11 @@
           for (const kf of l.keyframes) {
             if (tMs >= kf.time) activeKf = kf;
           }
+          if (activeKf.x !== undefined) b.style.left = activeKf.x + '%';
           if (activeKf.y !== undefined) b.style.top = activeKf.y + '%';
+          if (activeKf.w !== undefined) b.style.width = activeKf.w + '%';
           if (activeKf.h !== undefined) b.style.height = activeKf.h + '%';
+          if (activeKf.opacity !== undefined) b.style.opacity = activeKf.opacity;
         }
       });
     });
@@ -489,8 +493,9 @@
   function renderStages() {
     setPlaying(false);
     const host = $('stages'); host.replaceChildren();
-    const dur = (parsed.stages[0]?.duration || 10000) / 1000;
-    $('time').max = dur; $('time').value = time; $('scrub').classList.add('on');
+    const selectedStage = parsed.stages[selected] || parsed.stages[0];
+    const dur = (selectedStage?.duration || 10000) / 1000;
+    $('time').max = dur; $('time').value = Math.min(time, dur); $('scrub').classList.add('on');
     parsed.stages.forEach((s, i) => {
       const card = el('div', 'stage-card');
       card.setAttribute('role', 'button');
@@ -508,7 +513,9 @@
 
       const metaRow = el('div', 'card-actions');
       metaRow.append(
-        el('small', '', `${s.width}×${s.height}, ${s.layers.length} layers` + (s.warnings?.length ? `, ${s.warnings.length} warning(s)` : '')),
+        el('small', '', `${s.width}×${s.height} · ${(s.duration / 1000).toFixed(1)}s · ${s.layers.length} layers`
+          + (s.metadata?.layout === 'measured' ? ' · measured' : ' · estimated')
+          + (s.warnings?.length ? ` · ${s.warnings.length} warning(s)` : '')),
         playCardBtn
       );
 
@@ -549,6 +556,11 @@
     const host = $('detail'); host.replaceChildren();
     const s = parsed?.stages[selected];
     if (!s) { host.textContent = 'Parse the HTML first.'; return; }
+    if (s.duration) {
+      const max = s.duration / 1000;
+      $('time').max = max;
+      if (time > max) { time = max; $('time').value = time; applyTime(); }
+    }
     host.appendChild(el('div', '', s.name)).style.fontWeight = '600';
     if (s.warnings?.length) {
       const w = el('div', 'warns'); s.warnings.forEach(t => w.appendChild(el('div', '', t))); host.appendChild(w);
@@ -658,8 +670,8 @@
         }
       });
 
-      const link = el('a', '', 'Open in Studio');
-      link.href = `/studio-v2.html?project=${encodeURIComponent(id)}`;
+      const link = el('a', '', 'Open composition');
+      link.href = `/data/projects/${encodeURIComponent(id)}/compositions/${encodeURIComponent(id)}.composition.json`;
       link.target = '_blank'; link.rel = 'noopener';
 
       actions.append(playLink, link);

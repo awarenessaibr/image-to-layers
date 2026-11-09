@@ -729,6 +729,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 "--max-stages", str(max_stages),
                 "--preview-only",
             ]
+            duration_ms = payload.get("durationMs")
+            if isinstance(duration_ms, (int, float)) and duration_ms > 0:
+                argv.extend(["--duration-ms", str(int(duration_ms))])
             done = subprocess.run(
                 argv, cwd=str(ROOT), capture_output=True, text=True,
                 timeout=180,
@@ -769,6 +772,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 "--out", str(PROJECTS_DIR),
                 "--max-stages", str(max_stages),
             ]
+            duration_ms = payload.get("durationMs")
+            if isinstance(duration_ms, (int, float)) and duration_ms > 0:
+                argv.extend(["--duration-ms", str(int(duration_ms))])
+            if payload.get("fetchRemote"):
+                argv.append("--fetch-remote")
             if payload.get("segmentBackground"):
                 argv.append("--segment-background")
             if payload.get("samModel"):

@@ -117,6 +117,8 @@ class SamAutoTests(unittest.TestCase):
         generator_class.assert_called_once_with(
             build_model.return_value,
             points_per_side=16,
+            pred_iou_thresh=0.8,
+            stability_score_thresh=0.85,
             output_mode="binary_mask",
         )
 

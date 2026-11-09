@@ -1,0 +1,1953 @@
+{
+ "pages": [
+  {
+   "page": "02-brutal.html",
+   "file": "html-examples/02-brutal.html",
+   "slug": "02-brutal",
+   "fixture": "tests/fixtures/examples/02-brutal.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 9000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 3,
+      "photo": 1
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 11000,
+     "layout": "measured",
+     "layers": {
+      "text": 10,
+      "shape": 2,
+      "photo": 6
+     },
+     "text": {
+      "expected": 4,
+      "within": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "paint": {
+      "expected": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 5,
+      "shape": 3,
+      "photo": 3
+     },
+     "text": {
+      "expected": 5,
+      "within": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "paint": {
+      "expected": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 40,
+    "textExpected": 16,
+    "textWithin": 16,
+    "paintExpected": 15,
+    "paintMatched": 15
+   }
+  },
+  {
+   "page": "03-immersive.html",
+   "file": "html-examples/03-immersive.html",
+   "slug": "03-immersive",
+   "fixture": "tests/fixtures/examples/03-immersive.json",
+   "fonts": "loaded",
+   "stageCount": 1,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 12000,
+     "layout": "measured",
+     "layers": {
+      "text": 5,
+      "shape": 1,
+      "photo": 1
+     },
+     "text": {
+      "expected": 6,
+      "within": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 7,
+    "textExpected": 6,
+    "textWithin": 6,
+    "paintExpected": 1,
+    "paintMatched": 1
+   }
+  },
+  {
+   "page": "Alternatives \u00b7 Heritage \u00b7 Italian places \u00b7 Pinocchio.html",
+   "file": "html-examples/Alternatives \u00b7 Heritage \u00b7 Italian places \u00b7 Pinocchio.html",
+   "slug": "alternatives-heritage-italian-places-pinocchio",
+   "fixture": "tests/fixtures/examples/alternatives-heritage-italian-places-pinocchio.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 14000,
+     "layout": "measured",
+     "layers": {
+      "text": 19,
+      "shape": 41,
+      "photo": 5
+     },
+     "text": {
+      "expected": 19,
+      "within": 19,
+      "matched": 19,
+      "missing": []
+     },
+     "paint": {
+      "expected": 40,
+      "matched": 40,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 12000,
+     "layout": "measured",
+     "layers": {
+      "text": 22,
+      "shape": 11,
+      "photo": 4
+     },
+     "text": {
+      "expected": 22,
+      "within": 22,
+      "matched": 22,
+      "missing": []
+     },
+     "paint": {
+      "expected": 14,
+      "matched": 14,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 12000,
+     "layout": "measured",
+     "layers": {
+      "text": 9,
+      "shape": 10,
+      "photo": 6
+     },
+     "text": {
+      "expected": 9,
+      "within": 9,
+      "matched": 9,
+      "missing": []
+     },
+     "paint": {
+      "expected": 13,
+      "matched": 13,
+      "missing": []
+     },
+     "warnings": [
+      "Clipped image <div .abs gr> kept uncropped."
+     ]
+    }
+   ],
+   "totals": {
+    "layers": 127,
+    "textExpected": 50,
+    "textWithin": 50,
+    "paintExpected": 67,
+    "paintMatched": 67
+   }
+  },
+  {
+   "page": "butterfly-pig-cinematic-posts.html",
+   "file": "html-examples/butterfly-pig-cinematic-posts.html",
+   "slug": "butterfly-pig-cinematic-posts",
+   "fixture": "tests/fixtures/examples/butterfly-pig-cinematic-posts.json",
+   "fonts": "loaded",
+   "stageCount": 4,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 16000,
+     "layout": "measured",
+     "layers": {
+      "text": 24,
+      "shape": 38,
+      "photo": 3
+     },
+     "text": {
+      "expected": 24,
+      "within": 24,
+      "matched": 24,
+      "missing": []
+     },
+     "paint": {
+      "expected": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "warnings": [
+      "Gradient on <div .rr> is not supported; skipped."
+     ]
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 14000,
+     "layout": "measured",
+     "layers": {
+      "text": 27,
+      "shape": 46,
+      "photo": 1
+     },
+     "text": {
+      "expected": 27,
+      "within": 27,
+      "matched": 27,
+      "missing": []
+     },
+     "paint": {
+      "expected": 15,
+      "matched": 15,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 16000,
+     "layout": "measured",
+     "layers": {
+      "text": 15,
+      "shape": 50,
+      "photo": 1
+     },
+     "text": {
+      "expected": 15,
+      "within": 15,
+      "matched": 15,
+      "missing": []
+     },
+     "paint": {
+      "expected": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 3,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 4,
+      "shape": 5,
+      "photo": 4
+     },
+     "text": {
+      "expected": 6,
+      "within": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "paint": {
+      "expected": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 218,
+    "textExpected": 72,
+    "textWithin": 72,
+    "paintExpected": 31,
+    "paintMatched": 31
+   }
+  },
+  {
+   "page": "Deep Thinkers \u00b7 cinematic reels.html",
+   "file": "html-examples/Deep Thinkers \u00b7 cinematic reels.html",
+   "slug": "deep-thinkers-cinematic-reels",
+   "fixture": "tests/fixtures/examples/deep-thinkers-cinematic-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 15000,
+     "layout": "measured",
+     "layers": {
+      "text": 5,
+      "shape": 24,
+      "photo": 1
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 15000,
+     "layout": "measured",
+     "layers": {
+      "text": 6,
+      "shape": 22,
+      "photo": 3
+     },
+     "text": {
+      "expected": 6,
+      "within": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 18000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 24,
+      "photo": 1
+     },
+     "text": {
+      "expected": 8,
+      "within": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "paint": {
+      "expected": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 93,
+    "textExpected": 21,
+    "textWithin": 21,
+    "paintExpected": 4,
+    "paintMatched": 4
+   }
+  },
+  {
+   "page": "Heritage Collection \u00b7 ALT places reels.html",
+   "file": "html-examples/Heritage Collection \u00b7 ALT places reels.html",
+   "slug": "heritage-collection-alt-places-reels",
+   "fixture": "tests/fixtures/examples/heritage-collection-alt-places-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 13000,
+     "layout": "measured",
+     "layers": {
+      "text": 28,
+      "shape": 18,
+      "photo": 0
+     },
+     "text": {
+      "expected": 28,
+      "within": 27,
+      "matched": 28,
+      "missing": []
+     },
+     "paint": {
+      "expected": 12,
+      "matched": 12,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 11500,
+     "layout": "measured",
+     "layers": {
+      "text": 14,
+      "shape": 12,
+      "photo": 0
+     },
+     "text": {
+      "expected": 15,
+      "within": 15,
+      "matched": 15,
+      "missing": []
+     },
+     "paint": {
+      "expected": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 14500,
+     "layout": "measured",
+     "layers": {
+      "text": 18,
+      "shape": 9,
+      "photo": 1
+     },
+     "text": {
+      "expected": 6,
+      "within": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 100,
+    "textExpected": 49,
+    "textWithin": 48,
+    "paintExpected": 24,
+    "paintMatched": 24
+   }
+  },
+  {
+   "page": "Heritage Collection \u00b7 places reels.html",
+   "file": "html-examples/Heritage Collection \u00b7 places reels.html",
+   "slug": "heritage-collection-places-reels",
+   "fixture": "tests/fixtures/examples/heritage-collection-places-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 13500,
+     "layout": "measured",
+     "layers": {
+      "text": 20,
+      "shape": 14,
+      "photo": 17
+     },
+     "text": {
+      "expected": 20,
+      "within": 20,
+      "matched": 20,
+      "missing": []
+     },
+     "paint": {
+      "expected": 17,
+      "matched": 17,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 11000,
+     "layout": "measured",
+     "layers": {
+      "text": 21,
+      "shape": 8,
+      "photo": 5
+     },
+     "text": {
+      "expected": 21,
+      "within": 21,
+      "matched": 21,
+      "missing": []
+     },
+     "paint": {
+      "expected": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 14200,
+     "layout": "measured",
+     "layers": {
+      "text": 29,
+      "shape": 17,
+      "photo": 37
+     },
+     "text": {
+      "expected": 29,
+      "within": 29,
+      "matched": 29,
+      "missing": []
+     },
+     "paint": {
+      "expected": 21,
+      "matched": 21,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 168,
+    "textExpected": 70,
+    "textWithin": 70,
+    "paintExpected": 44,
+    "paintMatched": 44
+   }
+  },
+  {
+   "page": "Heritage Collection \u00b7 story reels.html",
+   "file": "html-examples/Heritage Collection \u00b7 story reels.html",
+   "slug": "heritage-collection-story-reels",
+   "fixture": "tests/fixtures/examples/heritage-collection-story-reels.json",
+   "fonts": "loaded",
+   "stageCount": 6,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 31,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 31,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 31,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 3,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 31,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 4,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 31,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 5,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 9,
+      "shape": 3,
+      "photo": 5
+     },
+     "text": {
+      "expected": 9,
+      "within": 9,
+      "matched": 9,
+      "missing": []
+     },
+     "paint": {
+      "expected": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 217,
+    "textExpected": 44,
+    "textWithin": 44,
+    "paintExpected": 21,
+    "paintMatched": 21
+   }
+  },
+  {
+   "page": "Heritage Collection \u00b7 video posts.html",
+   "file": "html-examples/Heritage Collection \u00b7 video posts.html",
+   "slug": "heritage-collection-video-posts",
+   "fixture": "tests/fixtures/examples/heritage-collection-video-posts.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 4900,
+     "layout": "measured",
+     "layers": {
+      "text": 8,
+      "shape": 22,
+      "photo": 3
+     },
+     "text": {
+      "expected": 8,
+      "within": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 4,
+      "shape": 16,
+      "photo": 2
+     },
+     "text": {
+      "expected": 4,
+      "within": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "paint": {
+      "expected": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1350,
+     "duration": 4900,
+     "layout": "measured",
+     "layers": {
+      "text": 5,
+      "shape": 22,
+      "photo": 1
+     },
+     "text": {
+      "expected": 5,
+      "within": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "paint": {
+      "expected": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 83,
+    "textExpected": 17,
+    "textWithin": 17,
+    "paintExpected": 10,
+    "paintMatched": 10
+   }
+  },
+  {
+   "page": "Melano \u00b7 stop-motion style posts.html",
+   "file": "html-examples/Melano \u00b7 stop-motion style posts.html",
+   "slug": "melano-stop-motion-style-posts",
+   "fixture": "tests/fixtures/examples/melano-stop-motion-style-posts.json",
+   "fonts": "loading",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 0,
+      "shape": 1,
+      "photo": 3
+     },
+     "text": {
+      "expected": 4,
+      "within": 0,
+      "matched": 0,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": [
+      "Text is baked into the flattened artwork layer (inline SVG)."
+     ]
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 0,
+      "shape": 1,
+      "photo": 3
+     },
+     "text": {
+      "expected": 6,
+      "within": 0,
+      "matched": 0,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": [
+      "Text is baked into the flattened artwork layer (inline SVG)."
+     ]
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 0,
+      "shape": 1,
+      "photo": 3
+     },
+     "text": {
+      "expected": 6,
+      "within": 0,
+      "matched": 0,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": [
+      "Text is baked into the flattened artwork layer (inline SVG)."
+     ]
+    }
+   ],
+   "totals": {
+    "layers": 12,
+    "textExpected": 16,
+    "textWithin": 0,
+    "paintExpected": 3,
+    "paintMatched": 3
+   }
+  },
+  {
+   "page": "Singl-end Pinocchio \u00b7 ALT reels.html",
+   "file": "html-examples/Singl-end Pinocchio \u00b7 ALT reels.html",
+   "slug": "singl-end-pinocchio-alt-reels",
+   "fixture": "tests/fixtures/examples/singl-end-pinocchio-alt-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 11,
+      "photo": 0
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 8,
+      "shape": 18,
+      "photo": 0
+     },
+     "text": {
+      "expected": 8,
+      "within": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "paint": {
+      "expected": 17,
+      "matched": 17,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 10,
+      "shape": 15,
+      "photo": 0
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 14,
+      "matched": 14,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 69,
+    "textExpected": 22,
+    "textWithin": 22,
+    "paintExpected": 38,
+    "paintMatched": 38
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 3 minimalist reels.html",
+   "file": "html-examples/Singl-end \u00b7 3 minimalist reels.html",
+   "slug": "singl-end-3-minimalist-reels",
+   "fixture": "tests/fixtures/examples/singl-end-3-minimalist-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 3,
+      "shape": 2,
+      "photo": 1
+     },
+     "text": {
+      "expected": 3,
+      "within": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 3,
+      "shape": 2,
+      "photo": 1
+     },
+     "text": {
+      "expected": 3,
+      "within": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "paint": {
+      "expected": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 3,
+      "shape": 1,
+      "photo": 1
+     },
+     "text": {
+      "expected": 3,
+      "within": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 17,
+    "textExpected": 9,
+    "textWithin": 9,
+    "paintExpected": 4,
+    "paintMatched": 4
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 3 more reel styles.html",
+   "file": "html-examples/Singl-end \u00b7 3 more reel styles.html",
+   "slug": "singl-end-3-more-reel-styles",
+   "fixture": "tests/fixtures/examples/singl-end-3-more-reel-styles.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 2,
+      "shape": 4,
+      "photo": 1
+     },
+     "text": {
+      "expected": 2,
+      "within": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 4,
+      "shape": 4,
+      "photo": 1
+     },
+     "text": {
+      "expected": 4,
+      "within": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 8,
+      "shape": 7,
+      "photo": 1
+     },
+     "text": {
+      "expected": 8,
+      "within": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "paint": {
+      "expected": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 32,
+    "textExpected": 14,
+    "textWithin": 14,
+    "paintExpected": 15,
+    "paintMatched": 15
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 9_16 reel concepts.html",
+   "file": "html-examples/Singl-end \u00b7 9_16 reel concepts.html",
+   "slug": "singl-end-9-16-reel-concepts",
+   "fixture": "tests/fixtures/examples/singl-end-9-16-reel-concepts.json",
+   "fonts": "loaded",
+   "stageCount": 2,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 6,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 7,
+      "photo": 1
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 1,
+      "matched": 1,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 30,
+    "textExpected": 14,
+    "textWithin": 14,
+    "paintExpected": 4,
+    "paintMatched": 4
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 before & after reels.html",
+   "file": "html-examples/Singl-end \u00b7 before & after reels.html",
+   "slug": "singl-end-before-after-reels",
+   "fixture": "tests/fixtures/examples/singl-end-before-after-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 8,
+      "shape": 5,
+      "photo": 2
+     },
+     "text": {
+      "expected": 8,
+      "within": 7,
+      "matched": 8,
+      "missing": []
+     },
+     "paint": {
+      "expected": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 10,
+      "shape": 4,
+      "photo": 1
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 8,
+      "shape": 3,
+      "photo": 1
+     },
+     "text": {
+      "expected": 8,
+      "within": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 42,
+    "textExpected": 23,
+    "textWithin": 22,
+    "paintExpected": 13,
+    "paintMatched": 13
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 Italian places reels.html",
+   "file": "html-examples/Singl-end \u00b7 Italian places reels.html",
+   "slug": "singl-end-italian-places-reels",
+   "fixture": "tests/fixtures/examples/singl-end-italian-places-reels.json",
+   "fonts": "loaded",
+   "stageCount": 2,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 12000,
+     "layout": "measured",
+     "layers": {
+      "text": 39,
+      "shape": 43,
+      "photo": 2
+     },
+     "text": {
+      "expected": 36,
+      "within": 36,
+      "matched": 36,
+      "missing": []
+     },
+     "paint": {
+      "expected": 24,
+      "matched": 24,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 24,
+      "shape": 12,
+      "photo": 12
+     },
+     "text": {
+      "expected": 16,
+      "within": 16,
+      "matched": 16,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 132,
+    "textExpected": 52,
+    "textWithin": 52,
+    "paintExpected": 27,
+    "paintMatched": 27
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 Le Regole della Nonna (3-episode series).html",
+   "file": "html-examples/Singl-end \u00b7 Le Regole della Nonna (3-episode series).html",
+   "slug": "singl-end-le-regole-della-nonna-3-episode-series",
+   "fixture": "tests/fixtures/examples/singl-end-le-regole-della-nonna-3-episode-series.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 19,
+      "shape": 14,
+      "photo": 1
+     },
+     "text": {
+      "expected": 19,
+      "within": 19,
+      "matched": 19,
+      "missing": []
+     },
+     "paint": {
+      "expected": 12,
+      "matched": 12,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 19,
+      "shape": 14,
+      "photo": 1
+     },
+     "text": {
+      "expected": 19,
+      "within": 19,
+      "matched": 19,
+      "missing": []
+     },
+     "paint": {
+      "expected": 12,
+      "matched": 12,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 19,
+      "shape": 14,
+      "photo": 1
+     },
+     "text": {
+      "expected": 19,
+      "within": 19,
+      "matched": 19,
+      "missing": []
+     },
+     "paint": {
+      "expected": 12,
+      "matched": 12,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 102,
+    "textExpected": 57,
+    "textWithin": 57,
+    "paintExpected": 36,
+    "paintMatched": 36
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 news bulletin reels.html",
+   "file": "html-examples/Singl-end \u00b7 news bulletin reels.html",
+   "slug": "singl-end-news-bulletin-reels",
+   "fixture": "tests/fixtures/examples/singl-end-news-bulletin-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 11,
+      "shape": 14,
+      "photo": 1
+     },
+     "text": {
+      "expected": 12,
+      "within": 12,
+      "matched": 12,
+      "missing": []
+     },
+     "paint": {
+      "expected": 11,
+      "matched": 11,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 15,
+      "shape": 11,
+      "photo": 1
+     },
+     "text": {
+      "expected": 15,
+      "within": 15,
+      "matched": 15,
+      "missing": []
+     },
+     "paint": {
+      "expected": 8,
+      "matched": 8,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 5,
+      "photo": 1
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 66,
+    "textExpected": 34,
+    "textWithin": 34,
+    "paintExpected": 23,
+    "paintMatched": 23
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 Tarantella posts.html",
+   "file": "html-examples/Singl-end \u00b7 Tarantella posts.html",
+   "slug": "singl-end-tarantella-posts",
+   "fixture": "tests/fixtures/examples/singl-end-tarantella-posts.json",
+   "fonts": "loading",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 4,
+      "shape": 13,
+      "photo": 2
+     },
+     "text": {
+      "expected": 5,
+      "within": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "paint": {
+      "expected": 14,
+      "matched": 14,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 5,
+      "shape": 1,
+      "photo": 3
+     },
+     "text": {
+      "expected": 5,
+      "within": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "paint": {
+      "expected": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1350,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 3,
+      "photo": 3
+     },
+     "text": {
+      "expected": 8,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": [
+      "Gradient on <div .abs sb> is not supported; skipped."
+     ]
+    }
+   ],
+   "totals": {
+    "layers": 41,
+    "textExpected": 18,
+    "textWithin": 17,
+    "paintExpected": 20,
+    "paintMatched": 20
+   }
+  },
+  {
+   "page": "Singl-end \u00b7 two social post concepts.html",
+   "file": "html-examples/Singl-end \u00b7 two social post concepts.html",
+   "slug": "singl-end-two-social-post-concepts",
+   "fixture": "tests/fixtures/examples/singl-end-two-social-post-concepts.json",
+   "fonts": "loaded",
+   "stageCount": 2,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1122,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 6,
+      "shape": 9,
+      "photo": 1
+     },
+     "text": {
+      "expected": 6,
+      "within": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "paint": {
+      "expected": 5,
+      "matched": 5,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1392,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 6,
+      "shape": 8,
+      "photo": 1
+     },
+     "text": {
+      "expected": 6,
+      "within": 6,
+      "matched": 6,
+      "missing": []
+     },
+     "paint": {
+      "expected": 3,
+      "matched": 3,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 31,
+    "textExpected": 12,
+    "textWithin": 12,
+    "paintExpected": 8,
+    "paintMatched": 8
+   }
+  },
+  {
+   "page": "Singl-end \u00d7 Giovannin Senza Paura \u00b7 reels.html",
+   "file": "html-examples/Singl-end \u00d7 Giovannin Senza Paura \u00b7 reels.html",
+   "slug": "singl-end-giovannin-senza-paura-reels",
+   "fixture": "tests/fixtures/examples/singl-end-giovannin-senza-paura-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 17,
+      "shape": 14,
+      "photo": 2
+     },
+     "text": {
+      "expected": 11,
+      "within": 11,
+      "matched": 11,
+      "missing": []
+     },
+     "paint": {
+      "expected": 11,
+      "matched": 11,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 16,
+      "shape": 15,
+      "photo": 5
+     },
+     "text": {
+      "expected": 15,
+      "within": 15,
+      "matched": 15,
+      "missing": []
+     },
+     "paint": {
+      "expected": 16,
+      "matched": 16,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 19,
+      "shape": 4,
+      "photo": 3
+     },
+     "text": {
+      "expected": 15,
+      "within": 15,
+      "matched": 15,
+      "missing": []
+     },
+     "paint": {
+      "expected": 4,
+      "matched": 4,
+      "missing": []
+     },
+     "warnings": []
+    }
+   ],
+   "totals": {
+    "layers": 95,
+    "textExpected": 41,
+    "textWithin": 41,
+    "paintExpected": 31,
+    "paintMatched": 31
+   }
+  },
+  {
+   "page": "Singl-end \u00d7 Pinocchio \u00b7 storytelling reels.html",
+   "file": "html-examples/Singl-end \u00d7 Pinocchio \u00b7 storytelling reels.html",
+   "slug": "singl-end-pinocchio-storytelling-reels",
+   "fixture": "tests/fixtures/examples/singl-end-pinocchio-storytelling-reels.json",
+   "fonts": "loaded",
+   "stageCount": 3,
+   "stages": [
+    {
+     "index": 0,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 11,
+      "photo": 2
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 1,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 7,
+      "shape": 2,
+      "photo": 1
+     },
+     "text": {
+      "expected": 7,
+      "within": 7,
+      "matched": 7,
+      "missing": []
+     },
+     "paint": {
+      "expected": 2,
+      "matched": 2,
+      "missing": []
+     },
+     "warnings": []
+    },
+    {
+     "index": 2,
+     "width": 1080,
+     "height": 1920,
+     "duration": 10000,
+     "layout": "measured",
+     "layers": {
+      "text": 11,
+      "shape": 12,
+      "photo": 2
+     },
+     "text": {
+      "expected": 11,
+      "within": 11,
+      "matched": 11,
+      "missing": []
+     },
+     "paint": {
+      "expected": 10,
+      "matched": 10,
+      "missing": []
+     },
+     "warnings": [
+      "Gradient on <div .abs sb> is not supported; skipped."
+     ]
+    }
+   ],
+   "totals": {
+    "layers": 55,
+    "textExpected": 25,
+    "textWithin": 25,
+    "paintExpected": 19,
+    "paintMatched": 19
+   }
+  }
+ ],
+ "tolerance": 2.0
+}

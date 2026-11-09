@@ -1,0 +1,6431 @@
+{
+ "source": "Singl-end \u00b7 news bulletin reels.html",
+ "sourceSha256": "7463877627fe79132477bacbc3827acc0197f2b17ecdd31056e4b437f250e31f",
+ "selector": ".stage, .post, .reel, .story",
+ "state": "on",
+ "timeSeconds": 3.0,
+ "cssVars": {
+  "p": "1",
+  "s": "1"
+ },
+ "noTransform": true,
+ "stageWidth": 1080,
+ "viewport": {
+  "width": 1400,
+  "height": 1000
+ },
+ "chrome": "Google Chrome",
+ "fontsStatus": "loaded",
+ "urls": [],
+ "stages": [
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(0, 0, 0)",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "abs im",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "url",
+     "bgImage": 0,
+     "bgPos": "65% 50%",
+     "bgSize": "cover",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "abs scan",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%, 0% 0%",
+     "bgSize": "auto, auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "t abs flash on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.1,
+     "dataE": 0.3,
+     "timing": {
+      "start": 0.1,
+      "end": 0.3
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "t bk on",
+     "id": "",
+     "text": "BREAKING NEWS",
+     "flowText": "BREAKING NEWS",
+     "inlineKids": [],
+     "allText": "BREAKING NEWS",
+     "box": {
+      "x": 0,
+      "y": 39.38,
+      "w": 100,
+      "h": 28.37
+     },
+     "content": {
+      "x": 0,
+      "y": 41.07,
+      "w": 100,
+      "h": 25
+     },
+     "textBox": {
+      "x": 15.32,
+      "y": 41.06,
+      "w": 69.36,
+      "h": 25
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      545
+     ],
+     "client": [
+      1080,
+      545
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 162,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 194.4,
+      "letterSpacing": 8.64,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 32.4,
+      "r": 0,
+      "b": 32.4,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 2.2,
+     "timing": {
+      "start": 0.3,
+      "end": 2.2
+     }
+    },
+    {
+     "path": "4",
+     "tag": "div",
+     "cls": "t lv on",
+     "id": "",
+     "text": "LIVE",
+     "flowText": "LIVE",
+     "inlineKids": [],
+     "allText": "LIVE",
+     "box": {
+      "x": 5,
+      "y": 5.06,
+      "w": 19.7,
+      "h": 4.7
+     },
+     "content": {
+      "x": 8,
+      "y": 5.51,
+      "w": 13.7,
+      "h": 3.8
+     },
+     "textBox": {
+      "x": 12.2,
+      "y": 5.51,
+      "w": 9.5,
+      "h": 3.8
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      213,
+      90
+     ],
+     "client": [
+      213,
+      90
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 49.68,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 59.62,
+      "letterSpacing": 4.32,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 32.4,
+      "b": 8.64,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\"",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5",
+     "tag": "div",
+     "cls": "t nt on",
+     "id": "",
+     "text": "SINGL-END NEWS\nREC",
+     "flowText": "SINGL-END NEWS\nREC 08:14:30",
+     "inlineKids": [
+      "5.1"
+     ],
+     "allText": "SINGL-END NEWS\nREC 08:14:30",
+     "box": {
+      "x": 63.29,
+      "y": 5.06,
+      "w": 31.71,
+      "h": 6.07
+     },
+     "content": {
+      "x": 63.29,
+      "y": 5.06,
+      "w": 31.71,
+      "h": 6.07
+     },
+     "textBox": {
+      "x": 63.29,
+      "y": 4.91,
+      "w": 31.71,
+      "h": 6.37
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      342,
+      117
+     ],
+     "client": [
+      342,
+      117
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 4.32,
+      "align": "right",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.0",
+     "tag": "br",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 95,
+      "y": 4.91,
+      "w": 0,
+      "h": 3.33
+     },
+     "content": {
+      "x": 95,
+      "y": 4.91,
+      "w": 0,
+      "h": 3.33
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 4.32,
+      "align": "right",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.1",
+     "tag": "span",
+     "cls": "tc",
+     "id": "",
+     "text": "08:14:30",
+     "flowText": "08:14:30",
+     "inlineKids": [],
+     "allText": "08:14:30",
+     "box": {
+      "x": 78.05,
+      "y": 7.94,
+      "w": 16.95,
+      "h": 3.33
+     },
+     "content": {
+      "x": 78.05,
+      "y": 7.94,
+      "w": 16.95,
+      "h": 3.33
+     },
+     "textBox": {
+      "x": 78.05,
+      "y": 7.94,
+      "w": 16.95,
+      "h": 3.33
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      183,
+      64
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 4.32,
+      "align": "right",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "6",
+     "tag": "div",
+     "cls": "t sl l3 on",
+     "id": "",
+     "text": "",
+     "flowText": "BREAKING",
+     "inlineKids": [
+      "6.0"
+     ],
+     "allText": "BREAKING\nCYCLIST DIVERTS ROUTE FOR BREAKFAST\nRabbie\u2019s Eggs \u00b7 \u00a314.75",
+     "box": {
+      "x": 0,
+      "y": 55.62,
+      "w": 94,
+      "h": 19.63
+     },
+     "content": {
+      "x": 0,
+      "y": 55.62,
+      "w": 94,
+      "h": 19.63
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      377
+     ],
+     "client": [
+      1015,
+      377
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 2.4,
+     "dataE": 5.6,
+     "timing": {
+      "start": 2.4,
+      "end": 5.6
+     }
+    },
+    {
+     "path": "6.0",
+     "tag": "span",
+     "cls": "tg",
+     "id": "",
+     "text": "BREAKING",
+     "flowText": "BREAKING",
+     "inlineKids": [],
+     "allText": "BREAKING",
+     "box": {
+      "x": 5,
+      "y": 55.62,
+      "w": 25.95,
+      "h": 4.08
+     },
+     "content": {
+      "x": 8,
+      "y": 56.07,
+      "w": 19.95,
+      "h": 3.18
+     },
+     "textBox": {
+      "x": 8,
+      "y": 56.07,
+      "w": 19.95,
+      "h": 3.18
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      280,
+      78
+     ],
+     "client": [
+      280,
+      78
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline-block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 5.4,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 32.4,
+      "b": 8.64,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.4,
+      "end": 5.6
+     }
+    },
+    {
+     "path": "6.1",
+     "tag": "div",
+     "cls": "hd",
+     "id": "",
+     "text": "Cyclist diverts route for breakfast",
+     "flowText": "Cyclist diverts route for breakfast",
+     "inlineKids": [],
+     "allText": "CYCLIST DIVERTS ROUTE FOR BREAKFAST",
+     "box": {
+      "x": 0,
+      "y": 59.7,
+      "w": 94,
+      "h": 11.32
+     },
+     "content": {
+      "x": 6.57,
+      "y": 61.11,
+      "w": 82.43,
+      "h": 8.51
+     },
+     "textBox": {
+      "x": 6.57,
+      "y": 60.27,
+      "w": 82.29,
+      "h": 10.09
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      217
+     ],
+     "client": [
+      998,
+      217
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(11, 24, 64)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 75.6,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 81.65,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "uppercase",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 17
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 27,
+      "r": 54,
+      "b": 27,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.4,
+      "end": 5.6
+     }
+    },
+    {
+     "path": "6.2",
+     "tag": "div",
+     "cls": "sb",
+     "id": "",
+     "text": "Rabbie\u2019s Eggs \u00b7 \u00a314.75",
+     "flowText": "Rabbie\u2019s Eggs \u00b7 \u00a314.75",
+     "inlineKids": [],
+     "allText": "Rabbie\u2019s Eggs \u00b7 \u00a314.75",
+     "box": {
+      "x": 0,
+      "y": 71.01,
+      "w": 94,
+      "h": 4.24
+     },
+     "content": {
+      "x": 5,
+      "y": 71.85,
+      "w": 84,
+      "h": 2.55
+     },
+     "textBox": {
+      "x": 5,
+      "y": 71.86,
+      "w": 38.6,
+      "h": 2.55
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      81
+     ],
+     "client": [
+      1015,
+      81
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(11, 24, 64)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(11, 24, 64)",
+      "leftColor": "rgb(11, 24, 64)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 16.2,
+      "r": 54,
+      "b": 16.2,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(11, 24, 64)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.4,
+      "end": 5.6
+     }
+    },
+    {
+     "path": "7",
+     "tag": "div",
+     "cls": "t sl l3 on",
+     "id": "",
+     "text": "",
+     "flowText": "DEVELOPING",
+     "inlineKids": [
+      "7.0"
+     ],
+     "allText": "DEVELOPING\nHAGGIS, CHILLI JAM & POACHED EGGS \u201cWORTH THE DETOUR\u201d\nSriracha hollandaise \u00b7 toasted sourdough",
+     "box": {
+      "x": 0,
+      "y": 51.37,
+      "w": 94,
+      "h": 23.88
+     },
+     "content": {
+      "x": 0,
+      "y": 51.37,
+      "w": 94,
+      "h": 23.88
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      459
+     ],
+     "client": [
+      1015,
+      459
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 5.8,
+     "dataE": 9.5,
+     "timing": {
+      "start": 5.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7.0",
+     "tag": "span",
+     "cls": "tg",
+     "id": "",
+     "text": "DEVELOPING",
+     "flowText": "DEVELOPING",
+     "inlineKids": [],
+     "allText": "DEVELOPING",
+     "box": {
+      "x": 5,
+      "y": 51.37,
+      "w": 30.14,
+      "h": 4.08
+     },
+     "content": {
+      "x": 8,
+      "y": 51.82,
+      "w": 24.14,
+      "h": 3.18
+     },
+     "textBox": {
+      "x": 8,
+      "y": 51.82,
+      "w": 24.14,
+      "h": 3.18
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      326,
+      78
+     ],
+     "client": [
+      326,
+      78
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline-block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 5.4,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 32.4,
+      "b": 8.64,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 5.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7.1",
+     "tag": "div",
+     "cls": "hd",
+     "id": "",
+     "text": "Haggis, chilli jam & poached eggs \u201cworth the detour\u201d",
+     "flowText": "Haggis, chilli jam & poached eggs \u201cworth the detour\u201d",
+     "inlineKids": [],
+     "allText": "HAGGIS, CHILLI JAM & POACHED EGGS \u201cWORTH THE DETOUR\u201d",
+     "box": {
+      "x": 0,
+      "y": 55.44,
+      "w": 94,
+      "h": 15.57
+     },
+     "content": {
+      "x": 6.57,
+      "y": 56.85,
+      "w": 82.43,
+      "h": 12.76
+     },
+     "textBox": {
+      "x": 6.57,
+      "y": 56.02,
+      "w": 81.33,
+      "h": 14.34
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      299
+     ],
+     "client": [
+      998,
+      299
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(11, 24, 64)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 75.6,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 81.65,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "uppercase",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 17
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 27,
+      "r": 54,
+      "b": 27,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 5.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7.2",
+     "tag": "div",
+     "cls": "sb",
+     "id": "",
+     "text": "Sriracha hollandaise \u00b7 toasted sourdough",
+     "flowText": "Sriracha hollandaise \u00b7 toasted sourdough",
+     "inlineKids": [],
+     "allText": "Sriracha hollandaise \u00b7 toasted sourdough",
+     "box": {
+      "x": 0,
+      "y": 71.01,
+      "w": 94,
+      "h": 4.24
+     },
+     "content": {
+      "x": 5,
+      "y": 71.85,
+      "w": 84,
+      "h": 2.55
+     },
+     "textBox": {
+      "x": 5,
+      "y": 71.86,
+      "w": 74.51,
+      "h": 2.55
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      81
+     ],
+     "client": [
+      1015,
+      81
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(11, 24, 64)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(11, 24, 64)",
+      "leftColor": "rgb(11, 24, 64)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 16.2,
+      "r": 54,
+      "b": 16.2,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(11, 24, 64)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 5.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "8",
+     "tag": "div",
+     "cls": "t tk on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "NOW\nSINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7 \u00a0SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY ",
+     "box": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "content": {
+      "x": 0,
+      "y": 76.12,
+      "w": 100,
+      "h": 3.63
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      76
+     ],
+     "client": [
+      1080,
+      70
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "flex",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(11, 24, 64)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(214, 32, 47)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "solid",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 2.4,
+     "dataE": 9.5,
+     "timing": {
+      "start": 2.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "8.0",
+     "tag": "b",
+     "cls": "",
+     "id": "",
+     "text": "NOW",
+     "flowText": "NOW",
+     "inlineKids": [],
+     "allText": "NOW",
+     "box": {
+      "x": 0,
+      "y": 76.13,
+      "w": 14.28,
+      "h": 3.62
+     },
+     "content": {
+      "x": 3,
+      "y": 76.13,
+      "w": 8.28,
+      "h": 3.62
+     },
+     "textBox": {
+      "x": 3,
+      "y": 76.27,
+      "w": 8.28,
+      "h": 3.33
+     },
+     "clip": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "offset": [
+      154,
+      70
+     ],
+     "client": [
+      154,
+      70
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "grid",
+     "vis": "visible",
+     "op": 1,
+     "z": "1",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 32.4,
+      "b": 0,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "8.1",
+     "tag": "div",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7 SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7",
+     "inlineKids": [
+      "8.1.0"
+     ],
+     "allText": "SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7 \u00a0SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RA",
+     "box": {
+      "x": 14.28,
+      "y": 76.27,
+      "w": 360.78,
+      "h": 3.33
+     },
+     "content": {
+      "x": 14.28,
+      "y": 76.27,
+      "w": 360.78,
+      "h": 3.33
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "offset": [
+      3896,
+      64
+     ],
+     "client": [
+      3896,
+      64
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "nowrap"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(217, 161, 184)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "8.1.0",
+     "tag": "span",
+     "cls": "",
+     "id": "",
+     "text": "SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7 SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7",
+     "flowText": "SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7 SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7",
+     "inlineKids": [],
+     "allText": "SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RABBIE\u2019S EGGS \u00a314.75 \u00b7 \u00a0SINGL-END CAFE & BAKEHOUSE \u00b7 OPEN EVERYDAY \u00b7 MENU SERVED ALL DAY \u00b7 RA",
+     "box": {
+      "x": 14.28,
+      "y": 76.27,
+      "w": 360.78,
+      "h": 3.33
+     },
+     "content": {
+      "x": 14.28,
+      "y": 76.27,
+      "w": 360.78,
+      "h": 3.33
+     },
+     "textBox": {
+      "x": 14.28,
+      "y": 76.27,
+      "w": 360.78,
+      "h": 3.33
+     },
+     "clip": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "offset": [
+      3896,
+      64
+     ],
+     "client": [
+      3896,
+      64
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline-block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "nowrap"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(217, 161, 184)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "9",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgba(255, 255, 255, 0.267)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "9.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": false,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "10",
+     "tag": "div",
+     "cls": "safe",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": -15.74,
+      "y": -7.86,
+      "w": 0,
+      "h": 0
+     },
+     "content": {
+      "x": -15.37,
+      "y": -7.65,
+      "w": 0,
+      "h": 0
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "none",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(224, 176, 0)",
+      "leftColor": "rgb(224, 176, 0)",
+      "topStyle": "dashed",
+      "leftStyle": "dashed"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "11",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "9",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    }
+   ]
+  },
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(0, 0, 0)",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "abs im",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "url",
+     "bgImage": 1,
+     "bgPos": "25% 50%",
+     "bgSize": "cover",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "abs scan",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%, 0% 0%",
+     "bgSize": "auto, auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "t lv on",
+     "id": "",
+     "text": "LIVE",
+     "flowText": "LIVE",
+     "inlineKids": [],
+     "allText": "LIVE",
+     "box": {
+      "x": 5,
+      "y": 5.06,
+      "w": 19.7,
+      "h": 4.7
+     },
+     "content": {
+      "x": 8,
+      "y": 5.51,
+      "w": 13.7,
+      "h": 3.8
+     },
+     "textBox": {
+      "x": 12.2,
+      "y": 5.51,
+      "w": 9.5,
+      "h": 3.8
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      213,
+      90
+     ],
+     "client": [
+      213,
+      90
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 49.68,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 59.62,
+      "letterSpacing": 4.32,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 32.4,
+      "b": 8.64,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\"",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "t nt on",
+     "id": "",
+     "text": "JOHN STREET\nMERCHANT CITY",
+     "flowText": "JOHN STREET\nMERCHANT CITY",
+     "inlineKids": [],
+     "allText": "JOHN STREET\nMERCHANT CITY",
+     "box": {
+      "x": 64.75,
+      "y": 5.06,
+      "w": 30.25,
+      "h": 6.07
+     },
+     "content": {
+      "x": 64.75,
+      "y": 5.06,
+      "w": 30.25,
+      "h": 6.07
+     },
+     "textBox": {
+      "x": 64.75,
+      "y": 4.91,
+      "w": 30.25,
+      "h": 6.37
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      327,
+      117
+     ],
+     "client": [
+      327,
+      117
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 4.32,
+      "align": "right",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "3.0",
+     "tag": "br",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 95,
+      "y": 4.91,
+      "w": 0,
+      "h": 3.33
+     },
+     "content": {
+      "x": 95,
+      "y": 4.91,
+      "w": 0,
+      "h": 3.33
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 4.32,
+      "align": "right",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "4",
+     "tag": "div",
+     "cls": "t pz on",
+     "id": "",
+     "text": "\u00a315.50",
+     "flowText": "\u00a315.50",
+     "inlineKids": [],
+     "allText": "\u00a315.50",
+     "box": {
+      "x": 64.51,
+      "y": 16.31,
+      "w": 29.5,
+      "h": 7.79
+     },
+     "content": {
+      "x": 68.51,
+      "y": 16.87,
+      "w": 21.5,
+      "h": 6.67
+     },
+     "textBox": {
+      "x": 68.5,
+      "y": 16.87,
+      "w": 21.5,
+      "h": 6.67
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      319,
+      150
+     ],
+     "client": [
+      319,
+      150
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 86.4,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 103.68,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 10.8,
+      "r": 43.2,
+      "b": 10.8,
+      "l": 43.2
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 1,
+     "dataE": 9.5,
+     "timing": {
+      "start": 1,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5",
+     "tag": "div",
+     "cls": "t pn on",
+     "id": "",
+     "text": "",
+     "flowText": "ON THE MENU TODAY",
+     "inlineKids": [
+      "5.0"
+     ],
+     "allText": "ON THE MENU TODAY\nTHE CLUBBIN CHICKEN SANDWICH\nGrilled chicken breast\nCrispy bacon\nHot honey halloumi\nRoasted garlic & truffle mayo\nSriracha hot sauce slaw",
+     "box": {
+      "x": 6,
+      "y": 21.37,
+      "w": 88,
+      "h": 41.08
+     },
+     "content": {
+      "x": 11,
+      "y": 24.14,
+      "w": 78,
+      "h": 36.06
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      789
+     ],
+     "client": [
+      950,
+      779
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(11, 24, 64, 0.867)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 10,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(217, 161, 184)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "solid",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 43.2,
+      "r": 54,
+      "b": 43.2,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.8,
+     "dataE": 9.5,
+     "timing": {
+      "start": 0.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.0",
+     "tag": "small",
+     "cls": "",
+     "id": "",
+     "text": "ON THE MENU TODAY",
+     "flowText": "ON THE MENU TODAY",
+     "inlineKids": [],
+     "allText": "ON THE MENU TODAY",
+     "box": {
+      "x": 11,
+      "y": 24.14,
+      "w": 40.62,
+      "h": 3.18
+     },
+     "content": {
+      "x": 11,
+      "y": 24.14,
+      "w": 40.62,
+      "h": 3.18
+     },
+     "textBox": {
+      "x": 11,
+      "y": 24.14,
+      "w": 40.62,
+      "h": 3.18
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      439,
+      61
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 6.48,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(217, 161, 184)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.1",
+     "tag": "h3",
+     "cls": "",
+     "id": "",
+     "text": "The Clubbin Chicken Sandwich",
+     "flowText": "The Clubbin Chicken Sandwich",
+     "inlineKids": [],
+     "allText": "THE CLUBBIN CHICKEN SANDWICH",
+     "box": {
+      "x": 11,
+      "y": 27.88,
+      "w": 78,
+      "h": 10.13
+     },
+     "content": {
+      "x": 11,
+      "y": 27.88,
+      "w": 78,
+      "h": 10.13
+     },
+     "textBox": {
+      "x": 11,
+      "y": 26.63,
+      "w": 74.19,
+      "h": 12.56
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      194
+     ],
+     "client": [
+      842,
+      194
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 97.2,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 97.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "uppercase",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.2",
+     "tag": "ul",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "Grilled chicken breast\nCrispy bacon\nHot honey halloumi\nRoasted garlic & truffle mayo\nSriracha hot sauce slaw",
+     "box": {
+      "x": 11,
+      "y": 39.7,
+      "w": 78,
+      "h": 20.51
+     },
+     "content": {
+      "x": 11,
+      "y": 39.7,
+      "w": 78,
+      "h": 20.51
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      394
+     ],
+     "client": [
+      842,
+      394
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 46.44,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 55.73,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.2.0",
+     "tag": "li",
+     "cls": "on",
+     "id": "",
+     "text": "Grilled chicken breast",
+     "flowText": "Grilled chicken breast",
+     "inlineKids": [],
+     "allText": "Grilled chicken breast",
+     "box": {
+      "x": 11,
+      "y": 39.7,
+      "w": 78,
+      "h": 4.1
+     },
+     "content": {
+      "x": 11,
+      "y": 40.32,
+      "w": 78,
+      "h": 2.86
+     },
+     "textBox": {
+      "x": 15.67,
+      "y": 40.31,
+      "w": 45.2,
+      "h": 2.86
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      79
+     ],
+     "client": [
+      842,
+      79
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "list-item",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 46.44,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 55.73,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 11.88,
+      "r": 0,
+      "b": 11.88,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\u2714 \"",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 2,
+     "dataE": null,
+     "timing": {
+      "start": 2,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.2.1",
+     "tag": "li",
+     "cls": "on",
+     "id": "",
+     "text": "Crispy bacon",
+     "flowText": "Crispy bacon",
+     "inlineKids": [],
+     "allText": "Crispy bacon",
+     "box": {
+      "x": 11,
+      "y": 43.8,
+      "w": 78,
+      "h": 4.1
+     },
+     "content": {
+      "x": 11,
+      "y": 44.42,
+      "w": 78,
+      "h": 2.86
+     },
+     "textBox": {
+      "x": 15.67,
+      "y": 44.42,
+      "w": 26.57,
+      "h": 2.86
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      79
+     ],
+     "client": [
+      842,
+      79
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "list-item",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 46.44,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 55.73,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 11.88,
+      "r": 0,
+      "b": 11.88,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\u2714 \"",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 2.9,
+     "dataE": null,
+     "timing": {
+      "start": 2.9,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.2.2",
+     "tag": "li",
+     "cls": "on",
+     "id": "",
+     "text": "Hot honey halloumi",
+     "flowText": "Hot honey halloumi",
+     "inlineKids": [],
+     "allText": "Hot honey halloumi",
+     "box": {
+      "x": 11,
+      "y": 47.9,
+      "w": 78,
+      "h": 4.1
+     },
+     "content": {
+      "x": 11,
+      "y": 48.52,
+      "w": 78,
+      "h": 2.86
+     },
+     "textBox": {
+      "x": 15.67,
+      "y": 48.52,
+      "w": 40.17,
+      "h": 2.86
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      79
+     ],
+     "client": [
+      842,
+      79
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "list-item",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 46.44,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 55.73,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 11.88,
+      "r": 0,
+      "b": 11.88,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\u2714 \"",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 3.8,
+     "dataE": null,
+     "timing": {
+      "start": 3.8,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.2.3",
+     "tag": "li",
+     "cls": "on",
+     "id": "",
+     "text": "Roasted garlic & truffle mayo",
+     "flowText": "Roasted garlic & truffle mayo",
+     "inlineKids": [],
+     "allText": "Roasted garlic & truffle mayo",
+     "box": {
+      "x": 11,
+      "y": 52,
+      "w": 78,
+      "h": 4.1
+     },
+     "content": {
+      "x": 11,
+      "y": 52.62,
+      "w": 78,
+      "h": 2.86
+     },
+     "textBox": {
+      "x": 15.67,
+      "y": 52.62,
+      "w": 59.67,
+      "h": 2.86
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      79
+     ],
+     "client": [
+      842,
+      79
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "list-item",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 46.44,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 55.73,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 11.88,
+      "r": 0,
+      "b": 11.88,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\u2714 \"",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 4.7,
+     "dataE": null,
+     "timing": {
+      "start": 4.7,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "5.2.4",
+     "tag": "li",
+     "cls": "on",
+     "id": "",
+     "text": "Sriracha hot sauce slaw",
+     "flowText": "Sriracha hot sauce slaw",
+     "inlineKids": [],
+     "allText": "Sriracha hot sauce slaw",
+     "box": {
+      "x": 11,
+      "y": 56.1,
+      "w": 78,
+      "h": 4.1
+     },
+     "content": {
+      "x": 11,
+      "y": 56.72,
+      "w": 78,
+      "h": 2.86
+     },
+     "textBox": {
+      "x": 15.67,
+      "y": 56.72,
+      "w": 48.63,
+      "h": 2.86
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      842,
+      79
+     ],
+     "client": [
+      842,
+      79
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "list-item",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 46.44,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 55.73,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 11.88,
+      "r": 0,
+      "b": 11.88,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "\"\u2714 \"",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 5.6,
+     "dataE": null,
+     "timing": {
+      "start": 5.6,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "6",
+     "tag": "div",
+     "cls": "t sl l3 on",
+     "id": "",
+     "text": "",
+     "flowText": "LIVE",
+     "inlineKids": [
+      "6.0"
+     ],
+     "allText": "LIVE\nLIVE FROM JOHN STREET\nLunch \u00b7 served all day",
+     "box": {
+      "x": 0,
+      "y": 59.87,
+      "w": 94,
+      "h": 15.38
+     },
+     "content": {
+      "x": 0,
+      "y": 59.87,
+      "w": 94,
+      "h": 15.38
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      295
+     ],
+     "client": [
+      1015,
+      295
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "6.0",
+     "tag": "span",
+     "cls": "tg",
+     "id": "",
+     "text": "LIVE",
+     "flowText": "LIVE",
+     "inlineKids": [],
+     "allText": "LIVE",
+     "box": {
+      "x": 5,
+      "y": 59.87,
+      "w": 14.52,
+      "h": 4.08
+     },
+     "content": {
+      "x": 8,
+      "y": 60.32,
+      "w": 8.52,
+      "h": 3.18
+     },
+     "textBox": {
+      "x": 8,
+      "y": 60.32,
+      "w": 8.53,
+      "h": 3.18
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      157,
+      78
+     ],
+     "client": [
+      157,
+      78
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline-block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 5.4,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 32.4,
+      "b": 8.64,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "6.1",
+     "tag": "div",
+     "cls": "hd",
+     "id": "",
+     "text": "Live from John Street",
+     "flowText": "Live from John Street",
+     "inlineKids": [],
+     "allText": "LIVE FROM JOHN STREET",
+     "box": {
+      "x": 0,
+      "y": 63.95,
+      "w": 94,
+      "h": 7.06
+     },
+     "content": {
+      "x": 6.57,
+      "y": 65.36,
+      "w": 82.43,
+      "h": 4.25
+     },
+     "textBox": {
+      "x": 6.57,
+      "y": 64.52,
+      "w": 68.64,
+      "h": 5.83
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      136
+     ],
+     "client": [
+      998,
+      136
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(11, 24, 64)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 75.6,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 81.65,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "uppercase",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 17
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 27,
+      "r": 54,
+      "b": 27,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "6.2",
+     "tag": "div",
+     "cls": "sb",
+     "id": "",
+     "text": "Lunch \u00b7 served all day",
+     "flowText": "Lunch \u00b7 served all day",
+     "inlineKids": [],
+     "allText": "Lunch \u00b7 served all day",
+     "box": {
+      "x": 0,
+      "y": 71.01,
+      "w": 94,
+      "h": 4.24
+     },
+     "content": {
+      "x": 5,
+      "y": 71.85,
+      "w": 84,
+      "h": 2.55
+     },
+     "textBox": {
+      "x": 5,
+      "y": 71.86,
+      "w": 39.32,
+      "h": 2.55
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      81
+     ],
+     "client": [
+      1015,
+      81
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 49.25,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(11, 24, 64)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(11, 24, 64)",
+      "leftColor": "rgb(11, 24, 64)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 16.2,
+      "r": 54,
+      "b": 16.2,
+      "l": 54
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(11, 24, 64)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7",
+     "tag": "div",
+     "cls": "t tk on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "LIVE\nTHE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7 THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7",
+     "box": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "content": {
+      "x": 0,
+      "y": 76.12,
+      "w": 100,
+      "h": 3.63
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      76
+     ],
+     "client": [
+      1080,
+      70
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "flex",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(11, 24, 64)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(214, 32, 47)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "solid",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": 3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7.0",
+     "tag": "b",
+     "cls": "",
+     "id": "",
+     "text": "LIVE",
+     "flowText": "LIVE",
+     "inlineKids": [],
+     "allText": "LIVE",
+     "box": {
+      "x": 0,
+      "y": 76.13,
+      "w": 14.07,
+      "h": 3.62
+     },
+     "content": {
+      "x": 3,
+      "y": 76.13,
+      "w": 8.07,
+      "h": 3.62
+     },
+     "textBox": {
+      "x": 3,
+      "y": 76.27,
+      "w": 8.07,
+      "h": 3.33
+     },
+     "clip": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "offset": [
+      152,
+      70
+     ],
+     "client": [
+      152,
+      70
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "grid",
+     "vis": "visible",
+     "op": 1,
+     "z": "1",
+     "tf": "none",
+     "bg": "rgb(214, 32, 47)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 32.4,
+      "b": 0,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7.1",
+     "tag": "div",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7 THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7",
+     "inlineKids": [
+      "7.1.0"
+     ],
+     "allText": "THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7 THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7",
+     "box": {
+      "x": 14.07,
+      "y": 76.27,
+      "w": 327.31,
+      "h": 3.33
+     },
+     "content": {
+      "x": 14.07,
+      "y": 76.27,
+      "w": 327.31,
+      "h": 3.33
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "offset": [
+      3535,
+      64
+     ],
+     "client": [
+      3535,
+      64
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "nowrap"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(217, 161, 184)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "7.1.0",
+     "tag": "span",
+     "cls": "",
+     "id": "",
+     "text": "THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7 THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7",
+     "flowText": "THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7 THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7",
+     "inlineKids": [],
+     "allText": "THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7 THE CLUBBIN CHICKEN SANDWICH \u00a315.50 \u00b7 OPEN EVERYDAY \u00b7 @SINGLENDCAFE_GLASGOW \u00b7",
+     "box": {
+      "x": 14.07,
+      "y": 76.27,
+      "w": 327.31,
+      "h": 3.33
+     },
+     "content": {
+      "x": 14.07,
+      "y": 76.27,
+      "w": 327.31,
+      "h": 3.33
+     },
+     "textBox": {
+      "x": 14.07,
+      "y": 76.27,
+      "w": 327.31,
+      "h": 3.33
+     },
+     "clip": {
+      "x": 0,
+      "y": 75.81,
+      "w": 100,
+      "h": 3.94
+     },
+     "offset": [
+      3535,
+      64
+     ],
+     "client": [
+      3535,
+      64
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline-block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 51.84,
+      "letterSpacing": 3.24,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(217, 161, 184)",
+      "whiteSpace": "nowrap"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(217, 161, 184)",
+      "leftColor": "rgb(217, 161, 184)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(217, 161, 184)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "8",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgba(255, 255, 255, 0.267)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "8.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": false,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "9",
+     "tag": "div",
+     "cls": "safe",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": -49.26,
+      "y": -8.59,
+      "w": 0,
+      "h": 0
+     },
+     "content": {
+      "x": -48.89,
+      "y": -8.38,
+      "w": 0,
+      "h": 0
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "none",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(224, 176, 0)",
+      "leftColor": "rgb(224, 176, 0)",
+      "topStyle": "dashed",
+      "leftStyle": "dashed"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "10",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "9",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    }
+   ]
+  },
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(239, 231, 212)",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "t pp on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "The Singl-End Gazette\nGLASGOW \u00b7 DAILY \u00b7 PRICE: ONE SMILE\nDIRTY CHAI TAKES GLASGOW BY STORM\nTerrace regulars, John Street, Merchant City.\nDirty Chai, \u00a35.35. Sit ",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": 0,
+     "dataE": 99,
+     "timing": {
+      "start": 0,
+      "end": 99
+     }
+    },
+    {
+     "path": "0.0",
+     "tag": "div",
+     "cls": "t mh",
+     "id": "",
+     "text": "The Singl-End Gazette",
+     "flowText": "The Singl-End Gazette",
+     "inlineKids": [],
+     "allText": "The Singl-End Gazette",
+     "box": {
+      "x": 0,
+      "y": 3.94,
+      "w": 100,
+      "h": 5.29
+     },
+     "content": {
+      "x": 0,
+      "y": 3.94,
+      "w": 100,
+      "h": 5.29
+     },
+     "textBox": {
+      "x": 0.63,
+      "y": 3.05,
+      "w": 98.75,
+      "h": 7.03
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      102
+     ],
+     "client": [
+      1080,
+      102
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 101.52,
+      "family": "Playfair Display",
+      "weight": "900",
+      "style": "normal",
+      "lineHeight": 101.52,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": 99
+     }
+    },
+    {
+     "path": "0.1",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 6,
+      "y": 10.69,
+      "w": 88,
+      "h": 1.12
+     },
+     "content": {
+      "x": 6,
+      "y": 10.95,
+      "w": 88,
+      "h": 0.76
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      22
+     ],
+     "client": [
+      950,
+      15
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 5,
+       "r": 0,
+       "b": 2,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": 99
+     }
+    },
+    {
+     "path": "0.2",
+     "tag": "div",
+     "cls": "t dl",
+     "id": "",
+     "text": "GLASGOW \u00b7 DAILY \u00b7 PRICE: ONE SMILE",
+     "flowText": "GLASGOW \u00b7 DAILY \u00b7 PRICE: ONE SMILE",
+     "inlineKids": [],
+     "allText": "GLASGOW \u00b7 DAILY \u00b7 PRICE: ONE SMILE",
+     "box": {
+      "x": 6,
+      "y": 12.66,
+      "w": 88,
+      "h": 1.98
+     },
+     "content": {
+      "x": 6,
+      "y": 12.66,
+      "w": 88,
+      "h": 1.98
+     },
+     "textBox": {
+      "x": 16.38,
+      "y": 12.66,
+      "w": 67.24,
+      "h": 1.98
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      38
+     ],
+     "client": [
+      950,
+      38
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 32.4,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 38.88,
+      "letterSpacing": 4.32,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": 99
+     }
+    },
+    {
+     "path": "0.3",
+     "tag": "div",
+     "cls": "t hl on",
+     "id": "",
+     "text": "Dirty Chai takes Glasgow by storm",
+     "flowText": "Dirty Chai takes Glasgow by storm",
+     "inlineKids": [],
+     "allText": "DIRTY CHAI TAKES GLASGOW BY STORM",
+     "box": {
+      "x": 6,
+      "y": 16.88,
+      "w": 88,
+      "h": 27.56
+     },
+     "content": {
+      "x": 6,
+      "y": 16.88,
+      "w": 88,
+      "h": 27.56
+     },
+     "textBox": {
+      "x": 6,
+      "y": 15.63,
+      "w": 85.01,
+      "h": 30.05
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      529
+     ],
+     "client": [
+      950,
+      529
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 135,
+      "family": "Playfair Display",
+      "weight": "900",
+      "style": "normal",
+      "lineHeight": 132.3,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "uppercase",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": 1.4,
+     "dataE": 9.5,
+     "timing": {
+      "start": 1.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "0.4",
+     "tag": "div",
+     "cls": "t ph on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 6,
+      "y": 45.56,
+      "w": 88,
+      "h": 21.37
+     },
+     "content": {
+      "x": 6.46,
+      "y": 45.82,
+      "w": 87.07,
+      "h": 20.85
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      410
+     ],
+     "client": [
+      940,
+      400
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 5,
+       "r": 5,
+       "b": 5,
+       "l": 5
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "\"\"",
+     "dataS": 2.6,
+     "dataE": 9.5,
+     "timing": {
+      "start": 2.6,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "0.4.0",
+     "tag": "div",
+     "cls": "abs im",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 6.46,
+      "y": 45.82,
+      "w": 87.07,
+      "h": 20.85
+     },
+     "content": {
+      "x": 6.46,
+      "y": 45.82,
+      "w": 87.07,
+      "h": 20.85
+     },
+     "textBox": null,
+     "clip": {
+      "x": 6,
+      "y": 45.56,
+      "w": 88,
+      "h": 21.37
+     },
+     "offset": [
+      940,
+      400
+     ],
+     "client": [
+      940,
+      400
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "url",
+     "bgImage": 1,
+     "bgPos": "55% 62%",
+     "bgSize": "cover",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "grayscale(1) contrast(1.35) sepia(0.35)",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.6,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "0.5",
+     "tag": "div",
+     "cls": "t cp on",
+     "id": "",
+     "text": "Terrace regulars, John Street, Merchant City.",
+     "flowText": "Terrace regulars, John Street, Merchant City.",
+     "inlineKids": [],
+     "allText": "Terrace regulars, John Street, Merchant City.",
+     "box": {
+      "x": 6,
+      "y": 67.78,
+      "w": 88,
+      "h": 1.72
+     },
+     "content": {
+      "x": 6,
+      "y": 67.78,
+      "w": 88,
+      "h": 1.72
+     },
+     "textBox": {
+      "x": 6,
+      "y": 67.78,
+      "w": 70.37,
+      "h": 1.72
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      33
+     ],
+     "client": [
+      950,
+      33
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 32.4,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 38.88,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": 3.6,
+     "dataE": 9.5,
+     "timing": {
+      "start": 3.6,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "0.6",
+     "tag": "div",
+     "cls": "t bd on",
+     "id": "",
+     "text": "Dirty Chai, \u00a35.35. Sit in or take away.",
+     "flowText": "Dirty Chai, \u00a35.35. Sit in or take away.",
+     "inlineKids": [],
+     "allText": "Dirty Chai, \u00a35.35. Sit in or take away.\nSingl-end Cafe & Bakehouse \u00b7 @singlendcafe_glasgow",
+     "box": {
+      "x": 6,
+      "y": 72,
+      "w": 88,
+      "h": 10.27
+     },
+     "content": {
+      "x": 6,
+      "y": 72,
+      "w": 88,
+      "h": 10.27
+     },
+     "textBox": {
+      "x": 6,
+      "y": 71.84,
+      "w": 85.22,
+      "h": 3.75
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      197
+     ],
+     "client": [
+      950,
+      197
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 54,
+      "family": "Playfair Display",
+      "weight": "900",
+      "style": "normal",
+      "lineHeight": 67.5,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": 4.4,
+     "dataE": 9.5,
+     "timing": {
+      "start": 4.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "0.6.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "Singl-end Cafe & Bakehouse \u00b7 @singlendcafe_glasgow",
+     "flowText": "Singl-end Cafe & Bakehouse \u00b7 @singlendcafe_glasgow",
+     "inlineKids": [],
+     "allText": "Singl-end Cafe & Bakehouse \u00b7 @singlendcafe_glasgow",
+     "box": {
+      "x": 6,
+      "y": 76.64,
+      "w": 88,
+      "h": 5.63
+     },
+     "content": {
+      "x": 6,
+      "y": 76.64,
+      "w": 88,
+      "h": 5.63
+     },
+     "textBox": {
+      "x": 6,
+      "y": 76.69,
+      "w": 56.42,
+      "h": 5.47
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      950,
+      108
+     ],
+     "client": [
+      950,
+      108
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 43.2,
+      "family": "Raleway",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 54,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 4.4,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "0.7",
+     "tag": "div",
+     "cls": "t xt on",
+     "id": "",
+     "text": "EXTRA!",
+     "flowText": "EXTRA!",
+     "inlineKids": [],
+     "allText": "EXTRA!",
+     "box": {
+      "x": 49.18,
+      "y": 34.87,
+      "w": 45.82,
+      "h": 8.54
+     },
+     "content": {
+      "x": 53.11,
+      "y": 35.39,
+      "w": 37.97,
+      "h": 7.5
+     },
+     "textBox": {
+      "x": 53.1,
+      "y": 35.4,
+      "w": 37.97,
+      "h": 7.5
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      495,
+      164
+     ],
+     "client": [
+      475,
+      144
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(239, 231, 212)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 108,
+      "family": "Playfair Display",
+      "weight": "900",
+      "style": "normal",
+      "lineHeight": 129.6,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(214, 32, 47)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 10,
+       "r": 10,
+       "b": 10,
+       "l": 10
+      },
+      "topColor": "rgb(214, 32, 47)",
+      "leftColor": "rgb(214, 32, 47)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 32.4,
+      "b": 0,
+      "l": 32.4
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(214, 32, 47)",
+     "after": "none",
+     "dataS": 6,
+     "dataE": 9.5,
+     "timing": {
+      "start": 6,
+      "end": 9.5
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0.2)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "1.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": false,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(26, 26, 26)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "safe",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": -82.78,
+      "y": -7.86,
+      "w": 0,
+      "h": 0
+     },
+     "content": {
+      "x": -82.41,
+      "y": -7.65,
+      "w": 0,
+      "h": 0
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "none",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(224, 176, 0)",
+      "leftColor": "rgb(224, 176, 0)",
+      "topStyle": "dashed",
+      "leftStyle": "dashed"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "9",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "imgSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Oswald",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 26, 26)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 26, 26)",
+      "leftColor": "rgb(26, 26, 26)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 26, 26)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     }
+    }
+   ]
+  }
+ ]
+}

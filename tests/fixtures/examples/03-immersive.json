@@ -1,0 +1,1481 @@
+{
+ "samples": null,
+ "source": "03-immersive.html",
+ "sourceSha256": "cfbc2f606b567b5f78e4951b20521719a240d3b5321136d1a0a4f590fa3d58c4",
+ "selector": ".stage, .post, .reel, .story",
+ "state": "on",
+ "timeSeconds": 3.0,
+ "cssVars": {},
+ "noTransform": true,
+ "stageWidth": 1080,
+ "viewport": {
+  "width": 1400,
+  "height": 1000
+ },
+ "chrome": "Google Chrome",
+ "fontsStatus": "loaded",
+ "urls": [],
+ "stages": [
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(0, 0, 0)",
+   "backgroundImage": "",
+   "backgroundSize": "auto",
+   "backgroundPosition": "0% 0%",
+   "dataD": "12000",
+   "classes": "stage",
+   "id": "stage",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 4,
+      "y": 1.69,
+      "w": 92,
+      "h": 0.22
+     },
+     "content": {
+      "x": 4,
+      "y": 1.69,
+      "w": 92,
+      "h": 0.22
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      994,
+      4
+     ],
+     "client": [
+      994,
+      4
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "40",
+     "tf": "none",
+     "bg": "rgb(51, 51, 51)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Jost",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 2,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 4,
+      "y": 1.69,
+      "w": 92,
+      "h": 0.22
+     },
+     "endContent": {
+      "x": 4,
+      "y": 1.69,
+      "w": 92,
+      "h": 0.22
+     }
+    },
+    {
+     "path": "0.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 4,
+      "y": 1.69,
+      "w": 0,
+      "h": 0.22
+     },
+     "content": {
+      "x": 4,
+      "y": 1.69,
+      "w": 0,
+      "h": 0.22
+     },
+     "textBox": null,
+     "clip": {
+      "x": 4,
+      "y": 1.69,
+      "w": 92,
+      "h": 0.22
+     },
+     "clipRadius": [
+      0.2,
+      46.38,
+      0.2,
+      46.38,
+      0.2,
+      46.38,
+      0.2,
+      46.38
+     ],
+     "offset": [
+      0,
+      4
+     ],
+     "client": [
+      0,
+      4
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(232, 201, 106)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Jost",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 4,
+      "y": 1.69,
+      "w": 0,
+      "h": 0.22
+     },
+     "endContent": {
+      "x": 4,
+      "y": 1.69,
+      "w": 0,
+      "h": 0.22
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "50",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Jost",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "endContent": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "t wm on",
+     "id": "",
+     "text": "TARTAN GUYS",
+     "flowText": "TARTAN GUYS BATHROOMS",
+     "inlineKids": [
+      "2.0"
+     ],
+     "allText": "TARTAN GUYS BATHROOMS",
+     "box": {
+      "x": 5,
+      "y": 3.37,
+      "w": 64.86,
+      "h": 2.14
+     },
+     "content": {
+      "x": 5,
+      "y": 3.37,
+      "w": 64.86,
+      "h": 2.14
+     },
+     "textBox": {
+      "x": 5,
+      "y": 3.37,
+      "w": 35.66,
+      "h": 2.14
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      701,
+      41
+     ],
+     "client": [
+      701,
+      41
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 28.08,
+      "family": "Jost",
+      "weight": "500",
+      "style": "normal",
+      "lineHeight": 33.7,
+      "letterSpacing": 16.2,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(232, 201, 106)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(232, 201, 106)",
+      "leftColor": "rgb(232, 201, 106)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(232, 201, 106)",
+     "after": "none",
+     "dataS": 0.15,
+     "dataE": null,
+     "timing": {
+      "start": 0.15,
+      "end": null
+     },
+     "endBox": {
+      "x": 5,
+      "y": 3.37,
+      "w": 64.86,
+      "h": 2.14
+     },
+     "endContent": {
+      "x": 5,
+      "y": 3.37,
+      "w": 64.86,
+      "h": 2.14
+     }
+    },
+    {
+     "path": "2.0",
+     "tag": "span",
+     "cls": "",
+     "id": "",
+     "text": "BATHROOMS",
+     "flowText": "BATHROOMS",
+     "inlineKids": [],
+     "allText": "BATHROOMS",
+     "box": {
+      "x": 41.66,
+      "y": 3.37,
+      "w": 28.2,
+      "h": 2.14
+     },
+     "content": {
+      "x": 41.66,
+      "y": 3.37,
+      "w": 28.2,
+      "h": 2.14
+     },
+     "textBox": {
+      "x": 41.66,
+      "y": 3.37,
+      "w": 28.2,
+      "h": 2.14
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      305,
+      41
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 0.5,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 28.08,
+      "family": "Jost",
+      "weight": "300",
+      "style": "normal",
+      "lineHeight": 33.7,
+      "letterSpacing": 16.2,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(232, 201, 106)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(232, 201, 106)",
+      "leftColor": "rgb(232, 201, 106)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(232, 201, 106)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.15,
+      "end": null
+     },
+     "endBox": {
+      "x": 41.66,
+      "y": 3.37,
+      "w": 28.2,
+      "h": 2.14
+     },
+     "endContent": {
+      "x": 41.66,
+      "y": 3.37,
+      "w": 28.2,
+      "h": 2.14
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "t hl on",
+     "id": "",
+     "text": "The quiet\ndetails.",
+     "flowText": "The quiet\ndetails.",
+     "inlineKids": [],
+     "allText": "The quiet\ndetails.",
+     "box": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 12.37
+     },
+     "content": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 12.37
+     },
+     "textBox": {
+      "x": 5,
+      "y": 8.72,
+      "w": 38.68,
+      "h": 15.15
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      972,
+      238
+     ],
+     "client": [
+      972,
+      238
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 118.8,
+      "family": "Jost",
+      "weight": "200",
+      "style": "normal",
+      "lineHeight": 118.8,
+      "letterSpacing": -2.38,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": 0.4,
+     "dataE": 6.2,
+     "timing": {
+      "start": 0.4,
+      "end": 6.2
+     },
+     "endBox": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 12.37
+     },
+     "endContent": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 12.37
+     }
+    },
+    {
+     "path": "3.0",
+     "tag": "br",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 43.68,
+      "y": 8.72,
+      "w": 0,
+      "h": 8.96
+     },
+     "content": {
+      "x": 43.68,
+      "y": 8.72,
+      "w": 0,
+      "h": 8.96
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 118.8,
+      "family": "Jost",
+      "weight": "200",
+      "style": "normal",
+      "lineHeight": 118.8,
+      "letterSpacing": -2.38,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.4,
+      "end": 6.2
+     },
+     "endBox": {
+      "x": 43.68,
+      "y": 8.72,
+      "w": 0,
+      "h": 8.96
+     },
+     "endContent": {
+      "x": 43.68,
+      "y": 8.72,
+      "w": 0,
+      "h": 8.96
+     }
+    },
+    {
+     "path": "4",
+     "tag": "div",
+     "cls": "t hl on",
+     "id": "",
+     "text": "Your turn.",
+     "flowText": "Your turn.",
+     "inlineKids": [],
+     "allText": "Your turn.",
+     "box": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 6.19
+     },
+     "content": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 6.19
+     },
+     "textBox": {
+      "x": 5,
+      "y": 8.72,
+      "w": 39.96,
+      "h": 8.96
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      972,
+      119
+     ],
+     "client": [
+      972,
+      119
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 118.8,
+      "family": "Jost",
+      "weight": "200",
+      "style": "normal",
+      "lineHeight": 118.8,
+      "letterSpacing": -2.38,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": 6.4,
+     "dataE": null,
+     "timing": {
+      "start": 6.4,
+      "end": null
+     },
+     "endBox": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 6.19
+     },
+     "endContent": {
+      "x": 5,
+      "y": 10.12,
+      "w": 90,
+      "h": 6.19
+     }
+    },
+    {
+     "path": "5",
+     "tag": "div",
+     "cls": "t frame on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "content": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      842
+     ],
+     "client": [
+      907,
+      842
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Jost",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": 1,
+     "dataE": null,
+     "timing": {
+      "start": 1,
+      "end": null
+     },
+     "endBox": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "endContent": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     }
+    },
+    {
+     "path": "5.0",
+     "tag": "div",
+     "cls": "ph",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "content": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "textBox": null,
+     "clip": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "clipRadius": [
+      2.38,
+      2.56,
+      2.38,
+      2.56,
+      2.38,
+      2.56,
+      2.38,
+      2.56
+     ],
+     "offset": [
+      907,
+      842
+     ],
+     "client": [
+      907,
+      842
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "url",
+     "bgImage": 0,
+     "bgPos": "50% 50%",
+     "bgSize": "cover",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Jost",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 1,
+      "end": null
+     },
+     "endBox": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     },
+     "endContent": {
+      "x": 8,
+      "y": 27,
+      "w": 84,
+      "h": 43.87
+     }
+    },
+    {
+     "path": "6",
+     "tag": "div",
+     "cls": "t ann on",
+     "id": "",
+     "text": "Black fixtures \u00b7 soft grey tile",
+     "flowText": "Black fixtures \u00b7 soft grey tile",
+     "inlineKids": [],
+     "allText": "01 \u00b7 RAINFALL\nBlack fixtures \u00b7 soft grey tile",
+     "box": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 4.69
+     },
+     "content": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 4.69
+     },
+     "textBox": {
+      "x": 5,
+      "y": 88.59,
+      "w": 34.57,
+      "h": 2.45
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      373,
+      90
+     ],
+     "client": [
+      373,
+      90
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 32.4,
+      "family": "Jost",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 45.36,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(244, 243, 239)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(244, 243, 239)",
+      "leftColor": "rgb(244, 243, 239)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(244, 243, 239)",
+     "after": "none",
+     "dataS": 2.5,
+     "dataE": null,
+     "timing": {
+      "start": 2.5,
+      "end": null
+     },
+     "endBox": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 4.69
+     },
+     "endContent": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 4.69
+     }
+    },
+    {
+     "path": "6.0",
+     "tag": "b",
+     "cls": "",
+     "id": "",
+     "text": "01 \u00b7 RAINFALL",
+     "flowText": "01 \u00b7 RAINFALL",
+     "inlineKids": [],
+     "allText": "01 \u00b7 RAINFALL",
+     "box": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 2.05
+     },
+     "content": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 2.05
+     },
+     "textBox": {
+      "x": 5,
+      "y": 86.26,
+      "w": 24.58,
+      "h": 2.14
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      373,
+      39
+     ],
+     "client": [
+      373,
+      39
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 28.08,
+      "family": "Jost",
+      "weight": "500",
+      "style": "normal",
+      "lineHeight": 39.31,
+      "letterSpacing": 6.48,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(232, 201, 106)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(232, 201, 106)",
+      "leftColor": "rgb(232, 201, 106)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(232, 201, 106)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 2.5,
+      "end": null
+     },
+     "endBox": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 2.05
+     },
+     "endContent": {
+      "x": 5,
+      "y": 86.31,
+      "w": 34.57,
+      "h": 2.05
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Heritage Collection · ALT places reels</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Jost:wght@500;600;700&family=Pinyon+Script&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7;--ink:#2b1d12;--mut:#7a6a58;--btn:#2b3d33;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#15130f;--ink:#f1e8d6;--mut:#b3a68f;--btn:#5b7a67}
+}
+:root[data-theme="dark"]{--bg:#15130f;--ink:#f1e8d6;--mut:#b3a68f;--btn:#5b7a67}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Jost,system-ui,sans-serif}
+header{padding:28px 20px 8px;max-width:1000px;margin:auto}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;margin:0 0 6px}
+header p{margin:0;color:var(--mut);line-height:1.5;max-width:70ch}
+.grid{max-width:1000px;margin:auto;padding:16px 20px 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;justify-items:center}
+.col{width:100%;max-width:320px}
+.col h2{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin:0 0 10px}
+.stage{position:relative;aspect-ratio:9/16;overflow:hidden;border-radius:18px;container-type:size;box-shadow:0 10px 30px rgba(0,0,0,.3);--p:0;color:#f6ecd6;font-family:Jost,sans-serif}
+.abs{position:absolute;inset:0}
+.t{position:absolute;opacity:0;transform:translateY(4cqw);transition:opacity .45s,transform .55s}
+.t.on{opacity:1;transform:none}
+.fade{background:#000;opacity:0;transition:opacity .3s;pointer-events:none;z-index:50}
+.fade.on{opacity:1}
+.bar{position:absolute;top:2.5cqw;left:3cqw;right:3cqw;height:.8cqw;background:#fff4;overflow:hidden;z-index:49}
+.bar i{display:block;height:100%;background:var(--acc,#ffd36b);width:calc(var(--p)*100%)}
+.safe{display:none;border:.4cqw dashed #e0b000;inset:14cqw 3cqw 35cqw 3cqw;position:absolute;pointer-events:none;z-index:48}
+.on-safe .safe{display:block}
+.ctl{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button{font:inherit;font-weight:600;border:0;background:var(--btn);color:#fff;padding:8px 13px;border-radius:8px;cursor:pointer}
+.notes{max-width:1000px;margin:0 auto;padding:0 20px 40px;color:var(--mut);line-height:1.6;font-size:14px}
+.notes b{color:var(--ink)}
+.serif{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600}
+.scr{font-family:'Pinyon Script',cursive}
+.mono{font-family:'Special Elite',monospace}
+
+/* ========== A · POSTCARD RACK ========== */
+.rA{background:linear-gradient(#3a2a1c,#1f1610);--acc:#e8c07a}
+.rA .rack{
+  position:absolute;left:4cqw;right:4cqw;top:18cqw;bottom:18cqw;
+  perspective:120cqw;
+}
+.rA .card{
+  position:absolute;left:8cqw;right:8cqw;top:8cqw;height:70%;
+  background:#f6ecd6;color:#2b1d12;
+  border-radius:1.5cqw;
+  box-shadow:0 1.5cqw 3cqw #0008;
+  transform-origin:50% 100%;
+  transform:rotateX(18deg) translateY(40cqw) scale(.9);
+  opacity:0;
+  transition:transform .7s cubic-bezier(.2,1.1,.4,1),opacity .4s;
+  overflow:hidden;
+}
+.rA .card.on{
+  transform:rotateX(8deg) translateY(0) scale(1);
+  opacity:1;
+}
+.rA .card .stamp{
+  position:absolute;top:3cqw;right:3cqw;
+  width:16cqw;height:16cqw;border:.5cqw dashed #b3402f;
+  border-radius:50%;display:grid;place-items:center;
+  font-size:2.6cqw;font-weight:700;color:#b3402f;text-align:center;
+  transform:rotate(12deg);mix-blend-mode:multiply;
+}
+.rA .card .flag{
+  position:absolute;top:0;left:0;right:0;height:8cqw;
+}
+.rA .card h3{
+  margin:12cqw 4cqw 1cqw;font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:7.5cqw;line-height:1.05;color:#2b1d12;
+}
+.rA .card .rg{margin:0 4cqw;font-size:3.2cqw;font-weight:600;letter-spacing:.4cqw;color:#7a6a58}
+.rA .card .co{margin:1cqw 4cqw 0;font-size:3cqw;color:#7a6a58}
+.rA .card .story{
+  margin:3cqw 4cqw 0;font-size:3.6cqw;line-height:1.3;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+}
+.rA .titleA{
+  top:5cqw;left:0;right:0;text-align:center;
+  font-size:3.4cqw;letter-spacing:.8cqw;font-weight:600;color:var(--acc);
+}
+.rA .endA{
+  left:6cqw;right:6cqw;bottom:8cqw;text-align:center;
+  background:#f6ecd6;color:#2b1d12;border-radius:2.5cqw;padding:3cqw;
+}
+.rA .endA b{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:6.5cqw}
+.rA .endA span{display:inline-block;margin-top:1.5cqw;background:#2b1d12;color:#f6ecd6;padding:1cqw 3cqw;border-radius:6cqw;font-size:3cqw;font-weight:600}
+
+/* ========== B · SUITCASE + STAMPS ========== */
+.rB{background:linear-gradient(#2a2218,#14100c);--acc:#c9a06a}
+.rB .case{
+  position:absolute;left:8cqw;right:8cqw;top:22cqw;bottom:30cqw;
+  background:linear-gradient(#5a4030,#3a2a1c);
+  border:1.2cqw solid #2a1a10;
+  border-radius:2cqw;
+  box-shadow:inset 0 0 4cqw #0006,0 1cqw 0 #1a1008;
+}
+.rB .case:before{
+  content:"";position:absolute;left:4cqw;right:4cqw;top:4cqw;bottom:4cqw;
+  border:.4cqw dashed #c9a06a55;border-radius:1cqw;
+}
+.rB .handle{
+  position:absolute;left:30%;right:30%;top:-5cqw;height:5cqw;
+  border:1cqw solid #2a1a10;border-bottom:0;border-radius:2cqw 2cqw 0 0;
+  background:#3a2a1c;
+}
+.rB .stampB{
+  position:absolute;width:28cqw;height:28cqw;
+  border:.7cqw double var(--c);color:var(--c);
+  border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;font-family:'Special Elite',monospace;
+  background:#f6ecd6ee;mix-blend-mode:multiply;
+  transform:scale(0) rotate(var(--r,0deg));
+  opacity:0;transition:transform .35s cubic-bezier(.2,1.6,.4,1),opacity .2s;
+  z-index:5;
+}
+.rB .stampB.on{transform:scale(1) rotate(var(--r,0deg));opacity:.95}
+.rB .stampB small{font-size:2.8cqw;letter-spacing:.3cqw;font-weight:700}
+.rB .stampB b{font-size:2.4cqw;max-width:22cqw;line-height:1.1;margin-top:.4cqw}
+.rB .titleB{
+  top:6cqw;left:0;right:0;text-align:center;
+  font-size:3.3cqw;letter-spacing:.7cqw;font-weight:600;color:var(--acc);
+}
+.rB .pass{
+  top:11cqw;left:0;right:0;text-align:center;
+  font-family:'Pinyon Script',cursive;font-size:9cqw;color:#f6ecd6;
+}
+.rB .finB{
+  left:10cqw;right:10cqw;bottom:8cqw;text-align:center;
+  border:.8cqw solid #b3402f;color:#b3402f;
+  font-family:'Special Elite',monospace;font-size:5.5cqw;font-weight:700;
+  padding:1.8cqw;background:#f6ecd6dd;
+  transform:scale(1.8) rotate(-6deg);opacity:0;
+  transition:transform .4s cubic-bezier(.2,1.5,.4,1),opacity .25s;
+}
+.rB .finB.on{transform:rotate(-6deg);opacity:1}
+.rB .urlB{
+  bottom:2.5cqw;left:0;right:0;text-align:center;
+  font-family:'Special Elite',monospace;font-size:3cqw;color:#c9a06a;
+}
+
+/* ========== C · CAMPFIRE STORYTELLER ========== */
+.rC{background:linear-gradient(#0d1a22,#061015);--acc:#ff9a3c}
+.rC .glow{
+  position:absolute;left:50%;bottom:18cqw;width:90cqw;height:50cqw;
+  background:radial-gradient(ellipse at 50% 100%,#ff6a2033 0%,transparent 70%);
+  transform:translateX(-50%);pointer-events:none;
+}
+.rC .fire{
+  position:absolute;left:50%;bottom:12cqw;transform:translateX(-50%);
+  width:28cqw;height:22cqw;
+}
+.rC .flame{
+  position:absolute;bottom:0;left:50%;width:8cqw;height:18cqw;
+  background:linear-gradient(#ffcc33,#ff6a20,#c30);
+  border-radius:50% 50% 20% 20%;
+  transform:translateX(-50%);
+  animation:flick 0.6s ease-in-out infinite alternate;
+  filter:blur(.3cqw);
+}
+.rC .flame:nth-child(2){left:35%;width:6cqw;height:14cqw;animation-delay:.15s}
+.rC .flame:nth-child(3){left:65%;width:7cqw;height:16cqw;animation-delay:.3s}
+@keyframes flick{from{transform:translateX(-50%) scaleY(1)}to{transform:translateX(-50%) scaleY(1.15) rotate(2deg)}}
+.rC .logs{
+  position:absolute;left:50%;bottom:10cqw;transform:translateX(-50%);
+  width:32cqw;height:6cqw;background:#3a2a1a;border-radius:1cqw;
+  box-shadow:0 1cqw 0 #1a1008;
+}
+.rC .teller{
+  position:absolute;left:50%;bottom:28cqw;transform:translateX(-50%);
+  width:22cqw;height:30cqw;
+  background:#0a1218;
+  clip-path:polygon(30% 0,70% 0,80% 25%,75% 60%,85% 100%,15% 100%,25% 60%,20% 25%);
+  opacity:0;transition:opacity .6s;
+}
+.rC .teller.on{opacity:1}
+.rC .shape{
+  position:absolute;left:50%;top:22cqw;transform:translateX(-50%) scale(0);
+  width:55cqw;height:55cqw;
+  opacity:0;transition:transform .7s cubic-bezier(.2,1.3,.4,1),opacity .4s;
+}
+.rC .shape.on{transform:translateX(-50%) scale(1);opacity:1}
+.rC .shape svg{width:100%;height:100%;fill:var(--c);filter:drop-shadow(0 0 2cqw var(--c))}
+.rC .info{
+  top:6cqw;left:0;right:0;text-align:center;
+  font-size:3.2cqw;letter-spacing:.7cqw;font-weight:600;color:var(--acc);
+}
+.rC .q{
+  top:12cqw;left:6cqw;right:6cqw;text-align:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:7cqw;line-height:1.1;color:#f6ecd6;
+}
+.rC .ans{
+  left:8cqw;right:8cqw;top:88cqw;text-align:center;
+  background:#0d1a22ee;border:.6cqw solid var(--c);border-radius:2cqw;
+  padding:2.5cqw;color:#f6ecd6;
+}
+.rC .ans h3{margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:7cqw;color:var(--c)}
+.rC .ans b{display:block;font-family:'Pinyon Script',cursive;font-weight:400;font-size:5.5cqw;margin-top:1cqw}
+.rC .ans small{display:block;font-size:2.8cqw;letter-spacing:.4cqw;margin-top:1cqw;opacity:.8}
+.rC .endC{
+  left:6cqw;right:6cqw;bottom:6cqw;text-align:center;
+}
+.rC .endC .pill{
+  display:inline-block;background:var(--acc);color:#0d1a22;
+  font-weight:700;font-size:3.2cqw;padding:1.5cqw 4cqw;border-radius:8cqw;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Heritage Collection · ALT places reels</h1>
+  <p>Three new visual systems for the same five heritage stories: a flipping postcard rack, a suitcase filling with travel stamps, and a campfire storyteller with country shapes rising from the flames.</p>
+</header>
+
+<div class="grid">
+
+  <!-- A · POSTCARD RACK -->
+  <div class="col">
+    <h2>A · Postcard rack · five places</h2>
+    <div class="stage rA" id="sA" data-d="13000">
+      <div class="t titleA" data-s="0.2">AWARENESS · HERITAGE POSTCARDS</div>
+      <div class="rack">
+        <!-- cards will be injected / controlled by data-s -->
+        <div class="card" data-s="1.2" data-e="3.4" style="--c:#3aa57a">
+          <div class="flag" style="background:linear-gradient(#009c3b 33%,#ffdf00 33% 66%,#002776 66%)"></div>
+          <div class="stamp">BRASIL<br>RS</div>
+          <h3>Negrinho do Pastoreio</h3>
+          <div class="rg">RIO GRANDE DO SUL</div>
+          <div class="co">30°S · 53°W</div>
+          <div class="story">A little black shepherd boy and the kindness of strangers.</div>
+        </div>
+        <div class="card" data-s="3.5" data-e="5.6" style="--c:#e0725a">
+          <div class="flag" style="background:linear-gradient(#009246 33%,#fff 33% 66%,#ce2b37 66%)"></div>
+          <div class="stamp">ITALIA<br>PIE</div>
+          <h3>Giovannin senza paura</h3>
+          <div class="rg">PIEMONTE</div>
+          <div class="co">45°N · 8°E</div>
+          <div class="story">The boy who had no fear — and what he found in the dark.</div>
+        </div>
+        <div class="card" data-s="5.7" data-e="7.7" style="--c:#5d8fd6">
+          <div class="flag" style="background:linear-gradient(#012169 50%,#c8102e 50%)"></div>
+          <div class="stamp">UK<br>CORN</div>
+          <h3>King Arthur &amp; Tintagel</h3>
+          <div class="rg">CORNWALL</div>
+          <div class="co">51°N · 5°W</div>
+          <div class="story">Where legend and sea-cliff meet.</div>
+        </div>
+        <div class="card" data-s="7.8" data-e="9.6" style="--c:#e8ae3e">
+          <div class="flag" style="background:linear-gradient(#dc143c 50%,#fff 50%)"></div>
+          <div class="stamp">POLSKA<br>KRK</div>
+          <h3>Smok Wawelski</h3>
+          <div class="rg">KRAKÓW</div>
+          <div class="co">50°N · 20°E</div>
+          <div class="story">The dragon under Wawel Hill.</div>
+        </div>
+        <div class="card" data-s="9.7" data-e="11.6" style="--c:#ee8a46">
+          <div class="flag" style="background:linear-gradient(#d52b1e 50%,#fff 50%)"></div>
+          <div class="stamp">CHILE</div>
+          <h3>A tale from Chile</h3>
+          <div class="rg">CHILE</div>
+          <div class="co">35°S · 71°W</div>
+          <div class="story">Stories carried on the long spine of the Andes.</div>
+        </div>
+      </div>
+      <div class="t endA" data-s="11.8">
+        <b>Five countries. Twelve stories.</b>
+        <span>awareness-ai.com.br/heritage</span>
+      </div>
+      <div class="bar"><i></i></div>
+      <div class="safe"></div>
+      <div class="abs fade on"></div>
+    </div>
+    <div class="ctl">
+      <button onclick="rs('sA')">Restart</button>
+      <button onclick="sf('sA')">Safe zones</button>
+    </div>
+  </div>
+
+  <!-- B · SUITCASE -->
+  <div class="col">
+    <h2>B · Suitcase stamps · passport</h2>
+    <div class="stage rB" id="sB" data-d="11500">
+      <div class="t titleB" data-s="0.2">AWARENESS · TRAVEL STAMPS</div>
+      <div class="t pass" data-s="0.4">Heritage Passport</div>
+      <div class="case">
+        <div class="handle"></div>
+      </div>
+
+      <div class="stampB" data-s="1.3" style="left:12cqw;top:32cqw;--c:#1f7a52;--r:-12deg">
+        <small>BRASIL</small><b>Rio Grande do Sul</b>
+      </div>
+      <div class="stampB" data-s="2.6" style="left:48cqw;top:28cqw;--c:#b3402f;--r:8deg">
+        <small>ITALIA</small><b>Piemonte</b>
+      </div>
+      <div class="stampB" data-s="3.9" style="left:18cqw;top:58cqw;--c:#2f4f8f;--r:-6deg">
+        <small>UNITED KINGDOM</small><b>Cornwall</b>
+      </div>
+      <div class="stampB" data-s="5.2" style="left:52cqw;top:55cqw;--c:#a8741a;--r:14deg">
+        <small>POLSKA</small><b>Kraków</b>
+      </div>
+      <div class="stampB" data-s="6.5" style="left:30cqw;top:42cqw;--c:#7a3b8c;--r:-4deg">
+        <small>CHILE</small><b>Chile</b>
+      </div>
+
+      <div class="finB" data-s="8.0">12 STORIES<br><small style="font-size:2.8cqw;letter-spacing:.3cqw">PASSPORT COMPLETE</small></div>
+      <div class="t urlB" data-s="9.0">awareness-ai.com.br/heritage</div>
+
+      <div class="bar"><i></i></div>
+      <div class="safe"></div>
+      <div class="abs fade on"></div>
+    </div>
+    <div class="ctl">
+      <button onclick="rs('sB')">Restart</button>
+      <button onclick="sf('sB')">Safe zones</button>
+    </div>
+  </div>
+
+  <!-- C · CAMPFIRE -->
+  <div class="col">
+    <h2>C · Campfire storyteller · quiz</h2>
+    <div class="stage rC" id="sC" data-d="14500">
+      <div class="t titleC" data-s="0.2">AWARENESS · STORIES BY THE FIRE</div>
+      <div class="glow"></div>
+      <div class="logs"></div>
+      <div class="fire">
+        <div class="flame"></div>
+        <div class="flame"></div>
+        <div class="flame"></div>
+      </div>
+      <div class="teller" data-s="0.6"></div>
+
+      <!-- Round content driven by JS for cleaner sequencing -->
+      <div class="t q" id="qTxt" data-s="1.0" data-e="13">Guess the country from its shape</div>
+
+      <div class="shape" id="shp" data-s="2.0">
+        <svg viewBox="0 0 100 100" id="shpSvg"></svg>
+      </div>
+
+      <div class="t ans" id="ansBox" data-s="3.2" data-e="4.8" style="--c:#e0725a">
+        <h3>Italia</h3>
+        <b>Giovannin senza paura</b>
+        <small>PIEMONTE</small>
+      </div>
+
+      <div class="t endC" data-s="13.2">
+        <span class="pill">awareness-ai.com.br/heritage</span>
+      </div>
+
+      <div class="bar"><i></i></div>
+      <div class="safe"></div>
+      <div class="abs fade on"></div>
+    </div>
+    <div class="ctl">
+      <button onclick="rs('sC')">Restart</button>
+      <button onclick="sf('sC')">Safe zones</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="notes">
+  <b>Notes:</b> Same five places and stories as the original Heritage set.
+  A is a physical postcard rack — cards rise and tilt toward the viewer one after another.
+  B is an open suitcase that receives five circular travel stamps in sequence, ending with a “passport complete” mark.
+  C is a night campfire scene: a silhouette storyteller, flickering flames, and country silhouettes that rise from the fire before the answer is revealed.
+  All pure CSS/SVG + timeline JS. Durations are slightly longer than 10 s where the content needs it.
+</div>
+
+<script>
+// Simple country silhouettes (very simplified for visual recognition)
+const SIL = {
+  Italy: "M52,8 L58,12 L62,22 L60,35 L65,45 L62,55 L55,70 L52,85 L48,92 L42,88 L40,75 L38,60 L42,48 L40,35 L45,22 L48,12 Z",
+  "United Kingdom": "M40,15 L55,12 L62,20 L58,35 L65,45 L60,55 L55,70 L48,80 L42,75 L38,60 L35,45 L38,30 L42,20 Z",
+  Chile: "M48,5 L52,5 L54,20 L53,40 L55,60 L52,80 L50,95 L47,95 L46,75 L45,55 L46,35 L47,15 Z",
+  Poland: "M35,25 L65,22 L70,35 L68,55 L60,70 L40,72 L32,55 L30,35 Z",
+  Brazil: "M30,20 L70,18 L75,35 L72,55 L65,75 L45,85 L30,70 L25,45 L28,30 Z"
+};
+
+const ROUNDS = [
+  {name:"Italy", n:"Italia", ti:"Giovannin senza paura", rg:"PIEMONTE", c:"#e0725a", s:1.8, e:4.4},
+  {name:"United Kingdom", n:"United Kingdom", ti:"King Arthur & Tintagel", rg:"CORNWALL", c:"#5d8fd6", s:4.6, e:7.0},
+  {name:"Chile", n:"Chile", ti:"A tale from Chile", rg:"CHILE", c:"#ee8a46", s:7.2, e:9.6},
+  {name:"Poland", n:"Polska", ti:"Smok Wawelski", rg:"KRAKÓW", c:"#e8ae3e", s:9.8, e:12.0},
+  {name:"Brazil", n:"Brasil", ti:"Negrinho do Pastoreio", rg:"RIO GRANDE DO SUL", c:"#3aa57a", s:12.2, e:14.2}
+];
+
+const S = [...document.querySelectorAll('.stage')];
+const o = {};
+const sm = x => { x = Math.min(1, Math.max(0, x)); return x*x*(3-2*x); };
+
+function rs(i){ o[i] = performance.now(); }
+function sf(i){ document.getElementById(i).classList.toggle('on-safe'); }
+S.forEach(s => o[s.id] = performance.now());
+
+function f(n){
+  S.forEach(s => {
+    const d = +(s.dataset.d || 10000);
+    const t = ((n - o[s.id]) % d) / 1000;
+    s.style.setProperty('--p', t * 1000 / d);
+
+    s.querySelectorAll('[data-s]').forEach(e => {
+      const end = e.dataset.e ? +e.dataset.e : 99;
+      e.classList.toggle('on', t >= +e.dataset.s && t < end);
+    });
+    s.querySelector('.fade').classList.toggle('on', t > d/1000 - 0.45 || t < 0.1);
+
+    // C · campfire rounds
+    if (s.id === 'sC') {
+      const shp = document.getElementById('shp');
+      const svg = document.getElementById('shpSvg');
+      const ans = document.getElementById('ansBox');
+      const qTxt = document.getElementById('qTxt');
+
+      let active = null;
+      for (const r of ROUNDS) {
+        if (t >= r.s && t < r.e) { active = r; break; }
+      }
+
+      if (active) {
+        const mid = (active.s + active.e) / 2;
+        // shape appears first half, answer second half
+        if (t < mid - 0.15) {
+          shp.classList.add('on');
+          shp.style.setProperty('--c', active.c);
+          svg.innerHTML = `<path d="${SIL[active.name]}"/>`;
+          ans.classList.remove('on');
+          qTxt.textContent = 'Which tale hides in this shape?';
+        } else {
+          shp.classList.add('on');
+          ans.classList.add('on');
+          ans.style.setProperty('--c', active.c);
+          ans.querySelector('h3').textContent = active.n;
+          ans.querySelector('b').textContent = active.ti;
+          ans.querySelector('small').textContent = active.rg;
+          qTxt.textContent = '';
+        }
+      } else {
+        shp.classList.remove('on');
+        ans.classList.remove('on');
+        if (t < 1.5) qTxt.textContent = 'Guess the country from its shape';
+        else if (t > 13) qTxt.textContent = 'Which story will your family start with?';
+      }
+    }
+  });
+  requestAnimationFrame(f);
+}
+requestAnimationFrame(f);
+</script>
+</body>
+</html>

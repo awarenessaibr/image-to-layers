@@ -1,0 +1,7376 @@
+{
+ "samples": null,
+ "source": "Singl-end Pinocchio \u00b7 ALT reels.html",
+ "sourceSha256": "dc55f69e577d233c2e195cd15b4d7d55d8a85040cc1bbf21215c0d8bf2bf4211",
+ "selector": ".stage, .post, .reel, .story",
+ "state": "on",
+ "timeSeconds": 3.0,
+ "cssVars": {
+  "p": "1"
+ },
+ "noTransform": true,
+ "stageWidth": 1080,
+ "viewport": {
+  "width": 1400,
+  "height": 1000
+ },
+ "chrome": "Google Chrome",
+ "fontsStatus": "loaded",
+ "urls": [],
+ "stages": [
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(26, 10, 10)",
+   "backgroundImage": "",
+   "backgroundSize": "auto",
+   "backgroundPosition": "0% 0%",
+   "dataD": null,
+   "classes": "stage rA",
+   "id": "sA",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "t title",
+     "id": "",
+     "text": "TEATRO DELLE OMBRE",
+     "flowText": "TEATRO DELLE OMBRE",
+     "inlineKids": [],
+     "allText": "TEATRO DELLE OMBRE",
+     "box": {
+      "x": 0,
+      "y": 2.25,
+      "w": 100,
+      "h": 3.13
+     },
+     "content": {
+      "x": 0,
+      "y": 2.25,
+      "w": 100,
+      "h": 3.13
+     },
+     "textBox": {
+      "x": 17.57,
+      "y": 2.25,
+      "w": 64.87,
+      "h": 3.13
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      60
+     ],
+     "client": [
+      1080,
+      60
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 59.4,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 71.28,
+      "letterSpacing": 4.32,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(242, 193, 78)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(242, 193, 78)",
+      "leftColor": "rgb(242, 193, 78)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(242, 193, 78)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 0,
+      "y": 2.25,
+      "w": 100,
+      "h": 3.13
+     },
+     "endContent": {
+      "x": 0,
+      "y": 2.25,
+      "w": 100,
+      "h": 3.13
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "screen",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 6,
+      "y": 10.12,
+      "w": 88,
+      "h": 74.13
+     },
+     "content": {
+      "x": 7.11,
+      "y": 10.75,
+      "w": 85.78,
+      "h": 72.88
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      950,
+      1423
+     ],
+     "client": [
+      926,
+      1399
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(42, 24, 16)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 12,
+       "r": 12,
+       "b": 12,
+       "l": 12
+      },
+      "topColor": "rgb(61, 36, 24)",
+      "leftColor": "rgb(61, 36, 24)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 6,
+      "y": 10.12,
+      "w": 88,
+      "h": 74.13
+     },
+     "endContent": {
+      "x": 7.11,
+      "y": 10.75,
+      "w": 85.78,
+      "h": 72.88
+     }
+    },
+    {
+     "path": "1.0",
+     "tag": "div",
+     "cls": "light",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 50,
+      "y": 5.12,
+      "w": 80,
+      "h": 28.13
+     },
+     "content": {
+      "x": 50,
+      "y": 5.12,
+      "w": 80,
+      "h": 28.13
+     },
+     "textBox": null,
+     "clip": {
+      "x": 6,
+      "y": 10.12,
+      "w": 88,
+      "h": 74.13
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      864,
+      540
+     ],
+     "client": [
+      864,
+      540
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "radial-gradient(at 50% 0px, rgba(255, 216, 154, 0.533) 0%, rgba(255, 179, 71, 0.2) 40%, rgba(0, 0, 0, 0) 70%)",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 10,
+      "y": 5.12,
+      "w": 80,
+      "h": 28.13
+     },
+     "endContent": {
+      "x": 10,
+      "y": 5.12,
+      "w": 80,
+      "h": 28.13
+     }
+    },
+    {
+     "path": "1.1",
+     "tag": "div",
+     "cls": "sil",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 50,
+      "y": 44.25,
+      "w": 55,
+      "h": 39.38
+     },
+     "content": {
+      "x": 50,
+      "y": 44.25,
+      "w": 55,
+      "h": 39.38
+     },
+     "textBox": null,
+     "clip": {
+      "x": 6,
+      "y": 10.12,
+      "w": 88,
+      "h": 74.13
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      594,
+      756
+     ],
+     "client": [
+      594,
+      756
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "3",
+     "tf": "none",
+     "bg": "rgb(10, 5, 5)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "drop-shadow(rgb(0, 0, 0) 0px 0px 16.2px)",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 22.5,
+      "y": 44.25,
+      "w": 55,
+      "h": 39.38
+     },
+     "endContent": {
+      "x": 22.5,
+      "y": 44.25,
+      "w": 55,
+      "h": 39.38
+     }
+    },
+    {
+     "path": "1.1.0",
+     "tag": "div",
+     "cls": "nose",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 81.9,
+      "y": 52.91,
+      "w": 0,
+      "h": 1.24
+     },
+     "content": {
+      "x": 81.9,
+      "y": 52.91,
+      "w": 0,
+      "h": 1.24
+     },
+     "textBox": null,
+     "clip": {
+      "x": 50,
+      "y": 44.25,
+      "w": 44,
+      "h": 39.38
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      0,
+      24
+     ],
+     "client": [
+      0,
+      24
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "4",
+     "tf": "none",
+     "bg": "rgb(10, 5, 5)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 54.17,
+      "y": 52.93,
+      "w": 0.46,
+      "h": 1.21
+     },
+     "endContent": {
+      "x": 54.17,
+      "y": 52.93,
+      "w": 0.46,
+      "h": 1.21
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "curtain cl on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      562,
+      1920
+     ],
+     "client": [
+      562,
+      1920
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "6",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "repeating-linear-gradient(90deg, rgb(74, 11, 23) 0px, rgb(74, 11, 23) 32.4px, rgb(58, 8, 18) 32.4px, rgb(58, 8, 18) 64.8px)",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 99,
+     "timing": {
+      "start": 0.3,
+      "end": 99
+     },
+     "endBox": {
+      "x": -53.04,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     },
+     "endContent": {
+      "x": -53.04,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "curtain cr on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 48,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     },
+     "content": {
+      "x": 48,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      562,
+      1920
+     ],
+     "client": [
+      562,
+      1920
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "6",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "repeating-linear-gradient(90deg, rgb(74, 11, 23) 0px, rgb(74, 11, 23) 32.4px, rgb(58, 8, 18) 32.4px, rgb(58, 8, 18) 64.8px)",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.3,
+     "dataE": 99,
+     "timing": {
+      "start": 0.3,
+      "end": 99
+     },
+     "endBox": {
+      "x": 101.04,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     },
+     "endContent": {
+      "x": 101.04,
+      "y": 0,
+      "w": 52,
+      "h": 100
+     }
+    },
+    {
+     "path": "4",
+     "tag": "div",
+     "cls": "t bubble on",
+     "id": "",
+     "text": "Me, lie? Never!",
+     "flowText": "Me, lie? Never!",
+     "inlineKids": [],
+     "allText": "Me, lie? Never!",
+     "box": {
+      "x": 8,
+      "y": 75.53,
+      "w": 84,
+      "h": 6.47
+     },
+     "content": {
+      "x": 12,
+      "y": 77.22,
+      "w": 76,
+      "h": 3.1
+     },
+     "textBox": {
+      "x": 33.58,
+      "y": 77.53,
+      "w": 32.84,
+      "h": 2.45
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      124
+     ],
+     "client": [
+      907,
+      124
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgb(251, 243, 223)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 47.52,
+      "family": "Special Elite",
+      "weight": "800",
+      "style": "normal",
+      "lineHeight": 59.4,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(26, 10, 10)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 10, 10)",
+      "leftColor": "rgb(26, 10, 10)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 32.4,
+      "r": 43.2,
+      "b": 32.4,
+      "l": 43.2
+     },
+     "radius": 32.4,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 10, 10)",
+     "after": "\"\"",
+     "dataS": 2,
+     "dataE": 3.8,
+     "timing": {
+      "start": 2,
+      "end": 3.8
+     },
+     "endBox": {
+      "x": 8,
+      "y": 75.53,
+      "w": 84,
+      "h": 6.47
+     },
+     "endContent": {
+      "x": 12,
+      "y": 77.22,
+      "w": 76,
+      "h": 3.1
+     }
+    },
+    {
+     "path": "5",
+     "tag": "div",
+     "cls": "t bubble on",
+     "id": "",
+     "text": "The Limencello Spritz is\u2026 terrible.",
+     "flowText": "The Limencello Spritz is\u2026 terrible.",
+     "inlineKids": [],
+     "allText": "The Limencello Spritz is\u2026 terrible.",
+     "box": {
+      "x": 8,
+      "y": 72.44,
+      "w": 84,
+      "h": 9.56
+     },
+     "content": {
+      "x": 12,
+      "y": 74.13,
+      "w": 76,
+      "h": 6.19
+     },
+     "textBox": {
+      "x": 19.45,
+      "y": 74.44,
+      "w": 61.11,
+      "h": 5.54
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      184
+     ],
+     "client": [
+      907,
+      184
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgb(251, 243, 223)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 47.52,
+      "family": "Special Elite",
+      "weight": "800",
+      "style": "normal",
+      "lineHeight": 59.4,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(26, 10, 10)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 10, 10)",
+      "leftColor": "rgb(26, 10, 10)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 32.4,
+      "r": 43.2,
+      "b": 32.4,
+      "l": 43.2
+     },
+     "radius": 32.4,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 10, 10)",
+     "after": "\"\"",
+     "dataS": 3.9,
+     "dataE": 5.9,
+     "timing": {
+      "start": 3.9,
+      "end": 5.9
+     },
+     "endBox": {
+      "x": 8,
+      "y": 72.44,
+      "w": 84,
+      "h": 9.56
+     },
+     "endContent": {
+      "x": 12,
+      "y": 74.13,
+      "w": 76,
+      "h": 6.19
+     }
+    },
+    {
+     "path": "6",
+     "tag": "div",
+     "cls": "t bubble on",
+     "id": "",
+     "text": "Fine! It\u2019s delicious.\nProsecco & soda too.",
+     "flowText": "Fine! It\u2019s delicious.\nProsecco & soda too.",
+     "inlineKids": [],
+     "allText": "Fine! It\u2019s delicious.\nProsecco & soda too.",
+     "box": {
+      "x": 8,
+      "y": 72.44,
+      "w": 84,
+      "h": 9.56
+     },
+     "content": {
+      "x": 12,
+      "y": 74.13,
+      "w": 76,
+      "h": 6.19
+     },
+     "textBox": {
+      "x": 27.03,
+      "y": 74.44,
+      "w": 45.94,
+      "h": 5.54
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      184
+     ],
+     "client": [
+      907,
+      184
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "8",
+     "tf": "none",
+     "bg": "rgb(251, 243, 223)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 47.52,
+      "family": "Special Elite",
+      "weight": "800",
+      "style": "normal",
+      "lineHeight": 59.4,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(26, 10, 10)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 10, 10)",
+      "leftColor": "rgb(26, 10, 10)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 32.4,
+      "r": 43.2,
+      "b": 32.4,
+      "l": 43.2
+     },
+     "radius": 32.4,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 10, 10)",
+     "after": "\"\"",
+     "dataS": 6,
+     "dataE": 9.4,
+     "timing": {
+      "start": 6,
+      "end": 9.4
+     },
+     "endBox": {
+      "x": 8,
+      "y": 72.44,
+      "w": 84,
+      "h": 9.56
+     },
+     "endContent": {
+      "x": 12,
+      "y": 74.13,
+      "w": 76,
+      "h": 6.19
+     }
+    },
+    {
+     "path": "6.0",
+     "tag": "br",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 72.97,
+      "y": 74.44,
+      "w": 0,
+      "h": 2.45
+     },
+     "content": {
+      "x": 72.97,
+      "y": 74.44,
+      "w": 0,
+      "h": 2.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 47.52,
+      "family": "Special Elite",
+      "weight": "800",
+      "style": "normal",
+      "lineHeight": 59.4,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(26, 10, 10)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 10, 10)",
+      "leftColor": "rgb(26, 10, 10)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 10, 10)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 6,
+      "end": 9.4
+     },
+     "endBox": {
+      "x": 72.97,
+      "y": 74.44,
+      "w": 0,
+      "h": 2.45
+     },
+     "endContent": {
+      "x": 72.97,
+      "y": 74.44,
+      "w": 0,
+      "h": 2.45
+     }
+    },
+    {
+     "path": "7",
+     "tag": "div",
+     "cls": "price on",
+     "id": "",
+     "text": "\u00a310.50",
+     "flowText": "\u00a310.50",
+     "inlineKids": [],
+     "allText": "\u00a310.50",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 6.89
+     },
+     "content": {
+      "x": 4,
+      "y": 0.84,
+      "w": 92,
+      "h": 5.2
+     },
+     "textBox": {
+      "x": 4,
+      "y": 0.84,
+      "w": 26.47,
+      "h": 5.21
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      132
+     ],
+     "client": [
+      1080,
+      132
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "9",
+     "tf": "none",
+     "bg": "rgb(242, 193, 78)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 75.6,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 90.72,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(26, 10, 10)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(26, 10, 10)",
+      "leftColor": "rgb(26, 10, 10)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 16.2,
+      "r": 43.2,
+      "b": 16.2,
+      "l": 43.2
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(26, 10, 10)",
+     "after": "none",
+     "dataS": 7.2,
+     "dataE": 9.5,
+     "timing": {
+      "start": 7.2,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": -50.37,
+      "y": -2.92,
+      "w": 100.73,
+      "h": 12.74
+     },
+     "endContent": {
+      "x": -46.37,
+      "y": -2.08,
+      "w": 92.73,
+      "h": 11.05
+     }
+    },
+    {
+     "path": "8",
+     "tag": "div",
+     "cls": "t dish on",
+     "id": "",
+     "text": "Limencello Spritz",
+     "flowText": "Limencello Spritz",
+     "inlineKids": [],
+     "allText": "Limencello Spritz",
+     "box": {
+      "x": 0,
+      "y": 91.78,
+      "w": 100,
+      "h": 4.84
+     },
+     "content": {
+      "x": 0,
+      "y": 91.78,
+      "w": 100,
+      "h": 4.84
+     },
+     "textBox": {
+      "x": 13.68,
+      "y": 91.78,
+      "w": 72.63,
+      "h": 4.84
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      93
+     ],
+     "client": [
+      1080,
+      93
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 70.2,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 84.24,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(242, 193, 78)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(242, 193, 78)",
+      "leftColor": "rgb(242, 193, 78)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(242, 193, 78)",
+     "after": "none",
+     "dataS": 1.6,
+     "dataE": 9.5,
+     "timing": {
+      "start": 1.6,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": 0,
+      "y": 91.78,
+      "w": 100,
+      "h": 4.84
+     },
+     "endContent": {
+      "x": 0,
+      "y": 91.78,
+      "w": 100,
+      "h": 4.84
+     }
+    },
+    {
+     "path": "9",
+     "tag": "div",
+     "cls": "t ing on",
+     "id": "",
+     "text": "LIMENCELLO \u00b7 PROSECCO \u00b7 SODA",
+     "flowText": "LIMENCELLO \u00b7 PROSECCO \u00b7 SODA",
+     "inlineKids": [],
+     "allText": "LIMENCELLO \u00b7 PROSECCO \u00b7 SODA",
+     "box": {
+      "x": 0,
+      "y": 97.39,
+      "w": 100,
+      "h": 1.77
+     },
+     "content": {
+      "x": 0,
+      "y": 97.39,
+      "w": 100,
+      "h": 1.77
+     },
+     "textBox": {
+      "x": 21.92,
+      "y": 97.39,
+      "w": 56.16,
+      "h": 1.77
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      34
+     ],
+     "client": [
+      1080,
+      34
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 34.56,
+      "family": "Special Elite",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 41.47,
+      "letterSpacing": 3.24,
+      "align": "center",
+      "transform": "none",
+      "color": "rgba(242, 193, 78, 0.6)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgba(242, 193, 78, 0.6)",
+      "leftColor": "rgba(242, 193, 78, 0.6)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgba(242, 193, 78, 0.6)",
+     "after": "none",
+     "dataS": 2.2,
+     "dataE": 9.5,
+     "timing": {
+      "start": 2.2,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": 0,
+      "y": 97.39,
+      "w": 100,
+      "h": 1.77
+     },
+     "endContent": {
+      "x": 0,
+      "y": 97.39,
+      "w": 100,
+      "h": 1.77
+     }
+    },
+    {
+     "path": "10",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "19",
+     "tf": "none",
+     "bg": "rgba(255, 255, 255, 0.267)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "endContent": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     }
+    },
+    {
+     "path": "10.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": false,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "endContent": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     }
+    },
+    {
+     "path": "11",
+     "tag": "div",
+     "cls": "safe",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": -15.74,
+      "y": -9.84,
+      "w": 0,
+      "h": 0
+     },
+     "content": {
+      "x": -15.37,
+      "y": -9.63,
+      "w": 0,
+      "h": 0
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "none",
+     "vis": "visible",
+     "op": 1,
+     "z": "18",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(224, 176, 0)",
+      "leftColor": "rgb(224, 176, 0)",
+      "topStyle": "dashed",
+      "leftStyle": "dashed"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": -15.74,
+      "y": -9.84,
+      "w": 0,
+      "h": 0
+     },
+     "endContent": {
+      "x": -15.37,
+      "y": -9.63,
+      "w": 0,
+      "h": 0
+     }
+    },
+    {
+     "path": "12",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "20",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "endContent": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     }
+    }
+   ]
+  },
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(28, 28, 28)",
+   "backgroundImage": "",
+   "backgroundSize": "auto",
+   "backgroundPosition": "0% 0%",
+   "dataD": null,
+   "classes": "stage rB",
+   "id": "sB",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "page",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "CAPITOLO I \u2014 A wooden boy walks into Singl-end\nMy belly is empty\u2026\nHe orders \u201cThe Everything\u201d\nAvocado & chilli smash, grilled tomatoes, feta, poached eggs, pangr",
+     "box": {
+      "x": 4,
+      "y": 2.25,
+      "w": 92,
+      "h": 95.5
+     },
+     "content": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 93.77
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      994,
+      1834
+     ],
+     "client": [
+      978,
+      1818
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "grid",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(247, 242, 228)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 8,
+       "r": 8,
+       "b": 8,
+       "l": 8
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 8.64,
+      "b": 8.64,
+      "l": 8.64
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 4,
+      "y": 2.25,
+      "w": 92,
+      "h": 95.5
+     },
+     "endContent": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 93.77
+     }
+    },
+    {
+     "path": "0.0",
+     "tag": "div",
+     "cls": "panel p1 on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "CAPITOLO I \u2014 A wooden boy walks into Singl-end\nMy belly is empty\u2026",
+     "box": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "content": {
+      "x": 6.1,
+      "y": 3.43,
+      "w": 87.81,
+      "h": 30.34
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      960,
+      594
+     ],
+     "client": [
+      948,
+      582
+     ],
+     "clipped": true,
+     "pos": "relative",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "linear-gradient(rgb(232, 240, 255), rgb(200, 216, 240))",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 6,
+       "b": 6,
+       "l": 6
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 0.8,
+     "dataE": 9.6,
+     "timing": {
+      "start": 0.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "endContent": {
+      "x": 6.1,
+      "y": 3.43,
+      "w": 87.81,
+      "h": 30.34
+     }
+    },
+    {
+     "path": "0.0.0",
+     "tag": "div",
+     "cls": "cap",
+     "id": "",
+     "text": "CAPITOLO I \u2014 A wooden boy walks into Singl-end",
+     "flowText": "CAPITOLO I \u2014 A wooden boy walks into Singl-end",
+     "inlineKids": [],
+     "allText": "CAPITOLO I \u2014 A wooden boy walks into Singl-end",
+     "box": {
+      "x": 7.59,
+      "y": 4.27,
+      "w": 84.81,
+      "h": 5.71
+     },
+     "content": {
+      "x": 9.09,
+      "y": 4.83,
+      "w": 81.81,
+      "h": 4.59
+     },
+     "textBox": {
+      "x": 9.09,
+      "y": 4.73,
+      "w": 76.54,
+      "h": 4.79
+     },
+     "clip": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      916,
+      110
+     ],
+     "client": [
+      916,
+      110
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 36.72,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 44.06,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 10.8,
+      "r": 16.2,
+      "b": 10.8,
+      "l": 16.2
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 7.59,
+      "y": 4.27,
+      "w": 84.81,
+      "h": 5.71
+     },
+     "endContent": {
+      "x": 9.09,
+      "y": 4.83,
+      "w": 81.81,
+      "h": 4.59
+     }
+    },
+    {
+     "path": "0.0.1",
+     "tag": "div",
+     "cls": "wood",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 19.27,
+      "y": 17.08,
+      "w": 21.95,
+      "h": 16.68
+     },
+     "content": {
+      "x": 19.27,
+      "y": 17.08,
+      "w": 21.95,
+      "h": 16.68
+     },
+     "textBox": null,
+     "clip": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      237,
+      320
+     ],
+     "client": [
+      237,
+      320
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(139, 90, 43)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 19.27,
+      "y": 17.08,
+      "w": 21.95,
+      "h": 16.68
+     },
+     "endContent": {
+      "x": 19.27,
+      "y": 17.08,
+      "w": 21.95,
+      "h": 16.68
+     }
+    },
+    {
+     "path": "0.0.2",
+     "tag": "div",
+     "cls": "head",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 21.9,
+      "y": 9.32,
+      "w": 17.56,
+      "h": 9.88
+     },
+     "content": {
+      "x": 22.27,
+      "y": 9.53,
+      "w": 16.82,
+      "h": 9.46
+     },
+     "textBox": null,
+     "clip": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      190,
+      190
+     ],
+     "client": [
+      182,
+      182
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(245, 208, 169)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 94.82,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 21.9,
+      "y": 9.32,
+      "w": 17.56,
+      "h": 9.88
+     },
+     "endContent": {
+      "x": 22.27,
+      "y": 9.53,
+      "w": 16.82,
+      "h": 9.46
+     }
+    },
+    {
+     "path": "0.0.2.0",
+     "tag": "div",
+     "cls": "noseB",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 31.52,
+      "y": 13.31,
+      "w": 1.35,
+      "h": 0.76
+     },
+     "content": {
+      "x": 31.8,
+      "y": 13.47,
+      "w": 0.79,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      15,
+      15
+     ],
+     "client": [
+      9,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(245, 208, 169)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 3,
+       "r": 3,
+       "b": 3,
+       "l": 3
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 31.43,
+      "y": 13.21,
+      "w": 1.52,
+      "h": 0.85
+     },
+     "endContent": {
+      "x": 31.71,
+      "y": 13.37,
+      "w": 0.96,
+      "h": 0.54
+     }
+    },
+    {
+     "path": "0.0.3",
+     "tag": "div",
+     "cls": "balloon",
+     "id": "",
+     "text": "My belly is empty\u2026",
+     "flowText": "My belly is empty\u2026",
+     "inlineKids": [],
+     "allText": "My belly is empty\u2026",
+     "box": {
+      "x": 8.09,
+      "y": 24.26,
+      "w": 83.81,
+      "h": 5
+     },
+     "content": {
+      "x": 10.35,
+      "y": 25.53,
+      "w": 79.28,
+      "h": 2.45
+     },
+     "textBox": {
+      "x": 28.07,
+      "y": 25.32,
+      "w": 43.87,
+      "h": 2.81
+     },
+     "clip": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      905,
+      96
+     ],
+     "client": [
+      895,
+      86
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Bungee",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 47.2,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(17, 17, 17)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 5,
+       "r": 5,
+       "b": 5,
+       "l": 5
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 19.44,
+      "r": 19.44,
+      "b": 19.44,
+      "l": 19.44
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "\"\"",
+     "beforeColor": "rgb(17, 17, 17)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 8.09,
+      "y": 24.26,
+      "w": 83.81,
+      "h": 5
+     },
+     "endContent": {
+      "x": 10.35,
+      "y": 25.53,
+      "w": 79.28,
+      "h": 2.45
+     }
+    },
+    {
+     "path": "0.0.4",
+     "tag": "div",
+     "cls": "splat on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 73.13,
+      "y": 9.49,
+      "w": 12,
+      "h": 6.75
+     },
+     "content": {
+      "x": 73.13,
+      "y": 9.49,
+      "w": 12,
+      "h": 6.75
+     },
+     "textBox": null,
+     "clip": {
+      "x": 5.54,
+      "y": 3.12,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      130,
+      130
+     ],
+     "client": [
+      130,
+      130
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 0.15,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 64.8,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 1.1,
+     "dataE": null,
+     "timing": {
+      "start": 1.1,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 73.13,
+      "y": 9.49,
+      "w": 12,
+      "h": 6.75
+     },
+     "endContent": {
+      "x": 73.13,
+      "y": 9.49,
+      "w": 12,
+      "h": 6.75
+     }
+    },
+    {
+     "path": "0.1",
+     "tag": "div",
+     "cls": "panel p2 on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "He orders \u201cThe Everything\u201d\nAvocado & chilli smash, grilled tomatoes, feta, poached eggs, pangrattato\u2026",
+     "box": {
+      "x": 5.54,
+      "y": 34.52,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "content": {
+      "x": 6.1,
+      "y": 34.83,
+      "w": 87.81,
+      "h": 30.34
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      960,
+      594
+     ],
+     "client": [
+      948,
+      582
+     ],
+     "clipped": true,
+     "pos": "relative",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "linear-gradient(rgb(255, 245, 224), rgb(240, 216, 176))",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 6,
+       "b": 6,
+       "l": 6
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 3.2,
+     "dataE": 9.6,
+     "timing": {
+      "start": 3.2,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 5.54,
+      "y": 34.52,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "endContent": {
+      "x": 6.1,
+      "y": 34.83,
+      "w": 87.81,
+      "h": 30.34
+     }
+    },
+    {
+     "path": "0.1.0",
+     "tag": "div",
+     "cls": "cap",
+     "id": "",
+     "text": "He orders \u201cThe Everything\u201d",
+     "flowText": "He orders \u201cThe Everything\u201d",
+     "inlineKids": [],
+     "allText": "He orders \u201cThe Everything\u201d",
+     "box": {
+      "x": 7.59,
+      "y": 35.68,
+      "w": 84.81,
+      "h": 3.42
+     },
+     "content": {
+      "x": 9.09,
+      "y": 36.24,
+      "w": 81.81,
+      "h": 2.3
+     },
+     "textBox": {
+      "x": 9.09,
+      "y": 36.14,
+      "w": 56.81,
+      "h": 2.5
+     },
+     "clip": {
+      "x": 5.54,
+      "y": 34.52,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      916,
+      66
+     ],
+     "client": [
+      916,
+      66
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 36.72,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 44.06,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 10.8,
+      "r": 16.2,
+      "b": 10.8,
+      "l": 16.2
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3.2,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 7.59,
+      "y": 35.68,
+      "w": 84.81,
+      "h": 3.42
+     },
+     "endContent": {
+      "x": 9.09,
+      "y": 36.24,
+      "w": 81.81,
+      "h": 2.3
+     }
+    },
+    {
+     "path": "0.1.1",
+     "tag": "div",
+     "cls": "balloon",
+     "id": "",
+     "text": "Avocado & chilli smash, grilled tomatoes, feta, poached eggs, pangrattato\u2026",
+     "flowText": "Avocado & chilli smash, grilled tomatoes, feta, poached eggs, pangrattato\u2026",
+     "inlineKids": [],
+     "allText": "Avocado & chilli smash, grilled tomatoes, feta, poached eggs, pangrattato\u2026",
+     "box": {
+      "x": 8.09,
+      "y": 54.12,
+      "w": 83.81,
+      "h": 9.92
+     },
+     "content": {
+      "x": 10.35,
+      "y": 55.39,
+      "w": 79.28,
+      "h": 7.37
+     },
+     "textBox": {
+      "x": 12.87,
+      "y": 55.18,
+      "w": 74.25,
+      "h": 7.73
+     },
+     "clip": {
+      "x": 5.54,
+      "y": 34.52,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      905,
+      190
+     ],
+     "client": [
+      895,
+      180
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 41.04,
+      "family": "Bungee",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 47.2,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(17, 17, 17)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 5,
+       "r": 5,
+       "b": 5,
+       "l": 5
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 19.44,
+      "r": 19.44,
+      "b": 19.44,
+      "l": 19.44
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "\"\"",
+     "beforeColor": "rgb(17, 17, 17)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 3.2,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 8.09,
+      "y": 54.12,
+      "w": 83.81,
+      "h": 9.92
+     },
+     "endContent": {
+      "x": 10.35,
+      "y": 55.39,
+      "w": 79.28,
+      "h": 7.37
+     }
+    },
+    {
+     "path": "0.1.2",
+     "tag": "div",
+     "cls": "splat on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 13.12,
+      "y": 53.87,
+      "w": 12,
+      "h": 6.75
+     },
+     "content": {
+      "x": 13.12,
+      "y": 53.87,
+      "w": 12,
+      "h": 6.75
+     },
+     "textBox": null,
+     "clip": {
+      "x": 5.54,
+      "y": 34.52,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      130,
+      130
+     ],
+     "client": [
+      130,
+      130
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 0.15,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 64.8,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 3.5,
+     "dataE": null,
+     "timing": {
+      "start": 3.5,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 13.12,
+      "y": 53.87,
+      "w": 12,
+      "h": 6.75
+     },
+     "endContent": {
+      "x": 13.12,
+      "y": 53.87,
+      "w": 12,
+      "h": 6.75
+     }
+    },
+    {
+     "path": "0.2",
+     "tag": "div",
+     "cls": "panel p3 on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "And his nose never grew\nNot once.",
+     "box": {
+      "x": 5.54,
+      "y": 65.93,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "content": {
+      "x": 6.1,
+      "y": 66.24,
+      "w": 87.81,
+      "h": 30.34
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      960,
+      594
+     ],
+     "client": [
+      948,
+      582
+     ],
+     "clipped": true,
+     "pos": "relative",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "linear-gradient(rgb(240, 255, 232), rgb(208, 240, 192))",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 6,
+       "b": 6,
+       "l": 6
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 5.8,
+     "dataE": 9.6,
+     "timing": {
+      "start": 5.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 5.54,
+      "y": 65.93,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "endContent": {
+      "x": 6.1,
+      "y": 66.24,
+      "w": 87.81,
+      "h": 30.34
+     }
+    },
+    {
+     "path": "0.2.0",
+     "tag": "div",
+     "cls": "cap",
+     "id": "",
+     "text": "And his nose never grew",
+     "flowText": "And his nose never grew",
+     "inlineKids": [],
+     "allText": "And his nose never grew",
+     "box": {
+      "x": 7.59,
+      "y": 67.08,
+      "w": 84.81,
+      "h": 3.42
+     },
+     "content": {
+      "x": 9.09,
+      "y": 67.64,
+      "w": 81.81,
+      "h": 2.3
+     },
+     "textBox": {
+      "x": 9.09,
+      "y": 67.54,
+      "w": 48.98,
+      "h": 2.5
+     },
+     "clip": {
+      "x": 5.54,
+      "y": 65.93,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      916,
+      66
+     ],
+     "client": [
+      916,
+      66
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 36.72,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 44.06,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 10.8,
+      "r": 16.2,
+      "b": 10.8,
+      "l": 16.2
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 5.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 7.59,
+      "y": 67.08,
+      "w": 84.81,
+      "h": 3.42
+     },
+     "endContent": {
+      "x": 9.09,
+      "y": 67.64,
+      "w": 81.81,
+      "h": 2.3
+     }
+    },
+    {
+     "path": "0.2.1",
+     "tag": "div",
+     "cls": "balloon",
+     "id": "",
+     "text": "Not once.",
+     "flowText": "Not once.",
+     "inlineKids": [],
+     "allText": "Not once.",
+     "box": {
+      "x": 8.09,
+      "y": 90.19,
+      "w": 83.81,
+      "h": 5.26
+     },
+     "content": {
+      "x": 10.35,
+      "y": 91.46,
+      "w": 79.28,
+      "h": 2.71
+     },
+     "textBox": {
+      "x": 38.42,
+      "y": 91.25,
+      "w": 23.15,
+      "h": 3.13
+     },
+     "clip": {
+      "x": 5.54,
+      "y": 65.93,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      905,
+      101
+     ],
+     "client": [
+      895,
+      91
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "2",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 45.36,
+      "family": "Bungee",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 52.16,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(17, 17, 17)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 5,
+       "r": 5,
+       "b": 5,
+       "l": 5
+      },
+      "topColor": "rgb(17, 17, 17)",
+      "leftColor": "rgb(17, 17, 17)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 19.44,
+      "r": 19.44,
+      "b": 19.44,
+      "l": 19.44
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "\"\"",
+     "beforeColor": "rgb(17, 17, 17)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 5.8,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 8.09,
+      "y": 90.19,
+      "w": 83.81,
+      "h": 5.26
+     },
+     "endContent": {
+      "x": 10.35,
+      "y": 91.46,
+      "w": 79.28,
+      "h": 2.71
+     }
+    },
+    {
+     "path": "0.2.2",
+     "tag": "div",
+     "cls": "splat on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 41.22,
+      "y": 75.34,
+      "w": 12,
+      "h": 6.75
+     },
+     "content": {
+      "x": 41.22,
+      "y": 75.34,
+      "w": 12,
+      "h": 6.75
+     },
+     "textBox": null,
+     "clip": {
+      "x": 5.54,
+      "y": 65.93,
+      "w": 88.92,
+      "h": 30.96
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      130,
+      130
+     ],
+     "client": [
+      130,
+      130
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 0.15,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 64.8,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": 6.1,
+     "dataE": null,
+     "timing": {
+      "start": 6.1,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 41.22,
+      "y": 75.34,
+      "w": 12,
+      "h": 6.75
+     },
+     "endContent": {
+      "x": 41.22,
+      "y": 75.34,
+      "w": 12,
+      "h": 6.75
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "endbar on",
+     "id": "",
+     "text": "THE EVERYTHING",
+     "flowText": "THE EVERYTHING",
+     "inlineKids": [],
+     "allText": "THE EVERYTHING\n\u00a314.50 \u00b7 Sourdough \u00b7 Pangrattato",
+     "box": {
+      "x": 4,
+      "y": 88.72,
+      "w": 92,
+      "h": 9.03
+     },
+     "content": {
+      "x": 6.5,
+      "y": 90.13,
+      "w": 87,
+      "h": 6.22
+     },
+     "textBox": {
+      "x": 26.92,
+      "y": 90.13,
+      "w": 46.16,
+      "h": 3.7
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      994,
+      173
+     ],
+     "client": [
+      994,
+      173
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "5",
+     "tf": "none",
+     "bg": "rgb(17, 17, 17)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 54,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 64.8,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(242, 193, 78)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(242, 193, 78)",
+      "leftColor": "rgb(242, 193, 78)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 27,
+      "r": 27,
+      "b": 27,
+      "l": 27
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(242, 193, 78)",
+     "after": "none",
+     "dataS": 7.6,
+     "dataE": 9.6,
+     "timing": {
+      "start": 7.6,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 4,
+      "y": 88.72,
+      "w": 92,
+      "h": 9.03
+     },
+     "endContent": {
+      "x": 6.5,
+      "y": 90.13,
+      "w": 87,
+      "h": 6.22
+     }
+    },
+    {
+     "path": "1.0",
+     "tag": "small",
+     "cls": "",
+     "id": "",
+     "text": "\u00a314.50 \u00b7 Sourdough \u00b7 Pangrattato",
+     "flowText": "\u00a314.50 \u00b7 Sourdough \u00b7 Pangrattato",
+     "inlineKids": [],
+     "allText": "\u00a314.50 \u00b7 Sourdough \u00b7 Pangrattato",
+     "box": {
+      "x": 6.5,
+      "y": 94.1,
+      "w": 87,
+      "h": 2.24
+     },
+     "content": {
+      "x": 6.5,
+      "y": 94.1,
+      "w": 87,
+      "h": 2.24
+     },
+     "textBox": {
+      "x": 14.23,
+      "y": 94.1,
+      "w": 71.54,
+      "h": 2.24
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      940,
+      43
+     ],
+     "client": [
+      940,
+      43
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 32.4,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 38.88,
+      "letterSpacing": 4.32,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 7.6,
+      "end": 9.6
+     },
+     "endBox": {
+      "x": 6.5,
+      "y": 94.1,
+      "w": 87,
+      "h": 2.24
+     },
+     "endContent": {
+      "x": 6.5,
+      "y": 94.1,
+      "w": 87,
+      "h": 2.24
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "19",
+     "tf": "none",
+     "bg": "rgba(255, 255, 255, 0.267)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "endContent": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     }
+    },
+    {
+     "path": "2.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": false,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "endContent": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "safe",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": -49.26,
+      "y": -9.84,
+      "w": 0,
+      "h": 0
+     },
+     "content": {
+      "x": -48.89,
+      "y": -9.63,
+      "w": 0,
+      "h": 0
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "none",
+     "vis": "visible",
+     "op": 1,
+     "z": "18",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(224, 176, 0)",
+      "leftColor": "rgb(224, 176, 0)",
+      "topStyle": "dashed",
+      "leftStyle": "dashed"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": -49.26,
+      "y": -9.84,
+      "w": 0,
+      "h": 0
+     },
+     "endContent": {
+      "x": -48.89,
+      "y": -9.63,
+      "w": 0,
+      "h": 0
+     }
+    },
+    {
+     "path": "4",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "20",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Bungee",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "endContent": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     }
+    }
+   ]
+  },
+  {
+   "widthPx": 1080,
+   "heightPx": 1920,
+   "background": "rgb(13, 26, 20)",
+   "backgroundImage": "",
+   "backgroundSize": "auto",
+   "backgroundPosition": "0% 0%",
+   "dataD": null,
+   "classes": "stage rC",
+   "id": "sC",
+   "nodes": [
+    {
+     "path": "0",
+     "tag": "div",
+     "cls": "t label",
+     "id": "",
+     "text": "TRUTH OR NOSE \u00b7 SINGL-END",
+     "flowText": "TRUTH OR NOSE \u00b7 SINGL-END",
+     "inlineKids": [],
+     "allText": "TRUTH OR NOSE \u00b7 SINGL-END",
+     "box": {
+      "x": 0,
+      "y": 2.25,
+      "w": 100,
+      "h": 2.5
+     },
+     "content": {
+      "x": 0,
+      "y": 2.25,
+      "w": 100,
+      "h": 2.5
+     },
+     "textBox": {
+      "x": 11.71,
+      "y": 2.25,
+      "w": 76.58,
+      "h": 2.5
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      48
+     ],
+     "client": [
+      1080,
+      48
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 0,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 48.6,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 6.48,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(143, 191, 160)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(143, 191, 160)",
+      "leftColor": "rgb(143, 191, 160)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(143, 191, 160)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 0,
+      "y": 3.94,
+      "w": 100,
+      "h": 2.5
+     },
+     "endContent": {
+      "x": 0,
+      "y": 3.94,
+      "w": 100,
+      "h": 2.5
+     }
+    },
+    {
+     "path": "1",
+     "tag": "div",
+     "cls": "machine",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "It has avocado & pickled purple cabbage.",
+     "box": {
+      "x": 5,
+      "y": 6.75,
+      "w": 90,
+      "h": 80.88
+     },
+     "content": {
+      "x": 6.48,
+      "y": 7.58,
+      "w": 87.04,
+      "h": 79.21
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      972,
+      1553
+     ],
+     "client": [
+      940,
+      1521
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "linear-gradient(rgb(42, 58, 50), rgb(26, 40, 32))",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 16,
+       "r": 16,
+       "b": 16,
+       "l": 16
+      },
+      "topColor": "rgb(61, 90, 74)",
+      "leftColor": "rgb(61, 90, 74)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 32.4,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 5,
+      "y": 6.75,
+      "w": 90,
+      "h": 80.88
+     },
+     "endContent": {
+      "x": 6.48,
+      "y": 7.58,
+      "w": 87.04,
+      "h": 79.21
+     }
+    },
+    {
+     "path": "1.0",
+     "tag": "div",
+     "cls": "screenC",
+     "id": "qScr",
+     "text": "It has avocado & pickled purple cabbage.",
+     "flowText": "It has avocado & pickled purple cabbage.",
+     "inlineKids": [],
+     "allText": "It has avocado & pickled purple cabbage.",
+     "box": {
+      "x": 12.48,
+      "y": 10.96,
+      "w": 75.04,
+      "h": 15.75
+     },
+     "content": {
+      "x": 15.22,
+      "y": 12.5,
+      "w": 69.56,
+      "h": 12.67
+     },
+     "textBox": {
+      "x": 15.63,
+      "y": 16.07,
+      "w": 68.73,
+      "h": 5.41
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      810,
+      302
+     ],
+     "client": [
+      794,
+      286
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "flex",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(10, 26, 18)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 45.36,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.97,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(51, 255, 136)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 8,
+       "r": 8,
+       "b": 8,
+       "l": 8
+      },
+      "topColor": "rgb(26, 48, 37)",
+      "leftColor": "rgb(26, 48, 37)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 21.6,
+      "r": 21.6,
+      "b": 21.6,
+      "l": 21.6
+     },
+     "radius": 16.2,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(51, 255, 136)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 12.48,
+      "y": 10.96,
+      "w": 75.04,
+      "h": 15.75
+     },
+     "endContent": {
+      "x": 15.22,
+      "y": 12.5,
+      "w": 69.56,
+      "h": 12.67
+     }
+    },
+    {
+     "path": "1.1",
+     "tag": "div",
+     "cls": "gauge g1",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 16.48,
+      "y": 31.21,
+      "w": 22,
+      "h": 12.37
+     },
+     "content": {
+      "x": 17.41,
+      "y": 31.73,
+      "w": 20.15,
+      "h": 11.33
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      238,
+      238
+     ],
+     "client": [
+      218,
+      218
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 10,
+       "r": 10,
+       "b": 10,
+       "l": 10
+      },
+      "topColor": "rgb(74, 106, 88)",
+      "leftColor": "rgb(74, 106, 88)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 118.75,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 16.48,
+      "y": 31.21,
+      "w": 22,
+      "h": 12.37
+     },
+     "endContent": {
+      "x": 17.41,
+      "y": 31.73,
+      "w": 20.15,
+      "h": 11.33
+     }
+    },
+    {
+     "path": "1.1.0",
+     "tag": "div",
+     "cls": "needle",
+     "id": "n1",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 27.48,
+      "y": 37.4,
+      "w": 1.2,
+      "h": 5.06
+     },
+     "content": {
+      "x": 27.48,
+      "y": 37.4,
+      "w": 1.2,
+      "h": 5.06
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      13,
+      97
+     ],
+     "client": [
+      13,
+      97
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 10.8,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "\"\"",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 21.24,
+      "y": 33.3,
+      "w": 6.7,
+      "h": 4.31
+     },
+     "endContent": {
+      "x": 21.24,
+      "y": 33.3,
+      "w": 6.7,
+      "h": 4.31
+     }
+    },
+    {
+     "path": "1.2",
+     "tag": "div",
+     "cls": "gauge g2",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 61.52,
+      "y": 31.21,
+      "w": 22,
+      "h": 12.37
+     },
+     "content": {
+      "x": 62.45,
+      "y": 31.73,
+      "w": 20.15,
+      "h": 11.33
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      238,
+      238
+     ],
+     "client": [
+      218,
+      218
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 10,
+       "r": 10,
+       "b": 10,
+       "l": 10
+      },
+      "topColor": "rgb(74, 106, 88)",
+      "leftColor": "rgb(74, 106, 88)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 118.75,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 61.52,
+      "y": 31.21,
+      "w": 22,
+      "h": 12.37
+     },
+     "endContent": {
+      "x": 62.45,
+      "y": 31.73,
+      "w": 20.15,
+      "h": 11.33
+     }
+    },
+    {
+     "path": "1.2.0",
+     "tag": "div",
+     "cls": "needle",
+     "id": "n2",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 72.52,
+      "y": 37.4,
+      "w": 1.2,
+      "h": 5.06
+     },
+     "content": {
+      "x": 72.52,
+      "y": 37.4,
+      "w": 1.2,
+      "h": 5.06
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      13,
+      97
+     ],
+     "client": [
+      13,
+      97
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 10.8,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "\"\"",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 66.28,
+      "y": 33.3,
+      "w": 6.7,
+      "h": 4.31
+     },
+     "endContent": {
+      "x": 66.28,
+      "y": 33.3,
+      "w": 6.7,
+      "h": 4.31
+     }
+    },
+    {
+     "path": "1.3",
+     "tag": "div",
+     "cls": "lamp l-green",
+     "id": "lg",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 20.48,
+      "y": 46.96,
+      "w": 10,
+      "h": 5.63
+     },
+     "content": {
+      "x": 21.04,
+      "y": 47.27,
+      "w": 8.89,
+      "h": 5.01
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      108,
+      108
+     ],
+     "client": [
+      96,
+      96
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(26, 58, 26)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 6,
+       "b": 6,
+       "l": 6
+      },
+      "topColor": "rgb(34, 34, 34)",
+      "leftColor": "rgb(34, 34, 34)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 54,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 20.48,
+      "y": 46.96,
+      "w": 10,
+      "h": 5.63
+     },
+     "endContent": {
+      "x": 21.04,
+      "y": 47.27,
+      "w": 8.89,
+      "h": 5.01
+     }
+    },
+    {
+     "path": "1.4",
+     "tag": "div",
+     "cls": "lamp l-red",
+     "id": "lr",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 69.52,
+      "y": 46.96,
+      "w": 10,
+      "h": 5.63
+     },
+     "content": {
+      "x": 70.08,
+      "y": 47.27,
+      "w": 8.89,
+      "h": 5.01
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      108,
+      108
+     ],
+     "client": [
+      96,
+      96
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(58, 26, 26)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 6,
+       "r": 6,
+       "b": 6,
+       "l": 6
+      },
+      "topColor": "rgb(34, 34, 34)",
+      "leftColor": "rgb(34, 34, 34)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 54,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 69.52,
+      "y": 46.96,
+      "w": 10,
+      "h": 5.63
+     },
+     "endContent": {
+      "x": 70.08,
+      "y": 47.27,
+      "w": 8.89,
+      "h": 5.01
+     }
+    },
+    {
+     "path": "1.5",
+     "tag": "div",
+     "cls": "noseC",
+     "id": "noseC",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 50,
+      "y": 45.83,
+      "w": 18,
+      "h": 4.5
+     },
+     "content": {
+      "x": 50.46,
+      "y": 46.09,
+      "w": 17.07,
+      "h": 3.98
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      194,
+      86
+     ],
+     "client": [
+      184,
+      76
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "5",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "gradient",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "linear-gradient(rgb(232, 176, 144), rgb(200, 144, 112))",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 5,
+       "r": 5,
+       "b": 5,
+       "l": 5
+      },
+      "topColor": "rgb(160, 112, 80)",
+      "leftColor": "rgb(160, 112, 80)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 34.56,
+     "filter": "none",
+     "before": "\"\"",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 41,
+      "y": 45.83,
+      "w": 18,
+      "h": 4.5
+     },
+     "endContent": {
+      "x": 41.46,
+      "y": 46.09,
+      "w": 17.07,
+      "h": 3.98
+     }
+    },
+    {
+     "path": "2",
+     "tag": "div",
+     "cls": "t result on",
+     "id": "r1",
+     "text": "TRUE \u2714",
+     "flowText": "TRUE \u2714",
+     "inlineKids": [],
+     "allText": "TRUE \u2714",
+     "box": {
+      "x": 8,
+      "y": 77.27,
+      "w": 84,
+      "h": 6.98
+     },
+     "content": {
+      "x": 11.15,
+      "y": 79.04,
+      "w": 77.7,
+      "h": 3.44
+     },
+     "textBox": {
+      "x": 41.53,
+      "y": 79.67,
+      "w": 16.93,
+      "h": 2.81
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      134
+     ],
+     "client": [
+      893,
+      120
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "6",
+     "tf": "none",
+     "bg": "rgb(10, 26, 18)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 54,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 64.8,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(51, 255, 136)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 7,
+       "r": 7,
+       "b": 7,
+       "l": 7
+      },
+      "topColor": "rgb(51, 255, 136)",
+      "leftColor": "rgb(51, 255, 136)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 27,
+      "r": 27,
+      "b": 27,
+      "l": 27
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(51, 255, 136)",
+     "after": "none",
+     "dataS": 2,
+     "dataE": 3.4,
+     "timing": {
+      "start": 2,
+      "end": 3.4
+     },
+     "endBox": {
+      "x": 8,
+      "y": 77.27,
+      "w": 84,
+      "h": 6.98
+     },
+     "endContent": {
+      "x": 11.15,
+      "y": 79.04,
+      "w": 77.7,
+      "h": 3.44
+     }
+    },
+    {
+     "path": "3",
+     "tag": "div",
+     "cls": "t result lie on",
+     "id": "r2",
+     "text": "LIE \u2718",
+     "flowText": "LIE \u2718",
+     "inlineKids": [],
+     "allText": "LIE \u2718",
+     "box": {
+      "x": 8,
+      "y": 77.27,
+      "w": 84,
+      "h": 6.98
+     },
+     "content": {
+      "x": 11.15,
+      "y": 79.04,
+      "w": 77.7,
+      "h": 3.44
+     },
+     "textBox": {
+      "x": 43.42,
+      "y": 79.67,
+      "w": 13.16,
+      "h": 2.81
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      134
+     ],
+     "client": [
+      893,
+      120
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "6",
+     "tf": "none",
+     "bg": "rgb(10, 26, 18)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 54,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 64.8,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(255, 51, 68)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 7,
+       "r": 7,
+       "b": 7,
+       "l": 7
+      },
+      "topColor": "rgb(255, 51, 68)",
+      "leftColor": "rgb(255, 51, 68)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 27,
+      "r": 27,
+      "b": 27,
+      "l": 27
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 51, 68)",
+     "after": "none",
+     "dataS": 4,
+     "dataE": 5.4,
+     "timing": {
+      "start": 4,
+      "end": 5.4
+     },
+     "endBox": {
+      "x": 8,
+      "y": 77.27,
+      "w": 84,
+      "h": 6.98
+     },
+     "endContent": {
+      "x": 11.15,
+      "y": 79.04,
+      "w": 77.7,
+      "h": 3.44
+     }
+    },
+    {
+     "path": "4",
+     "tag": "div",
+     "cls": "t result on",
+     "id": "r3",
+     "text": "TRUE \u2714",
+     "flowText": "TRUE \u2714",
+     "inlineKids": [],
+     "allText": "TRUE \u2714",
+     "box": {
+      "x": 8,
+      "y": 77.27,
+      "w": 84,
+      "h": 6.98
+     },
+     "content": {
+      "x": 11.15,
+      "y": 79.04,
+      "w": 77.7,
+      "h": 3.44
+     },
+     "textBox": {
+      "x": 41.53,
+      "y": 79.67,
+      "w": 16.93,
+      "h": 2.81
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      907,
+      134
+     ],
+     "client": [
+      893,
+      120
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "6",
+     "tf": "none",
+     "bg": "rgb(10, 26, 18)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 54,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 64.8,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(51, 255, 136)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 7,
+       "r": 7,
+       "b": 7,
+       "l": 7
+      },
+      "topColor": "rgb(51, 255, 136)",
+      "leftColor": "rgb(51, 255, 136)",
+      "topStyle": "solid",
+      "leftStyle": "solid"
+     },
+     "pad": {
+      "t": 27,
+      "r": 27,
+      "b": 27,
+      "l": 27
+     },
+     "radius": 21.6,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(51, 255, 136)",
+     "after": "none",
+     "dataS": 5.8,
+     "dataE": 7,
+     "timing": {
+      "start": 5.8,
+      "end": 7
+     },
+     "endBox": {
+      "x": 8,
+      "y": 77.27,
+      "w": 84,
+      "h": 6.98
+     },
+     "endContent": {
+      "x": 11.15,
+      "y": 79.04,
+      "w": 77.7,
+      "h": 3.44
+     }
+    },
+    {
+     "path": "5",
+     "tag": "div",
+     "cls": "t final on",
+     "id": "",
+     "text": "",
+     "flowText": "\u00a314.00",
+     "inlineKids": [
+      "5.2"
+     ],
+     "allText": "Rainbow Open Sandwich\n\nRoasted beetroot & toasted cumin hummus, avocado, pickled purple cabbage, flamed peppers, sourdough.\n\n\u00a314.00",
+     "box": {
+      "x": 6,
+      "y": 77.09,
+      "w": 88,
+      "h": 19.53
+     },
+     "content": {
+      "x": 9,
+      "y": 78.78,
+      "w": 82,
+      "h": 16.16
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      950,
+      375
+     ],
+     "client": [
+      950,
+      375
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "7",
+     "tf": "none",
+     "bg": "rgb(242, 193, 78)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(13, 26, 20)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(13, 26, 20)",
+      "leftColor": "rgb(13, 26, 20)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 32.4,
+      "r": 32.4,
+      "b": 32.4,
+      "l": 32.4
+     },
+     "radius": 27,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(13, 26, 20)",
+     "after": "none",
+     "dataS": 7.3,
+     "dataE": 9.5,
+     "timing": {
+      "start": 7.3,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": 6,
+      "y": 77.09,
+      "w": 88,
+      "h": 19.53
+     },
+     "endContent": {
+      "x": 9,
+      "y": 78.78,
+      "w": 82,
+      "h": 16.16
+     }
+    },
+    {
+     "path": "5.0",
+     "tag": "b",
+     "cls": "",
+     "id": "",
+     "text": "Rainbow Open Sandwich",
+     "flowText": "Rainbow Open Sandwich",
+     "inlineKids": [],
+     "allText": "Rainbow Open Sandwich",
+     "box": {
+      "x": 9,
+      "y": 78.78,
+      "w": 82,
+      "h": 4.11
+     },
+     "content": {
+      "x": 9,
+      "y": 78.78,
+      "w": 82,
+      "h": 4.11
+     },
+     "textBox": {
+      "x": 11.22,
+      "y": 78.78,
+      "w": 77.56,
+      "h": 4.11
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      886,
+      79
+     ],
+     "client": [
+      886,
+      79
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 59.4,
+      "family": "Bungee",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 71.28,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(13, 26, 20)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(13, 26, 20)",
+      "leftColor": "rgb(13, 26, 20)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(13, 26, 20)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 7.3,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": 9,
+      "y": 78.78,
+      "w": 82,
+      "h": 4.11
+     },
+     "endContent": {
+      "x": 9,
+      "y": 78.78,
+      "w": 82,
+      "h": 4.11
+     }
+    },
+    {
+     "path": "5.1",
+     "tag": "p",
+     "cls": "",
+     "id": "",
+     "text": "Roasted beetroot & toasted cumin hummus, avocado, pickled purple cabbage, flamed peppers, sourdough.",
+     "flowText": "Roasted beetroot & toasted cumin hummus, avocado, pickled purple cabbage, flamed peppers, sourdough.",
+     "inlineKids": [],
+     "allText": "Roasted beetroot & toasted cumin hummus, avocado, pickled purple cabbage, flamed peppers, sourdough.",
+     "box": {
+      "x": 9,
+      "y": 83.46,
+      "w": 82,
+      "h": 7.24
+     },
+     "content": {
+      "x": 9,
+      "y": 83.46,
+      "w": 82,
+      "h": 7.24
+     },
+     "textBox": {
+      "x": 14.55,
+      "y": 83.72,
+      "w": 70.91,
+      "h": 6.7
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      886,
+      139
+     ],
+     "client": [
+      886,
+      139
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 35.64,
+      "family": "Special Elite",
+      "weight": "700",
+      "style": "normal",
+      "lineHeight": 46.33,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(13, 26, 20)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(13, 26, 20)",
+      "leftColor": "rgb(13, 26, 20)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(13, 26, 20)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 7.3,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": 9,
+      "y": 83.46,
+      "w": 82,
+      "h": 7.24
+     },
+     "endContent": {
+      "x": 9,
+      "y": 83.46,
+      "w": 82,
+      "h": 7.24
+     }
+    },
+    {
+     "path": "5.2",
+     "tag": "em",
+     "cls": "",
+     "id": "",
+     "text": "\u00a314.00",
+     "flowText": "\u00a314.00",
+     "inlineKids": [],
+     "allText": "\u00a314.00",
+     "box": {
+      "x": 39.45,
+      "y": 91.54,
+      "w": 21.09,
+      "h": 3.4
+     },
+     "content": {
+      "x": 42.45,
+      "y": 91.99,
+      "w": 15.09,
+      "h": 2.5
+     },
+     "textBox": {
+      "x": 42.45,
+      "y": 91.99,
+      "w": 15.09,
+      "h": 2.5
+     },
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      228,
+      65
+     ],
+     "client": [
+      228,
+      65
+     ],
+     "clipped": true,
+     "pos": "static",
+     "disp": "inline-block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(13, 26, 20)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 48.6,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 58.32,
+      "letterSpacing": 0,
+      "align": "center",
+      "transform": "none",
+      "color": "rgb(242, 193, 78)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(242, 193, 78)",
+      "leftColor": "rgb(242, 193, 78)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 8.64,
+      "r": 32.4,
+      "b": 8.64,
+      "l": 32.4
+     },
+     "radius": 43.2,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(242, 193, 78)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 7.3,
+      "end": 9.5
+     },
+     "endBox": {
+      "x": 39.45,
+      "y": 91.54,
+      "w": 21.09,
+      "h": 3.4
+     },
+     "endContent": {
+      "x": 42.45,
+      "y": 91.99,
+      "w": 15.09,
+      "h": 2.5
+     }
+    },
+    {
+     "path": "6",
+     "tag": "div",
+     "cls": "bar",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "19",
+     "tf": "none",
+     "bg": "rgba(255, 255, 255, 0.267)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "endContent": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     }
+    },
+    {
+     "path": "6.0",
+     "tag": "i",
+     "cls": "",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "content": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "textBox": null,
+     "clip": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1015,
+      9
+     ],
+     "client": [
+      1015,
+      9
+     ],
+     "clipped": false,
+     "pos": "static",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "auto",
+     "tf": "none",
+     "bg": "rgb(255, 255, 255)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "italic",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     },
+     "endContent": {
+      "x": 3,
+      "y": 1.41,
+      "w": 94,
+      "h": 0.45
+     }
+    },
+    {
+     "path": "7",
+     "tag": "div",
+     "cls": "safe",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": -82.78,
+      "y": -9.84,
+      "w": 0,
+      "h": 0
+     },
+     "content": {
+      "x": -82.41,
+      "y": -9.63,
+      "w": 0,
+      "h": 0
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      0,
+      0
+     ],
+     "client": [
+      0,
+      0
+     ],
+     "clipped": true,
+     "pos": "absolute",
+     "disp": "none",
+     "vis": "visible",
+     "op": 1,
+     "z": "18",
+     "tf": "none",
+     "bg": "rgba(0, 0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 4,
+       "r": 4,
+       "b": 4,
+       "l": 4
+      },
+      "topColor": "rgb(224, 176, 0)",
+      "leftColor": "rgb(224, 176, 0)",
+      "topStyle": "dashed",
+      "leftStyle": "dashed"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": -82.78,
+      "y": -9.84,
+      "w": 0,
+      "h": 0
+     },
+     "endContent": {
+      "x": -82.41,
+      "y": -9.63,
+      "w": 0,
+      "h": 0
+     }
+    },
+    {
+     "path": "8",
+     "tag": "div",
+     "cls": "abs fade on",
+     "id": "",
+     "text": "",
+     "flowText": "",
+     "inlineKids": [],
+     "allText": "",
+     "box": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "content": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "textBox": null,
+     "clip": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "clipRadius": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "offset": [
+      1080,
+      1920
+     ],
+     "client": [
+      1080,
+      1920
+     ],
+     "clipped": false,
+     "pos": "absolute",
+     "disp": "block",
+     "vis": "visible",
+     "op": 1,
+     "z": "20",
+     "tf": "none",
+     "bg": "rgb(0, 0, 0)",
+     "bgKind": "none",
+     "bgImage": -1,
+     "bgPos": "0% 0%",
+     "bgSize": "auto",
+     "bgGradient": "",
+     "imgSrc": -1,
+     "videoSrc": -1,
+     "imgW": 0,
+     "imgH": 0,
+     "objFit": "fill",
+     "font": {
+      "size": 16,
+      "family": "Special Elite",
+      "weight": "400",
+      "style": "normal",
+      "lineHeight": 19.2,
+      "letterSpacing": 0,
+      "align": "start",
+      "transform": "none",
+      "color": "rgb(255, 255, 255)",
+      "whiteSpace": "normal"
+     },
+     "border": {
+      "widths": {
+       "t": 0,
+       "r": 0,
+       "b": 0,
+       "l": 0
+      },
+      "topColor": "rgb(255, 255, 255)",
+      "leftColor": "rgb(255, 255, 255)",
+      "topStyle": "none",
+      "leftStyle": "none"
+     },
+     "pad": {
+      "t": 0,
+      "r": 0,
+      "b": 0,
+      "l": 0
+     },
+     "radius": 0,
+     "filter": "none",
+     "before": "none",
+     "beforeColor": "rgb(255, 255, 255)",
+     "after": "none",
+     "dataS": null,
+     "dataE": null,
+     "timing": {
+      "start": 0,
+      "end": null
+     },
+     "endBox": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     },
+     "endContent": {
+      "x": 0,
+      "y": 0,
+      "w": 100,
+      "h": 100
+     }
+    }
+   ]
+  }
+ ]
+}
